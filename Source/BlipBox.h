@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "juce.h"
 #include "Serial.h"
 #include "MidiZone.h"
 
@@ -32,7 +32,7 @@ public:
       Thread(T("BlipBoxSerial"))
   {}
   int connect(){
-    std::cout << "starting blipbox serial connection on " << getPort() << std::endl;
+    std::cout << "starting blipbox serial connection on " << getPort().toUTF8() << std::endl;
     int status = Serial::connect();
     Serial::start();
     juce::Thread::startThread();
@@ -40,7 +40,7 @@ public:
   }
   int disconnect(){
     Serial::stop();
-    std::cout << "stopping blipbox serial connection on " << getPort() << std::endl;
+    std::cout << "stopping blipbox serial connection on " << getPort().toUTF8() << std::endl;
     juce::Thread::stopThread(30000); // 30 secs
     return Serial::disconnect();
   }

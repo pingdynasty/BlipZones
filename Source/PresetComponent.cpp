@@ -106,7 +106,7 @@ PresetComponent::PresetComponent ()
 
     addAndMakeVisible (sendButton = new TextButton (L"Send"));
     sendButton->setButtonText (L"send");
-    sendButton->addListener (this);
+    sendButton->addButtonListener (this);
 
     addAndMakeVisible (label = new Label (L"new label",
                                           L"Channel"));
@@ -178,7 +178,7 @@ PresetComponent::PresetComponent ()
 
     addAndMakeVisible (showButton = new TextButton (L"show button"));
     showButton->setButtonText (L"show");
-    showButton->addListener (this);
+    showButton->addButtonListener (this);
 
 
     //[UserPreSize]
@@ -269,7 +269,7 @@ void PresetComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == typeComboBox)
     {
         //[UserComboBoxCode_typeComboBox] -- add your combo box handling code here..
-      std::cout << "type " << typeComboBox->getText() << std::endl;
+      std::cout << "type " << typeComboBox->getText().toUTF8() << std::endl;
       getZone().setTypeIndex(typeComboBox->getSelectedItemIndex());
 //       getZone()._type = preset->getTypeCode(typeComboBox->getSelectedItemIndex());
         //[/UserComboBoxCode_typeComboBox]

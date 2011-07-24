@@ -8,7 +8,10 @@
   ==============================================================================
 */
 
-#include "../JuceLibraryCode/JuceHeader.h"
+#include "juce.h"
+#define noexcept  throw()
+#define nullptr   (0)
+#include "juce_ScopedPointer.h"
 #include "MainWindow.h"
 
 //==============================================================================
@@ -49,10 +52,10 @@ public:
         return "BlipZones";
     }
 
-    const String getApplicationVersion()
-    {
-        return ProjectInfo::versionString;
-    }
+//     const String getApplicationVersion()
+//     {
+//         return ProjectInfo::versionString;
+//     }
 
     bool moreThanOneInstanceAllowed()
     {
@@ -65,9 +68,11 @@ public:
     }
 
 private:
+
   ScopedPointer <MainAppWindow> mainWindow;
 
 };
+
 
 //==============================================================================
 // This macro generates the main() routine that starts the app.
