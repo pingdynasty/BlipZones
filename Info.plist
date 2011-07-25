@@ -5,11 +5,11 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleExecutable</key>
-	<string>juce_application</string>
+	<string>BlipZones</string>
 	<key>CFBundleIconFile</key>
-	<string></string>
+	<string>blipbox</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.apple.myCarbonApp</string>
+	<string>org.blipbox.BlipZones</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundlePackageType</key>

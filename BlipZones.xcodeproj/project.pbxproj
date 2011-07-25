@@ -14,6 +14,7 @@
 		418BD6CD13DC9DBD002C3B29 /* PresetComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418BD6C613DC9DBD002C3B29 /* PresetComponent.cpp */; };
 		418BD70413DCCF12002C3B29 /* libjucedebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 418BD70213DCCECD002C3B29 /* libjucedebug.a */; };
 		418BD71713DCCF66002C3B29 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 418BD71613DCCF66002C3B29 /* OpenGL.framework */; };
+		4194459413DCDBCB009EDADC /* blipbox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 4194459313DCDBCB009EDADC /* blipbox.icns */; };
 		84078F3E09E6B42E004E7BCD /* AGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84078F3D09E6B42E004E7BCD /* AGL.framework */; };
 		8407902B09E6B5BD004E7BCD /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8407902A09E6B5BD004E7BCD /* QuickTime.framework */; };
 		84F30CED08FEAD7A0087E26C /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F30CEC08FEAD7A0087E26C /* CoreAudio.framework */; };
@@ -27,7 +28,7 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 84F30CCA08FEAA8C0087E26C /* Juce.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D /* libjucedebug.a */;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = Juce;
 		};
 /* End PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		418BD6C713DC9DBD002C3B29 /* PresetComponent.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = PresetComponent.h; path = Source/PresetComponent.h; sourceTree = "<group>"; };
 		418BD6C813DC9DBD002C3B29 /* Serial.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; name = Serial.h; path = Source/Serial.h; sourceTree = "<group>"; };
 		418BD71613DCCF66002C3B29 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		4194459313DCDBCB009EDADC /* blipbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blipbox.icns; path = Resources/blipbox.icns; sourceTree = "<group>"; };
 		4A9504C8FFE6A3BC11CA0CBA /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = /System/Library/Frameworks/ApplicationServices.framework; sourceTree = "<absolute>"; };
 		4A9504CAFFE6A41611CA0CBA /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		84078F3D09E6B42E004E7BCD /* AGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AGL.framework; path = /System/Library/Frameworks/AGL.framework; sourceTree = "<absolute>"; };
@@ -54,7 +56,7 @@
 		84F30CEC08FEAD7A0087E26C /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = /System/Library/Frameworks/CoreAudio.framework; sourceTree = "<absolute>"; };
 		84FAD6190C7C3CCB00AF3028 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = /System/Library/Frameworks/IOKit.framework; sourceTree = "<absolute>"; };
 		8D0C4E960486CD37000505A6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		8D0C4E970486CD37000505A6 /* juce_application.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = juce_application.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D0C4E970486CD37000505A6 /* BlipZones.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlipZones.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,12 +80,12 @@
 		195DF8CFFE9D517E11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8D0C4E970486CD37000505A6 /* juce_application.app */,
+				8D0C4E970486CD37000505A6 /* BlipZones.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		20286C29FDCF999611CA2CEA /* juce_application */ = {
+		20286C29FDCF999611CA2CEA /* BlipZones */ = {
 			isa = PBXGroup;
 			children = (
 				20286C2AFDCF999611CA2CEA /* Sources */,
@@ -91,7 +93,7 @@
 				20286C32FDCF999611CA2CEA /* External Frameworks and Libraries */,
 				195DF8CFFE9D517E11CA2CBB /* Products */,
 			);
-			name = juce_application;
+			name = BlipZones;
 			sourceTree = "<group>";
 		};
 		20286C2AFDCF999611CA2CEA /* Sources */ = {
@@ -114,6 +116,7 @@
 		20286C2CFDCF999611CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				4194459313DCDBCB009EDADC /* blipbox.icns */,
 				8D0C4E960486CD37000505A6 /* Info.plist */,
 				0867D6AAFE840B52C02AAC07 /* InfoPlist.strings */,
 			);
@@ -161,8 +164,8 @@
 			);
 			name = BlipZones;
 			productInstallPath = "$(HOME)/Applications";
-			productName = juce_application;
-			productReference = 8D0C4E970486CD37000505A6 /* juce_application.app */;
+			productName = BlipZones;
+			productReference = 8D0C4E970486CD37000505A6 /* BlipZones.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +175,7 @@
 			isa = PBXProject;
 			buildConfigurationList = 84F30CC308FEAA620087E26C /* Build configuration list for PBXProject "BlipZones" */;
 			hasScannedForEncodings = 1;
-			mainGroup = 20286C29FDCF999611CA2CEA /* juce_application */;
+			mainGroup = 20286C29FDCF999611CA2CEA /* BlipZones */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -202,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D0C4E8D0486CD37000505A6 /* InfoPlist.strings in Resources */,
+				4194459413DCDBCB009EDADC /* blipbox.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -252,7 +256,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "~/compile/juce/juce/bin";
 				PREBINDING = NO;
-				PRODUCT_NAME = juce_application;
+				PRODUCT_NAME = BlipZones;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -273,7 +277,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = "~/compile/juce/juce/bin";
 				PREBINDING = NO;
-				PRODUCT_NAME = juce_application;
+				PRODUCT_NAME = BlipZones;
 				WRAPPER_EXTENSION = app;
 				ZERO_LINK = NO;
 			};

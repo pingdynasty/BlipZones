@@ -49,13 +49,14 @@ public:
     //==============================================================================
     const String getApplicationName()
     {
-        return "BlipZones";
+      return T("BlipZones");
     }
 
-//     const String getApplicationVersion()
-//     {
+    const String getApplicationVersion()
+    {
+        return T("1.0");      
 //         return ProjectInfo::versionString;
-//     }
+    }
 
     bool moreThanOneInstanceAllowed()
     {

@@ -13,9 +13,9 @@
 
 //==============================================================================
 MainAppWindow::MainAppWindow()
-    : DocumentWindow (JUCEApplication::getInstance()->getApplicationName(),
+    : DocumentWindow (T("BlipZones"),
                       Colours::lightgrey,
-                      DocumentWindow::allButtons)
+                      DocumentWindow::allButtons, true)
 {
     centreWithSize (500, 400);
     setVisible (true);
