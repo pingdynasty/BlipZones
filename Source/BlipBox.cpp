@@ -1,10 +1,62 @@
 #include "BlipBox.h"
 
-int BlipBoxSerial::handle(unsigned char* data, ssize_t len){
+#define POSITION_MSG       0x50 // 0x5 << 4
+#define RELEASE_MSG        0x70 // 0x7 << 4
+#define POT1_SENSOR_MSG    0x84 // 0x80 | (0x1 << 2)
+#define X_SENSOR_MSG       0x88 // 0x80 | (0x2 << 2)
+#define Y_SENSOR_MSG       0x8c // 0x80 | (0x3 << 2)
+#define POT2_SENSOR_MSG    0x90 // 0x80 | (0x4 << 2)
+#define BUTTON1_SENSOR_MSG 0x94 // 0x80 | (0x5 << 2)
+#define BUTTON2_SENSOR_MSG 0x98 // 0x80 | (0x6 << 2)
+#define BUTTON3_SENSOR_MSG 0x9c // 0x80 | (0x7 << 2)
+#define PARAMETER_MSG      0xc0 // 0x3 << 6 B11000000
+
+void BlipBox::handlePositionMessage(uint16_t x, uint16_t y){
+  std::cout << "position " << x << "/" << y << std::endl;
+  if(handler)
+    handler->handlePositionMessage(x, y);
+}
+
+void BlipBox::handleParameterMessage(uint8_t pid, uint16_t value){
+  std::cout << "param " << (int)pid << ":" << value << std::endl;
+  if(handler)
+    handler->handleParameterMessage(pid, value);
+}
+
+void BlipBox::handleReleaseMessage(){
+  std::cout << "release" << std::endl;
+  if(handler)
+    handler->handleReleaseMessage();
+}
+
+int BlipBox::handle(unsigned char* data, ssize_t len){
 //   std::cout << "rx";
 //   for(int i=0; i<len; ++i)
 //     std::cout << "\t0x" << std::hex << (int)data[i];
 //   std::cout << std::endl;
+  uint8_t type = data[0];
+  if((type >> 6) == 0x3){
+  // parameter msg: 11ppppvv vvvvvvvv
+    if(len < 2)
+      return 0;
+//     uint8_t pid = (type << 2) >> 4;
+    uint8_t pid = (type >> 2) & 0x0f;
+    uint16_t value = ((type & 0x3) << 8) | data[1];
+    handleParameterMessage(pid, value);
+    return 2;
+  }else if((type >> 4) == 0x5){
+    // position msg: 0101xxxx xxxxxxyy yyyyyyyy
+      if(len < 3)
+      return 0;
+    uint16_t x = ((type & 0xf) << 6) | (data[1] >> 2);
+    uint16_t y = ((data[1] & 0x3) << 8) | data[2];
+    handlePositionMessage(x, y);
+    return 3;
+  }else if(type == RELEASE_MSG){
+    // release message
+    handleReleaseMessage();
+    return 1;
+  }
   return len;
 }
 
@@ -22,10 +74,18 @@ void BlipBox::setLed(uint8_t x, uint8_t y, uint8_t brightness){
   serial->writeSerial(cmd, sizeof(cmd));
 }
 
+#define REQUEST_PRESET_COMMAND (2 << 4)
+#define READ_PRESET_COMMAND    (1 << 4)
+
+void BlipBox::requestMidiZonePreset(uint8_t index){
+  uint8_t cmd[] = { COMMAND_MESSAGE | 12,  REQUEST_PRESET_COMMAND | index, 0x00};
+  serial->writeSerial(cmd, sizeof(cmd));
+}
+
 void BlipBox::sendMidiZonePreset(MidiZonePreset& preset){
   uint8_t cmd[] = { COMMAND_MESSAGE | 12 };
   serial->writeSerial(cmd, 1);
-  cmd[0] = 1 << 4 | preset.getIndex();
+  cmd[0] = READ_PRESET_COMMAND | preset.getIndex();
   serial->writeSerial(cmd, 1);
   uint8_t buf[4];
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){

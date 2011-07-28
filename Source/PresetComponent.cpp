@@ -21,12 +21,15 @@
 
 //[Headers] You can add your own extra header files here...
 // #include <Math.h>
+#include "BlipBox.h"
 //[/Headers]
 
 #include "PresetComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
+uint8_t buf[1+4*8];
+uint8_t bufpos;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -69,15 +72,17 @@ PresetComponent::PresetComponent ()
     typeComboBox->setJustificationType (Justification::centredLeft);
     typeComboBox->setTextWhenNothingSelected (String::empty);
     typeComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
-    typeComboBox->addItem (L"HORIZONTAL_CC", 1);
-    typeComboBox->addItem (L"VERTICAL_CC", 2);
-    typeComboBox->addItem (L" HORIZONTAL_NOTE", 3);
-    typeComboBox->addItem (L"VERTICAL_NOTE", 4);
-    typeComboBox->addItem (L"NOTE_PUSH_BUTTON", 5);
-    typeComboBox->addItem (L"NOTE_TOGGLE_BUTTON", 6);
-    typeComboBox->addItem (L"CC_PUSH_BUTTON", 7);
-    typeComboBox->addItem (L"CC_TOGGLE_BUTTON", 8);
-    typeComboBox->addItem (L"PRESET_BUTTON", 9);
+    typeComboBox->addItem (L"Horizontal CC Slider", 1);
+    typeComboBox->addItem (L"Vertical CC Slider", 2);
+    typeComboBox->addItem (L"Horizontal Note Player", 3);
+    typeComboBox->addItem (L"Vertical Note Player", 4);
+    typeComboBox->addItem (L"Note Push Button", 5);
+    typeComboBox->addItem (L"Note Toggle Button", 6);
+    typeComboBox->addItem (L"CC Push Button", 7);
+    typeComboBox->addItem (L"CC Toggle Button", 8);
+    typeComboBox->addItem (L"Inverted Horizontal CC Slider", 9);
+    typeComboBox->addItem (L"Inverted Vertical CC Slider", 10);
+//     typeComboBox->addItem (L"PRESET_BUTTON", 9);
     typeComboBox->addListener (this);
 
     addAndMakeVisible (Xslider = new Slider (L"X"));
@@ -177,7 +182,7 @@ PresetComponent::PresetComponent ()
     presetComboBox->addListener (this);
 
     addAndMakeVisible (showButton = new TextButton (L"show button"));
-    showButton->setButtonText (L"show");
+    showButton->setButtonText (L"request");
     showButton->addButtonListener (this);
 
 
@@ -235,7 +240,7 @@ void PresetComponent::paint (Graphics& g)
 void PresetComponent::resized()
 {
     zoneComboBox->setBounds (8, 80, 150, 24);
-    typeComboBox->setBounds (176, 80, 150, 24);
+    typeComboBox->setBounds (176, 80, 200, 24);
     Xslider->setBounds (8, 120, 240, 72);
     Yslider->setBounds (256, 144, 64, 136);
     channelSlider->setBounds (8, 240, 150, 24);
@@ -338,8 +343,10 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == showButton)
     {
         //[UserButtonCode_showButton] -- add your button handler code here..
-      std::cout << "show!" << std::endl;
-      blipbox->drawMidiZone(getZone());
+      std::cout << "request!" << std::endl;
+      blipbox->requestMidiZonePreset(preset->getIndex());
+      bufpos = 0;
+//       blipbox->drawMidiZone(getZone());
       std::cout << "done!" << std::endl;
         //[/UserButtonCode_showButton]
     }
@@ -351,6 +358,83 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
+
+void PresetComponent::init(){
+  blipbox = new BlipBox(L"/dev/tty.usbserial-A60081hf");
+  blipbox->setEventHandler(this);
+  blipbox->connect();
+  presetComboBox->setSelectedItemIndex(0, false);
+  loadPreset(presetComboBox->getSelectedItemIndex());
+}
+
+void PresetComponent::handleReleaseMessage(){
+//   loadZone(getZone());
+}
+
+void PresetComponent::handlePositionMessage(uint16_t x, uint16_t y){
+  x = x*10/1023;
+  y = y*8/1023;
+  MidiZone zone = getZone();
+  const MessageManagerLock mmLock;
+  if(abs(zone._from_x - x) < abs(zone._to_x - x))
+    Xslider->setMinValue(x, true);
+  else
+    Xslider->setMaxValue(x, true);
+  if(abs(zone._from_y - y) < abs(zone._to_y - y))
+    Yslider->setMinValue(y, true);
+  else
+    Yslider->setMaxValue(y, true);
+}
+
+void PresetComponent::handleParameterMessage(uint8_t pid, uint16_t value){
+  std::cout << "preset ... [" << (int)pid << "] [" << (pid == 24) << "]" << std::endl;
+  if(pid == 6){
+    std::cout << "preset data " << (int)bufpos << std::endl;
+    if(bufpos < sizeof(buf))
+      buf[bufpos++] = (uint8_t)value;
+    else
+      std::cerr << "preset buffer overflow!" << std::endl;
+    if(bufpos == sizeof(buf)){
+      uint8_t index = buf[0];
+      std::cout << "loading preset " << index << std::endl;
+      preset = blipbox->getPreset(index);
+      for(int i=0; i<8; ++i)
+        preset->getZone(i).read(&buf[1+i*4]);
+      loadPreset(index);
+    }
+  }
+}
+
+void PresetComponent::release(){
+  if(blipbox != NULL)
+    blipbox->disconnect();
+  delete blipbox;
+}
+MidiZone& PresetComponent::getZone(){
+  return preset->getZone(zoneComboBox->getSelectedItemIndex());
+}
+void PresetComponent::loadPreset(uint8_t index){
+  preset = blipbox->getPreset(index);
+  /*       if(index < MIDI_ZONE_PRESETS) */
+  /* 	preset = &presets[index]; */
+  zoneComboBox->setSelectedItemIndex(0, false);
+  loadZone(zoneComboBox->getSelectedItemIndex());
+}
+void PresetComponent::loadZone(uint8_t index){
+  MidiZone& zone = preset->getZone(index);
+  loadZone(zone);
+}
+void PresetComponent::loadZone(MidiZone& zone){
+  typeComboBox->setSelectedItemIndex(zone.getTypeIndex(), false);
+  channelSlider->setValue(zone.getChannel(), false);
+  data1Slider->setValue(zone._data1, false);
+  Xslider->setMinValue(zone._from_x, false);
+  Yslider->setMinValue(zone._from_y, false);
+  Xslider->setMaxValue(zone._to_x, false);
+  Yslider->setMaxValue(zone._to_y, false);
+  blipbox->drawMidiZone(getZone());
+}
+
 //[/MiscUserCode]
 
 

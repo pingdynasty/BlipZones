@@ -24,8 +24,8 @@
 
 //[Headers]     -- You can add your own extra header files here --
 #include "juce.h"
-#include "BlipBox.h"
 #include "MidiZone.h"
+class BlipBox;
 //[/Headers]
 
 
@@ -50,39 +50,15 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    void init(){
-      for(int i=0; i<MIDI_ZONE_PRESETS; ++i)
-	presets[i].preset = i;
-      blipbox = new BlipBox();
-      blipbox->connect();
-      presetComboBox->setSelectedItemIndex(0, false);
-      loadPreset(presetComboBox->getSelectedItemIndex());
-    }
-    void release(){
-      if(blipbox != NULL)
-	blipbox->disconnect();
-      delete blipbox;
-    }
-    MidiZone& getZone(){
-      return preset->getZone(zoneComboBox->getSelectedItemIndex());
-    }
-    void loadPreset(uint8_t index){
-      if(index < MIDI_ZONE_PRESETS)
-	preset = &presets[index];
-      zoneComboBox->setSelectedItemIndex(0, false);
-      loadZone(zoneComboBox->getSelectedItemIndex());
-    }
-    void loadZone(uint8_t index){
-      MidiZone& zone = preset->getZone(index);
-      typeComboBox->setSelectedItemIndex(zone.getTypeIndex(), false);
-      channelSlider->setValue(zone.getChannel(), false);
-      data1Slider->setValue(zone._data1, false);
-      Xslider->setMinValue(zone._from_x, false);
-      Yslider->setMinValue(zone._from_y, false);
-      Xslider->setMaxValue(zone._to_x, false);
-      Yslider->setMaxValue(zone._to_y, false);
-      blipbox->drawMidiZone(getZone());
-    }
+    void init();
+    void handleReleaseMessage();
+    void handlePositionMessage(uint16_t x, uint16_t y);
+    void handleParameterMessage(uint8_t pid, uint16_t value);
+    void release();
+    MidiZone& getZone();
+    void loadPreset(uint8_t index);
+    void loadZone(uint8_t index);
+    void loadZone(MidiZone& zone);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -100,7 +76,6 @@ private:
     //[UserVariables]   -- You can add your own custom variables in this section.
     BlipBox* blipbox;
     MidiZonePreset* preset;
-    MidiZonePreset presets[MIDI_ZONE_PRESETS];
     //[/UserVariables]
 
     //==============================================================================

@@ -10,6 +10,7 @@
 #include "juce.h"
 #include "Serial.h"
 #include "MidiZone.h"
+#include "PresetComponent.h"
 
 #define FILL_MESSAGE              0x10
 #define SET_LED_MESSAGE           0x20 // sets 1 led - 3 byte message
@@ -25,12 +26,12 @@
 // command: 0111cccc : 4 bit command index
 #define SET_PARAMETER_MESSAGE     0xc0
 
-class BlipBoxSerial : public Serial, public juce::Thread {
+class BlipBox : public Serial, public juce::Thread {
 public:
-  BlipBoxSerial(const juce::String& port, int speed, bool verbose = true)
-    : Serial(port, speed, verbose),
-      Thread(T("BlipBoxSerial"))
-  {}
+/*   BlipBox(const juce::String& port, int speed, bool verbose = true) */
+/*     : Serial(port, speed, verbose), */
+/*       Thread(T("BlipBox")) */
+/*   {} */
   int connect(){
     std::cout << "starting blipbox serial connection on " << getPort().toUTF8() << std::endl;
     int status = Serial::connect();
@@ -48,28 +49,40 @@ public:
     Serial::run();
   }
   int handle(unsigned char* data, ssize_t len);
-};
+  void handleReleaseMessage();
+  void handlePositionMessage(uint16_t x, uint16_t y);
+  void handleParameterMessage(uint8_t pid, uint16_t value);
+/* }; */
 
-class BlipBox {
+/* class BlipBox { */
 private:
-  BlipBoxSerial* serial;
-
+/*   BlipBoxSerial* serial; */
+  MidiZonePreset presets[MIDI_ZONE_PRESETS];
+  Serial *serial;
 public:
 
-  BlipBox() :
-    serial(NULL)
-  {}
-
-  void connect(){
-    serial = new BlipBoxSerial(L"/dev/tty.usbserial-A60081hf", 57600);
-    serial->connect();
+  BlipBox(const juce::String& port, int speed = 57600, bool verbose = false)
+    : Serial(port, speed, verbose),
+      Thread(T("BlipBox"))
+  {
+    for(int i=0; i<MIDI_ZONE_PRESETS; ++i)
+      presets[i].preset = i;
+    serial = this;
   }
-
-  void disconnect(){
-    if(serial != NULL)
-      serial->disconnect();
-    delete serial;
+  PresetComponent* handler;
+  void setEventHandler(PresetComponent* ahandler){
+    handler = ahandler;
   }
+/*   void connect(){ */
+/*     serial = new BlipBoxSerial(L"/dev/tty.usbserial-A60081hf", 57600); */
+/*     serial->connect(); */
+/*   } */
+
+/*   void disconnect(){ */
+/*     if(serial != NULL) */
+/*       serial->disconnect(); */
+/*     delete serial; */
+/*   } */
 
   void clear(){
     fill(0);
@@ -77,8 +90,15 @@ public:
 
   void fill(uint8_t value);
   void setLed(uint8_t x, uint8_t y, uint8_t brightness);
+
+  void requestMidiZonePreset(uint8_t index);
   void sendMidiZonePreset(MidiZonePreset& preset);
   void drawMidiZone(MidiZone& zone);
+  MidiZonePreset* getPreset(uint8_t index){
+    if(index < MIDI_ZONE_PRESETS)
+      return &presets[index];
+    return NULL;
+  }      
 };
 
 #endif  // __BLIPBOX_H__

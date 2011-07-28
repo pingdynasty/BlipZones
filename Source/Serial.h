@@ -106,16 +106,18 @@ public:
       topos += len;
       len = topos-frompos;
       if(len > 0){
-	if(m_verbose){
-	  std::cout << "rx\t";
-	  log(&buf[frompos], len);
-	}
-	used = handle(&buf[frompos], len);
-        if(used == len)
-          frompos = topos = 0;
-        else
-          frompos += used;
-// 	len = topos-frompos;
+        do{
+          if(m_verbose){
+            std::cout << "rx\t";
+            log(&buf[frompos], len);
+          }
+          used = handle(&buf[frompos], len);
+          if(used == len)
+            frompos = topos = 0;
+          else
+            frompos += used;
+          len = topos-frompos;
+        }while(used > 0 && len > 0);
       }
       if(topos >= BUFFER_LENGTH-1){
         std::cerr << "buffer overflow!" << std::endl;
