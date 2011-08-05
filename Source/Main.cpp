@@ -8,11 +8,9 @@
   ==============================================================================
 */
 
-#include "juce.h"
-#define noexcept  throw()
-#define nullptr   (0)
-#include "juce_ScopedPointer.h"
+#include "../JuceLibraryCode/JuceHeader.h"
 #include "MainWindow.h"
+#include "globals.h"
 
 //==============================================================================
 class BlipZonesApplication  : public JUCEApplication
@@ -31,7 +29,17 @@ public:
     void initialise (const String& commandLine)
     {
       // Do your application's initialisation code here..
+
+    // Do your application's initialisation code here..
+      init();
+      setup();
+      blipbox.config.touchscreen_x_min = 0;
+      blipbox.config.touchscreen_y_min = 0;
+      blipbox.config.touchscreen_x_range = 1023;
+      blipbox.config.touchscreen_y_range = 1023;
+
       mainWindow = new MainAppWindow();
+      blipbox.leds.setLed(0, 0, 255);
     }
 
     void shutdown()

@@ -55,7 +55,7 @@ public:
       return -1; 
     }
     if(m_verbose)
-      std::cout << "tty " << m_port.toUTF8() << " at " << m_speed << " baud" << std::endl;
+      std::cout << "tty " << m_port << " at " << m_speed << " baud" << std::endl;
 //     fcntl(m_fd, F_SETFL, FNDELAY); // set non-blocking read
     fcntl(m_fd, F_SETFL, 0); // set blocking read
 

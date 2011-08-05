@@ -1,5 +1,5 @@
-#ifndef __BLIPBOX_H__
-#define __BLIPBOX_H__
+#ifndef __BLIPCLIENT_H__
+#define __BLIPCLIENT_H__
 
 #include <sys/types.h>
 #include <stdio.h>
@@ -57,7 +57,7 @@ public:
 /* class BlipClient { */
 private:
 /*   BlipClientSerial* serial; */
-  MidiZonePreset presets[MIDI_ZONE_PRESETS];
+/*   MidiZonePreset presets[MIDI_ZONE_PRESETS]; */
   Serial *serial;
 public:
 
@@ -65,24 +65,14 @@ public:
     : Serial(port, speed, verbose),
       Thread(T("BlipClient"))
   {
-    for(int i=0; i<MIDI_ZONE_PRESETS; ++i)
-      presets[i].preset = i;
+/*     for(int i=0; i<MIDI_ZONE_PRESETS; ++i) */
+/*       presets[i].preset = i; */
     serial = this;
   }
   PresetComponent* handler;
   void setEventHandler(PresetComponent* ahandler){
     handler = ahandler;
   }
-/*   void connect(){ */
-/*     serial = new BlipClientSerial(L"/dev/tty.usbserial-A60081hf", 57600); */
-/*     serial->connect(); */
-/*   } */
-
-/*   void disconnect(){ */
-/*     if(serial != NULL) */
-/*       serial->disconnect(); */
-/*     delete serial; */
-/*   } */
 
   void clear(){
     fill(0);
@@ -92,13 +82,13 @@ public:
   void setLed(uint8_t x, uint8_t y, uint8_t brightness);
 
   void requestMidiZonePreset(uint8_t index);
-  void sendMidiZonePreset(MidiZonePreset& preset);
+  void sendMidiZonePreset();
   void drawMidiZone(MidiZone& zone);
-  MidiZonePreset* getPreset(uint8_t index){
-    if(index < MIDI_ZONE_PRESETS)
-      return &presets[index];
-    return NULL;
-  }      
+/*   MidiZonePreset* getPreset(uint8_t index){ */
+/*     if(index < MIDI_ZONE_PRESETS) */
+/*       return &presets[index]; */
+/*     return NULL; */
+/*   }       */
 };
 
-#endif  // __BLIPBOX_H__
+#endif  // __BLIPCLIENT_H__

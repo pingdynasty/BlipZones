@@ -23,9 +23,9 @@
 #define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_D44A8DE6__
 
 //[Headers]     -- You can add your own extra header files here --
-#include "juce.h"
-#include "MidiZone.h"
-class BlipBox;
+#include "../JuceLibraryCode/JuceHeader.h"
+#include "globals.h"
+class BlipClient;
 //[/Headers]
 
 
@@ -74,8 +74,7 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    BlipBox* blipbox;
-    MidiZonePreset* preset;
+    BlipClient* client;
     //[/UserVariables]
 
     //==============================================================================

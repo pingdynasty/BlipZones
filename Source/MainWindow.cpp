@@ -13,7 +13,7 @@
 
 //==============================================================================
 MainAppWindow::MainAppWindow()
-    : DocumentWindow (T("BlipZones"),
+    : DocumentWindow (JUCEApplication::getInstance()->getApplicationName(),
                       Colours::lightgrey,
                       DocumentWindow::allButtons, true)
 {
@@ -21,8 +21,8 @@ MainAppWindow::MainAppWindow()
     setVisible (true);
     setResizable(true, true); // resizable, with resize corner (instead of border)
     preset = new PresetComponent();
-//     setContentOwned(preset, true);
-    setContentComponent(preset);
+    setContentOwned(preset, true);
+//     setContentComponent(preset);
 //     addAndMakeVisible(preset);
 }
 

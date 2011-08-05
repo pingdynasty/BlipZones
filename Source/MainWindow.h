@@ -11,27 +11,9 @@
 #ifndef __MAINWINDOW_H_30D86307__
 #define __MAINWINDOW_H_30D86307__
 
-#include "juce.h"
-
+#include "../JuceLibraryCode/JuceHeader.h"
 
 #include "PresetComponent.h"
-
- #define JUCE_LEAK_DETECTOR(OwnerClass)  public:\
-			  static void* operator new (size_t sz)	   { return JUCE_NAMESPACE::juceDLL_malloc ((int) sz); } \
-			  static void* operator new (size_t, void* p)	 { return p; } \
-			  static void operator delete (void* p)	   { JUCE_NAMESPACE::juceDLL_free (p); } \
-			  static void operator delete (void*, void*)	  {}
-
-#define JUCE_DECLARE_NON_COPYABLE(className) \
-	className (const className&);\
-	className& operator= (const className&)
-
-/** This is a shorthand way of writing both a JUCE_DECLARE_NON_COPYABLE and
-	JUCE_LEAK_DETECTOR macro for a class.
-*/
-#define JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(className) \
-	JUCE_DECLARE_NON_COPYABLE(className);\
-	JUCE_LEAK_DETECTOR(className)
 
 //==============================================================================
 class MainAppWindow   : public DocumentWindow
@@ -54,7 +36,7 @@ public:
 private:
     PresetComponent* preset;
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE (MainAppWindow);
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainAppWindow)
 };
 
 

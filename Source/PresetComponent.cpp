@@ -21,7 +21,7 @@
 
 //[Headers] You can add your own extra header files here...
 // #include <Math.h>
-#include "BlipBox.h"
+#include "BlipClient.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -30,6 +30,52 @@
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 uint8_t buf[1+4*8];
 uint8_t bufpos;
+
+#define NOTE_CC_ZONE_BIT             (1<<1)
+#define BUTTON_SLIDER_ZONE_BIT       (1<<2)
+#define HORIZONTAL_VERTICAL_ZONE_BIT (1<<3)
+#define MOMENTARY_TOGGLE_ZONE_BIT    (1<<3)
+#define INVERTED_ZONE_BIT            (1<<0)
+
+uint8_t typecodes[] = {
+//     typeComboBox->addItem (L"Horizontal CC Slider", 1);
+  HORIZONTAL_VERTICAL_ZONE_BIT,
+//     typeComboBox->addItem (L"Vertical CC Slider", 2);
+    0,
+//     typeComboBox->addItem (L"Horizontal Note Player", 3);
+    NOTE_CC_ZONE_BIT | HORIZONTAL_VERTICAL_ZONE_BIT,
+//     typeComboBox->addItem (L"Vertical Note Player", 4);
+    NOTE_CC_ZONE_BIT,
+//     typeComboBox->addItem (L"Note Push Button", 5);
+    NOTE_CC_ZONE_BIT | BUTTON_SLIDER_ZONE_BIT | MOMENTARY_TOGGLE_ZONE_BIT,
+//     typeComboBox->addItem (L"Note Toggle Button", 6);
+    NOTE_CC_ZONE_BIT | BUTTON_SLIDER_ZONE_BIT,
+//     typeComboBox->addItem (L"CC Push Button", 7);
+    BUTTON_SLIDER_ZONE_BIT | MOMENTARY_TOGGLE_ZONE_BIT,
+//     typeComboBox->addItem (L"CC Toggle Button", 8);
+    BUTTON_SLIDER_ZONE_BIT,
+//     typeComboBox->addItem (L"Inverted Horizontal CC Slider", 9);
+    HORIZONTAL_VERTICAL_ZONE_BIT | INVERTED_ZONE_BIT,
+//     typeComboBox->addItem (L"Inverted Vertical CC Slider", 10);
+    INVERTED_ZONE_BIT
+};
+
+uint8_t getTypeIndex(MidiZone& zone){
+  for(int i=0; i<sizeof(typecodes); ++i)
+    if(typecodes[i] == zone._type)
+      return i;
+  return -1;
+}
+
+void setTypeIndex(MidiZone& zone, uint8_t index){
+  if(index < sizeof(typecodes))
+    zone._type = typecodes[index];
+}
+
+uint8_t getChannel(MidiZone& zone){
+  return zone._type & 0x0f;
+}
+
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -111,7 +157,7 @@ PresetComponent::PresetComponent ()
 
     addAndMakeVisible (sendButton = new TextButton (L"Send"));
     sendButton->setButtonText (L"send");
-    sendButton->addButtonListener (this);
+    sendButton->addListener (this);
 
     addAndMakeVisible (label = new Label (L"new label",
                                           L"Channel"));
@@ -183,7 +229,7 @@ PresetComponent::PresetComponent ()
 
     addAndMakeVisible (showButton = new TextButton (L"show button"));
     showButton->setButtonText (L"request");
-    showButton->addButtonListener (this);
+    showButton->addListener (this);
 
 
     //[UserPreSize]
@@ -274,8 +320,8 @@ void PresetComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == typeComboBox)
     {
         //[UserComboBoxCode_typeComboBox] -- add your combo box handling code here..
-      std::cout << "type " << typeComboBox->getText().toUTF8() << std::endl;
-      getZone().setTypeIndex(typeComboBox->getSelectedItemIndex());
+      std::cout << "type " << typeComboBox->getText() << std::endl;
+      setTypeIndex(getZone(), typeComboBox->getSelectedItemIndex());
 //       getZone()._type = preset->getTypeCode(typeComboBox->getSelectedItemIndex());
         //[/UserComboBoxCode_typeComboBox]
     }
@@ -298,15 +344,15 @@ void PresetComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == Xslider)
     {
         //[UserSliderCode_Xslider] -- add your slider handling code here..
-      getZone()._from_x = sliderThatWasMoved->getMinValue();
-      getZone()._to_x = sliderThatWasMoved->getMaxValue();
+      getZone()._from_column = sliderThatWasMoved->getMinValue();
+      getZone()._to_column = sliderThatWasMoved->getMaxValue();
         //[/UserSliderCode_Xslider]
     }
     else if (sliderThatWasMoved == Yslider)
     {
         //[UserSliderCode_Yslider] -- add your slider handling code here..
-      getZone()._from_y = sliderThatWasMoved->getMinValue();
-      getZone()._to_y = sliderThatWasMoved->getMaxValue();
+      getZone()._from_row = sliderThatWasMoved->getMinValue();
+      getZone()._to_row = sliderThatWasMoved->getMaxValue();
         //[/UserSliderCode_Yslider]
     }
     else if (sliderThatWasMoved == channelSlider)
@@ -324,7 +370,7 @@ void PresetComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 
     //[UsersliderValueChanged_Post]
     if(sliderThatWasMoved == Xslider || sliderThatWasMoved == Yslider)
-      blipbox->drawMidiZone(getZone());
+      client->drawMidiZone(getZone());
     //[/UsersliderValueChanged_Post]
 }
 
@@ -337,16 +383,16 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_sendButton] -- add your button handler code here..
       std::cout << "send!" << std::endl;
-      blipbox->sendMidiZonePreset(*preset);
+      client->sendMidiZonePreset();
         //[/UserButtonCode_sendButton]
     }
     else if (buttonThatWasClicked == showButton)
     {
         //[UserButtonCode_showButton] -- add your button handler code here..
       std::cout << "request!" << std::endl;
-      blipbox->requestMidiZonePreset(preset->getIndex());
+      client->requestMidiZonePreset(blipbox.midizones.preset);
       bufpos = 0;
-//       blipbox->drawMidiZone(getZone());
+//       client->drawMidiZone(getZone());
       std::cout << "done!" << std::endl;
         //[/UserButtonCode_showButton]
     }
@@ -360,9 +406,9 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 
 void PresetComponent::init(){
-  blipbox = new BlipBox(L"/dev/tty.usbserial-A60081hf");
-  blipbox->setEventHandler(this);
-  blipbox->connect();
+  client = new BlipClient(L"/dev/tty.usbserial-A60081hf");
+  client->setEventHandler(this);
+  client->connect();
   presetComboBox->setSelectedItemIndex(0, false);
   loadPreset(presetComboBox->getSelectedItemIndex());
 }
@@ -376,11 +422,11 @@ void PresetComponent::handlePositionMessage(uint16_t x, uint16_t y){
   y = y*8/1023;
   MidiZone zone = getZone();
   const MessageManagerLock mmLock;
-  if(abs(zone._from_x - x) < abs(zone._to_x - x))
+  if(abs(zone._from_column - x) < abs(zone._to_column - x))
     Xslider->setMinValue(x, true);
   else
     Xslider->setMaxValue(x, true);
-  if(abs(zone._from_y - y) < abs(zone._to_y - y))
+  if(abs(zone._from_row - y) < abs(zone._to_row - y))
     Yslider->setMinValue(y, true);
   else
     Yslider->setMaxValue(y, true);
@@ -397,42 +443,45 @@ void PresetComponent::handleParameterMessage(uint8_t pid, uint16_t value){
     if(bufpos == sizeof(buf)){
       uint8_t index = buf[0];
       std::cout << "loading preset " << index << std::endl;
-      preset = blipbox->getPreset(index);
-      for(int i=0; i<8; ++i)
-        preset->getZone(i).read(&buf[1+i*4]);
+//       preset = client->getPreset(index);
+//       for(int i=0; i<8; ++i)
+//         preset->getZone(i).read(&buf[1+i*4]);
       loadPreset(index);
     }
   }
 }
 
 void PresetComponent::release(){
-  if(blipbox != NULL)
-    blipbox->disconnect();
-  delete blipbox;
+  if(client != NULL)
+    client->disconnect();
+  delete client;
 }
 MidiZone& PresetComponent::getZone(){
-  return preset->getZone(zoneComboBox->getSelectedItemIndex());
+//   return preset->getZone(zoneComboBox->getSelectedItemIndex());
+  return blipbox.midizones.getZone(zoneComboBox->getSelectedItemIndex());
 }
 void PresetComponent::loadPreset(uint8_t index){
-  preset = blipbox->getPreset(index);
+  blipbox.midizones.loadPreset(index);
+//   preset = client->getPreset(index);
   /*       if(index < MIDI_ZONE_PRESETS) */
   /* 	preset = &presets[index]; */
   zoneComboBox->setSelectedItemIndex(0, false);
   loadZone(zoneComboBox->getSelectedItemIndex());
 }
 void PresetComponent::loadZone(uint8_t index){
-  MidiZone& zone = preset->getZone(index);
+//   MidiZone& zone = preset->getZone(index);
+  MidiZone& zone = blipbox.midizones.getZone(index);
   loadZone(zone);
 }
 void PresetComponent::loadZone(MidiZone& zone){
-  typeComboBox->setSelectedItemIndex(zone.getTypeIndex(), false);
-  channelSlider->setValue(zone.getChannel(), false);
+  typeComboBox->setSelectedItemIndex(getTypeIndex(zone), false);
+  channelSlider->setValue(getChannel(zone), false);
   data1Slider->setValue(zone._data1, false);
-  Xslider->setMinValue(zone._from_x, false);
-  Yslider->setMinValue(zone._from_y, false);
-  Xslider->setMaxValue(zone._to_x, false);
-  Yslider->setMaxValue(zone._to_y, false);
-  blipbox->drawMidiZone(getZone());
+  Xslider->setMinValue(zone._from_column, false);
+  Yslider->setMinValue(zone._from_row, false);
+  Xslider->setMaxValue(zone._to_column, false);
+  Yslider->setMaxValue(zone._to_row, false);
+  client->drawMidiZone(getZone());
 }
 
 //[/MiscUserCode]

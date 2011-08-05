@@ -1,4 +1,5 @@
 #include "BlipClient.h"
+#include "globals.h"
 
 #define POSITION_MSG       0x50 // 0x5 << 4
 #define RELEASE_MSG        0x70 // 0x7 << 4
@@ -62,14 +63,15 @@ int BlipClient::handle(unsigned char* data, ssize_t len){
 
 void BlipClient::fill(uint8_t value){
   jassert(serial != NULL);
-  jassert(serial->connected());
+//   jassert(serial->connected());
   jassert(value < 16);
   uint8_t cmd[] = { FILL_MESSAGE | value };
   serial->writeSerial(cmd, sizeof(cmd));
 }
 
 void BlipClient::setLed(uint8_t x, uint8_t y, uint8_t brightness){
-  jassert(serial != NULL && serial->connected());
+  jassert(serial != NULL);
+//   jassert(serial->connected());
   uint8_t cmd[] = { SET_LED_MESSAGE, x*16+y, brightness };
   serial->writeSerial(cmd, sizeof(cmd));
 }
@@ -82,14 +84,14 @@ void BlipClient::requestMidiZonePreset(uint8_t index){
   serial->writeSerial(cmd, sizeof(cmd));
 }
 
-void BlipClient::sendMidiZonePreset(MidiZonePreset& preset){
+void BlipClient::sendMidiZonePreset(){
   uint8_t cmd[] = { COMMAND_MESSAGE | 12 };
   serial->writeSerial(cmd, 1);
-  cmd[0] = READ_PRESET_COMMAND | preset.getIndex();
+  cmd[0] = READ_PRESET_COMMAND | blipbox.midizones.preset;
   serial->writeSerial(cmd, 1);
   uint8_t buf[4];
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){
-    preset.getZone(i).write(buf);
+    blipbox.midizones.getZone(i).write(buf);
     serial->writeSerial(buf, sizeof(buf));
   }
   cmd[0] = 0x00;
@@ -97,10 +99,10 @@ void BlipClient::sendMidiZonePreset(MidiZonePreset& preset){
 }
 
 void BlipClient::drawMidiZone(MidiZone& zone){
-  std::cout << "x " << (int)zone._from_x << "-" << (int)zone._to_x << std::endl;
-  std::cout << "y " << (int)zone._from_y << "-" << (int)zone._to_y << std::endl;
+  std::cout << "x " << (int)zone._from_column << "-" << (int)zone._to_column << std::endl;
+  std::cout << "y " << (int)zone._from_row << "-" << (int)zone._to_row << std::endl;
   clear();
-  for(int x=std::min(zone._from_x, zone._to_x); x<std::max(zone._from_x, zone._to_x); ++x)
-    for(int y=std::min(zone._from_y, zone._to_y); y<std::max(zone._from_y, zone._to_y); ++y)
+  for(int x=std::min(zone._from_column, zone._to_column); x<std::max(zone._from_column, zone._to_column); ++x)
+    for(int y=std::min(zone._from_row, zone._to_row); y<std::max(zone._from_row, zone._to_row); ++y)
       setLed(x, y, 0xff);
 }
