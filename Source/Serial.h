@@ -44,6 +44,10 @@ public:
     return m_port;
   }
 
+  void setPort(const juce::String& port){
+    m_port = port;
+  }
+
   int getSpeed(){
     return m_speed;
   }

@@ -17,7 +17,7 @@ MainAppWindow::MainAppWindow()
                       Colours::lightgrey,
                       DocumentWindow::allButtons, true)
 {
-    centreWithSize (500, 400);
+    centreWithSize (400, 700);
     setVisible (true);
     setResizable(true, true); // resizable, with resize corner (instead of border)
     preset = new PresetComponent();

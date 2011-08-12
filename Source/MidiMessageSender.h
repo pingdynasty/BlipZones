@@ -22,11 +22,6 @@ class MidiMessageSender {
   };
 
   ~MidiMessageSender(){
-/*     If you're leaking, it's probably because you're using old-fashioned, non-RAII techniques for */
-/*     your object management. Tut, tut. Always, always use ScopedPointers, OwnedArrays, */
-/*     ReferenceCountedObjects, etc, and avoid the 'delete' operator at all costs! */
-    if(midiout != NULL)
-      delete midiout;
   }
 
   void handleByte(uint8_t bt){

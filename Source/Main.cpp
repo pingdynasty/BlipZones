@@ -10,7 +10,9 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "MainWindow.h"
-#include "globals.h"
+#include "SimWindow.h"
+#include "BlipSim.h"
+#include "ApplicationConfiguration.h"
 
 //==============================================================================
 class BlipZonesApplication  : public JUCEApplication
@@ -29,23 +31,23 @@ public:
     void initialise (const String& commandLine)
     {
       // Do your application's initialisation code here..
-
-    // Do your application's initialisation code here..
-      init();
-      setup();
-      blipbox.config.touchscreen_x_min = 0;
-      blipbox.config.touchscreen_y_min = 0;
-      blipbox.config.touchscreen_x_range = 1023;
-      blipbox.config.touchscreen_y_range = 1023;
-
+      ApplicationConfiguration::initialise();
+      ApplicationConfiguration::getBlipSim()->initialise();
       mainWindow = new MainAppWindow();
-      blipbox.leds.setLed(0, 0, 255);
+      simWindow = new SimWindow();
+      ApplicationConfiguration::getBlipSim()->start();
+      ApplicationConfiguration::getBlipClient()->setPort(T("/dev/tty.usbserial-A60081hf"));
+      ApplicationConfiguration::getBlipClient()->connect();
     }
 
     void shutdown()
     {
         // Do your application's shutdown code here..
+      ApplicationConfiguration::getBlipClient()->shutdown();
+      ApplicationConfiguration::getBlipSim()->shutdown();
+      ApplicationConfiguration::release();
       mainWindow = 0;
+      simWindow = 0;
     }
 
     //==============================================================================
@@ -79,7 +81,7 @@ public:
 private:
 
   ScopedPointer <MainAppWindow> mainWindow;
-
+  ScopedPointer <SimWindow> simWindow;
 };
 
 

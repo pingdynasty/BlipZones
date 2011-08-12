@@ -1,5 +1,8 @@
 #include "BlipClient.h"
 #include "globals.h"
+#include "ApplicationConfiguration.h"
+
+#define THREAD_TIMEOUT_MS  2000
 
 #define POSITION_MSG       0x50 // 0x5 << 4
 #define RELEASE_MSG        0x70 // 0x7 << 4
@@ -12,25 +15,85 @@
 #define BUTTON3_SENSOR_MSG 0x9c // 0x80 | (0x7 << 2)
 #define PARAMETER_MSG      0xc0 // 0x3 << 6 B11000000
 
+class BlipConnectionThread : public Thread {
+private:
+  BlipClient* client;
+public:
+  BlipConnectionThread () : Thread(T("BlipConnectionThread")), client(0) {}
+
+  void run(){
+    sleep(2000);
+    client = ApplicationConfiguration::getBlipClient();
+    while(!threadShouldExit()){
+      client->sendCommand(START_LED_BLOCK);
+      for(int x=0; x<10; ++x)
+	for(int y=0; y<8; ++y)
+	  client->setLed(x, y, blipbox.leds.getLed(x, y));
+      client->sendCommand(END_LED_BLOCK);
+      sleep(40);
+    }
+  }
+};
+
+BlipConnectionThread connectionthread;
+
+int BlipClient::connect(){
+  std::cout << "starting blipbox serial connection on " << getPort() << std::endl;
+  int status = Serial::connect();
+  Serial::start();
+  juce::Thread::startThread();
+  connectionthread.startThread();
+  return status;
+}
+
+int BlipClient::disconnect(){
+  Serial::stop();
+  std::cout << "stopping blipbox serial connection on " << getPort() << std::endl;
+  connectionthread.stopThread(THREAD_TIMEOUT_MS);
+  juce::Thread::stopThread(THREAD_TIMEOUT_MS);
+  return Serial::disconnect();
+}
+
 void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
   std::cout << "position " << x << "/" << y << std::endl;
-  if(handler)
-    handler->handlePositionMessage(x, y);
+//   Component* window = ApplicationConfiguration::getSimScreen();
+//   Point<int> p = window->getPosition();
+//   p = p.translated(x*window->getWidth()/1024, window->getHeight()-y*window->getHeight()/1024);
+//   std::cout << "p " << p.getX() << "/" << p.getY() << std::endl;
+//   Desktop::setMousePosition(p);
+  ApplicationConfiguration::getSimScreen()->position(x, 1023-y); // inverted y axis
 }
 
 void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
-  std::cout << "param " << (int)pid << ":" << value << std::endl;
-  if(handler)
-    handler->handleParameterMessage(pid, value);
+  static uint8_t buf[1+MIDI_ZONE_PRESET_SIZE*MIDI_ZONES_IN_PRESET];
+  static uint8_t bufpos;
+  std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
+  if(pid == 6){
+//     std::cout << "preset data " << std::dec << (int)bufpos << std::endl;
+    if(bufpos < sizeof(buf))
+      buf[bufpos++] = (uint8_t)value;
+    else
+      std::cerr << "preset buffer overflow!" << std::endl;
+    if(bufpos == sizeof(buf)){
+      uint8_t index = buf[0];
+      std::cout << "loading preset " << std::dec << (int)index << std::endl;
+      ApplicationConfiguration::getMidiZonePreset(index)->read(&buf[1]);
+      bufpos = 0;
+//       preset = client->getPreset(index);
+//       for(int i=0; i<8; ++i)
+//         preset->getZone(i).read(&buf[1+i*4]);
+//       loadPreset(index);
+    }
+  }
 }
 
 void BlipClient::handleReleaseMessage(){
   std::cout << "release" << std::endl;
-  if(handler)
-    handler->handleReleaseMessage();
+  ApplicationConfiguration::getSimScreen()->release();
 }
 
 int BlipClient::handle(unsigned char* data, ssize_t len){
+//   std::cout << "rx[" << std::dec << len << "]" << std::endl;
 //   std::cout << "rx";
 //   for(int i=0; i<len; ++i)
 //     std::cout << "\t0x" << std::hex << (int)data[i];
@@ -57,52 +120,63 @@ int BlipClient::handle(unsigned char* data, ssize_t len){
     // release message
     handleReleaseMessage();
     return 1;
+  }else{
+    std::cout << "unhandled message [" << (int)type << "]" << std::endl;
+    return len;
   }
-  return len;
 }
 
 void BlipClient::fill(uint8_t value){
-  jassert(serial != NULL);
-//   jassert(serial->connected());
   jassert(value < 16);
   uint8_t cmd[] = { FILL_MESSAGE | value };
-  serial->writeSerial(cmd, sizeof(cmd));
+  sendSerial(cmd, sizeof(cmd));
 }
 
 void BlipClient::setLed(uint8_t x, uint8_t y, uint8_t brightness){
-  jassert(serial != NULL);
-//   jassert(serial->connected());
   uint8_t cmd[] = { SET_LED_MESSAGE, x*16+y, brightness };
-  serial->writeSerial(cmd, sizeof(cmd));
+  sendSerial(cmd, sizeof(cmd));
+}
+
+void BlipClient::sendCommand(Command command){
+  uint8_t cmd[] = { COMMAND_MESSAGE | command};
+  sendSerial(cmd, sizeof(cmd));  
 }
 
 #define REQUEST_PRESET_COMMAND (2 << 4)
 #define READ_PRESET_COMMAND    (1 << 4)
 
 void BlipClient::requestMidiZonePreset(uint8_t index){
-  uint8_t cmd[] = { COMMAND_MESSAGE | 12,  REQUEST_PRESET_COMMAND | index, 0x00};
-  serial->writeSerial(cmd, sizeof(cmd));
+  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, REQUEST_PRESET_COMMAND | index, 0x00};
+  sendSerial(cmd, sizeof(cmd));
 }
 
-void BlipClient::sendMidiZonePreset(){
-  uint8_t cmd[] = { COMMAND_MESSAGE | 12 };
-  serial->writeSerial(cmd, 1);
-  cmd[0] = READ_PRESET_COMMAND | blipbox.midizones.preset;
-  serial->writeSerial(cmd, 1);
-  uint8_t buf[4];
+void BlipClient::sendMidiZonePreset(uint8_t index){
+  MidiZonePreset* preset = ApplicationConfiguration::getMidiZonePreset(index);
+  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, READ_PRESET_COMMAND | index};
+  sendSerial(cmd, sizeof(cmd));
+  uint8_t buf[MIDI_ZONE_PRESET_SIZE];
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){
-    blipbox.midizones.getZone(i).write(buf);
-    serial->writeSerial(buf, sizeof(buf));
+    preset->getZone(i)->write(buf);
+    sendSerial(buf, sizeof(buf));
   }
   cmd[0] = 0x00;
-  serial->writeSerial(cmd, 1);
+  sendSerial(cmd, 1);
 }
 
-void BlipClient::drawMidiZone(MidiZone& zone){
-  std::cout << "x " << (int)zone._from_column << "-" << (int)zone._to_column << std::endl;
-  std::cout << "y " << (int)zone._from_row << "-" << (int)zone._to_row << std::endl;
+void BlipClient::drawMidiZone(MidiZone* zone){
+  std::cout << "x " << (int)zone->_from_column << "-" << (int)zone->_to_column << std::endl;
+  std::cout << "y " << (int)zone->_from_row << "-" << (int)zone->_to_row << std::endl;
   clear();
-  for(int x=std::min(zone._from_column, zone._to_column); x<std::max(zone._from_column, zone._to_column); ++x)
-    for(int y=std::min(zone._from_row, zone._to_row); y<std::max(zone._from_row, zone._to_row); ++y)
-      setLed(x, y, 0xff);
+  for(int x=std::min(zone->_from_column, zone->_to_column); x<std::max(zone->_from_column, zone->_to_column); ++x)
+    for(int y=std::min(zone->_from_row, zone->_to_row); y<std::max(zone->_from_row, zone->_to_row); ++y)
+      setLed(x, y, 0x20);
+}
+
+void BlipClient::sendSerial(uint8_t* data, ssize_t size){
+  // send to simulator
+//   ApplicationConfiguration::getBlipSim()->sendSerial(data, size);
+  jassert(serial != NULL);
+  // send to connected BlipBox device
+  if(serial->connected())
+    serial->writeSerial(data, size);
 }

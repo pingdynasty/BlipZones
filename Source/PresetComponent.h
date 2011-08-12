@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  11 Jul 2011 5:46:50pm
+  Creation date:  12 Aug 2011 3:05:01am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,15 +19,16 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_D44A8DE6__
-#define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_D44A8DE6__
+#ifndef __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__
+#define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "globals.h"
-class BlipClient;
+#include "MidiZonePreset.h"
 //[/Headers]
 
+#include "MidiZoneComponent.h"
 
 
 //==============================================================================
@@ -39,9 +40,8 @@ class BlipClient;
                                                                     //[/Comments]
 */
 class PresetComponent  : public Component,
-                         public ComboBoxListener,
-                         public SliderListener,
-                         public ButtonListener
+                         public ButtonListener,
+                         public ComboBoxListener
 {
 public:
     //==============================================================================
@@ -50,22 +50,22 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    void init();
+    void initialise();
     void handleReleaseMessage();
     void handlePositionMessage(uint16_t x, uint16_t y);
     void handleParameterMessage(uint8_t pid, uint16_t value);
     void release();
-    MidiZone& getZone();
     void loadPreset(uint8_t index);
-    void loadZone(uint8_t index);
-    void loadZone(MidiZone& zone);
+    void loadZones();
+    void selectZone(uint8_t index);
+    void loadFile();
+    void saveFile();
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
-    void sliderValueChanged (Slider* sliderThatWasMoved);
     void buttonClicked (Button* buttonThatWasClicked);
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
 
 
 
@@ -74,26 +74,42 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    BlipClient* client;
+    MidiZonePreset *preset;
+    MidiZoneComponent* zonecomponents[MIDI_ZONES_IN_PRESET];
     //[/UserVariables]
 
     //==============================================================================
-    ComboBox* zoneComboBox;
-    ComboBox* typeComboBox;
-    Slider* Xslider;
-    Slider* Yslider;
-    Slider* channelSlider;
-    Slider* data1Slider;
     TextButton* sendButton;
     Label* label;
-    Label* label2;
+    Label* dataLabel;
     Label* label3;
     Label* label4;
     Label* label5;
     Label* label6;
     Label* label7;
     ComboBox* presetComboBox;
-    TextButton* showButton;
+    TextButton* requestButton;
+    MidiZoneComponent* zone1;
+    Label* label8;
+    MidiZoneComponent* zone2;
+    MidiZoneComponent* zone3;
+    MidiZoneComponent* zone4;
+    MidiZoneComponent* zone5;
+    MidiZoneComponent* zone6;
+    MidiZoneComponent* zone7;
+    MidiZoneComponent* zone8;
+    ToggleButton* toggleButton1;
+    ToggleButton* toggleButton2;
+    ToggleButton* toggleButton3;
+    ToggleButton* toggleButton4;
+    ToggleButton* toggleButton5;
+    ToggleButton* toggleButton6;
+    ToggleButton* toggleButton7;
+    ToggleButton* toggleButton8;
+    TextButton* saveButton;
+    TextButton* loadButton;
+    TextButton* resetButton;
+    ToggleButton* runButton;
 
 
     //==============================================================================
@@ -103,4 +119,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_D44A8DE6__
+#endif   // __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__

@@ -13,7 +13,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-#include "SimScreen.h"
+#include "BlipSimComponent.h"
 
 //==============================================================================
 class SimWindow   : public DocumentWindow
@@ -26,7 +26,7 @@ public:
     void closeButtonPressed();
 
 private:
-    Component* sim;
+    BlipSimComponent* sim;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimWindow)
 };

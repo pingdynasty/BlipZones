@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Aug 2011 2:32:59am
+  Creation date:  12 Aug 2011 3:04:50am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -20,6 +20,7 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "ApplicationConfiguration.h"
 //[/Headers]
 
 #include "MidiZoneComponent.h"
@@ -41,11 +42,14 @@ void MidiZoneComponent::handlePositionMessage(uint16_t x, uint16_t y){
     Yslider->setMaxValue(y, true);
 }
 
+void MidiZoneComponent::updateZoneChannel(){
+  getZone()->_status = (getZone()->_status & MIDI_STATUS_MASK) | ((uint8_t)channelSlider->getValue() - 1);
+}
+
 void MidiZoneComponent::updateZoneType(){
   uint8_t type = 0;
   uint8_t status = 0;
   type = MIDI_ZONE_TYPE;
-
   switch(typeComboBox1->getSelectedId()){
   case 1: // Control Change
     status = MIDI_CONTROL_CHANGE;
@@ -67,7 +71,6 @@ void MidiZoneComponent::updateZoneType(){
     status = MIDI_AFTERTOUCH;
     break;
   }
-
   switch(typeComboBox2->getSelectedId()){
   case 1: // Horizontal Slider
     type |= HORIZONTAL_VERTICAL_ZONE_BIT;
@@ -81,7 +84,6 @@ void MidiZoneComponent::updateZoneType(){
     type |= BUTTON_SLIDER_ZONE_BIT;
     break;
   }
-
   switch(typeComboBox3->getSelectedId()){
   case 1:
     type |= BAR_DISPLAY_TYPE;
@@ -96,16 +98,43 @@ void MidiZoneComponent::updateZoneType(){
     type |= NO_DISPLAY_TYPE;
     break;
   }
-
-  status |= (uint8_t)channelSlider->getValue()-1;
   getZone()->_status = status;
   getZone()->_type = type;
+  updateZoneChannel();
+  uint8_t buf[MIDI_ZONE_PRESET_SIZE];
+  getZone()->write(buf);
+  getZone()->read(buf);
+}
+
+void MidiZoneComponent::updateZoneRange(){
+  if(minSlider->getValue() > maxSlider->getValue()){
+    midizone->_max = minSlider->getValue();
+    midizone->_min = maxSlider->getValue();
+    midizone->_type |= INVERTED_ZONE_BIT;
+  }else{
+    midizone->_min = minSlider->getValue();
+    midizone->_max = maxSlider->getValue();
+    midizone->_type &= ~INVERTED_ZONE_BIT;
+  }
+  if(midizone->_min == midizone->_max)
+    midizone->_max += 1;
+}
+
+void MidiZoneComponent::updateZoneArea(){
+  midizone->_from_row = Yslider->getMinValue();
+  midizone->_to_row = Yslider->getMaxValue();
+  midizone->_from_column = Xslider->getMinValue();
+  midizone->_to_column = Xslider->getMaxValue();
+}
+
+void MidiZoneComponent::setZoneChannel(MidiZone* zone){
+  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1);
 }
 
 void MidiZoneComponent::setZoneType(MidiZone* zone){
   switch(zone->_type & ZONE_TYPE_MASK){
   case MIDI_ZONE_TYPE:
-    switch(zone->_status & 0xf0){
+    switch(zone->_status & MIDI_STATUS_MASK){
     case MIDI_CONTROL_CHANGE:
       typeComboBox1->setSelectedId(1, false); // Control Change
       break;
@@ -131,7 +160,6 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     typeComboBox1->setSelectedId(0, false);
     break;
   }
-
   if(zone->_type & BUTTON_SLIDER_ZONE_BIT){
     if(zone->_type & MOMENTARY_TOGGLE_ZONE_BIT)
       typeComboBox2->setSelectedId(3, false); // Momentary Button
@@ -143,7 +171,6 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     else
       typeComboBox2->setSelectedId(2, false); // Vertical Slider
   }
-
   switch(zone->_type & DISPLAY_TYPE_MASK){
   case BAR_DISPLAY_TYPE:
     typeComboBox3->setSelectedId(1, false);
@@ -158,19 +185,24 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     typeComboBox3->setSelectedId(4, false);
     break;
   }
-
-  channelSlider->setValue((zone->_status & 0x0f)+1);
 }
 
 void MidiZoneComponent::loadZone(MidiZone* zone){
+  midizone = zone;
   setZoneType(zone);
-  dataSlider->setValue(zone->_data1, false);
-  maxSlider->setValue(zone->_max, false);
-  minSlider->setValue(zone->_min, false);
-  Xslider->setMinValue(zone->_from_column, false);
-  Yslider->setMinValue(zone->_from_row, false);
-  Xslider->setMaxValue(zone->_to_column, false);
-  Yslider->setMaxValue(zone->_to_row, false);
+  setZoneChannel(zone);
+  if(zone->_type & INVERTED_ZONE_BIT){
+    maxSlider->setValue(zone->_min);
+    minSlider->setValue(zone->_max);
+  }else{
+    maxSlider->setValue(zone->_max);
+    minSlider->setValue(zone->_min);
+  }
+  dataSlider->setValue(zone->_data1);
+  Xslider->setMinValue(zone->_from_column, true, false, true);
+  Yslider->setMinValue(zone->_from_row, true, false, true);
+  Xslider->setMaxValue(zone->_to_column, true, false, true);
+  Yslider->setMaxValue(zone->_to_row, true, false, true);
 }
 
 //[/MiscUserDefs]
@@ -214,19 +246,19 @@ MidiZoneComponent::MidiZoneComponent ()
 
     addAndMakeVisible (channelSlider = new Slider (L"channel"));
     channelSlider->setRange (1, 16, 1);
-    channelSlider->setSliderStyle (Slider::Rotary);
+    channelSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     channelSlider->setTextBoxStyle (Slider::TextBoxAbove, false, 80, 20);
     channelSlider->addListener (this);
 
     addAndMakeVisible (maxSlider = new Slider (L"max"));
     maxSlider->setRange (0, 127, 1);
-    maxSlider->setSliderStyle (Slider::Rotary);
+    maxSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     maxSlider->setTextBoxStyle (Slider::TextBoxAbove, false, 80, 20);
     maxSlider->addListener (this);
 
     addAndMakeVisible (minSlider = new Slider (L"min"));
     minSlider->setRange (0, 127, 1);
-    minSlider->setSliderStyle (Slider::Rotary);
+    minSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     minSlider->setTextBoxStyle (Slider::TextBoxAbove, false, 80, 20);
     minSlider->addListener (this);
 
@@ -244,7 +276,7 @@ MidiZoneComponent::MidiZoneComponent ()
 
     addAndMakeVisible (dataSlider = new Slider (L"data"));
     dataSlider->setRange (0, 127, 1);
-    dataSlider->setSliderStyle (Slider::Rotary);
+    dataSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     dataSlider->setTextBoxStyle (Slider::TextBoxAbove, false, 80, 20);
     dataSlider->addListener (this);
 
@@ -300,21 +332,27 @@ void MidiZoneComponent::paint (Graphics& g)
 
     g.fillAll (Colours::white);
 
+    g.setColour (Colour (0xf5f9ea0));
+    g.fillRoundedRectangle (1.0f, 4.0f, 510.0f, 67.0f, 3.5000f);
+
+    g.setColour (Colours::cadetblue);
+    g.drawRoundedRectangle (1.0f, 4.0f, 510.0f, 67.0f, 3.5000f, 0.5000f);
+
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
 }
 
 void MidiZoneComponent::resized()
 {
-    typeComboBox1->setBounds (96, 0, 88, 24);
-    typeComboBox2->setBounds (96, 32, 88, 24);
-    channelSlider->setBounds (192, 0, 32, 56);
-    maxSlider->setBounds (312, 0, 32, 56);
-    minSlider->setBounds (272, 0, 32, 56);
-    Xslider->setBounds (352, 0, 56, 56);
-    Yslider->setBounds (416, 0, 32, 56);
-    dataSlider->setBounds (232, 0, 32, 56);
-    typeComboBox3->setBounds (0, 32, 88, 24);
+    typeComboBox1->setBounds (104, 8, 136, 24);
+    typeComboBox2->setBounds (104, 40, 136, 24);
+    channelSlider->setBounds (248, 8, 32, 56);
+    maxSlider->setBounds (368, 8, 32, 56);
+    minSlider->setBounds (328, 8, 32, 56);
+    Xslider->setBounds (408, 8, 56, 56);
+    Yslider->setBounds (472, 8, 32, 56);
+    dataSlider->setBounds (288, 8, 32, 56);
+    typeComboBox3->setBounds (8, 40, 88, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -327,12 +365,17 @@ void MidiZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == typeComboBox1)
     {
         //[UserComboBoxCode_typeComboBox1] -- add your combo box handling code here..
+      updateZoneType();
         //[/UserComboBoxCode_typeComboBox1]
     }
     else if (comboBoxThatHasChanged == typeComboBox2)
     {
         //[UserComboBoxCode_typeComboBox2] -- add your combo box handling code here..
       updateZoneType();
+      if(getZone()->_type & BUTTON_SLIDER_ZONE_BIT)
+	typeComboBox3->setSelectedId(2, false);
+      else
+	typeComboBox3->setSelectedId(1, false);
         //[/UserComboBoxCode_typeComboBox2]
     }
     else if (comboBoxThatHasChanged == typeComboBox3)
@@ -354,33 +397,31 @@ void MidiZoneComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == channelSlider)
     {
         //[UserSliderCode_channelSlider] -- add your slider handling code here..
-      midizone->_status = (midizone->_status & 0xf0) | ((uint8_t)sliderThatWasMoved->getValue() + 1);
+      updateZoneChannel();
         //[/UserSliderCode_channelSlider]
     }
     else if (sliderThatWasMoved == maxSlider)
     {
         //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      midizone->_max = sliderThatWasMoved->getValue();
+      updateZoneRange();
         //[/UserSliderCode_maxSlider]
     }
     else if (sliderThatWasMoved == minSlider)
     {
         //[UserSliderCode_minSlider] -- add your slider handling code here..
-      midizone->_min = sliderThatWasMoved->getValue();
+      updateZoneRange();
         //[/UserSliderCode_minSlider]
     }
     else if (sliderThatWasMoved == Xslider)
     {
         //[UserSliderCode_Xslider] -- add your slider handling code here..
-      midizone->_from_column = sliderThatWasMoved->getMinValue();
-      midizone->_to_column = sliderThatWasMoved->getMaxValue();
+      updateZoneArea();
         //[/UserSliderCode_Xslider]
     }
     else if (sliderThatWasMoved == Yslider)
     {
         //[UserSliderCode_Yslider] -- add your slider handling code here..
-      midizone->_from_row = sliderThatWasMoved->getMinValue();
-      midizone->_to_row = sliderThatWasMoved->getMaxValue();
+      updateZoneArea();
         //[/UserSliderCode_Yslider]
     }
     else if (sliderThatWasMoved == dataSlider)
@@ -412,41 +453,44 @@ BEGIN_JUCER_METADATA
                  parentClasses="public Component" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
                  fixedSize="0" initialWidth="600" initialHeight="100">
-  <BACKGROUND backgroundColour="ffffffff"/>
+  <BACKGROUND backgroundColour="ffffffff">
+    <ROUNDRECT pos="1 4 510 67" cornerSize="3.5" fill="solid: f5f9ea0" hasStroke="1"
+               stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
+  </BACKGROUND>
   <COMBOBOX name="Type" id="c1f4660eabe8fccb" memberName="typeComboBox1"
-            virtualName="" explicitFocusOrder="0" pos="96 0 88 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="104 8 136 24" editable="0"
             layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <COMBOBOX name="Type" id="c60683b64f639182" memberName="typeComboBox2"
-            virtualName="" explicitFocusOrder="0" pos="96 32 88 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="104 40 136 24" editable="0"
             layout="33" items="Horizontal Slider&#10;Vertical Slider&#10;Momentary Button&#10;Toggle Button"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <SLIDER name="channel" id="3b517834e41dae35" memberName="channelSlider"
-          virtualName="" explicitFocusOrder="0" pos="192 0 32 56" min="1"
-          max="16" int="1" style="Rotary" textBoxPos="TextBoxAbove" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
+          virtualName="" explicitFocusOrder="0" pos="248 8 32 56" min="1"
+          max="16" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxAbove"
+          textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
-          explicitFocusOrder="0" pos="312 0 32 56" min="0" max="127" int="1"
-          style="Rotary" textBoxPos="TextBoxAbove" textBoxEditable="1"
+          explicitFocusOrder="0" pos="368 8 32 56" min="0" max="127" int="1"
+          style="RotaryVerticalDrag" textBoxPos="TextBoxAbove" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
-          explicitFocusOrder="0" pos="272 0 32 56" min="0" max="127" int="1"
-          style="Rotary" textBoxPos="TextBoxAbove" textBoxEditable="1"
+          explicitFocusOrder="0" pos="328 8 32 56" min="0" max="127" int="1"
+          style="RotaryVerticalDrag" textBoxPos="TextBoxAbove" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="X" id="9789276617163945" memberName="Xslider" virtualName=""
-          explicitFocusOrder="0" pos="352 0 56 56" min="0" max="10" int="1"
+          explicitFocusOrder="0" pos="408 8 56 56" min="0" max="10" int="1"
           style="TwoValueHorizontal" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="Y" id="159851448f456c82" memberName="Yslider" virtualName=""
-          explicitFocusOrder="0" pos="416 0 32 56" min="0" max="8" int="1"
+          explicitFocusOrder="0" pos="472 8 32 56" min="0" max="8" int="1"
           style="TwoValueVertical" textBoxPos="NoTextBox" textBoxEditable="1"
           textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="data" id="e3a29d8ffb183a23" memberName="dataSlider" virtualName=""
-          explicitFocusOrder="0" pos="232 0 32 56" min="0" max="127" int="1"
-          style="Rotary" textBoxPos="TextBoxAbove" textBoxEditable="1"
+          explicitFocusOrder="0" pos="288 8 32 56" min="0" max="127" int="1"
+          style="RotaryVerticalDrag" textBoxPos="TextBoxAbove" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <COMBOBOX name="Type" id="ee97d6a8e0e218c6" memberName="typeComboBox3"
-            virtualName="" explicitFocusOrder="0" pos="0 32 88 24" editable="0"
+            virtualName="" explicitFocusOrder="0" pos="8 40 88 24" editable="0"
             layout="33" items="Bar&#10;Fill&#10;Dot&#10;None" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
 </JUCER_COMPONENT>

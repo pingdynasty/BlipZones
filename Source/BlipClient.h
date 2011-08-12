@@ -10,7 +10,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Serial.h"
 #include "MidiZone.h"
-#include "PresetComponent.h"
+#include "Command.h"
 
 #define FILL_MESSAGE              0x10
 #define SET_LED_MESSAGE           0x20 // sets 1 led - 3 byte message
@@ -26,24 +26,15 @@
 // command: 0111cccc : 4 bit command index
 #define SET_PARAMETER_MESSAGE     0xc0
 
+#define DEFAULT_SERIAL_PORT       L"/dev/tty.usbserial"
+
 class BlipClient : public Serial, public juce::Thread {
 public:
-/*   BlipClient(const juce::String& port, int speed, bool verbose = true) */
-/*     : Serial(port, speed, verbose), */
-/*       Thread(T("BlipClient")) */
-/*   {} */
-  int connect(){
-    std::cout << "starting blipbox serial connection on " << getPort() << std::endl;
-    int status = Serial::connect();
-    Serial::start();
-    juce::Thread::startThread();
-    return status;
-  }
-  int disconnect(){
-    Serial::stop();
-    std::cout << "stopping blipbox serial connection on " << getPort() << std::endl;
-    juce::Thread::stopThread(30000); // 30 secs
-    return Serial::disconnect();
+  int connect();
+  int disconnect();
+  void shutdown(){
+    stop();
+    disconnect();
   }
   void run(){
     Serial::run();
@@ -52,26 +43,16 @@ public:
   void handleReleaseMessage();
   void handlePositionMessage(uint16_t x, uint16_t y);
   void handleParameterMessage(uint8_t pid, uint16_t value);
-/* }; */
 
-/* class BlipClient { */
 private:
-/*   BlipClientSerial* serial; */
-/*   MidiZonePreset presets[MIDI_ZONE_PRESETS]; */
   Serial *serial;
-public:
 
-  BlipClient(const juce::String& port, int speed = 57600, bool verbose = false)
+public:
+  BlipClient(const juce::String& port = DEFAULT_SERIAL_PORT, int speed = 57600, bool verbose = false)
     : Serial(port, speed, verbose),
       Thread(T("BlipClient"))
   {
-/*     for(int i=0; i<MIDI_ZONE_PRESETS; ++i) */
-/*       presets[i].preset = i; */
     serial = this;
-  }
-  PresetComponent* handler;
-  void setEventHandler(PresetComponent* ahandler){
-    handler = ahandler;
   }
 
   void clear(){
@@ -80,15 +61,11 @@ public:
 
   void fill(uint8_t value);
   void setLed(uint8_t x, uint8_t y, uint8_t brightness);
-
   void requestMidiZonePreset(uint8_t index);
-  void sendMidiZonePreset();
-  void drawMidiZone(MidiZone& zone);
-/*   MidiZonePreset* getPreset(uint8_t index){ */
-/*     if(index < MIDI_ZONE_PRESETS) */
-/*       return &presets[index]; */
-/*     return NULL; */
-/*   }       */
+  void sendMidiZonePreset(uint8_t index);
+  void drawMidiZone(MidiZone* zone);
+  void sendCommand(Command command);
+  void sendSerial(uint8_t* data, ssize_t size);
 };
 
 #endif  // __BLIPCLIENT_H__

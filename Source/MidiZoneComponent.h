@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Aug 2011 2:32:59am
+  Creation date:  12 Aug 2011 3:04:50am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_9B69AC03__
-#define __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_9B69AC03__
+#ifndef __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4139F0C1__
+#define __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4139F0C1__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -49,12 +49,13 @@ public:
     MidiZone* getZone(){
       return midizone;
     }
-    void setZone(MidiZone* _zone){
-      midizone = _zone;
-    }
     void loadZone(MidiZone* zone);
     void updateZoneType();
+    void updateZoneArea();
+    void updateZoneRange();
+    void updateZoneChannel();
     void setZoneType(MidiZone* zone);
+    void setZoneChannel(MidiZone* zone);
     void handlePositionMessage(uint16_t x, uint16_t y);
     //[/UserMethods]
 
@@ -92,4 +93,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_9B69AC03__
+#endif   // __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4139F0C1__
