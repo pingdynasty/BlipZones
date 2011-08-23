@@ -17,12 +17,12 @@ ifeq ($(CONFIG),Debug)
   LIBDIR := build
   OBJDIR := build/intermediate/Debug
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2"
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I " ../../../BlipBox/firmware"
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
   CXXFLAGS += $(CFLAGS) 
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../../juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2"
+  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I " ../../../BlipBox/firmware"
   TARGET := BlipZones
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
@@ -32,17 +32,18 @@ ifeq ($(CONFIG),Release)
   LIBDIR := build
   OBJDIR := build/intermediate/Release
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2"
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I " ../../../BlipBox/firmware"
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
   CXXFLAGS += $(CFLAGS) 
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../../juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2"
+  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I " ../../../BlipBox/firmware"
   TARGET := BlipZones
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/5x8_5e083a8f.o \
   $(OBJDIR)/eeprom_119b2b22.o \
   $(OBJDIR)/interrupt_7815b74b.o \
   $(OBJDIR)/io_396ac548.o \
@@ -50,7 +51,6 @@ OBJECTS := \
   $(OBJDIR)/FiveWireTouchController_f675de.o \
   $(OBJDIR)/Animator_34f8d44c.o \
   $(OBJDIR)/BlipBox_5cdbe29f.o \
-  $(OBJDIR)/BlipBoxProtocol_313f2f57.o \
   $(OBJDIR)/Characters_a59f0e4f.o \
   $(OBJDIR)/Configuration_1163487b.o \
   $(OBJDIR)/DirectCounter_d4bbe6d8.o \
@@ -98,6 +98,11 @@ clean:
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
 
+$(OBJDIR)/5x8_5e083a8f.o: ../../../BlipBox/firmware/fonts/5x8.c
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling 5x8.c"
+	@$(CC) $(CFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/eeprom_119b2b22.o: ../../../BlipBox/firmware/simulator/avr/eeprom.c
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling eeprom.c"
@@ -131,11 +136,6 @@ $(OBJDIR)/Animator_34f8d44c.o: ../../../BlipBox/firmware/Animator.cpp
 $(OBJDIR)/BlipBox_5cdbe29f.o: ../../../BlipBox/firmware/BlipBox.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling BlipBox.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/BlipBoxProtocol_313f2f57.o: ../../../BlipBox/firmware/BlipBoxProtocol.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling BlipBoxProtocol.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Characters_a59f0e4f.o: ../../../BlipBox/firmware/Characters.cpp
