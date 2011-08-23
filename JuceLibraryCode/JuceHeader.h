@@ -10,11 +10,12 @@
 
 */
 
-#ifndef __APPHEADERFILE_H__
-#define __APPHEADERFILE_H__
+#ifndef __APPHEADERFILE_5733A838__
+#define __APPHEADERFILE_5733A838__
 
 #include "AppConfig.h"
 #include "../../juce/juce_amalgamated.h"
+#include "BinaryData.h"
 
 namespace ProjectInfo
 {
@@ -23,4 +24,4 @@ namespace ProjectInfo
     const int          versionNumber  = 0x10000;
 }
 
-#endif   // __APPHEADERFILE_H__
+#endif   // __APPHEADERFILE_5733A838__
