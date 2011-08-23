@@ -7,6 +7,9 @@
 
 namespace BinaryData
 {
+    extern const char*   blipbox_icns;
+    const int            blipbox_icnsSize = 38378;
+
     extern const char*   interrupt_o;
     const int            interrupt_oSize = 688;
 

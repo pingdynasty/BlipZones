@@ -5,14 +5,14 @@
     <Filter Include="BlipZones">
       <UniqueIdentifier>{2CA9AAB7-2F97-4AC1-ABD3-F29A867048C6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BlipZones\Resources">
+      <UniqueIdentifier>{46270A4F-F88B-563C-A2D1-47F751D01473}</UniqueIdentifier>
+    </Filter>
     <Filter Include="BlipZones\Source">
       <UniqueIdentifier>{D9933298-914E-E70C-2696-0421C5C688A6}</UniqueIdentifier>
     </Filter>
     <Filter Include="BlipZones\Source\BlipBox">
       <UniqueIdentifier>{6121C62A-9EA5-9ECF-A487-19A2B7602B2C}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BlipZones\Source\BlipBox\fonts">
-      <UniqueIdentifier>{5501CA8C-0BFE-2132-A5BE-C3070FB41DF1}</UniqueIdentifier>
     </Filter>
     <Filter Include="BlipZones\Source\BlipBox\simulator">
       <UniqueIdentifier>{A0C0DBDD-22CA-CA7F-A063-49051A99C9F1}</UniqueIdentifier>
@@ -25,8 +25,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\BlipBox\firmware\fonts\5x8.c">
-      <Filter>BlipZones\Source\BlipBox\fonts</Filter>
+    <ClCompile Include="..\..\Resources\blipbox.icns">
+      <Filter>BlipZones\Resources</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>

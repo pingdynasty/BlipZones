@@ -53,7 +53,7 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware; ../../BlipBox/firmware/simulator; ../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
@@ -122,7 +122,6 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\BlipBox\firmware\fonts\5x8.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c"/>

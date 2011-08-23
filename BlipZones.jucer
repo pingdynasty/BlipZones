@@ -26,15 +26,131 @@
   </EXPORTFORMATS>
   <CONFIGURATIONS>
     <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
-                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"/>
+                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                   headerPath="../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware; ../../BlipBox/firmware/simulator; ../../BlipBox/firmware"/>
     <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
-                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"/>
+                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                   headerPath="../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware"/>
   </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
+    <GROUP id="sVYklZ" name="Resources">
+      <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
+    </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <GROUP id="C9s1RO" name="BlipBox">
+        <GROUP id="zEIWUP" name="simulator">
+          <GROUP id="rWYSVI" name="avr">
+            <FILE id="BDOfLN" name="eeprom.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.c"/>
+            <FILE id="fba5rd" name="eeprom.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.h"/>
+            <FILE id="uT5KhS" name="interrupt.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.c"/>
+            <FILE id="QO28mm" name="interrupt.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.h"/>
+            <FILE id="k3jAjL" name="interrupt.o" compile="0" resource="1" file="../BlipBox/firmware/simulator/avr/interrupt.o"/>
+            <FILE id="CYpWHf" name="io.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/io.c"/>
+            <FILE id="S22Yp" name="io.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/io.h"/>
+            <FILE id="F9vCb1" name="pgmspace.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/pgmspace.c"/>
+            <FILE id="AKuBCO" name="pgmspace.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/pgmspace.h"/>
+          </GROUP>
+          <FILE id="upaXRt" name="FiveWireTouchController.cpp" compile="1" resource="0"
+                file="../BlipBox/firmware/simulator/FiveWireTouchController.cpp"/>
+        </GROUP>
+        <FILE id="BhOUgX" name="Animator.cpp" compile="1" resource="0" file="../BlipBox/firmware/Animator.cpp"/>
+        <FILE id="cJOD7V" name="Animator.h" compile="0" resource="0" file="../BlipBox/firmware/Animator.h"/>
+        <FILE id="vDUyb2" name="BlipBox.cpp" compile="1" resource="0" file="../BlipBox/firmware/BlipBox.cpp"/>
+        <FILE id="MlaM4i" name="BlipBox.h" compile="0" resource="0" file="../BlipBox/firmware/BlipBox.h"/>
+        <FILE id="aV6Aj3" name="Characters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Characters.cpp"/>
+        <FILE id="YPyetV" name="Characters.h" compile="0" resource="0" file="../BlipBox/firmware/Characters.h"/>
+        <FILE id="pDnQ85" name="Command.h" compile="0" resource="0" file="../BlipBox/firmware/Command.h"/>
+        <FILE id="RRachl" name="Configuration.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/Configuration.cpp"/>
+        <FILE id="qEs2M" name="Configuration.h" compile="0" resource="0" file="../BlipBox/firmware/Configuration.h"/>
+        <FILE id="yrXnL4" name="Counter.h" compile="0" resource="0" file="../BlipBox/firmware/Counter.h"/>
+        <FILE id="soadD" name="defs.h" compile="0" resource="0" file="../BlipBox/firmware/defs.h"/>
+        <FILE id="UTuFnb" name="device.h" compile="0" resource="0" file="../BlipBox/firmware/device.h"/>
+        <FILE id="w5ap9x" name="DirectCounter.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/DirectCounter.cpp"/>
+        <FILE id="mFtk1" name="DirectCounter.h" compile="0" resource="0" file="../BlipBox/firmware/DirectCounter.h"/>
+        <FILE id="gcjb04" name="DisplayManager.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/DisplayManager.cpp"/>
+        <FILE id="OSgKg3" name="DisplayManager.h" compile="0" resource="0"
+              file="../BlipBox/firmware/DisplayManager.h"/>
+        <FILE id="HKfdQk" name="EventHandler.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/EventHandler.cpp"/>
+        <FILE id="hkLZne" name="EventHandler.h" compile="0" resource="0" file="../BlipBox/firmware/EventHandler.h"/>
+        <FILE id="mgVYKx" name="globals.cpp" compile="1" resource="0" file="../BlipBox/firmware/globals.cpp"/>
+        <FILE id="f1ROJQ" name="globals.h" compile="0" resource="0" file="../BlipBox/firmware/globals.h"/>
+        <FILE id="zbbWSr" name="KeyController.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/KeyController.cpp"/>
+        <FILE id="ytyttA" name="KeyController.h" compile="0" resource="0" file="../BlipBox/firmware/KeyController.h"/>
+        <FILE id="qSebp" name="LedController.h" compile="0" resource="0" file="../BlipBox/firmware/LedController.h"/>
+        <FILE id="XfIEIn" name="MessageDispatcher.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/MessageDispatcher.cpp"/>
+        <FILE id="Pg6o42" name="MessageDispatcher.h" compile="0" resource="0"
+              file="../BlipBox/firmware/MessageDispatcher.h"/>
+        <FILE id="v4q1H" name="MidiPresetReader.h" compile="0" resource="0"
+              file="../BlipBox/firmware/MidiPresetReader.h"/>
+        <FILE id="qYiMx4" name="MidiZone.cpp" compile="1" resource="0" file="../BlipBox/firmware/MidiZone.cpp"/>
+        <FILE id="rz6KbC" name="MidiZone.h" compile="0" resource="0" file="../BlipBox/firmware/MidiZone.h"/>
+        <FILE id="F3p7LH" name="MidiZoneEventHandler.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/MidiZoneEventHandler.cpp"/>
+        <FILE id="WtVyYi" name="MidiZoneEventHandler.h" compile="0" resource="0"
+              file="../BlipBox/firmware/MidiZoneEventHandler.h"/>
+        <FILE id="qOl4Cp" name="Parameters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Parameters.cpp"/>
+        <FILE id="UMVlH" name="Parameters.h" compile="0" resource="0" file="../BlipBox/firmware/Parameters.h"/>
+        <FILE id="RGy1di" name="Position.h" compile="0" resource="0" file="../BlipBox/firmware/Position.h"/>
+        <FILE id="dj4x2" name="PresetChooser.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/PresetChooser.cpp"/>
+        <FILE id="nwJUBP" name="PresetChooser.h" compile="0" resource="0" file="../BlipBox/firmware/PresetChooser.h"/>
+        <FILE id="qNqTSF" name="Protocol.h" compile="0" resource="0" file="../BlipBox/firmware/Protocol.h"/>
+        <FILE id="VzlVo4" name="serial.h" compile="0" resource="0" file="../BlipBox/firmware/serial.h"/>
+        <FILE id="HTlJax" name="SerialProtocol.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/SerialProtocol.cpp"/>
+        <FILE id="QWowbd" name="SerialProtocolReader.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/SerialProtocolReader.cpp"/>
+        <FILE id="wqM99U" name="SerialProtocolReader.h" compile="0" resource="0"
+              file="../BlipBox/firmware/SerialProtocolReader.h"/>
+        <FILE id="P6lwKf" name="TouchController.h" compile="0" resource="0"
+              file="../BlipBox/firmware/TouchController.h"/>
+      </GROUP>
+      <FILE id="zQDSJz" name="ApplicationConfiguration.cpp" compile="1" resource="0"
+            file="Source/ApplicationConfiguration.cpp"/>
+      <FILE id="TbLI2r" name="ApplicationConfiguration.h" compile="0" resource="0"
+            file="Source/ApplicationConfiguration.h"/>
+      <FILE id="U8CFEc" name="ApplicationSettingsComponent.cpp" compile="1"
+            resource="0" file="Source/ApplicationSettingsComponent.cpp"/>
+      <FILE id="uBaBO0" name="ApplicationSettingsComponent.h" compile="0"
+            resource="0" file="Source/ApplicationSettingsComponent.h"/>
+      <FILE id="pNcpEQ" name="BlipClient.cpp" compile="1" resource="0" file="Source/BlipClient.cpp"/>
+      <FILE id="b1zrtB" name="BlipClient.h" compile="0" resource="0" file="Source/BlipClient.h"/>
+      <FILE id="pOIJ1w" name="BlipSim.cpp" compile="1" resource="0" file="Source/BlipSim.cpp"/>
+      <FILE id="dKD5Ed" name="BlipSim.h" compile="0" resource="0" file="Source/BlipSim.h"/>
+      <FILE id="Au8bUu" name="BlipSimComponent.cpp" compile="1" resource="0"
+            file="Source/BlipSimComponent.cpp"/>
+      <FILE id="T9RHqD" name="BlipSimComponent.h" compile="0" resource="0"
+            file="Source/BlipSimComponent.h"/>
+      <FILE id="TkMvJf" name="EventHandler.h" compile="0" resource="0" file="Source/EventHandler.h"/>
       <FILE id="uuKLoI" name="MainWindow.cpp" compile="1" resource="0" file="Source/MainWindow.cpp"/>
       <FILE id="xshxLI" name="MainWindow.h" compile="0" resource="0" file="Source/MainWindow.h"/>
       <FILE id="obzgrO" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
+      <FILE id="hj81aA" name="MidiMessageSender.h" compile="0" resource="0"
+            file="Source/MidiMessageSender.h"/>
+      <FILE id="KQetf8" name="MidiZoneComponent.cpp" compile="1" resource="0"
+            file="Source/MidiZoneComponent.cpp"/>
+      <FILE id="ZBqpVS" name="MidiZoneComponent.h" compile="0" resource="0"
+            file="Source/MidiZoneComponent.h"/>
+      <FILE id="jtH53j" name="MidiZonePreset.cpp" compile="1" resource="0"
+            file="Source/MidiZonePreset.cpp"/>
+      <FILE id="zaMhX2" name="MidiZonePreset.h" compile="0" resource="0"
+            file="Source/MidiZonePreset.h"/>
+      <FILE id="A2jt5w" name="OverflowTimer.h" compile="0" resource="0" file="Source/OverflowTimer.h"/>
+      <FILE id="tn8i9Z" name="PresetComponent.cpp" compile="1" resource="0"
+            file="Source/PresetComponent.cpp"/>
+      <FILE id="OtgMKa" name="PresetComponent.h" compile="0" resource="0"
+            file="Source/PresetComponent.h"/>
+      <FILE id="hoIlhc" name="Serial.h" compile="0" resource="0" file="Source/Serial.h"/>
+      <FILE id="Xroynl" name="SimScreen.cpp" compile="1" resource="0" file="Source/SimScreen.cpp"/>
+      <FILE id="d0NYYJ" name="SimScreen.h" compile="0" resource="0" file="Source/SimScreen.h"/>
+      <FILE id="cK7Wjo" name="SimWindow.cpp" compile="1" resource="0" file="Source/SimWindow.cpp"/>
+      <FILE id="iNFnaN" name="SimWindow.h" compile="0" resource="0" file="Source/SimWindow.h"/>
     </GROUP>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_FORCE_DEBUG="default" JUCE_LOG_ASSERTIONS="default" JUCE_ASIO="default"
