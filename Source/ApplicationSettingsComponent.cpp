@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  22 Aug 2011 4:36:34pm
+  Creation date:  23 Aug 2011 10:20:02am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -128,7 +128,7 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (600, 400);
+    setSize (600, 240);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -322,7 +322,7 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public Component" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
-                 initialHeight="400">
+                 initialHeight="240">
   <BACKGROUND backgroundColour="ffffffff"/>
   <LABEL name="new label" id="20e8eb8f34814ba6" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="16 16 104 24" edTextCol="ff000000"
