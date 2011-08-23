@@ -5,7 +5,8 @@
 MidiZonePreset::MidiZonePreset(){
   reset();
   uint8_t channel = 0;
-
+  selected = -1;
+  // initialise two simple zones
   zones[0]._to_column = 10;
   zones[0]._to_row = 8;
   zones[0]._type = MIDI_ZONE_TYPE | HORIZONTAL_VERTICAL_ZONE_BIT | BAR_DISPLAY_TYPE;
@@ -21,8 +22,6 @@ MidiZonePreset::MidiZonePreset(){
   zones[1]._min = 0;
   zones[1]._max = 127;
   zones[1]._data1 = 41;
-
-  selected = -1;
 }
 
 void MidiZonePreset::reset(){

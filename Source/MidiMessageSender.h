@@ -18,10 +18,30 @@
 class MidiMessageSender {
  public:
  MidiMessageSender() : frompos(1), topos(0), len(0), midiout(NULL) {
-    midiout = ApplicationConfiguration::getMidiOutput();
   };
 
   ~MidiMessageSender(){
+    if(midiout != NULL)
+      delete midiout;
+  }
+
+  void setMidiOutput(juce::String name){
+    std::cout << "setting midi output: " << name << std::endl;
+    if(MidiOutput::getDevices().contains(name)){
+      setMidiOutput(MidiOutput::openDevice(MidiOutput::getDevices().indexOf(name)));
+#if ! JUCE_WINDOWS
+    }else if(name.compare("BlipZones") == 0){
+      setMidiOutput(MidiOutput::createNewDevice(T("BlipZones")));
+#endif
+    }else{
+      setMidiOutput(NULL);
+    }
+  }
+
+  void setMidiOutput(juce::MidiOutput* output){
+    if(midiout != NULL)
+      delete midiout;
+    midiout = output;
   }
 
   void handleByte(uint8_t bt){

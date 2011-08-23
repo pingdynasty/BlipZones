@@ -128,7 +128,7 @@ void MidiZoneComponent::updateZoneArea(){
 }
 
 void MidiZoneComponent::setZoneChannel(MidiZone* zone){
-  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1);
+  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1, false);
 }
 
 void MidiZoneComponent::setZoneType(MidiZone* zone){
@@ -157,6 +157,7 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     break;
   case SELECTOR_ZONE_TYPE:
   case EMPTY_ZONE_TYPE:
+  default:
     typeComboBox1->setSelectedId(0, false);
     break;
   }
@@ -182,6 +183,7 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     typeComboBox3->setSelectedId(3, false);
     break;
   case NO_DISPLAY_TYPE:
+  default:
     typeComboBox3->setSelectedId(4, false);
     break;
   }
@@ -189,20 +191,20 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
 
 void MidiZoneComponent::loadZone(MidiZone* zone){
   midizone = zone;
+  if(zone->_type & INVERTED_ZONE_BIT){
+    maxSlider->setValue(zone->_min, false);
+    minSlider->setValue(zone->_max, false);
+  }else{
+    maxSlider->setValue(zone->_max, false);
+    minSlider->setValue(zone->_min, false);
+  }
+  dataSlider->setValue(zone->_data1, false);
+  Xslider->setMinValue(zone->_from_column, false, false, true);
+  Yslider->setMinValue(zone->_from_row, false, false, true);
+  Xslider->setMaxValue(zone->_to_column, false, false, true);
+  Yslider->setMaxValue(zone->_to_row, false, false, true);
   setZoneType(zone);
   setZoneChannel(zone);
-  if(zone->_type & INVERTED_ZONE_BIT){
-    maxSlider->setValue(zone->_min);
-    minSlider->setValue(zone->_max);
-  }else{
-    maxSlider->setValue(zone->_max);
-    minSlider->setValue(zone->_min);
-  }
-  dataSlider->setValue(zone->_data1);
-  Xslider->setMinValue(zone->_from_column, true, false, true);
-  Yslider->setMinValue(zone->_from_row, true, false, true);
-  Xslider->setMaxValue(zone->_to_column, true, false, true);
-  Yslider->setMaxValue(zone->_to_row, true, false, true);
 }
 
 //[/MiscUserDefs]

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  12 Aug 2011 3:05:01am
+  Creation date:  22 Aug 2011 12:57:00pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -22,12 +22,14 @@
 //[Headers] You can add your own extra header files here...
 // #include <Math.h>
 #include "ApplicationConfiguration.h"
+#include "ApplicationSettingsComponent.h"
 //[/Headers]
 
 #include "PresetComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
+const bool useNativeVersion = false;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -61,7 +63,7 @@ PresetComponent::PresetComponent ()
       toggleButton8 (0),
       saveButton (0),
       loadButton (0),
-      resetButton (0),
+      settingsButton (0),
       runButton (0)
 {
     addAndMakeVisible (sendButton = new TextButton (L"send"));
@@ -166,7 +168,6 @@ PresetComponent::PresetComponent ()
     toggleButton1->setButtonText (L"zone 1");
     toggleButton1->setRadioGroupId (1005);
     toggleButton1->addListener (this);
-    toggleButton1->setToggleState (true, false);
 
     addAndMakeVisible (toggleButton2 = new ToggleButton (L"new toggle button"));
     toggleButton2->setExplicitFocusOrder (2);
@@ -220,14 +221,16 @@ PresetComponent::PresetComponent ()
     loadButton->setConnectedEdges (Button::ConnectedOnLeft);
     loadButton->addListener (this);
 
-    addAndMakeVisible (resetButton = new TextButton (L"reset"));
-    resetButton->addListener (this);
+    addAndMakeVisible (settingsButton = new TextButton (L"reset"));
+    settingsButton->setButtonText (L"settings");
+    settingsButton->addListener (this);
 
     addAndMakeVisible (runButton = new ToggleButton (L"new toggle button"));
     runButton->setExplicitFocusOrder (9);
     runButton->setButtonText (L"run");
     runButton->setRadioGroupId (1005);
     runButton->addListener (this);
+    runButton->setToggleState (true, false);
 
 
     //[UserPreSize]
@@ -277,7 +280,7 @@ PresetComponent::~PresetComponent()
     deleteAndZero (toggleButton8);
     deleteAndZero (saveButton);
     deleteAndZero (loadButton);
-    deleteAndZero (resetButton);
+    deleteAndZero (settingsButton);
     deleteAndZero (runButton);
 
 
@@ -329,7 +332,7 @@ void PresetComponent::resized()
     toggleButton8->setBounds (48, 576, 88, 24);
     saveButton->setBounds (120, 648, 80, 24);
     loadButton->setBounds (200, 648, 80, 24);
-    resetButton->setBounds (296, 648, 80, 24);
+    settingsButton->setBounds (296, 648, 80, 24);
     runButton->setBounds (48, 648, 64, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
@@ -343,17 +346,13 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
     if (buttonThatWasClicked == sendButton)
     {
         //[UserButtonCode_sendButton] -- add your button handler code here..
-      std::cout << "send!" << std::endl;
-      ApplicationConfiguration::getBlipClient()->sendMidiZonePreset(presetComboBox->getSelectedItemIndex());
+      sendPreset();
         //[/UserButtonCode_sendButton]
     }
     else if (buttonThatWasClicked == requestButton)
     {
         //[UserButtonCode_requestButton] -- add your button handler code here..
-      std::cout << "request!" << std::endl;
-      ApplicationConfiguration::getBlipClient()->requestMidiZonePreset(presetComboBox->getSelectedItemIndex());
-      Thread::sleep(10); // otherwise load is called before the preset has actually been loaded
-      loadZones();
+      requestPreset();
         //[/UserButtonCode_requestButton]
     }
     else if (buttonThatWasClicked == toggleButton1)
@@ -416,12 +415,11 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
       loadFile();
         //[/UserButtonCode_loadButton]
     }
-    else if (buttonThatWasClicked == resetButton)
+    else if (buttonThatWasClicked == settingsButton)
     {
-        //[UserButtonCode_resetButton] -- add your button handler code here..
-      preset->reset();
-      loadZones();
-        //[/UserButtonCode_resetButton]
+        //[UserButtonCode_settingsButton] -- add your button handler code here..
+      openSettings();
+        //[/UserButtonCode_settingsButton]
     }
     else if (buttonThatWasClicked == runButton)
     {
@@ -468,7 +466,39 @@ void PresetComponent::initialise(){
 }
 
 void PresetComponent::release(){
+}
 
+void PresetComponent::sendPreset(){
+  std::cout << "send!" << std::endl;
+  if(ApplicationConfiguration::getBlipClient()->isConnected()){
+    ApplicationConfiguration::getBlipClient()->sendMidiZonePreset(presetComboBox->getSelectedItemIndex());
+    std::cout << "sent!" << std::endl;
+  }else{
+    AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon,
+				     "Connection Error",
+				     "BlipBox not connected!");
+  }
+}
+
+void PresetComponent::openSettings(){
+  std::cout << "opening settings" << std::endl;
+  ApplicationSettingsComponent component;
+  component.showModalDialog(this);
+  std::cout << "settings done" << std::endl;
+}
+
+void PresetComponent::requestPreset(){
+  std::cout << "request!" << std::endl;
+  if(ApplicationConfiguration::getBlipClient()->isConnected()){
+    ApplicationConfiguration::getBlipClient()->requestMidiZonePreset(presetComboBox->getSelectedItemIndex());
+    Thread::sleep(200); // otherwise load is called before the preset has actually been loaded
+    loadZones();
+    std::cout << "requested!" << std::endl;
+  }else{
+    AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon,
+				     "Connection Error",
+				     "BlipBox not connected!");
+  }
 }
 
 void PresetComponent::selectZone(uint8_t index){
@@ -478,7 +508,7 @@ void PresetComponent::selectZone(uint8_t index){
 
 void PresetComponent::loadPreset(uint8_t index){
   std::cout << "load preset " << (int)index << std::endl;
-  int selected = 1;
+  int selected = 0; // the zone that will be loaded when no preset has yet been selected
   if(preset != NULL){
     selected = preset->getSelectedZoneIndex();
     preset->stop();
@@ -495,19 +525,24 @@ void PresetComponent::loadZones(){
   selectZone(preset->getSelectedZoneIndex());
 }
 
-  const bool useNativeVersion = false;
-
 void PresetComponent::saveFile(){
-  FileChooser fc("Choose a file to save to...",
-		 File::getCurrentWorkingDirectory(),
+  File dir = ApplicationConfiguration::getPresetDirectory();
+  if(!dir.exists())
+    dir.createDirectory();
+  FileChooser fc("Choose a file to save to...", dir,
 		 "*.xml", useNativeVersion);
-  if(fc.browseForFileToSave(true))
-    preset->saveFile(fc.getResult());
+  if(fc.browseForFileToSave(true)){
+    File file = fc.getResult();
+    if(!file.hasFileExtension(".xml"))
+      file = file.withFileExtension(".xml");
+    preset->saveFile(file);
+  }
 }
 
 void PresetComponent::loadFile(){
   FileChooser fc("Choose a file to open...",
-		 File::getCurrentWorkingDirectory(),
+		 ApplicationConfiguration::getPresetDirectory(),
+// 		 File::getCurrentWorkingDirectory(),
 		 "*.xml",
 		  useNativeVersion);
   if(fc.browseForFileToOpen())
@@ -607,7 +642,7 @@ BEGIN_JUCER_METADATA
              constructorParams=""/>
   <TOGGLEBUTTON name="new toggle button" id="162d6fc3ec28538e" memberName="toggleButton1"
                 virtualName="" explicitFocusOrder="1" pos="48 72 88 24" buttonText="zone 1"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="1"/>
+                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
   <TOGGLEBUTTON name="new toggle button" id="93cf0f4ff2bc2160" memberName="toggleButton2"
                 virtualName="" explicitFocusOrder="2" pos="48 144 88 24" buttonText="zone 2"
                 connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
@@ -635,12 +670,12 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="load button" id="175730ddac9ace26" memberName="loadButton"
               virtualName="" explicitFocusOrder="0" pos="200 648 80 24" buttonText="load"
               connectedEdges="1" needsCallback="1" radioGroupId="0"/>
-  <TEXTBUTTON name="reset" id="68dc470f3c2876e2" memberName="resetButton" virtualName=""
-              explicitFocusOrder="0" pos="296 648 80 24" buttonText="reset"
+  <TEXTBUTTON name="reset" id="68dc470f3c2876e2" memberName="settingsButton"
+              virtualName="" explicitFocusOrder="0" pos="296 648 80 24" buttonText="settings"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <TOGGLEBUTTON name="new toggle button" id="fc0dad117bb79388" memberName="runButton"
                 virtualName="" explicitFocusOrder="9" pos="48 648 64 24" buttonText="run"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
+                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

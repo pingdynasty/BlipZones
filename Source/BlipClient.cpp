@@ -1,5 +1,4 @@
 #include "BlipClient.h"
-#include "globals.h"
 #include "ApplicationConfiguration.h"
 
 #define THREAD_TIMEOUT_MS  2000
@@ -15,27 +14,43 @@
 #define BUTTON3_SENSOR_MSG 0x9c // 0x80 | (0x7 << 2)
 #define PARAMETER_MSG      0xc0 // 0x3 << 6 B11000000
 
-class BlipConnectionThread : public Thread {
-private:
-  BlipClient* client;
-public:
-  BlipConnectionThread () : Thread(T("BlipConnectionThread")), client(0) {}
+bool doSendScreenUpdates = false;
 
+class BlipConnectionThread : public Thread {
+public:
+  BlipConnectionThread () : Thread(T("BlipConnectionThread")) {}
   void run(){
     sleep(2000);
-    client = ApplicationConfiguration::getBlipClient();
+    BlipClient* client = ApplicationConfiguration::getBlipClient();
+    BlipSim* sim = ApplicationConfiguration::getBlipSim();
     while(!threadShouldExit()){
-      client->sendCommand(START_LED_BLOCK);
-      for(int x=0; x<10; ++x)
-	for(int y=0; y<8; ++y)
-	  client->setLed(x, y, blipbox.leds.getLed(x, y));
-      client->sendCommand(END_LED_BLOCK);
-      sleep(40);
+      if(doSendScreenUpdates){
+	client->sendCommand(START_LED_BLOCK);
+	for(int x=0; x<10; ++x)
+	  for(int y=0; y<8; ++y)
+	    client->setLed(x, y, sim->getLed(x, y));
+	client->sendCommand(END_LED_BLOCK);
+      }
+      sleep(20);
     }
   }
 };
 
 BlipConnectionThread connectionthread;
+
+void BlipClient::initialise(){
+  PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
+  setPort(properties->getValue("serialport"));
+  setSpeed(properties->getValue("serialspeed").getIntValue());
+}
+
+void BlipClient::sendScreenUpdates(bool send){
+  doSendScreenUpdates = send;
+}
+
+void BlipClient::shutdown(){
+  disconnect();
+}
 
 int BlipClient::connect(){
   std::cout << "starting blipbox serial connection on " << getPort() << std::endl;
@@ -43,10 +58,12 @@ int BlipClient::connect(){
   Serial::start();
   juce::Thread::startThread();
   connectionthread.startThread();
+  sendScreenUpdates(true);
   return status;
 }
 
 int BlipClient::disconnect(){
+  sendScreenUpdates(false);
   Serial::stop();
   std::cout << "stopping blipbox serial connection on " << getPort() << std::endl;
   connectionthread.stopThread(THREAD_TIMEOUT_MS);
@@ -79,6 +96,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
       std::cout << "loading preset " << std::dec << (int)index << std::endl;
       ApplicationConfiguration::getMidiZonePreset(index)->read(&buf[1]);
       bufpos = 0;
+      sendScreenUpdates(true);
 //       preset = client->getPreset(index);
 //       for(int i=0; i<8; ++i)
 //         preset->getZone(i).read(&buf[1+i*4]);
@@ -146,11 +164,13 @@ void BlipClient::sendCommand(Command command){
 #define READ_PRESET_COMMAND    (1 << 4)
 
 void BlipClient::requestMidiZonePreset(uint8_t index){
+  sendScreenUpdates(false);
   uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, REQUEST_PRESET_COMMAND | index, 0x00};
   sendSerial(cmd, sizeof(cmd));
 }
 
 void BlipClient::sendMidiZonePreset(uint8_t index){
+  sendScreenUpdates(false);
   MidiZonePreset* preset = ApplicationConfiguration::getMidiZonePreset(index);
   uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, READ_PRESET_COMMAND | index};
   sendSerial(cmd, sizeof(cmd));
@@ -161,11 +181,11 @@ void BlipClient::sendMidiZonePreset(uint8_t index){
   }
   cmd[0] = 0x00;
   sendSerial(cmd, 1);
+  sleep(1000);
+  sendScreenUpdates(true);
 }
 
 void BlipClient::drawMidiZone(MidiZone* zone){
-  std::cout << "x " << (int)zone->_from_column << "-" << (int)zone->_to_column << std::endl;
-  std::cout << "y " << (int)zone->_from_row << "-" << (int)zone->_to_row << std::endl;
   clear();
   for(int x=std::min(zone->_from_column, zone->_to_column); x<std::max(zone->_from_column, zone->_to_column); ++x)
     for(int y=std::min(zone->_from_row, zone->_to_row); y<std::max(zone->_from_row, zone->_to_row); ++y)
@@ -177,6 +197,6 @@ void BlipClient::sendSerial(uint8_t* data, ssize_t size){
 //   ApplicationConfiguration::getBlipSim()->sendSerial(data, size);
   jassert(serial != NULL);
   // send to connected BlipBox device
-  if(serial->connected())
+  if(serial->isConnected())
     serial->writeSerial(data, size);
 }

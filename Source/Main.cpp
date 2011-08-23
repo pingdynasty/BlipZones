@@ -13,6 +13,7 @@
 #include "SimWindow.h"
 #include "BlipSim.h"
 #include "ApplicationConfiguration.h"
+#include "ApplicationSettingsComponent.h"
 
 //==============================================================================
 class BlipZonesApplication  : public JUCEApplication
@@ -31,21 +32,31 @@ public:
     void initialise (const String& commandLine)
     {
       // Do your application's initialisation code here..
+  #if JUCE_MAC || JUCE_IOS
+
+
+  #endif
       ApplicationConfiguration::initialise();
       ApplicationConfiguration::getBlipSim()->initialise();
       mainWindow = new MainAppWindow();
+      if(!ApplicationConfiguration::getApplicationProperties()->getFile().exists()){
+	ApplicationSettingsComponent component;
+	component.showModalDialog(mainWindow);
+      }
       simWindow = new SimWindow();
       ApplicationConfiguration::getBlipSim()->start();
-      ApplicationConfiguration::getBlipClient()->setPort(T("/dev/tty.usbserial-A60081hf"));
+      ApplicationConfiguration::getBlipClient()->initialise();
       ApplicationConfiguration::getBlipClient()->connect();
     }
 
     void shutdown()
     {
+      std::cout << "shutdown" << std::endl;
         // Do your application's shutdown code here..
       ApplicationConfiguration::getBlipClient()->shutdown();
       ApplicationConfiguration::getBlipSim()->shutdown();
       ApplicationConfiguration::release();
+      std::cout << "shutdown complete" << std::endl;
       mainWindow = 0;
       simWindow = 0;
     }

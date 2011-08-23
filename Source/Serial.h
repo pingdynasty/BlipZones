@@ -21,7 +21,8 @@ private:
   juce::String m_port;
   int m_speed;
   bool m_verbose;
-  bool m_connected, m_running;
+  volatile bool m_connected;
+  volatile bool m_running;
 
 public:
   Serial(const juce::String& port, int speed, bool verbose = true)
@@ -50,6 +51,10 @@ public:
 
   int getSpeed(){
     return m_speed;
+  }
+
+  void setSpeed(int speed){
+    m_speed = speed;
   }
 
   virtual int connect(){
@@ -182,11 +187,32 @@ public:
     return write(m_fd, data, len);
   }
 
-  bool connected(){
+  bool isConnected(){
     return m_connected;
   }
 
+  bool checkConnection(){
+    struct flock fl;
+    fl.l_type   = F_WRLCK;  /* F_RDLCK, F_WRLCK, F_UNLCK */
+    fl.l_whence = SEEK_SET; /* SEEK_SET, SEEK_CUR, SEEK_END */
+    fl.l_start  = 0; /* Offset from l_whence */
+    fl.l_len    = 0; /* length, 0 = to EOF */
+    fl.l_pid    = getpid();
+    int ret = fcntl(m_fd, F_GETLK, &fl);
+    if(ret < 0 || fl.l_pid != getpid()){
+      disconnect();
+      return false;
+    }
+    return true;
+  }
+
+  bool drain(){
+    return tcdrain(m_fd) != -1;
+  }
+
   virtual int disconnect(){
+    if(m_running)
+      stop();
     if(m_connected){
       if(m_verbose)
 	std::cout << "disconnecting" << std::endl;

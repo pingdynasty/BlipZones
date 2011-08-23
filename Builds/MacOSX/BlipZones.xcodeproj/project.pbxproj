@@ -12,6 +12,8 @@
 		0723696A320BD974C2F9A36B /* JuceLibraryCode4.mm in Sources */ = {isa = PBXBuildFile; fileRef = 47D7CB994BD84945D72F5A0E /* JuceLibraryCode4.mm */; };
 		39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */; };
 		3F815EA2C165CCF5B2E833D5 /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69E3CE875903BE2F4EA94527 /* MainWindow.cpp */; };
+		416582AB1403D030001812F1 /* BlipSimComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 416582A61403D030001812F1 /* BlipSimComponent.cpp */; };
+		416582AC1403D030001812F1 /* SimScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 416582A91403D030001812F1 /* SimScreen.cpp */; };
 		418E308C13ED879C007858FB /* eeprom.c in Sources */ = {isa = PBXBuildFile; fileRef = 418E305313ED879C007858FB /* eeprom.c */; };
 		418E308D13ED879C007858FB /* interrupt.c in Sources */ = {isa = PBXBuildFile; fileRef = 418E305513ED879C007858FB /* interrupt.c */; };
 		418E308E13ED879C007858FB /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 418E305713ED879C007858FB /* io.c */; };
@@ -33,9 +35,8 @@
 		418E30A013ED879C007858FB /* PresetChooser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E307C13ED879C007858FB /* PresetChooser.cpp */; };
 		418E30A113ED879C007858FB /* SerialProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E308013ED879C007858FB /* SerialProtocol.cpp */; };
 		418E30A213ED879C007858FB /* SerialProtocolReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E308113ED879C007858FB /* SerialProtocolReader.cpp */; };
-		418E30A313ED879C007858FB /* BlipSimComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E308613ED879C007858FB /* BlipSimComponent.cpp */; };
-		418E30A413ED879C007858FB /* SimScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E308713ED879C007858FB /* SimScreen.cpp */; };
 		418E30DB13ED901D007858FB /* SimWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 418E30D913ED901D007858FB /* SimWindow.cpp */; };
+		419421EC14003676004F8725 /* ApplicationSettingsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 419421EA14003676004F8725 /* ApplicationSettingsComponent.cpp */; };
 		41E2CEC013EEE90800329E3E /* blipbox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 41E2CEBF13EEE90700329E3E /* blipbox.icns */; };
 		41E2CF3513EF2EB400329E3E /* MidiZoneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CF3313EF2EB400329E3E /* MidiZoneComponent.cpp */; };
 		41E2CFE413EFF64500329E3E /* ApplicationConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41E2CFE013EFF64500329E3E /* ApplicationConfiguration.cpp */; };
@@ -65,6 +66,11 @@
 		201E2BC57EDDA2796285F7F6 /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainWindow.h; path = ../../Source/MainWindow.h; sourceTree = SOURCE_ROOT; };
 		2BDBD52034C01DC96C596BF5 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		415BC8C613F4CAC0009FAF1E /* Command.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Command.h; path = ../../../BlipBox/firmware/Command.h; sourceTree = SOURCE_ROOT; };
+		416582A61403D030001812F1 /* BlipSimComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlipSimComponent.cpp; path = ../../Source/BlipSimComponent.cpp; sourceTree = SOURCE_ROOT; };
+		416582A71403D030001812F1 /* BlipSimComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlipSimComponent.h; path = ../../Source/BlipSimComponent.h; sourceTree = SOURCE_ROOT; };
+		416582A81403D030001812F1 /* OverflowTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OverflowTimer.h; path = ../../Source/OverflowTimer.h; sourceTree = SOURCE_ROOT; };
+		416582A91403D030001812F1 /* SimScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimScreen.cpp; path = ../../Source/SimScreen.cpp; sourceTree = SOURCE_ROOT; };
+		416582AA1403D030001812F1 /* SimScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimScreen.h; path = ../../Source/SimScreen.h; sourceTree = SOURCE_ROOT; };
 		418E305313ED879C007858FB /* eeprom.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = eeprom.c; path = ../../../BlipBox/firmware/simulator/avr/eeprom.c; sourceTree = SOURCE_ROOT; };
 		418E305413ED879C007858FB /* eeprom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = eeprom.h; path = ../../../BlipBox/firmware/simulator/avr/eeprom.h; sourceTree = SOURCE_ROOT; };
 		418E305513ED879C007858FB /* interrupt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = interrupt.c; path = ../../../BlipBox/firmware/simulator/avr/interrupt.c; sourceTree = SOURCE_ROOT; };
@@ -114,13 +120,10 @@
 		418E308313ED879C007858FB /* TouchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouchController.h; path = ../../../BlipBox/firmware/TouchController.h; sourceTree = SOURCE_ROOT; };
 		418E308413ED879C007858FB /* globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = globals.h; path = ../../../BlipBox/firmware/globals.h; sourceTree = SOURCE_ROOT; };
 		418E308513ED879C007858FB /* BlipBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlipBox.h; path = ../../../BlipBox/firmware/BlipBox.h; sourceTree = SOURCE_ROOT; };
-		418E308613ED879C007858FB /* BlipSimComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BlipSimComponent.cpp; path = ../../../BlipSim/Source/BlipSimComponent.cpp; sourceTree = SOURCE_ROOT; };
-		418E308713ED879C007858FB /* SimScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimScreen.cpp; path = ../../../BlipSim/Source/SimScreen.cpp; sourceTree = SOURCE_ROOT; };
-		418E308813ED879C007858FB /* SimScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimScreen.h; path = ../../../BlipSim/Source/SimScreen.h; sourceTree = SOURCE_ROOT; };
-		418E30B913ED8B97007858FB /* OverflowTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OverflowTimer.h; path = ../../../BlipSim/Source/OverflowTimer.h; sourceTree = SOURCE_ROOT; };
 		418E30D913ED901D007858FB /* SimWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimWindow.cpp; path = ../../Source/SimWindow.cpp; sourceTree = SOURCE_ROOT; };
 		418E30DA13ED901D007858FB /* SimWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimWindow.h; path = ../../Source/SimWindow.h; sourceTree = SOURCE_ROOT; };
-		418E30DE13ED9095007858FB /* BlipSimComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BlipSimComponent.h; path = ../../../BlipSim/Source/BlipSimComponent.h; sourceTree = SOURCE_ROOT; };
+		419421EA14003676004F8725 /* ApplicationSettingsComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationSettingsComponent.cpp; path = ../../Source/ApplicationSettingsComponent.cpp; sourceTree = SOURCE_ROOT; };
+		419421EB14003676004F8725 /* ApplicationSettingsComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ApplicationSettingsComponent.h; path = ../../Source/ApplicationSettingsComponent.h; sourceTree = SOURCE_ROOT; };
 		41E2CEBF13EEE90700329E3E /* blipbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blipbox.icns; path = ../../Resources/blipbox.icns; sourceTree = SOURCE_ROOT; };
 		41E2CF3313EF2EB400329E3E /* MidiZoneComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZoneComponent.cpp; path = ../../Source/MidiZoneComponent.cpp; sourceTree = SOURCE_ROOT; };
 		41E2CF3413EF2EB400329E3E /* MidiZoneComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MidiZoneComponent.h; path = ../../Source/MidiZoneComponent.h; sourceTree = SOURCE_ROOT; };
@@ -194,6 +197,13 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				416582A61403D030001812F1 /* BlipSimComponent.cpp */,
+				416582A71403D030001812F1 /* BlipSimComponent.h */,
+				416582A81403D030001812F1 /* OverflowTimer.h */,
+				416582A91403D030001812F1 /* SimScreen.cpp */,
+				416582AA1403D030001812F1 /* SimScreen.h */,
+				419421EA14003676004F8725 /* ApplicationSettingsComponent.cpp */,
+				419421EB14003676004F8725 /* ApplicationSettingsComponent.h */,
 				41E2D13013F1E1CF00329E3E /* MidiZonePreset.cpp */,
 				41E2D0CC13F1A78A00329E3E /* BlipSim.cpp */,
 				41E2D0CD13F1A78A00329E3E /* BlipSim.h */,
@@ -217,19 +227,6 @@
 				0BC5FFEF408E7788EDAE3A3C /* Main.cpp */,
 			);
 			name = Source;
-			sourceTree = "<group>";
-		};
-		418E304F13ED879C007858FB /* BlipSim */ = {
-			isa = PBXGroup;
-			children = (
-				418E30DE13ED9095007858FB /* BlipSimComponent.h */,
-				418E30B913ED8B97007858FB /* OverflowTimer.h */,
-				418E308613ED879C007858FB /* BlipSimComponent.cpp */,
-				418E308713ED879C007858FB /* SimScreen.cpp */,
-				418E308813ED879C007858FB /* SimScreen.h */,
-				418E305013ED879C007858FB /* BlipBox */,
-			);
-			name = BlipSim;
 			sourceTree = "<group>";
 		};
 		418E305013ED879C007858FB /* BlipBox */ = {
@@ -343,7 +340,7 @@
 		F3419B0B0090B3979E58CB67 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				418E304F13ED879C007858FB /* BlipSim */,
+				418E305013ED879C007858FB /* BlipBox */,
 				37E4663821DAE593C016B4D5 /* Source */,
 				0D8CFC996F400297911D71A3 /* Juce Library Code */,
 				C2FA7C7DC4BD36D5512176C4 /* Resources */,
@@ -443,13 +440,14 @@
 				418E30A013ED879C007858FB /* PresetChooser.cpp in Sources */,
 				418E30A113ED879C007858FB /* SerialProtocol.cpp in Sources */,
 				418E30A213ED879C007858FB /* SerialProtocolReader.cpp in Sources */,
-				418E30A313ED879C007858FB /* BlipSimComponent.cpp in Sources */,
-				418E30A413ED879C007858FB /* SimScreen.cpp in Sources */,
 				418E30DB13ED901D007858FB /* SimWindow.cpp in Sources */,
 				41E2CF3513EF2EB400329E3E /* MidiZoneComponent.cpp in Sources */,
 				41E2CFE413EFF64500329E3E /* ApplicationConfiguration.cpp in Sources */,
 				41E2D0CE13F1A78A00329E3E /* BlipSim.cpp in Sources */,
 				41E2D13113F1E1CF00329E3E /* MidiZonePreset.cpp in Sources */,
+				419421EC14003676004F8725 /* ApplicationSettingsComponent.cpp in Sources */,
+				416582AB1403D030001812F1 /* BlipSimComponent.cpp in Sources */,
+				416582AC1403D030001812F1 /* SimScreen.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

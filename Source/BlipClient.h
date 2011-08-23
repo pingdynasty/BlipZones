@@ -30,19 +30,18 @@
 
 class BlipClient : public Serial, public juce::Thread {
 public:
+  void initialise();
   int connect();
   int disconnect();
-  void shutdown(){
-    stop();
-    disconnect();
-  }
-  void run(){
-    Serial::run();
-  }
+  void shutdown();
   int handle(unsigned char* data, ssize_t len);
   void handleReleaseMessage();
   void handlePositionMessage(uint16_t x, uint16_t y);
   void handleParameterMessage(uint8_t pid, uint16_t value);
+  void sendScreenUpdates(bool send);
+  void run(){
+    Serial::run();
+  }
 
 private:
   Serial *serial;

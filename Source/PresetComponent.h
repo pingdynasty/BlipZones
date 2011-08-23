@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  12 Aug 2011 3:05:01am
+  Creation date:  22 Aug 2011 12:57:00pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,12 +19,11 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__
-#define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__
+#ifndef __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_376ED187__
+#define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_376ED187__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "globals.h"
 #include "MidiZonePreset.h"
 //[/Headers]
 
@@ -55,11 +54,14 @@ public:
     void handlePositionMessage(uint16_t x, uint16_t y);
     void handleParameterMessage(uint8_t pid, uint16_t value);
     void release();
+    void requestPreset();
+    void sendPreset();
     void loadPreset(uint8_t index);
     void loadZones();
     void selectZone(uint8_t index);
     void loadFile();
     void saveFile();
+    void openSettings();
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -108,7 +110,7 @@ private:
     ToggleButton* toggleButton8;
     TextButton* saveButton;
     TextButton* loadButton;
-    TextButton* resetButton;
+    TextButton* settingsButton;
     ToggleButton* runButton;
 
 
@@ -119,4 +121,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_B576CCD2__
+#endif   // __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_376ED187__

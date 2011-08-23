@@ -1,12 +1,15 @@
 #include "BlipSim.h"
 #include "globals.h"
 #include "OverflowTimer.h"
+#include "MidiMessageSender.h"
 
 #define THREAD_TIMEOUT_MS 2000
 
-class BlipBoxThread : public Thread { 
+MidiMessageSender midi;
+
+class BlipSimThread : public Thread { 
 public:
-  BlipBoxThread() : Thread(T("BlipBox Simulator")) {}
+  BlipSimThread() : Thread(T("BlipBox Simulator")) {}
   void run(){
     while(!threadShouldExit()){
       loop();
@@ -23,7 +26,7 @@ void BlipSim::initialise(){
   blipbox.config.touchscreen_y_min = 0;
   blipbox.config.touchscreen_x_range = 1023;
   blipbox.config.touchscreen_y_range = 1023;
-  blipthread = new BlipBoxThread();
+  blipthread = new BlipSimThread();
   timer0 = new OverflowTimer(0.001);
 }
 
@@ -34,8 +37,11 @@ void BlipSim::start(){
 }
 
 void BlipSim::stop(){
-  blipthread->stopThread(THREAD_TIMEOUT_MS);
+  blipbox.animator = NULL;
+  blipbox.eventhandler = &blipbox.defaulthandler;
+  midi.setMidiOutput(NULL);
   timer0->stopThread(THREAD_TIMEOUT_MS);
+  blipthread->stopThread(THREAD_TIMEOUT_MS);
   std::cout << "stopped threads" << std::endl;
 }
 
@@ -55,9 +61,17 @@ void BlipSim::sendSerial(uint8_t* data, ssize_t size){
   }
 }
 
-#include "MidiMessageSender.h"
+void BlipSim::setMidiOutput(String name){
+  midi.setMidiOutput(name);
+}
 
-MidiMessageSender midi;
+// void BlipSim::setMidiOutput(MidiOutput* midiout){
+//   midi.setMidiOutput(midiout);
+// }
+
+uint8_t BlipSim::getLed(uint8_t x, uint8_t y){
+  return blipbox.leds.getLed(x, y);
+}
 
 extern "C" {
 
