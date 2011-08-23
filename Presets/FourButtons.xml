@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<PROPERTIES>
+  <VALUE name="preset" val="2"/>
+  <VALUE name="zone0">
+    <zone>
+      <VALUE name="type" val="61"/>
+      <VALUE name="status" val="144"/>
+      <VALUE name="data1" val="60"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="5"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="4"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone1">
+    <zone>
+      <VALUE name="type" val="61"/>
+      <VALUE name="status" val="144"/>
+      <VALUE name="data1" val="61"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="5"/>
+      <VALUE name="from_row" val="4"/>
+      <VALUE name="to_row" val="8"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone2">
+    <zone>
+      <VALUE name="type" val="61"/>
+      <VALUE name="status" val="144"/>
+      <VALUE name="data1" val="62"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="5"/>
+      <VALUE name="to_column" val="10"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="4"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone3">
+    <zone>
+      <VALUE name="type" val="61"/>
+      <VALUE name="status" val="144"/>
+      <VALUE name="data1" val="63"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="5"/>
+      <VALUE name="to_column" val="10"/>
+      <VALUE name="from_row" val="4"/>
+      <VALUE name="to_row" val="8"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone4">
+    <zone>
+      <VALUE name="type" val="9"/>
+      <VALUE name="status" val="176"/>
+      <VALUE name="data1" val="41"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="0"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="0"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone5">
+    <zone>
+      <VALUE name="type" val="33"/>
+      <VALUE name="status" val="176"/>
+      <VALUE name="data1" val="42"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="0"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="0"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone6">
+    <zone>
+      <VALUE name="type" val="33"/>
+      <VALUE name="status" val="176"/>
+      <VALUE name="data1" val="43"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="0"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="0"/>
+    </zone>
+  </VALUE>
+  <VALUE name="zone7">
+    <zone>
+      <VALUE name="type" val="33"/>
+      <VALUE name="status" val="176"/>
+      <VALUE name="data1" val="0"/>
+      <VALUE name="min" val="0"/>
+      <VALUE name="max" val="100"/>
+      <VALUE name="from_column" val="0"/>
+      <VALUE name="to_column" val="0"/>
+      <VALUE name="from_row" val="0"/>
+      <VALUE name="to_row" val="0"/>
+    </zone>
+  </VALUE>
+</PROPERTIES>
