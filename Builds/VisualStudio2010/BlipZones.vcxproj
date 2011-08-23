@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+  <ImportGroup Label="ExtensionSettings"/>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')"
+            Label="LocalAppDataPlatform"/>
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros"/>
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">.\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">BlipZones</TargetName>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">BlipZones</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName/>
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader/>
+      <AssemblerListingLocation>.\Debug\</AssemblerListingLocation>
+      <ObjectFileName>.\Debug\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Debug\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>.\Debug\BlipZones.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreSpecificDefaultLibraries>libcmt.lib; msvcrt.lib;;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Debug\BlipZones.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug\BlipZones.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName/>
+    </Midl>
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <AdditionalIncludeDirectories>../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader/>
+      <AssemblerListingLocation>.\Release\</AssemblerListingLocation>
+      <ObjectFileName>.\Release\</ObjectFileName>
+      <ProgramDataBaseFileName>.\Release\</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>.\Release\BlipZones.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>.\Release\BlipZones.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release\BlipZones.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\BlipBox\firmware\fonts\5x8.c"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\pgmspace.c"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\FiveWireTouchController.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Animator.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\BlipBox.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Characters.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Configuration.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\DirectCounter.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\DisplayManager.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\EventHandler.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\globals.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\KeyController.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\PresetChooser.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocol.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocolReader.cpp"/>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
+    <ClCompile Include="..\..\Source\ApplicationSettingsComponent.cpp"/>
+    <ClCompile Include="..\..\Source\BlipClient.cpp"/>
+    <ClCompile Include="..\..\Source\BlipSim.cpp"/>
+    <ClCompile Include="..\..\Source\BlipSimComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MainWindow.cpp"/>
+    <ClCompile Include="..\..\Source\Main.cpp"/>
+    <ClCompile Include="..\..\Source\MidiZoneComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MidiZonePreset.cpp"/>
+    <ClCompile Include="..\..\Source\PresetComponent.cpp"/>
+    <ClCompile Include="..\..\Source\SimScreen.cpp"/>
+    <ClCompile Include="..\..\Source\SimWindow.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode1.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode2.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode3.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode4.cpp"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\io.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\pgmspace.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Animator.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\BlipBox.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Characters.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Command.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Configuration.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Counter.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\defs.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\device.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\DirectCounter.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\DisplayManager.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\EventHandler.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\globals.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\KeyController.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MessageDispatcher.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZone.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Position.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\PresetChooser.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Protocol.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\serial.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\SerialProtocolReader.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\TouchController.h"/>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h"/>
+    <ClInclude Include="..\..\Source\ApplicationSettingsComponent.h"/>
+    <ClInclude Include="..\..\Source\BlipClient.h"/>
+    <ClInclude Include="..\..\Source\BlipSim.h"/>
+    <ClInclude Include="..\..\Source\BlipSimComponent.h"/>
+    <ClInclude Include="..\..\Source\EventHandler.h"/>
+    <ClInclude Include="..\..\Source\MainWindow.h"/>
+    <ClInclude Include="..\..\Source\MidiMessageSender.h"/>
+    <ClInclude Include="..\..\Source\MidiZoneComponent.h"/>
+    <ClInclude Include="..\..\Source\MidiZonePreset.h"/>
+    <ClInclude Include="..\..\Source\OverflowTimer.h"/>
+    <ClInclude Include="..\..\Source\PresetComponent.h"/>
+    <ClInclude Include="..\..\Source\Serial.h"/>
+    <ClInclude Include="..\..\Source\SimScreen.h"/>
+    <ClInclude Include="..\..\Source\SimWindow.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+  <ImportGroup Label="ExtensionTargets"/>
+</Project>

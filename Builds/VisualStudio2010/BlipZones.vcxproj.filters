@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="BlipZones">
+      <UniqueIdentifier>{2CA9AAB7-2F97-4AC1-ABD3-F29A867048C6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Source">
+      <UniqueIdentifier>{D9933298-914E-E70C-2696-0421C5C688A6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Source\BlipBox">
+      <UniqueIdentifier>{6121C62A-9EA5-9ECF-A487-19A2B7602B2C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Source\BlipBox\fonts">
+      <UniqueIdentifier>{5501CA8C-0BFE-2132-A5BE-C3070FB41DF1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Source\BlipBox\simulator">
+      <UniqueIdentifier>{A0C0DBDD-22CA-CA7F-A063-49051A99C9F1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Source\BlipBox\simulator\avr">
+      <UniqueIdentifier>{5E06BD46-ABCE-F8D6-C523-AAF9E961B28B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Juce Library Code">
+      <UniqueIdentifier>{F7048EA6-F4B2-F31B-E402-E05D678A1111}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\BlipBox\firmware\fonts\5x8.c">
+      <Filter>BlipZones\Source\BlipBox\fonts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.o">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\pgmspace.c">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\FiveWireTouchController.cpp">
+      <Filter>BlipZones\Source\BlipBox\simulator</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Animator.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\BlipBox.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Characters.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Configuration.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\DirectCounter.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\DisplayManager.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\EventHandler.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\globals.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\KeyController.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\PresetChooser.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocol.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocolReader.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ApplicationSettingsComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BlipClient.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BlipSim.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\BlipSimComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MainWindow.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Main.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiZoneComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiZonePreset.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\PresetComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SimScreen.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SimWindow.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode1.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode2.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode3.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode4.cpp">
+      <Filter>Juce Library Code</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.h">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\io.h">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\pgmspace.h">
+      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Animator.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\BlipBox.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Characters.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Command.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Configuration.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Counter.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\defs.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\device.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\DirectCounter.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\DisplayManager.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\EventHandler.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\globals.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\KeyController.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MessageDispatcher.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZone.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Position.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\PresetChooser.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Protocol.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\serial.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\SerialProtocolReader.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\TouchController.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ApplicationConfiguration.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ApplicationSettingsComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BlipClient.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BlipSim.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\BlipSimComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\EventHandler.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MainWindow.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiMessageSender.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiZoneComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiZonePreset.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OverflowTimer.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\PresetComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Serial.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SimScreen.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SimWindow.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h">
+      <Filter>Juce Library Code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
+      <Filter>Juce Library Code</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h">
+      <Filter>Juce Library Code</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
