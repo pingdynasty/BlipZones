@@ -27,10 +27,10 @@
   <CONFIGURATIONS>
     <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
                    osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                   headerPath="../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware; ../../BlipBox/firmware/simulator; ../../BlipBox/firmware"/>
+                   headerPath="../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
     <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
                    osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                   headerPath="../../../BlipBox/firmware/simulator; ../../../BlipBox/firmware"/>
+                   headerPath="../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
   </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
     <GROUP id="sVYklZ" name="Resources">
