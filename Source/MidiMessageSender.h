@@ -13,7 +13,7 @@
 #define MIDI_PITCH_BEND               0xE0
 #define MIDI_SYSTEM_MESSAGE           0xF0
 
-#define BUFFER_LENGTH 512
+#define MIDI_MESSAGE_SENDER_BUFFER_LENGTH 512
 
 class MidiMessageSender {
  public:
@@ -92,7 +92,7 @@ class MidiMessageSender {
       else
 	frompos += used;
       len = topos-frompos;
-      if(topos >= BUFFER_LENGTH){
+      if(topos >= MIDI_MESSAGE_SENDER_BUFFER_LENGTH){
 	std::cerr << "buffer overflow!" << std::endl;
 	frompos = topos = len = 0;
       }else if(len > 0){
@@ -104,7 +104,7 @@ class MidiMessageSender {
   juce::MidiMessage msg;
   juce::MidiOutput* midiout;
   ssize_t len;
-  unsigned char buf[BUFFER_LENGTH];
+  unsigned char buf[MIDI_MESSAGE_SENDER_BUFFER_LENGTH];
   int frompos;
   int topos;
 };

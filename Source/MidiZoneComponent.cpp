@@ -47,9 +47,9 @@ void MidiZoneComponent::updateZoneChannel(){
 }
 
 void MidiZoneComponent::updateZoneType(){
-  uint8_t type = 0;
+  uint8_t type = MIDI_ZONE_TYPE;
   uint8_t status = 0;
-  type = MIDI_ZONE_TYPE;
+  bool hasData = true;
   switch(typeComboBox1->getSelectedId()){
   case 1: // Control Change
     status = MIDI_CONTROL_CHANGE;
@@ -59,6 +59,7 @@ void MidiZoneComponent::updateZoneType(){
     break;
   case 3: // Pitch Bend
     status = MIDI_PITCH_BEND;
+    hasData = false;
     break;
   case 4: // NRPN
     status = MIDI_CONTROL_CHANGE;
@@ -69,8 +70,10 @@ void MidiZoneComponent::updateZoneType(){
     break;
   case 6: // Polyphonic Aftertouch
     status = MIDI_AFTERTOUCH;
+    hasData = false;
     break;
   }
+  dataSlider->setEnabled(hasData);
   switch(typeComboBox2->getSelectedId()){
   case 1: // Horizontal Slider
     type |= HORIZONTAL_VERTICAL_ZONE_BIT;
@@ -192,11 +195,11 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
 void MidiZoneComponent::loadZone(MidiZone* zone){
   midizone = zone;
   if(zone->_type & INVERTED_ZONE_BIT){
-    maxSlider->setValue(zone->_min, false);
     minSlider->setValue(zone->_max, false);
+    maxSlider->setValue(zone->_min, false);
   }else{
-    maxSlider->setValue(zone->_max, false);
     minSlider->setValue(zone->_min, false);
+    maxSlider->setValue(zone->_max, false);
   }
   dataSlider->setValue(zone->_data1, false);
   Xslider->setMinValue(zone->_from_column, false, false, true);

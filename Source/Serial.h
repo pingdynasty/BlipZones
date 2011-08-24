@@ -10,9 +10,9 @@
 #include <unistd.h>
 #include <iostream>
 
-#define BUFFER_LENGTH 2048
-#define DEFAULT_SPEED B38400
-#define DEFAULT_PORT "/dev/ttyS1"
+#define SERIAL_BUFFER_LENGTH 2048
+#define SERIAL_DEFAULT_SPEED B38400
+#define SERIAL_DEFAULT_PORT "/dev/ttyS1"
 
 class Serial {
 private:
@@ -30,8 +30,8 @@ public:
   }
 
   Serial() :
-    m_port(T(DEFAULT_PORT)),
-    m_speed(DEFAULT_SPEED){
+    m_port(T(SERIAL_DEFAULT_PORT)),
+    m_speed(SERIAL_DEFAULT_SPEED){
   }
 
   virtual ~Serial(){
@@ -92,7 +92,7 @@ public:
 
   virtual void run(){
     ssize_t len;
-    unsigned char buf[BUFFER_LENGTH];
+    unsigned char buf[SERIAL_BUFFER_LENGTH];
     int used = 0;
     int frompos = 0;
     int topos = 0;
@@ -101,7 +101,7 @@ public:
       std::cout << "starting rx" << std::endl;
 
     while(m_running) {
-      len = read(m_fd, &buf[topos], BUFFER_LENGTH-topos);
+      len = read(m_fd, &buf[topos], SERIAL_BUFFER_LENGTH-topos);
 
 //       if(len > 0){
 // 	if(m_verbose){
@@ -128,7 +128,7 @@ public:
           len = topos-frompos;
         }while(used > 0 && len > 0);
       }
-      if(topos >= BUFFER_LENGTH-1){
+      if(topos >= SERIAL_BUFFER_LENGTH-1){
         std::cerr << "buffer overflow!" << std::endl;
         frompos = topos = 0;
       }
