@@ -1,6 +1,5 @@
 #include "SimScreen.h"
 
-#include <inttypes.h>
 #include "globals.h"
 #include "BlipBox.h"
 #include "LedController.h"

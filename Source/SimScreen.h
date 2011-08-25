@@ -2,6 +2,7 @@
 #define __SIM_SCREEN__
 
 #include "../JuceLibraryCode/JuceHeader.h"
+#include <inttypes.h>
 
 class SimScreen  : public Component
 {
