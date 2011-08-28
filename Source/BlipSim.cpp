@@ -9,7 +9,9 @@ MidiMessageSender midi;
 
 class BlipSimThread : public Thread { 
 public:
-  BlipSimThread() : Thread(T("BlipBox Simulator")) {}
+  BlipSimThread() : Thread(T("BlipBox Simulator")) {
+    setPriority(0);
+  }
   void run(){
     while(!threadShouldExit()){
       loop();
@@ -51,6 +53,28 @@ void BlipSim::shutdown(){
   deleteAndZero(blipthread);
 }
 
+void BlipSim::release(){
+  blipbox.keys.setValue(0, 1023);
+}
+
+void BlipSim::position(uint16_t x, uint16_t y){
+  blipbox.keys.setValue(1, x);
+  blipbox.keys.setValue(2, y);
+  blipbox.keys.setValue(0, 40);
+}
+
+bool BlipSim::isPressed(){
+  return blipbox.keys.isPressed();
+}
+
+uint8_t BlipSim::getLed(uint8_t x, uint8_t y){
+  return blipbox.leds.getLed(x, y);
+}
+
+Position& BlipSim::getPosition(){
+  return blipbox.keys.pos;
+}
+
 extern "C" void SIG_USART_RECV();
 extern "C" uint8_t UDR0;
 
@@ -68,10 +92,6 @@ void BlipSim::setMidiOutput(String name){
 // void BlipSim::setMidiOutput(MidiOutput* midiout){
 //   midi.setMidiOutput(midiout);
 // }
-
-uint8_t BlipSim::getLed(uint8_t x, uint8_t y){
-  return blipbox.leds.getLed(x, y);
-}
 
 extern "C" {
 

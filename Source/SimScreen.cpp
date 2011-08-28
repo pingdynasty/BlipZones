@@ -1,7 +1,7 @@
 #include "SimScreen.h"
 
-#include "globals.h"
-#include "BlipBox.h"
+#include "BlipSim.h"
+#include "ApplicationConfiguration.h"
 #include "LedController.h"
 
 static int row_count = 8;
@@ -10,7 +10,6 @@ static SimScreen *simstance = NULL;
 
 SimScreen::SimScreen ()
 {
-  std::cout << "SimScreen " << isEnabled() << std::endl;
   setMouseCursor(MouseCursor::CrosshairCursor);
   if(simstance == NULL)
     simstance = this;
@@ -22,18 +21,9 @@ SimScreen::~SimScreen()
     simstance = NULL;
 }
 
-void SimScreen::release(){
-  blipbox.keys.setValue(0, 1023);
-}
-
-void SimScreen::position(uint16_t x, uint16_t y){
-  blipbox.keys.setValue(1, x);
-  blipbox.keys.setValue(2, y);
-  blipbox.keys.setValue(0, 40);
-}
-
 void SimScreen::position(const Point<float> p){
-  position(p.getX()/getWidth()*1024, p.getY()/getHeight()*1024);
+  BlipSim* blipsim = ApplicationConfiguration::getBlipSim();  
+  blipsim->position(p.getX()/getWidth()*1024, p.getY()/getHeight()*1024);
 }
 
 void SimScreen::mouseDown (const MouseEvent& e)
@@ -48,20 +38,21 @@ void SimScreen::mouseDrag (const MouseEvent& e)
 }
 
 void SimScreen::mouseUp (const MouseEvent& e){
-  release();
+  ApplicationConfiguration::getBlipSim()->release();
 }
 
 void SimScreen::mouseExit (const MouseEvent& e){
-//   release();
+//   ApplicationConfiguration::getBlipSim()->release();
 }
 
 void SimScreen::paint (Graphics& g)
 {
+  BlipSim* blipsim = ApplicationConfiguration::getBlipSim();
   g.fillAll(Colours::black);
-  if(blipbox.keys.isPressed()){
+  if(blipsim->isPressed()){
     g.setColour(Colours::grey);
-    float x = blipbox.keys.pos.x*getWidth()/1024;
-    float y = getHeight() - blipbox.keys.pos.y*getHeight()/1024;
+    float x = blipsim->getPosition().x*getWidth()/1024;
+    float y = getHeight() - blipsim->getPosition().y*getHeight()/1024;
     g.drawLine(x, 0, x, getHeight());
     g.drawLine(0, y, getWidth(), y);
   }
@@ -75,9 +66,9 @@ void SimScreen::paint (Graphics& g)
     for(int row=0; row<row_count; ++row){
       g.setOpacity(0.4);
       g.drawEllipse(col*dx, row*dy, width, width, 4);
-      uint8_t value = blipbox.leds.getLed(col, row_count-row-1);
-//       g.setOpacity(blipbox.leds.getLed(col, row)/255.0);
-//       g.setColour(c.withBrightness(blipbox.leds.getLed(col, row)/255.0));
+      uint8_t value = blipsim->getLed(col, row_count-row-1);
+//       g.setOpacity(blipsim->getLed(col, row)/255.0);
+//       g.setColour(c.withBrightness(blipsim->getLed(col, row)/255.0));
       g.setOpacity(value/255.0);
       g.fillEllipse(col*dx, row*dy, width, width);
     }
@@ -99,8 +90,8 @@ void LedController::flip(){
 //   // memcpy(to, from, bytes)
 //   memcpy(back_buffer, front_buffer, LED_BUFFER_LENGTH);
 //   flipped = !flipped;
+  const MessageManagerLock mmLock;
   if(simstance){
-    const MessageManagerLock mmLock;
     simstance->repaint();
   }
 }

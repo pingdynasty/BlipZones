@@ -381,10 +381,11 @@ void MidiZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     {
         //[UserComboBoxCode_typeComboBox2] -- add your combo box handling code here..
       updateZoneType();
-      if(getZone()->_type & BUTTON_SLIDER_ZONE_BIT)
-	typeComboBox3->setSelectedId(2, false); // FILL
-      else
-	typeComboBox3->setSelectedId(1, false); // BAR
+      // TODO figure out how to set default values only when combo is manually changed
+//       if(getZone()->_type & BUTTON_SLIDER_ZONE_BIT)
+// 	typeComboBox3->setSelectedId(2, false); // FILL
+//       else
+// 	typeComboBox3->setSelectedId(1, false); // BAR
         //[/UserComboBoxCode_typeComboBox2]
     }
     else if (comboBoxThatHasChanged == typeComboBox3)

@@ -20,12 +20,12 @@ protected:
   volatile bool running;
 
 public:
-  Serial(const juce::String& aport, int aspeed, bool averbose = true)
+  Serial(const juce::String& aport, int aspeed, bool averbose = false)
     : port(aport), speed(aspeed), verbose(averbose), 
       callback(NULL), connected(false), running(false) {
   }
    Serial() :
-   port(NULL), speed(-1), verbose(true),
+   port(NULL), speed(-1), verbose(false),
    callback(NULL), connected(false), running(false) {
   }
   virtual ~Serial(){

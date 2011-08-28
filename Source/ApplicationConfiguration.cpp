@@ -50,15 +50,6 @@ BlipClient* ApplicationConfiguration::getBlipClient(){
   return blipclient;
 }
 
-SimScreen* simwindow = NULL;
-SimScreen* ApplicationConfiguration::getSimScreen(){
-  return simwindow;
-}
-
-void ApplicationConfiguration::setSimScreen(SimScreen* window){
-  simwindow = window;
-}
-
 MidiZonePreset presets[MIDI_ZONE_PRESETS];
 MidiZonePreset* ApplicationConfiguration::getMidiZonePreset(int index){
   return &presets[index];
@@ -85,5 +76,4 @@ void ApplicationConfiguration::release(){
   deleteAndZero(midiout);
   deleteAndZero(blipsim);
   deleteAndZero(blipclient);
-  simwindow = NULL;
 }

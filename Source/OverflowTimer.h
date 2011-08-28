@@ -15,8 +15,15 @@ public:
   OverflowTimer(double periodSeconds) : Thread(T("Overflow Timer")) {
     period = Time::secondsToHighResolutionTicks(periodSeconds);
     std::cout << "period " << period << " ticks" << std::endl;
+    setPriority(0);
   }
   void run(){
+    while(!threadShouldExit()){
+      sleep(1);
+      SIG_OVERFLOW0();
+    }
+  }
+  void runHighRes(){
     int64 timerms = millis();
     int64 ticks = Time::getHighResolutionTicks();
     int64 lastcalibrated = Time::currentTimeMillis();

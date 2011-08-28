@@ -16,8 +16,6 @@ public:
   static void setMidiOutput(MidiOutput* midi);
   static BlipSim* getBlipSim();
   static BlipClient* getBlipClient();
-  static SimScreen* getSimScreen();
-  static void setSimScreen(SimScreen* window);
   static MidiZonePreset* getMidiZonePreset(int index);
   static File getPresetDirectory();
 private:

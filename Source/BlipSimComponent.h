@@ -46,9 +46,6 @@ public:
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    SimScreen* getSimScreen(){
-      return screen;
-    }
     //[/UserMethods]
 
     void paint (Graphics& g);

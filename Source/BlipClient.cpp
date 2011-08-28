@@ -19,7 +19,9 @@ bool doSendScreenUpdates = false;
 
 class BlipConnectionThread : public Thread {
 public:
-  BlipConnectionThread () : Thread(T("BlipConnectionThread")) {}
+  BlipConnectionThread () : Thread(T("BlipConnectionThread")) {
+    setPriority(0);
+  }
   void run(){
     sleep(2000);
     BlipClient* client = ApplicationConfiguration::getBlipClient();
@@ -43,6 +45,7 @@ BlipClient::BlipClient()
   : Thread(T("BlipClient")){
   serial = Serial::createSerial();
   serial->setSerialCallback(this);
+  setPriority(0);
 }
 
 BlipClient::~BlipClient(){
@@ -89,7 +92,7 @@ void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
 //   p = p.translated(x*window->getWidth()/1024, window->getHeight()-y*window->getHeight()/1024);
 //   std::cout << "p " << p.getX() << "/" << p.getY() << std::endl;
 //   Desktop::setMousePosition(p);
-  ApplicationConfiguration::getSimScreen()->position(x, 1023-y); // inverted y axis
+  ApplicationConfiguration::getBlipSim()->position(x, 1023-y); // inverted y axis
 }
 
 void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
@@ -118,7 +121,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
 
 void BlipClient::handleReleaseMessage(){
   std::cout << "release" << std::endl;
-  ApplicationConfiguration::getSimScreen()->release();
+  ApplicationConfiguration::getBlipSim()->release();
 }
 
 int BlipClient::handle(unsigned char* data, ssize_t len){

@@ -16,19 +16,13 @@ public:
     void mouseUp (const MouseEvent& e);
     void mouseDown (const MouseEvent& e);
     void mouseExit (const MouseEvent& e);
-
     void position(const Point<float> p);
-    void position(uint16_t x, uint16_t y);
-    void release();
 
     juce_UseDebuggingNewOperator
-
 
 private:
     SimScreen (const SimScreen&);
     const SimScreen& operator= (const SimScreen&);
-
-/*     BlipBox* blipbox; */
 };
 
 

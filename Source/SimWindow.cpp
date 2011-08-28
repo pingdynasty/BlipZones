@@ -12,7 +12,6 @@ SimWindow::SimWindow()
     setResizable(true, true); // resizable, with resize corner (instead of border)
     sim = new BlipSimComponent();
     setContentOwned(sim, true);
-    ApplicationConfiguration::setSimScreen(sim->getSimScreen());
 }
 
 SimWindow::~SimWindow()
@@ -21,7 +20,7 @@ SimWindow::~SimWindow()
 
 void SimWindow::closeButtonPressed()
 {
-//   delete this;
-  JUCEApplication::getInstance()->systemRequestedQuit();
+  delete this;
+//   JUCEApplication::getInstance()->systemRequestedQuit();  
 }
 
