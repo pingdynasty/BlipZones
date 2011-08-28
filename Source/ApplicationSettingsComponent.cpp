@@ -277,7 +277,14 @@ int ApplicationSettingsComponent::showModalDialog(Component* ref){
 
 void ApplicationSettingsComponent::loadSettingsFromFile(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
+#if JUCE_MAC || JUCE_IOS
   DirectoryIterator it(File("/dev"), false, "tty.usbserial-*");
+#elif JUCE_WINDOWS
+  // not yet supported!
+  DirectoryIterator it(File("/"), false, "com*");
+#elif JUCE_LINUX
+  DirectoryIterator it(File("/dev"), false, "ttyUSB*");
+#endif
   int index = 1;
   serialPortComboBox->addItem("none", index);
   while(it.next())

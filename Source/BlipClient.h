@@ -28,7 +28,7 @@
 
 #define DEFAULT_SERIAL_PORT       L"/dev/tty.usbserial"
 
-class BlipClient : public Serial, public juce::Thread {
+class BlipClient : public SerialCallback, public juce::Thread {
 public:
   void initialise();
   int connect();
@@ -39,25 +39,26 @@ public:
   void handlePositionMessage(uint16_t x, uint16_t y);
   void handleParameterMessage(uint8_t pid, uint16_t value);
   void sendScreenUpdates(bool send);
+  bool isConnected(){
+    return serial->isConnected();
+  }
   void run(){
-    Serial::run();
+    serial->run();
+  }
+  void setPort(const juce::String& aport){
+    serial->setPort(aport);
+  }
+  void setSpeed(int aspeed){
+    serial->setSpeed(aspeed);
   }
 
 private:
   Serial *serial;
 
 public:
-  BlipClient(const juce::String& port = DEFAULT_SERIAL_PORT, int speed = 57600, bool verbose = false)
-    : Serial(port, speed, verbose),
-      Thread(T("BlipClient"))
-  {
-    serial = this;
-  }
-
-  void clear(){
-    fill(0);
-  }
-
+  BlipClient();
+  ~BlipClient();
+  void clear();
   void fill(uint8_t value);
   void setLed(uint8_t x, uint8_t y, uint8_t brightness);
   void requestMidiZonePreset(uint8_t index);

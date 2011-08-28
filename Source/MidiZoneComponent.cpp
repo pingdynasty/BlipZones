@@ -28,18 +28,22 @@
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 
+const bool sendUpdateMessage = false;
+const bool sendMessageSynchronously = true;
+const bool allowNudgingOfOtherValues = true;
+
 void MidiZoneComponent::handlePositionMessage(uint16_t x, uint16_t y){
   x = x*10/1023;
   y = y*8/1023;
   const MessageManagerLock mmLock;
   if(abs(getZone()->_from_column - x) < abs(getZone()->_to_column - x))
-    Xslider->setMinValue(x, true);
+    Xslider->setMinValue(x, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   else
-    Xslider->setMaxValue(x, true);
+    Xslider->setMaxValue(x, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   if(abs(getZone()->_from_row - y) < abs(getZone()->_to_row - y))
-    Yslider->setMinValue(y, true);
+    Yslider->setMinValue(y, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   else
-    Yslider->setMaxValue(y, true);
+    Yslider->setMaxValue(y, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
 }
 
 void MidiZoneComponent::updateZoneChannel(){
@@ -131,7 +135,7 @@ void MidiZoneComponent::updateZoneArea(){
 }
 
 void MidiZoneComponent::setZoneChannel(MidiZone* zone){
-  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1, false);
+  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1, sendUpdateMessage, sendMessageSynchronously);
 }
 
 void MidiZoneComponent::setZoneType(MidiZone* zone){
@@ -139,55 +143,55 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
   case MIDI_ZONE_TYPE:
     switch(zone->_status & MIDI_STATUS_MASK){
     case MIDI_CONTROL_CHANGE:
-      typeComboBox1->setSelectedId(1, false); // Control Change
+      typeComboBox1->setSelectedId(1, sendUpdateMessage); // Control Change
       break;
     case MIDI_NOTE_ON:
-      typeComboBox1->setSelectedId(2, false); // Note On
+      typeComboBox1->setSelectedId(2, sendUpdateMessage); // Note On
       break;
     case MIDI_PITCH_BEND:
-      typeComboBox1->setSelectedId(3, false); // Pitch Bend
+      typeComboBox1->setSelectedId(3, sendUpdateMessage); // Pitch Bend
       break;
     case MIDI_CHANNEL_PRESSURE:
-      typeComboBox1->setSelectedId(5, false); // Channel Pressure
+      typeComboBox1->setSelectedId(5, sendUpdateMessage); // Channel Pressure
       break;
     case MIDI_AFTERTOUCH:
-      typeComboBox1->setSelectedId(6, false); // Polyphonic Aftertouch
+      typeComboBox1->setSelectedId(6, sendUpdateMessage); // Polyphonic Aftertouch
       break;
     }
     break;
   case NRPN_ZONE_TYPE:
-    typeComboBox1->setSelectedId(4, false); // NRPN
+    typeComboBox1->setSelectedId(4, sendUpdateMessage); // NRPN
     break;
   case SELECTOR_ZONE_TYPE:
   case EMPTY_ZONE_TYPE:
   default:
-    typeComboBox1->setSelectedId(0, false);
+    typeComboBox1->setSelectedId(0, sendUpdateMessage);
     break;
   }
   if(zone->_type & BUTTON_SLIDER_ZONE_BIT){
     if(zone->_type & MOMENTARY_TOGGLE_ZONE_BIT)
-      typeComboBox2->setSelectedId(3, false); // Momentary Button
+      typeComboBox2->setSelectedId(3, sendUpdateMessage); // Momentary Button
     else
-      typeComboBox2->setSelectedId(4, false); // Toggle Button
+      typeComboBox2->setSelectedId(4, sendUpdateMessage); // Toggle Button
   }else{
     if(zone->_type & HORIZONTAL_VERTICAL_ZONE_BIT)
-      typeComboBox2->setSelectedId(1, false); // Horizontal Slider
+      typeComboBox2->setSelectedId(1, sendUpdateMessage); // Horizontal Slider
     else
-      typeComboBox2->setSelectedId(2, false); // Vertical Slider
+      typeComboBox2->setSelectedId(2, sendUpdateMessage); // Vertical Slider
   }
   switch(zone->_type & DISPLAY_TYPE_MASK){
   case BAR_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(1, false);
+    typeComboBox3->setSelectedId(1, sendUpdateMessage);
     break;
   case FILL_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(2, false);
+    typeComboBox3->setSelectedId(2, sendUpdateMessage);
     break;
   case DOT_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(3, false);
+    typeComboBox3->setSelectedId(3, sendUpdateMessage);
     break;
   case NO_DISPLAY_TYPE:
   default:
-    typeComboBox3->setSelectedId(4, false);
+    typeComboBox3->setSelectedId(4, sendUpdateMessage);
     break;
   }
 }
@@ -195,17 +199,17 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
 void MidiZoneComponent::loadZone(MidiZone* zone){
   midizone = zone;
   if(zone->_type & INVERTED_ZONE_BIT){
-    minSlider->setValue(zone->_max, false);
-    maxSlider->setValue(zone->_min, false);
+    minSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
   }else{
-    minSlider->setValue(zone->_min, false);
-    maxSlider->setValue(zone->_max, false);
+    minSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
   }
-  dataSlider->setValue(zone->_data1, false);
-  Xslider->setMinValue(zone->_from_column, false, false, true);
-  Yslider->setMinValue(zone->_from_row, false, false, true);
-  Xslider->setMaxValue(zone->_to_column, false, false, true);
-  Yslider->setMaxValue(zone->_to_row, false, false, true);
+  dataSlider->setValue(zone->_data1, sendUpdateMessage, sendMessageSynchronously);
+  Xslider->setMinValue(zone->_from_column, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Yslider->setMinValue(zone->_from_row, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Xslider->setMaxValue(zone->_to_column, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Yslider->setMaxValue(zone->_to_row, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   setZoneType(zone);
   setZoneChannel(zone);
 }
@@ -378,9 +382,9 @@ void MidiZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
         //[UserComboBoxCode_typeComboBox2] -- add your combo box handling code here..
       updateZoneType();
       if(getZone()->_type & BUTTON_SLIDER_ZONE_BIT)
-	typeComboBox3->setSelectedId(2, false);
+	typeComboBox3->setSelectedId(2, false); // FILL
       else
-	typeComboBox3->setSelectedId(1, false);
+	typeComboBox3->setSelectedId(1, false); // BAR
         //[/UserComboBoxCode_typeComboBox2]
     }
     else if (comboBoxThatHasChanged == typeComboBox3)

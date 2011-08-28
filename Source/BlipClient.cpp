@@ -1,4 +1,5 @@
 #include "BlipClient.h"
+#include "Serial.h"
 #include "ApplicationConfiguration.h"
 
 #define THREAD_TIMEOUT_MS  2000
@@ -38,6 +39,16 @@ public:
 
 BlipConnectionThread connectionthread;
 
+BlipClient::BlipClient()
+  : Thread(T("BlipClient")){
+  serial = Serial::createSerial();
+  serial->setSerialCallback(this);
+}
+
+BlipClient::~BlipClient(){
+  delete serial;
+}
+
 void BlipClient::initialise(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
   setPort(properties->getValue("serialport"));
@@ -53,9 +64,9 @@ void BlipClient::shutdown(){
 }
 
 int BlipClient::connect(){
-  std::cout << "starting blipbox serial connection on " << getPort() << std::endl;
-  int status = Serial::connect();
-  Serial::start();
+  std::cout << "starting blipbox serial connection on " << serial->getPort() << std::endl;
+  int status = serial->connect();
+  serial->start();
   juce::Thread::startThread();
   connectionthread.startThread();
   sendScreenUpdates(true);
@@ -64,11 +75,11 @@ int BlipClient::connect(){
 
 int BlipClient::disconnect(){
   sendScreenUpdates(false);
-  Serial::stop();
-  std::cout << "stopping blipbox serial connection on " << getPort() << std::endl;
+  serial->stop();
+  std::cout << "stopping blipbox serial connection on " << serial->getPort() << std::endl;
   connectionthread.stopThread(THREAD_TIMEOUT_MS);
   juce::Thread::stopThread(THREAD_TIMEOUT_MS);
-  return Serial::disconnect();
+  return serial->disconnect();
 }
 
 void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
@@ -148,6 +159,10 @@ void BlipClient::fill(uint8_t value){
   jassert(value < 16);
   uint8_t cmd[] = { FILL_MESSAGE | value };
   sendSerial(cmd, sizeof(cmd));
+}
+
+void BlipClient::clear(){
+  fill(0);
 }
 
 void BlipClient::setLed(uint8_t x, uint8_t y, uint8_t brightness){

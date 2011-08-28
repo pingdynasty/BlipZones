@@ -32,10 +32,6 @@ public:
     void initialise (const String& commandLine)
     {
       // Do your application's initialisation code here..
-  #if JUCE_MAC || JUCE_IOS
-
-
-  #endif
       ApplicationConfiguration::initialise();
       ApplicationConfiguration::getBlipSim()->initialise();
       mainWindow = new MainAppWindow();
