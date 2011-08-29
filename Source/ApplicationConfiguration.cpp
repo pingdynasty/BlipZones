@@ -23,19 +23,6 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
   return properties;
 }
 
-MidiOutput* midiout = NULL;
-MidiOutput* ApplicationConfiguration::getMidiOutput(){
-  if(midiout == NULL){
-    midiout = MidiOutput::createNewDevice(T("BlipZones"));
-    //       midiout = MidiOutput::openDevice(MidiOutput::getDefaultDeviceIndex());
-  }
-  return midiout;
-}
-
-void ApplicationConfiguration::setMidiOutput(MidiOutput* midi){
-  midiout = midi;
-}
-
 BlipSim* blipsim = NULL;
 BlipSim* ApplicationConfiguration::getBlipSim(){
   if(blipsim == NULL)
@@ -73,7 +60,6 @@ void ApplicationConfiguration::release(){
   if(properties != NULL)
     properties->saveIfNeeded();
   deleteAndZero(properties);
-  deleteAndZero(midiout);
   deleteAndZero(blipsim);
   deleteAndZero(blipclient);
 }

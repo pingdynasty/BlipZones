@@ -12,8 +12,6 @@ public:
   static void initialise();
   static void release();
   static PropertiesFile* getApplicationProperties();
-  static MidiOutput* getMidiOutput();
-  static void setMidiOutput(MidiOutput* midi);
   static BlipSim* getBlipSim();
   static BlipClient* getBlipClient();
   static MidiZonePreset* getMidiZonePreset(int index);
