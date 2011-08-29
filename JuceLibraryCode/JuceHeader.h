@@ -14,7 +14,7 @@
 #define __APPHEADERFILE_5733A838__
 
 #include "AppConfig.h"
-#include "../../juce/juce_amalgamated.h"
+#include "../Libraries/juce/juce_amalgamated.h"
 #include "BinaryData.h"
 
 namespace ProjectInfo
