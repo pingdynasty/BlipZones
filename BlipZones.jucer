@@ -16,7 +16,7 @@
                   objCExtraSuffix="zMvwnk" juceFolder="Libraries/juce"/>
     <VS2010 targetFolder="Builds/VisualStudio2010" vstFolder="c:\SDKs\vstsdk2.4"
             rtasFolder="c:\SDKs\PT_80_SDK" libraryType="1" juceFolder="Libraries/juce"
-            extraDefs="BOOST_ALL_NO_LIBS" extraCompilerFlags="-I ../../Libraries/MSIntTypes"/>
+            extraDefs="BOOST_ALL_NO_LIB" extraCompilerFlags="-I ../../Libraries/MSIntTypes"/>
     <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="~/SDKs/vstsdk2.4" juceFolder="Libraries/juce"/>
   </EXPORTFORMATS>
   <CONFIGURATIONS>
