@@ -76,17 +76,15 @@ void BlipClient::sendScreenUpdates(bool send){
   doSendScreenUpdates = send;
 }
 
-void BlipClient::shutdown(){
-  disconnect();
-}
-
 int BlipClient::connect(){
   std::cout << "starting blipbox serial connection on " << serial->getPort() << std::endl;
   int status = serial->connect();
-  serial->start();
-  juce::Thread::startThread();
-  connectionthread.startThread();
-  sendScreenUpdates(true);
+  if(status >= 0){
+    serial->start();
+    juce::Thread::startThread();
+    connectionthread.startThread();
+    sendScreenUpdates(true);
+  }
   return status;
 }
 
@@ -97,6 +95,10 @@ int BlipClient::disconnect(){
   connectionthread.stopThread(THREAD_TIMEOUT_MS);
   juce::Thread::stopThread(THREAD_TIMEOUT_MS);
   return serial->disconnect();
+}
+
+void BlipClient::shutdown(){
+  disconnect();
 }
 
 void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){

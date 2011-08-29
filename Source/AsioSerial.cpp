@@ -11,24 +11,32 @@ asio::io_service io_service;
 asio::serial_port sport(io_service);
 
 int AsioSerial::connect(){
-  std::string str = (const char*)port.toUTF8();
-  sport.open(str);
-  if(!sport.is_open())
+  try{
+    std::string str = (const char*)port.toUTF8();
+    sport.open(str);
+    if(!sport.is_open())
+      return -1;
+    typedef asio::serial_port_base asios;
+    sport.set_option( asios::baud_rate( speed ) );
+    sport.set_option( asios::flow_control( asios::flow_control::none ) );
+    sport.set_option( asios::parity( asios::parity::none ) );
+    sport.set_option( asios::stop_bits( asios::stop_bits::one ) );
+    sport.set_option( asios::character_size( 8 ) );
+    connected = true;
+    return 0;
+  }catch(asio::system_error exc){
     return -1;
-  typedef asio::serial_port_base asios;
-  sport.set_option( asios::baud_rate( speed ) );
-  sport.set_option( asios::flow_control( asios::flow_control::none ) );
-  sport.set_option( asios::parity( asios::parity::none ) );
-  sport.set_option( asios::stop_bits( asios::stop_bits::one ) );
-  sport.set_option( asios::character_size( 8 ) );
-  connected = true;
-  return 0;
+  }
 }
 
 int AsioSerial::disconnect(){
-  sport.close();
-  connected = false;
-  return 0;
+  try{
+    sport.close();
+    connected = false;
+    return 0;
+  }catch(asio::system_error exc){
+    return -1;
+  }
 }
 
 bool AsioSerial::isConnected(){
