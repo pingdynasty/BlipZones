@@ -15,11 +15,10 @@
 
 #include "AppConfig.h"
 #include "../Libraries/juce/juce_amalgamated.h"
-#include "BinaryData.h"
 
 namespace ProjectInfo
 {
-    const char* const  projectName    = "BlipZones";
+    const char* const  projectName    = "";
     const char* const  versionString  = "1.0.0";
     const int          versionNumber  = 0x10000;
 }
