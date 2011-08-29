@@ -32,17 +32,19 @@ ifeq ($(CONFIG),Release)
   LIBDIR := build
   OBJDIR := build/intermediate/Release
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../Libraries" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
   CXXFLAGS += $(CFLAGS) 
   LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../Libraries/juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
+  RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../Libraries" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   TARGET := BlipZones
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/AsioSerial_7a9dfc75.o \
+  $(OBJDIR)/Serial_5af037d.o \
   $(OBJDIR)/eeprom_119b2b22.o \
   $(OBJDIR)/interrupt_7815b74b.o \
   $(OBJDIR)/io_396ac548.o \
@@ -66,7 +68,6 @@ OBJECTS := \
   $(OBJDIR)/SerialProtocolReader_18069df4.o \
   $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
   $(OBJDIR)/ApplicationSettingsComponent_dd54a033.o \
-  $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/BlipClient_d12f7da5.o \
   $(OBJDIR)/BlipSim_356db187.o \
   $(OBJDIR)/BlipSimComponent_eafa3680.o \
@@ -75,7 +76,6 @@ OBJECTS := \
   $(OBJDIR)/MidiZoneComponent_5a1e8671.o \
   $(OBJDIR)/MidiZonePreset_30c42135.o \
   $(OBJDIR)/PresetComponent_8f0e6a3f.o \
-  $(OBJDIR)/Serial_5af037d.o \
   $(OBJDIR)/SimScreen_99fdf804.o \
   $(OBJDIR)/SimWindow_21e2b188.o \
   $(OBJDIR)/BinaryData_ce4232d4.o \
@@ -95,6 +95,16 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling AsioSerial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/eeprom_119b2b22.o: ../../../BlipBox/firmware/simulator/avr/eeprom.c
 	-@mkdir -p $(OBJDIR)
@@ -211,11 +221,6 @@ $(OBJDIR)/ApplicationSettingsComponent_dd54a033.o: ../../Source/ApplicationSetti
 	@echo "Compiling ApplicationSettingsComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling AsioSerial.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/BlipClient_d12f7da5.o: ../../Source/BlipClient.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling BlipClient.cpp"
@@ -254,11 +259,6 @@ $(OBJDIR)/MidiZonePreset_30c42135.o: ../../Source/MidiZonePreset.cpp
 $(OBJDIR)/PresetComponent_8f0e6a3f.o: ../../Source/PresetComponent.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling PresetComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling Serial.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/SimScreen_99fdf804.o: ../../Source/SimScreen.cpp

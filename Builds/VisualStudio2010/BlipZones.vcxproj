@@ -54,7 +54,7 @@
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;DEBUG;_DEBUG;BOOST_ALL_NO_LIBS;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader/>
@@ -91,8 +91,8 @@
     </Midl>
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <AdditionalIncludeDirectories>../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;BOOST_ALL_NO_LIBS;JUCER_VS2010_78A501D=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader/>
@@ -122,6 +122,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
+    <ClCompile Include="..\..\Source\Serial.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c"/>
@@ -145,7 +147,6 @@
     <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocolReader.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationConfiguration.cpp"/>
     <ClCompile Include="..\..\Source\ApplicationSettingsComponent.cpp"/>
-    <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\BlipClient.cpp"/>
     <ClCompile Include="..\..\Source\BlipSim.cpp"/>
     <ClCompile Include="..\..\Source\BlipSimComponent.cpp"/>
@@ -154,13 +155,13 @@
     <ClCompile Include="..\..\Source\MidiZoneComponent.cpp"/>
     <ClCompile Include="..\..\Source\MidiZonePreset.cpp"/>
     <ClCompile Include="..\..\Source\PresetComponent.cpp"/>
-    <ClCompile Include="..\..\Source\Serial.cpp"/>
     <ClCompile Include="..\..\Source\SimScreen.cpp"/>
     <ClCompile Include="..\..\Source\SimWindow.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\AsioSerial.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\io.h"/>
@@ -192,7 +193,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\TouchController.h"/>
     <ClInclude Include="..\..\Source\ApplicationConfiguration.h"/>
     <ClInclude Include="..\..\Source\ApplicationSettingsComponent.h"/>
-    <ClInclude Include="..\..\Source\AsioSerial.h"/>
     <ClInclude Include="..\..\Source\BlipClient.h"/>
     <ClInclude Include="..\..\Source\BlipSim.h"/>
     <ClInclude Include="..\..\Source\BlipSimComponent.h"/>

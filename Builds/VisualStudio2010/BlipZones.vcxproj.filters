@@ -28,6 +28,12 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\AsioSerial.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Serial.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClCompile>
@@ -100,9 +106,6 @@
     <ClCompile Include="..\..\Source\ApplicationSettingsComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\AsioSerial.cpp">
-      <Filter>BlipZones\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\BlipClient.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -127,9 +130,6 @@
     <ClCompile Include="..\..\Source\PresetComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\Serial.cpp">
-      <Filter>BlipZones\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\SimScreen.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -144,6 +144,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\AsioSerial.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClInclude>
@@ -235,9 +238,6 @@
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationSettingsComponent.h">
-      <Filter>BlipZones\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\BlipClient.h">

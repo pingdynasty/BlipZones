@@ -262,13 +262,14 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				6C8A68D5EF029999EA6109A4 /* AsioSerial.cpp */,
+				95CB6C4BBD95128790768B0D /* AsioSerial.h */,
+				B00B43664A84156175CC3773 /* Serial.cpp */,
 				08BD380D6E3632F29E55E4E5 /* BlipBox */,
 				E15D74B4DFFF343958E0C9BC /* ApplicationConfiguration.cpp */,
 				C9219C1C82B8574AD7225641 /* ApplicationConfiguration.h */,
 				D1C0D693490BB7CFAA44E7B2 /* ApplicationSettingsComponent.cpp */,
 				D9233186CAB0B4CB82B1A41E /* ApplicationSettingsComponent.h */,
-				6C8A68D5EF029999EA6109A4 /* AsioSerial.cpp */,
-				95CB6C4BBD95128790768B0D /* AsioSerial.h */,
 				F682139A328C8A529BC1C572 /* BlipClient.cpp */,
 				20529268326B381FB07E65F3 /* BlipClient.h */,
 				94CD8F31265CC481E0974A9C /* BlipSim.cpp */,
@@ -288,7 +289,6 @@
 				BAE37E17112F357A454A9DDB /* PresetComponent.cpp */,
 				6D8F7B61C0950C60A3F650AC /* PresetComponent.h */,
 				AA055F83A370B3CF7D5EFF56 /* Serial.h */,
-				B00B43664A84156175CC3773 /* Serial.cpp */,
 				846B1A20A060845FDE601C37 /* SimScreen.cpp */,
 				EEBAEC32E346CCA210EA1A75 /* SimScreen.h */,
 				E298CBF215030626A1ACC5DC /* SimWindow.cpp */,
@@ -421,6 +421,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E8849F36894696AFEDAC7FBE /* AsioSerial.cpp in Sources */,
+				DB30F69E948BB93E0FB3251E /* Serial.cpp in Sources */,
 				D04EDF3303086EDE7D74654D /* eeprom.c in Sources */,
 				7959587CF0CDD8D15D1DE427 /* interrupt.c in Sources */,
 				C7F98798B2AFD87CC8AFD1A4 /* io.c in Sources */,
@@ -444,7 +446,6 @@
 				5E0EE15CCCF677DF49C32E5F /* SerialProtocolReader.cpp in Sources */,
 				C9517C3150BA2A09F2A914D5 /* ApplicationConfiguration.cpp in Sources */,
 				E85C7E29F7A7DB8E82AEB523 /* ApplicationSettingsComponent.cpp in Sources */,
-				E8849F36894696AFEDAC7FBE /* AsioSerial.cpp in Sources */,
 				FA51028A113C207E4E677340 /* BlipClient.cpp in Sources */,
 				80B1703C91850918C834C032 /* BlipSim.cpp in Sources */,
 				5D821375EC14928BE91382F0 /* BlipSimComponent.cpp in Sources */,
@@ -453,7 +454,6 @@
 				5DF37B85BF95CF52B345D8AA /* MidiZoneComponent.cpp in Sources */,
 				8FC2EBAB3DF200043B21B16F /* MidiZonePreset.cpp in Sources */,
 				F6EE8D1F038E0BBB0C44851B /* PresetComponent.cpp in Sources */,
-				DB30F69E948BB93E0FB3251E /* Serial.cpp in Sources */,
 				5551CE3056CBBF63574887C8 /* SimScreen.cpp in Sources */,
 				71F5C2BBD95AA04C4203E94D /* SimWindow.cpp in Sources */,
 				41F00686466A35B446F21DD4 /* BinaryData.cpp in Sources */,
@@ -518,6 +518,7 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				HEADER_SEARCH_PATHS = (
+					../../Libraries,
 					../../../BlipBox/firmware/simulator,
 					../../../BlipBox/firmware,
 					../../BlipBox/firmware/simulator,
