@@ -52,6 +52,7 @@
 		EAEFD2BA9DDACF751C545ED7 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC5FFEF408E7788EDAE3A3C /* Main.cpp */; };
 		F13B742D7FB7747E8EBD9604 /* DisplayManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D04D2765BBE8746944D3D6E /* DisplayManager.cpp */; };
 		F6EE8D1F038E0BBB0C44851B /* PresetComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAE37E17112F357A454A9DDB /* PresetComponent.cpp */; };
+		F71C5835AA69DD3ACB4BEBD6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */; };
 		F9A36BB90BBC016089CF3E44 /* Configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4DF7781AF2F36C8359C56D0 /* Configuration.cpp */; };
 		FA4396BB767E05FB7E59CFBF /* MidiZone.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4381844D9A9572AE868B160A /* MidiZone.cpp */; };
 		FA51028A113C207E4E677340 /* BlipClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F682139A328C8A529BC1C572 /* BlipClient.cpp */; };
@@ -75,6 +76,7 @@
 		2CD77B0298962985677D3C2A /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Configuration.h; path = ../../../BlipBox/firmware/Configuration.h; sourceTree = SOURCE_ROOT; };
 		2D04D2765BBE8746944D3D6E /* DisplayManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DisplayManager.cpp; path = ../../../BlipBox/firmware/DisplayManager.cpp; sourceTree = SOURCE_ROOT; };
 		396E821AA125556416BD4CD1 /* SerialProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SerialProtocol.cpp; path = ../../../BlipBox/firmware/SerialProtocol.cpp; sourceTree = SOURCE_ROOT; };
+		3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3DB436F423624861AD227518 /* Animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = ../../../BlipBox/firmware/Animator.h; sourceTree = SOURCE_ROOT; };
 		4156FDFA57CB9E875DEE5C7A /* Characters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Characters.cpp; path = ../../../BlipBox/firmware/Characters.cpp; sourceTree = SOURCE_ROOT; };
 		41940D969B047E9558658C4B /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Counter.h; path = ../../../BlipBox/firmware/Counter.h; sourceTree = SOURCE_ROOT; };
@@ -165,17 +167,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5305BD92F3F36EE5F903C84B /* Cocoa.framework in Frameworks */,
+				F71C5835AA69DD3ACB4BEBD6 /* AudioToolbox.framework in Frameworks */,
 				9F3988E5875DC905119D69B9 /* Carbon.framework in Frameworks */,
-				EA56E96EC2815026A27EF591 /* IOKit.framework in Frameworks */,
+				5305BD92F3F36EE5F903C84B /* Cocoa.framework in Frameworks */,
 				39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */,
 				AE86D65581912C65DFB1C2AB /* CoreMIDI.framework in Frameworks */,
-				CD6C0998B8F2D44EB4A62E1F /* WebKit.framework in Frameworks */,
 				036824D38ADF25185AF0A6C7 /* DiscRecording.framework in Frameworks */,
+				EA56E96EC2815026A27EF591 /* IOKit.framework in Frameworks */,
 				82B1149437A9B20669D825CA /* OpenGL.framework in Frameworks */,
-				B2187236A44707AC00748B74 /* QuartzCore.framework in Frameworks */,
 				7A0FA79588881FE82E90A5CF /* QTKit.framework in Frameworks */,
+				B2187236A44707AC00748B74 /* QuartzCore.framework in Frameworks */,
 				069EFA169E7D570081DFF109 /* QuickTime.framework in Frameworks */,
+				CD6C0998B8F2D44EB4A62E1F /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,9 +238,9 @@
 			isa = PBXGroup;
 			children = (
 				AF954846A74FE95C77980B83 /* AppConfig.h */,
-				67111FF3B90A0DBCEBA57FE2 /* JuceHeader.h */,
 				B75DE44B1A36EA8FC1770949 /* BinaryData.cpp */,
 				8DDC51D24D1B227438766E43 /* BinaryData.h */,
+				67111FF3B90A0DBCEBA57FE2 /* JuceHeader.h */,
 				F5124573ABD695FB00185620 /* JuceLibraryCode.mm */,
 			);
 			name = "Juce Library Code";
@@ -313,6 +316,18 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		D77744385191FA5EC79D64EA /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				F3419B0B0090B3979E58CB67 /* BlipZones */,
+				0D8CFC996F400297911D71A3 /* Juce Library Code */,
+				C2FA7C7DC4BD36D5512176C4 /* Resources */,
+				E5A92342AA26D9CDC17F2026 /* Frameworks */,
+				F0BEF0DE09564404BC747582 /* Products */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
 		DD0F6DE562D5D1F56543BAE2 /* simulator */ = {
 			isa = PBXGroup;
 			children = (
@@ -325,17 +340,18 @@
 		E5A92342AA26D9CDC17F2026 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EC95562A9E9EDC3E9B1A9061 /* Cocoa.framework */,
+				3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */,
 				2BDBD52034C01DC96C596BF5 /* Carbon.framework */,
-				FD46F99396B85E6C9880FD31 /* IOKit.framework */,
+				EC95562A9E9EDC3E9B1A9061 /* Cocoa.framework */,
 				9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */,
 				C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */,
-				5C47100C8F78F70EEC550FAB /* WebKit.framework */,
 				8CDA65FDA1D2A8FD2A217035 /* DiscRecording.framework */,
+				FD46F99396B85E6C9880FD31 /* IOKit.framework */,
 				4646F809AD6C93233832846A /* OpenGL.framework */,
-				0B041D56E8CA4C914812DF01 /* QuartzCore.framework */,
 				0E9C9572A50DB8EA6E51E1C2 /* QTKit.framework */,
+				0B041D56E8CA4C914812DF01 /* QuartzCore.framework */,
 				B121DEF6878456309C03792E /* QuickTime.framework */,
+				5C47100C8F78F70EEC550FAB /* WebKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -348,17 +364,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F3419B0B0090B3979E58CB67 /* Source */ = {
+		F3419B0B0090B3979E58CB67 /* BlipZones */ = {
 			isa = PBXGroup;
 			children = (
 				C190910D4439DCF92F5BD71F /* Resources */,
 				37E4663821DAE593C016B4D5 /* Source */,
-				0D8CFC996F400297911D71A3 /* Juce Library Code */,
-				C2FA7C7DC4BD36D5512176C4 /* Resources */,
-				E5A92342AA26D9CDC17F2026 /* Frameworks */,
-				F0BEF0DE09564404BC747582 /* Products */,
 			);
-			name = Source;
+			name = BlipZones;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,7 +409,7 @@
 				French,
 				German,
 			);
-			mainGroup = F3419B0B0090B3979E58CB67 /* Source */;
+			mainGroup = D77744385191FA5EC79D64EA /* Source */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -507,7 +519,6 @@
 		4F655F5AA820498CDCC271EB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_OPTIMIZATION_LEVEL = s;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -535,7 +546,6 @@
 		B5C9D7E78DC8B4A2C566F313 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
