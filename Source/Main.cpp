@@ -87,7 +87,7 @@ public:
 
 private:
 
-  // todo: windows may both be null
+  // todo: windows may both have deleted themselves
   ScopedPointer <MainAppWindow> mainWindow;
   ScopedPointer <SimWindow> simWindow;
 };

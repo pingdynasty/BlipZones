@@ -32,6 +32,6 @@ MainAppWindow::~MainAppWindow()
 
 void MainAppWindow::closeButtonPressed()
 {
-  delete this;
-//     JUCEApplication::getInstance()->systemRequestedQuit();
+//   delete this;
+    JUCEApplication::getInstance()->systemRequestedQuit();
 }

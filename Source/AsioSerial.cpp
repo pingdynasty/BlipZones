@@ -1,4 +1,3 @@
-#define BOOST_ALL_NO_LIBS
 #include <asio.hpp>
 #include <asio/serial_port.hpp> 
 #include "AsioSerial.h"
@@ -31,6 +30,7 @@ int AsioSerial::connect(){
 
 int AsioSerial::disconnect(){
   try{
+    sport.cancel();
     sport.close();
     connected = false;
     return 0;

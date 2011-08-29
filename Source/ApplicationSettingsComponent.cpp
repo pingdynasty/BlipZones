@@ -280,7 +280,7 @@ void ApplicationSettingsComponent::loadSettingsFromFile(){
 #if JUCE_MAC || JUCE_IOS
   DirectoryIterator it(File("/dev"), false, "tty.usbserial-*");
 #elif JUCE_WINDOWS
-  DirectoryIterator it(File("/"), false, "COM*");
+  DirectoryIterator it(File("\\\\.\\"), false, "COM*");
 #elif JUCE_LINUX
   DirectoryIterator it(File("/dev"), false, "ttyUSB*");
 #endif

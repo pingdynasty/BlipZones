@@ -20,7 +20,8 @@ SimWindow::~SimWindow()
 
 void SimWindow::closeButtonPressed()
 {
-  delete this;
+//   delete this;
+  setVisible(false);
 //   JUCEApplication::getInstance()->systemRequestedQuit();  
 }
 

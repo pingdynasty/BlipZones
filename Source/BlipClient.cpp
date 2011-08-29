@@ -91,10 +91,11 @@ int BlipClient::connect(){
 int BlipClient::disconnect(){
   sendScreenUpdates(false);
   serial->stop();
+  serial->disconnect();
   std::cout << "stopping blipbox serial connection on " << serial->getPort() << std::endl;
   connectionthread.stopThread(THREAD_TIMEOUT_MS);
   juce::Thread::stopThread(THREAD_TIMEOUT_MS);
-  return serial->disconnect();
+  return 0;
 }
 
 void BlipClient::shutdown(){
