@@ -4,6 +4,20 @@
 
 #define THREAD_TIMEOUT_MS  2000
 
+#define FILL_MESSAGE              0x10
+#define SET_LED_MESSAGE           0x20 // sets 1 led - 3 byte message
+// set led: 4 bits marker type, 8 bits led index, 8 bits brightness
+// 1000mmmm llllllll bbbbbbbb
+#define SET_LED_ROW_MESSAGE       0x30 // sets 8 leds - two byte message
+// led row: 0011cccc bbbbbbbb : 4 bit row index i, bit mask b
+#define SET_LED_COL_MESSAGE       0x40 // sets 8 leds - two byte message
+// led column: 0100iiii bbbbbbbb : 4 bit column index i, bit mask b
+#define WRITE_CHARACTER_MESSAGE   0x50
+#define SHIFT_LEDS_MESSAGE        0x60
+#define COMMAND_MESSAGE           0x70
+// command: 0111cccc : 4 bit command index
+#define SET_PARAMETER_MESSAGE     0xc0
+
 #define POSITION_MSG       0x50 // 0x5 << 4
 #define RELEASE_MSG        0x70 // 0x7 << 4
 #define POT1_SENSOR_MSG    0x84 // 0x80 | (0x1 << 2)
