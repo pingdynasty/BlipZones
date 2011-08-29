@@ -17,7 +17,7 @@ public:
   void stop();
   void setMidiOutput(String name);
 /*   void setMidiOutput(MidiOutput* midiout); */
-  void sendSerial(uint8_t* data, ssize_t size);
+  void sendSerial(uint8_t* data, size_t size);
   uint8_t getLed(uint8_t x, uint8_t y);
   bool isPressed();
   Position& getPosition();

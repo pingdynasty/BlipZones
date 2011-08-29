@@ -65,11 +65,11 @@ int TermiosSerial::openSerial(const char* serialport, int baud) {
   return fd;
 }
 
-ssize_t TermiosSerial::readSerial(unsigned char* data, ssize_t len){
+size_t TermiosSerial::readSerial(unsigned char* data, size_t len){
   return read(fd, data, len);
 }
 
-ssize_t TermiosSerial::writeSerial(unsigned char* data, ssize_t len){
+size_t TermiosSerial::writeSerial(unsigned char* data, size_t len){
   if(verbose){
     std::cout << "tx\t";
     log(data, len);

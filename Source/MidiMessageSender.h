@@ -103,7 +103,7 @@ class MidiMessageSender {
  private:
   juce::MidiMessage msg;
   juce::MidiOutput* midiout;
-  ssize_t len;
+  size_t len;
   unsigned char buf[MIDI_MESSAGE_SENDER_BUFFER_LENGTH];
   int frompos;
   int topos;

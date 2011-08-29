@@ -18,8 +18,8 @@ public:
   int connect();
   int disconnect();
   bool isConnected();
-  ssize_t readSerial(unsigned char* data, ssize_t len);
-  ssize_t writeSerial(unsigned char* data, ssize_t len);
+  size_t readSerial(unsigned char* data, size_t len);
+  size_t writeSerial(unsigned char* data, size_t len);
 };
 
 #endif  // __ASIOSERIAL_H__

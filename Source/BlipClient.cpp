@@ -138,7 +138,7 @@ void BlipClient::handleReleaseMessage(){
   ApplicationConfiguration::getBlipSim()->release();
 }
 
-int BlipClient::handle(unsigned char* data, ssize_t len){
+int BlipClient::handle(unsigned char* data, size_t len){
 //   std::cout << "rx[" << std::dec << len << "]" << std::endl;
 //   std::cout << "rx";
 //   for(int i=0; i<len; ++i)
@@ -224,7 +224,7 @@ void BlipClient::drawMidiZone(MidiZone* zone){
       setLed(x, y, 0x20);
 }
 
-void BlipClient::sendSerial(uint8_t* data, ssize_t size){
+void BlipClient::sendSerial(uint8_t* data, size_t size){
   // send to simulator
 //   ApplicationConfiguration::getBlipSim()->sendSerial(data, size);
   jassert(serial != NULL);

@@ -13,7 +13,7 @@ public:
   int connect();
   int disconnect();
   void shutdown();
-  int handle(unsigned char* data, ssize_t len);
+  int handle(unsigned char* data, size_t len);
   void handleReleaseMessage();
   void handlePositionMessage(uint16_t x, uint16_t y);
   void handleParameterMessage(uint8_t pid, uint16_t value);
@@ -44,7 +44,7 @@ public:
   void sendMidiZonePreset(uint8_t index);
   void drawMidiZone(MidiZone* zone);
   void sendCommand(Command command);
-  void sendSerial(uint8_t* data, ssize_t size);
+  void sendSerial(uint8_t* data, size_t size);
 };
 
 #endif  // __BLIPCLIENT_H__

@@ -48,7 +48,7 @@ bool Serial::isConnected(){
 }
 
 void Serial::run(){
-  ssize_t len;
+  size_t len;
   unsigned char buf[SERIAL_BUFFER_LENGTH];
   int used = 0;
   int frompos = 0;

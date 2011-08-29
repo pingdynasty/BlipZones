@@ -80,7 +80,7 @@ Position& BlipSim::getPosition(){
 extern "C" void SIG_USART_RECV();
 extern "C" uint8_t UDR0;
 
-void BlipSim::sendSerial(uint8_t* data, ssize_t size){
+void BlipSim::sendSerial(uint8_t* data, size_t size){
   for(int i=0; i<size; ++i){
     UDR0 = data[i];
     SIG_USART_RECV();    

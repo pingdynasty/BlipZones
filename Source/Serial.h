@@ -7,7 +7,7 @@
 class SerialCallback {
 public:
   virtual ~SerialCallback(){}
-  virtual int handle(unsigned char* data, ssize_t len) = 0;
+  virtual int handle(unsigned char* data, size_t len) = 0;
 };
 
 class Serial {
@@ -34,12 +34,12 @@ public:
   virtual void run();
   virtual int connect() = 0;
   virtual int disconnect() = 0;
-  virtual ssize_t readSerial(unsigned char* data, ssize_t len) = 0;
-  virtual ssize_t writeSerial(unsigned char* data, ssize_t len) = 0;
+  virtual size_t readSerial(unsigned char* data, size_t len) = 0;
+  virtual size_t writeSerial(unsigned char* data, size_t len) = 0;
 
   static Serial* createSerial();
 protected:
-  virtual void log(unsigned char* data, ssize_t len){
+  virtual void log(unsigned char* data, size_t len){
     for(int i=0; i<len; ++i)
       std::cout << "0x" << std::hex << (int)data[i] << "\t";
     std::cout << std::endl;
