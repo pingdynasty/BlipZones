@@ -100,6 +100,9 @@
     <ClCompile Include="..\..\Source\ApplicationSettingsComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\AsioSerial.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\BlipClient.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -124,6 +127,9 @@
     <ClCompile Include="..\..\Source\PresetComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Serial.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\SimScreen.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -133,16 +139,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp">
       <Filter>Juce Library Code</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode1.cpp">
-      <Filter>Juce Library Code</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode2.cpp">
-      <Filter>Juce Library Code</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode3.cpp">
-      <Filter>Juce Library Code</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode4.cpp">
+    <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp">
       <Filter>Juce Library Code</Filter>
     </ClCompile>
   </ItemGroup>
@@ -238,6 +235,9 @@
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\ApplicationSettingsComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\BlipClient.h">

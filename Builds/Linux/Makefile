@@ -17,12 +17,12 @@ ifeq ($(CONFIG),Debug)
   LIBDIR := build
   OBJDIR := build/intermediate/Debug
   OUTDIR := build
-  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
+  CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../Libraries" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -g -ggdb -O0
   CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../../juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
+  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../Libraries/juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
   LDDEPS :=
-  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
+  RESFLAGS :=  -D "LINUX=1" -D "DEBUG=1" -D "_DEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../Libraries" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   TARGET := BlipZones
   BLDCMD = $(CXX) -o $(OUTDIR)/$(TARGET) $(OBJECTS) $(LDFLAGS) $(RESOURCES) $(TARGET_ARCH)
 endif
@@ -35,7 +35,7 @@ ifeq ($(CONFIG),Release)
   CPPFLAGS := $(DEPFLAGS) -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   CFLAGS += $(CPPFLAGS) $(TARGET_ARCH) -Os
   CXXFLAGS += $(CFLAGS) 
-  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../../juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
+  LDFLAGS += -L$(BINDIR) -L$(LIBDIR) -L"/usr/X11R6/lib/" -L"../../Libraries/juce/bin" -lfreetype -lpthread -lrt -lX11 -lGL -lGLU -lXinerama -lasound 
   LDDEPS :=
   RESFLAGS :=  -D "LINUX=1" -D "NDEBUG=1" -D "JUCER_LINUX_MAKE_7346DA2A=1" -I "/usr/include" -I "/usr/include/freetype2" -I "../../../BlipBox/firmware/simulator" -I "../../../BlipBox/firmware" -I "../../BlipBox/firmware/simulator" -I "../../BlipBox/firmware"
   TARGET := BlipZones
@@ -66,6 +66,7 @@ OBJECTS := \
   $(OBJDIR)/SerialProtocolReader_18069df4.o \
   $(OBJDIR)/ApplicationConfiguration_4b5ea10f.o \
   $(OBJDIR)/ApplicationSettingsComponent_dd54a033.o \
+  $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/BlipClient_d12f7da5.o \
   $(OBJDIR)/BlipSim_356db187.o \
   $(OBJDIR)/BlipSimComponent_eafa3680.o \
@@ -74,13 +75,11 @@ OBJECTS := \
   $(OBJDIR)/MidiZoneComponent_5a1e8671.o \
   $(OBJDIR)/MidiZonePreset_30c42135.o \
   $(OBJDIR)/PresetComponent_8f0e6a3f.o \
+  $(OBJDIR)/Serial_5af037d.o \
   $(OBJDIR)/SimScreen_99fdf804.o \
   $(OBJDIR)/SimWindow_21e2b188.o \
   $(OBJDIR)/BinaryData_ce4232d4.o \
-  $(OBJDIR)/JuceLibraryCode1_682c927f.o \
-  $(OBJDIR)/JuceLibraryCode2_683aaa00.o \
-  $(OBJDIR)/JuceLibraryCode3_6848c181.o \
-  $(OBJDIR)/JuceLibraryCode4_6856d902.o \
+  $(OBJDIR)/JuceLibraryCode_9800db7c.o \
 
 .PHONY: clean
 
@@ -212,6 +211,11 @@ $(OBJDIR)/ApplicationSettingsComponent_dd54a033.o: ../../Source/ApplicationSetti
 	@echo "Compiling ApplicationSettingsComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling AsioSerial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/BlipClient_d12f7da5.o: ../../Source/BlipClient.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling BlipClient.cpp"
@@ -252,6 +256,11 @@ $(OBJDIR)/PresetComponent_8f0e6a3f.o: ../../Source/PresetComponent.cpp
 	@echo "Compiling PresetComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/SimScreen_99fdf804.o: ../../Source/SimScreen.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling SimScreen.cpp"
@@ -267,24 +276,9 @@ $(OBJDIR)/BinaryData_ce4232d4.o: ../../JuceLibraryCode/BinaryData.cpp
 	@echo "Compiling BinaryData.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/JuceLibraryCode1_682c927f.o: ../../JuceLibraryCode/JuceLibraryCode1.cpp
+$(OBJDIR)/JuceLibraryCode_9800db7c.o: ../../JuceLibraryCode/JuceLibraryCode.cpp
 	-@mkdir -p $(OBJDIR)
-	@echo "Compiling JuceLibraryCode1.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/JuceLibraryCode2_683aaa00.o: ../../JuceLibraryCode/JuceLibraryCode2.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling JuceLibraryCode2.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/JuceLibraryCode3_6848c181.o: ../../JuceLibraryCode/JuceLibraryCode3.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling JuceLibraryCode3.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/JuceLibraryCode4_6856d902.o: ../../JuceLibraryCode/JuceLibraryCode4.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling JuceLibraryCode4.cpp"
+	@echo "Compiling JuceLibraryCode.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
