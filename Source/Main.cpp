@@ -87,6 +87,7 @@ public:
 
 private:
 
+  // todo: windows may both be null
   ScopedPointer <MainAppWindow> mainWindow;
   ScopedPointer <SimWindow> simWindow;
 };

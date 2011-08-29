@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <iostream>
 
-#define SERIAL_BUFFER_LENGTH 2048
-
 Serial* Serial::createSerial(){
   return new TermiosSerial();
 }
@@ -24,55 +22,11 @@ int TermiosSerial::connect(){
     std::cout << "tty " << port << " at " << speed << " baud" << std::endl;
 //     fcntl(fd, F_SETFL, FNDELAY); // set non-blocking read
     fcntl(fd, F_SETFL, 0); // set blocking read
-
     //     fcntl(fd, F_SETFL, O_APPEND); // append output
     //     fcntl(fd, F_NOCACHE, 1); // turn caching off
     connected = true;
     return 0;
   }
-
-void TermiosSerial::run(){
-  ssize_t len;
-  unsigned char buf[SERIAL_BUFFER_LENGTH];
-  int used = 0;
-  int frompos = 0;
-  int topos = 0;
-
-  if(verbose)
-    std::cout << "starting rx" << std::endl;
-
-  while(running) {
-    len = read(fd, &buf[topos], SERIAL_BUFFER_LENGTH-topos);
-
-    topos += len;
-    len = topos-frompos;
-    if(len > 0){
-      do{
-	if(verbose){
-	  std::cout << "rx\t";
-	  log(&buf[frompos], len);
-	}
-	if(callback){
-	  used = callback->handle(&buf[frompos], len);
-	}else{
-	  used = len;
-	}
-	if(used == len)
-	  frompos = topos = 0;
-	else
-	  frompos += used;
-	len = topos-frompos;
-      }while(used > 0 && len > 0);
-    }
-    if(topos >= SERIAL_BUFFER_LENGTH-1){
-      std::cerr << "buffer overflow!" << std::endl;
-      frompos = topos = 0;
-    }
-  }
-
-  if(verbose)
-    std::cout << "stopping rx" << std::endl;
-}
 
 int TermiosSerial::openSerial(const char* serialport, int baud) {
   struct termios toptions;

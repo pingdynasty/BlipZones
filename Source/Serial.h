@@ -20,47 +20,22 @@ protected:
   volatile bool running;
 
 public:
-  Serial(const juce::String& aport, int aspeed, bool averbose = false)
-    : port(aport), speed(aspeed), verbose(averbose), 
-      callback(NULL), connected(false), running(false) {
-  }
-   Serial() :
-   port(NULL), speed(-1), verbose(false),
-   callback(NULL), connected(false), running(false) {
-  }
-  virtual ~Serial(){
-  }
-  juce::String& getPort(){
-    return port;
-  }
-  void setPort(const juce::String& aport){
-    port = aport;
-  }
-  int getSpeed(){
-    return speed;
-  }
-  void setSpeed(int aspeed){
-    speed = aspeed;
-  }
-  void setSerialCallback(SerialCallback* cb){
-    callback = cb;
-  }
-  virtual void stop(){
-    running = false;
-  }
-  virtual void start(){
-    running = true;
-  }
-  virtual bool isConnected(){
-    return connected;
-  }
+  Serial();
+  Serial(const juce::String& aport, int aspeed, bool averbose = false);
+  virtual ~Serial();
+  juce::String& getPort();
+  void setPort(const juce::String& aport);
+  int getSpeed();
+  void setSpeed(int aspeed);
+  void setSerialCallback(SerialCallback* cb);
+  virtual void stop();
+  virtual void start();
+  virtual bool isConnected();
+  virtual void run();
   virtual int connect() = 0;
   virtual int disconnect() = 0;
-  virtual bool checkConnection() = 0;
-  virtual int openSerial(const char* serialport, int baud) = 0;
   virtual ssize_t readSerial(unsigned char* data, ssize_t len) = 0;
   virtual ssize_t writeSerial(unsigned char* data, ssize_t len) = 0;
-  virtual void run() = 0;
 
   static Serial* createSerial();
 protected:

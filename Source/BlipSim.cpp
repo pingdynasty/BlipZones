@@ -15,7 +15,9 @@ public:
   void run(){
     while(!threadShouldExit()){
       loop();
-      yield();
+      Thread::sleep(1);
+      // todo: sub-ms resolution sleep
+//       yield(); // todo: yield doesn't seem to work well on 
     }
   }
 };

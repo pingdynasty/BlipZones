@@ -14,7 +14,7 @@ public:
    : Serial(){
   }
   int connect();
-  void run();
+/*   void run(); */
   int openSerial(const char* serialport, int baud);
   ssize_t readSerial(unsigned char* data, ssize_t len);
   ssize_t writeSerial(unsigned char* data, ssize_t len);
