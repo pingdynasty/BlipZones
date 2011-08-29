@@ -1,4 +1,4 @@
-
+#define BOOST_ALL_NO_LIBS
 #include <asio.hpp>
 #include <asio/serial_port.hpp> 
 #include "AsioSerial.h"
