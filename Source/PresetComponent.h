@@ -54,6 +54,7 @@ public:
     void handlePositionMessage(uint16_t x, uint16_t y);
     void handleParameterMessage(uint8_t pid, uint16_t value);
     void release();
+    MidiZonePreset* getPreset();
     void requestPreset();
     void sendPreset();
     void loadPreset(uint8_t index);

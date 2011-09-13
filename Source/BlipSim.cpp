@@ -55,6 +55,14 @@ void BlipSim::shutdown(){
   deleteAndZero(blipthread);
 }
 
+uint8_t BlipSim::getPresetIndex(){
+  return blipbox.midizones.preset;
+}
+ 
+void BlipSim::setPresetIndex(uint8_t index){
+  blipbox.midizones.preset = index;
+}
+
 void BlipSim::release(){
   blipbox.keys.setValue(0, 1023);
 }
@@ -95,10 +103,14 @@ void BlipSim::setMidiOutput(String name){
 //   midi.setMidiOutput(midiout);
 // }
 
+uint8_t domidi;
+void BlipSim::doMidi(bool doit){
+  domidi = doit;
+}
+
 extern "C" {
 
   // simulator callbacks
-  uint8_t domidi;
   void beginSerial(long baud) {
     printf("sim beginSerial %ld\n", baud);
 //     if(baud == 31250)

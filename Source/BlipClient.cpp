@@ -72,6 +72,23 @@ void BlipClient::initialise(){
   setSpeed(properties->getValue("serialspeed").getIntValue());
 }
 
+bool BlipClient::isConnected(){
+  return serial->isConnected();
+}
+
+void BlipClient::run(){
+  serial->run();
+  waitForThreadToExit(-1); // wait for as long as it takes    
+}
+
+void BlipClient::setPort(const juce::String& aport){
+  serial->setPort(aport);
+}
+
+void BlipClient::setSpeed(int aspeed){
+  serial->setSpeed(aspeed);
+}
+
 void BlipClient::sendScreenUpdates(bool send){
   doSendScreenUpdates = send;
 }
@@ -128,10 +145,6 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
       ApplicationConfiguration::getMidiZonePreset(index)->read(&buf[1]);
       bufpos = 0;
       sendScreenUpdates(true);
-//       preset = client->getPreset(index);
-//       for(int i=0; i<8; ++i)
-//         preset->getZone(i).read(&buf[1+i*4]);
-//       loadPreset(index);
     }
   }
 }
@@ -142,7 +155,6 @@ void BlipClient::handleReleaseMessage(){
 }
 
 int BlipClient::handle(unsigned char* data, size_t len){
-//   std::cout << "rx[" << std::dec << len << "]" << std::endl;
 //   std::cout << "rx";
 //   for(int i=0; i<len; ++i)
 //     std::cout << "\t0x" << std::hex << (int)data[i];
@@ -210,6 +222,8 @@ void BlipClient::sendMidiZonePreset(uint8_t index){
   uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, READ_PRESET_COMMAND | index};
   sendSerial(cmd, sizeof(cmd));
   uint8_t buf[MIDI_ZONE_PRESET_SIZE];
+  // todo: move this code to MidiZonePreset
+  // todo: sanity check and clean data: select preset 0 <= data1 <= 8, et c.
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     preset->getZone(i)->write(buf);
     sendSerial(buf, sizeof(buf));

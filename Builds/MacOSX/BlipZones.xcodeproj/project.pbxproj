@@ -14,7 +14,9 @@
 		39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */; };
 		3F815EA2C165CCF5B2E833D5 /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69E3CE875903BE2F4EA94527 /* MainWindow.cpp */; };
 		40A0DEE6CCB568B97B4B6942 /* KeyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */; };
+		415145BC140C6C400055F14F /* blipbox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 415145BB140C6C400055F14F /* blipbox.icns */; };
 		41F00686466A35B446F21DD4 /* BinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75DE44B1A36EA8FC1770949 /* BinaryData.cpp */; };
+		41FB5462140C3FA50051EDF7 /* operators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FB5461140C3FA50051EDF7 /* operators.cpp */; };
 		496271737F61DECBB9980E10 /* SerialProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 396E821AA125556416BD4CD1 /* SerialProtocol.cpp */; };
 		4F95C2A72AD5660572349E8B /* JuceLibraryCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5124573ABD695FB00185620 /* JuceLibraryCode.mm */; };
 		5305BD92F3F36EE5F903C84B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC95562A9E9EDC3E9B1A9061 /* Cocoa.framework */; };
@@ -78,8 +80,10 @@
 		396E821AA125556416BD4CD1 /* SerialProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SerialProtocol.cpp; path = ../../../BlipBox/firmware/SerialProtocol.cpp; sourceTree = SOURCE_ROOT; };
 		3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3DB436F423624861AD227518 /* Animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = ../../../BlipBox/firmware/Animator.h; sourceTree = SOURCE_ROOT; };
+		415145BB140C6C400055F14F /* blipbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blipbox.icns; path = ../../Resources/blipbox.icns; sourceTree = "<group>"; };
 		4156FDFA57CB9E875DEE5C7A /* Characters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Characters.cpp; path = ../../../BlipBox/firmware/Characters.cpp; sourceTree = SOURCE_ROOT; };
 		41940D969B047E9558658C4B /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Counter.h; path = ../../../BlipBox/firmware/Counter.h; sourceTree = SOURCE_ROOT; };
+		41FB5461140C3FA50051EDF7 /* operators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operators.cpp; path = ../../../BlipBox/firmware/operators.cpp; sourceTree = SOURCE_ROOT; };
 		4381844D9A9572AE868B160A /* MidiZone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZone.cpp; path = ../../../BlipBox/firmware/MidiZone.cpp; sourceTree = SOURCE_ROOT; };
 		4646F809AD6C93233832846A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		47F593A1F41EE0D12717EAA7 /* MessageDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = ../../../BlipBox/firmware/MessageDispatcher.h; sourceTree = SOURCE_ROOT; };
@@ -188,6 +192,7 @@
 		08BD380D6E3632F29E55E4E5 /* BlipBox */ = {
 			isa = PBXGroup;
 			children = (
+				41FB5461140C3FA50051EDF7 /* operators.cpp */,
 				DD0F6DE562D5D1F56543BAE2 /* simulator */,
 				ABD717D6A2B99B3E3FFC0E14 /* Animator.cpp */,
 				3DB436F423624861AD227518 /* Animator.h */,
@@ -311,6 +316,7 @@
 		C2FA7C7DC4BD36D5512176C4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				415145BB140C6C400055F14F /* blipbox.icns */,
 				DB0B82BCC9710D4366310C42 /* Info.plist */,
 			);
 			name = Resources;
@@ -423,6 +429,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				415145BC140C6C400055F14F /* blipbox.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +477,7 @@
 				71F5C2BBD95AA04C4203E94D /* SimWindow.cpp in Sources */,
 				41F00686466A35B446F21DD4 /* BinaryData.cpp in Sources */,
 				4F95C2A72AD5660572349E8B /* JuceLibraryCode.mm in Sources */,
+				41FB5462140C3FA50051EDF7 /* operators.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

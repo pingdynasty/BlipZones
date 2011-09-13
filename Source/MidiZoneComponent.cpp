@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  12 Aug 2011 3:04:50am
+  Creation date:  1 Sep 2011 4:54:09pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -54,6 +54,7 @@ void MidiZoneComponent::updateZoneType(){
   uint8_t type = MIDI_ZONE_TYPE;
   uint8_t status = 0;
   bool hasData = true;
+  bool hasChannel = true;
   switch(typeComboBox1->getSelectedId()){
   case 1: // Control Change
     status = MIDI_CONTROL_CHANGE;
@@ -76,8 +77,13 @@ void MidiZoneComponent::updateZoneType(){
     status = MIDI_AFTERTOUCH;
     hasData = false;
     break;
+  case 7: // Select Preset
+    type = SELECTOR_ZONE_TYPE;
+    hasChannel = false;
+    break;
   }
   dataSlider->setEnabled(hasData);
+  channelSlider->setEnabled(hasChannel);
   switch(typeComboBox2->getSelectedId()){
   case 1: // Horizontal Slider
     type |= HORIZONTAL_VERTICAL_ZONE_BIT;
@@ -163,6 +169,8 @@ void MidiZoneComponent::setZoneType(MidiZone* zone){
     typeComboBox1->setSelectedId(4, sendUpdateMessage); // NRPN
     break;
   case SELECTOR_ZONE_TYPE:
+    typeComboBox1->setSelectedId(7, sendUpdateMessage); // Select Preset
+    break;
   case EMPTY_ZONE_TYPE:
   default:
     typeComboBox1->setSelectedId(0, sendUpdateMessage);
@@ -240,6 +248,7 @@ MidiZoneComponent::MidiZoneComponent ()
     typeComboBox1->addItem (L"NRPN", 4);
     typeComboBox1->addItem (L"Channel Pressure", 5);
     typeComboBox1->addItem (L"Polyphonic Aftertouch", 6);
+    typeComboBox1->addItem (L"Select Preset", 7);
     typeComboBox1->addListener (this);
 
     addAndMakeVisible (typeComboBox2 = new ComboBox (L"Type"));
@@ -469,7 +478,7 @@ BEGIN_JUCER_METADATA
   </BACKGROUND>
   <COMBOBOX name="Type" id="c1f4660eabe8fccb" memberName="typeComboBox1"
             virtualName="" explicitFocusOrder="0" pos="104 8 136 24" editable="0"
-            layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch"
+            layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Select Preset"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <COMBOBOX name="Type" id="c60683b64f639182" memberName="typeComboBox2"
             virtualName="" explicitFocusOrder="0" pos="104 40 136 24" editable="0"

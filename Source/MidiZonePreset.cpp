@@ -2,10 +2,12 @@
 #include "globals.h"
 #include "ApplicationConfiguration.h"
 
+#define NONE_SELECTED -1
+
 MidiZonePreset::MidiZonePreset(){
   reset();
   uint8_t channel = 0;
-  selected = -1;
+  selected = NONE_SELECTED;
   // initialise two simple zones
   zones[0]._to_column = 10;
   zones[0]._to_row = 8;
@@ -43,6 +45,8 @@ void MidiZonePreset::reset(){
 void MidiZonePreset::start(){
   blipbox.eventhandler = this;
   blipbox.animator = this;
+//   blipbox.midizones = this;
+  setSelectedPreset();
 }
 
 void MidiZonePreset::stop(){
@@ -51,15 +55,21 @@ void MidiZonePreset::stop(){
 }
 
 uint8_t MidiZonePreset::getIndex(){
-  return preset;
+  return index;
 }
 
-void MidiZonePreset::setIndex(uint8_t _index){
-  preset = _index;
+void MidiZonePreset::setIndex(uint8_t pindex){
+  index = pindex;
 }
 
-MidiZone* MidiZonePreset::getZone(uint8_t index){
-  return &zones[index];
+void MidiZonePreset::setSelectedPreset(){
+  for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i)
+    if((zones[i]._type & ZONE_TYPE_MASK) == SELECTOR_ZONE_TYPE)
+      zones[i]._data2 = (zones[i]._data1 == index) ? 127 : 0;
+}
+
+MidiZone* MidiZonePreset::getZone(uint8_t zindex){
+  return &zones[zindex];
 }
 
 MidiZone* MidiZonePreset::getSelectedZone(){
@@ -72,11 +82,11 @@ uint8_t MidiZonePreset::getSelectedZoneIndex(){
   return selected+1;
 }
 
-void MidiZonePreset::selectZone(uint8_t index){
-  if(index > 0 && index <= MIDI_ZONES_IN_PRESET)
-    selected = index-1;
+void MidiZonePreset::selectZone(uint8_t zindex){
+  if(zindex > 0 && zindex <= MIDI_ZONES_IN_PRESET)
+    selected = zindex-1;
   else
-    selected = -1;
+    selected = NONE_SELECTED;
 }
 
 void MidiZonePreset::taptap(Position& pos){
@@ -87,13 +97,13 @@ void MidiZonePreset::taptap(Position& pos){
 void MidiZonePreset::read(const uint8_t* data){
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i)
     zones[i].read(&data[i*MIDI_ZONE_PRESET_SIZE]);
+  setSelectedPreset();
 }
 
 void MidiZonePreset::saveFile(const File& file){
-//   File file(ApplicationConfiguration::getDefaultPresetPath());
   PropertiesFile props(file, PropertiesFile::Options());
   PropertySet set;
-  props.setValue("preset", preset);
+  props.setValue("preset", index);
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     //       set.setValue("index", i);
     set.setValue("type", zones[i]._type);
@@ -112,14 +122,14 @@ void MidiZonePreset::saveFile(const File& file){
     props.setValue(zn, xml);
   }
   props.save();
-  std::cout << "saved preset " << preset << " to file " << props.getFile().getFullPathName() << std::endl;
+  std::cout << "saved preset " << index << " to file " << props.getFile().getFullPathName() << std::endl;
 }
 
 void MidiZonePreset::loadFile(const File& file){
 //   File file(ApplicationConfiguration::getDefaultPresetPath());
   PropertiesFile props(file, PropertiesFile::Options());
   PropertySet set;
-  //     props.getValue("preset");
+  //     props.getValue("index");
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     String zn("zone");
     zn += i;
@@ -138,11 +148,12 @@ void MidiZonePreset::loadFile(const File& file){
       zones[i]._to_row = set.getIntValue("to_row");
     }
   }
-  std::cout << "loaded preset " << preset << " from file " << props.getFile().getFullPathName() << std::endl;
+  setSelectedPreset();
+  std::cout << "loaded preset " << index << " from file " << props.getFile().getFullPathName() << std::endl;
 }
 
 void MidiZonePreset::tick(uint16_t counter){
-  if(selected == -1){
+  if(selected == NONE_SELECTED){
     MidiZoneEventHandler::tick(counter);
   }else{
     blipbox.leds.clear();

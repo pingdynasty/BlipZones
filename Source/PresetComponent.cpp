@@ -30,6 +30,7 @@
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 const bool useNativeVersion = false;
+
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -452,6 +453,30 @@ void PresetComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 
+// class PresetSynchronizingHackThread : public Thread {
+// private:
+//   PresetComponent* presetcomponent;
+// public:
+//   PresetSynchronizingHackThread(PresetComponent* pc) : 
+//     Thread(T("PresetSynchronizingHackThread")), presetcomponent(pc) {
+//     setPriority(0);
+//   }
+//   void run(){
+//     sleep(2000);
+//     while(!threadShouldExit()){
+//       const MessageManagerLock mmLock;
+//       uint8_t index = ApplicationConfiguration::getBlipSim()->getPresetIndex();
+//       if(presetcomponent->getPreset() != NULL && 
+// 	 index != presetcomponent->getPreset()->getIndex()){
+// 	presetcomponent->loadPreset(index);
+//       }
+//       sleep(200);
+//     }
+//     delete this;
+//   }
+// };
+
+// PresetComponent* pchack;
 void PresetComponent::initialise(){
   presetComboBox->setSelectedItemIndex(0, false);
   zonecomponents[0] = zone1;
@@ -463,9 +488,22 @@ void PresetComponent::initialise(){
   zonecomponents[6] = zone7;
   zonecomponents[7] = zone8;
   loadPreset(presetComboBox->getSelectedItemIndex());
+//   PresetSynchronizingHackThread* hack = new PresetSynchronizingHackThread(this);
+//   hack->startThread();
+//   pchack = this;
+}
+
+void MidiZonePreset::loadPreset(uint8_t index){
+  std::cout << "MidiZonePreset::loadPreset " << (int)index << std::endl;
+//   const MessageManagerLock mmLock;
+//   pchack->loadPreset(index);
 }
 
 void PresetComponent::release(){
+}
+
+MidiZonePreset* PresetComponent::getPreset(){
+  return preset;
 }
 
 void PresetComponent::sendPreset(){
@@ -504,15 +542,20 @@ void PresetComponent::requestPreset(){
 void PresetComponent::selectZone(uint8_t index){
   std::cout << "select zone " << (int)index << std::endl;
   preset->selectZone(index);
+  ApplicationConfiguration::getBlipSim()->doMidi(index == 0);
 }
 
 void PresetComponent::loadPreset(uint8_t index){
   std::cout << "load preset " << (int)index << std::endl;
-  int selected = 0; // the zone that will be loaded when no preset has yet been selected
+  if(index >= 8)
+    return;
+  presetComboBox->setSelectedItemIndex(index, false);
+  int selected = 0; // this zone will be loaded when no preset has yet been selected
   if(preset != NULL){
     selected = preset->getSelectedZoneIndex();
     preset->stop();
   }
+  ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
   preset = ApplicationConfiguration::getMidiZonePreset(index);
   preset->selectZone(selected);
   preset->start();

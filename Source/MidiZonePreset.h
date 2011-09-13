@@ -23,8 +23,10 @@ public:
   void saveFile(const File& file);
   void loadFile(const File& file);
   void tick(uint16_t counter);
-
+  void loadPreset(uint8_t index);
 private:
+  void setSelectedPreset();
+  int index;
   int selected; // selected zone
 };
 #endif  // __MIDIZONEPRESET_H__
