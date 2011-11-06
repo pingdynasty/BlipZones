@@ -8,7 +8,7 @@ Serial::Serial(const juce::String& aport, int aspeed, bool averbose)
 }
 
 Serial::Serial() :
-  port(NULL), speed(-1), verbose(false),
+  port(), speed(-1), verbose(false),
   callback(NULL), connected(false), running(false) {
 }
 
