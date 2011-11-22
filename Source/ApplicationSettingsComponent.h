@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  23 Aug 2011 10:20:02am
+  Creation date:  5 Nov 2011 9:20:33am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_54824367__
-#define __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_54824367__
+#ifndef __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_1FE269D0__
+#define __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_1FE269D0__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -78,8 +78,10 @@ private:
     Label* label3;
     TextButton* cancelButton;
     Label* label4;
-    ComboBox* midiOutputComboBox;
+    ComboBox* midiInputComboBox;
     ComboBox* serialPortComboBox;
+    Label* label5;
+    ComboBox* midiOutputComboBox;
 
 
     //==============================================================================
@@ -89,4 +91,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_54824367__
+#endif   // __JUCER_HEADER_APPLICATIONSETTINGSCOMPONENT_APPLICATIONSETTINGSCOMPONENT_1FE269D0__

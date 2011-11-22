@@ -6,6 +6,7 @@
 #include "SimScreen.h"
 #include "BlipClient.h"
 #include "MidiZonePreset.h"
+#include "ControlValues.h"
 
 class ApplicationConfiguration {
 public:
@@ -16,6 +17,7 @@ public:
   static BlipClient* getBlipClient();
   static MidiZonePreset* getMidiZonePreset(int index);
   static File getPresetDirectory();
+  static ControlValues* getControlValues();
 private:
 };
 

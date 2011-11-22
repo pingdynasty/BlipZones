@@ -32,7 +32,7 @@ void MidiZonePreset::reset(){
     //       zones[i]._type = EMPTY_ZONE_TYPE;
     zones[i]._status = MIDI_CONTROL_CHANGE;
     zones[i]._data1 = 0;
-    zones[i]._data2 = 0;
+    zones[i]._data2 = i;
     zones[i]._min = 0;
     zones[i]._max = 127;
     zones[i]._from_column = 0;
@@ -63,9 +63,11 @@ void MidiZonePreset::setIndex(uint8_t pindex){
 }
 
 void MidiZonePreset::setSelectedPreset(){
-  for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i)
+  for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     if((zones[i]._type & ZONE_TYPE_MASK) == SELECTOR_ZONE_TYPE)
       zones[i]._data2 = (zones[i]._data1 == index) ? 127 : 0;
+    ApplicationConfiguration::getControlValues()->configureControlValue(&zones[i]);    
+  }
 }
 
 MidiZone* MidiZonePreset::getZone(uint8_t zindex){
@@ -158,8 +160,8 @@ void MidiZonePreset::tick(uint16_t counter){
   }else{
     blipbox.leds.clear();
     MidiZone* zone = &zones[selected];
-    for(int x=std::min(zone->_from_column, zone->_to_column); x<std::max(zone->_from_column, zone->_to_column); ++x)
-      for(int y=std::min(zone->_from_row, zone->_to_row); y<std::max(zone->_from_row, zone->_to_row); ++y)
+    for(int x=min(zone->_from_column, zone->_to_column); x<max(zone->_from_column, zone->_to_column); ++x)
+      for(int y=min(zone->_from_row, zone->_to_row); y<max(zone->_from_row, zone->_to_row); ++y)
 	blipbox.leds.setLed(x, y, 0x80);
     blipbox.leds.flip();
   }

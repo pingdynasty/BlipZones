@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  23 Aug 2011 10:20:02am
+  Creation date:  5 Nov 2011 9:20:33am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -21,6 +21,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "ApplicationConfiguration.h"
+#include "MidiMessageReceiver.h"
 //[/Headers]
 
 #include "ApplicationSettingsComponent.h"
@@ -40,8 +41,10 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
       label3 (0),
       cancelButton (0),
       label4 (0),
-      midiOutputComboBox (0),
-      serialPortComboBox (0)
+      midiInputComboBox (0),
+      serialPortComboBox (0),
+      label5 (0),
+      midiOutputComboBox (0)
 {
     addAndMakeVisible (label = new Label (L"new label",
                                           L"Serial Port"));
@@ -103,19 +106,19 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
     cancelButton->addListener (this);
 
     addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"MIDI Output"));
+                                           L"MIDI Input"));
     label4->setFont (Font (15.0000f, Font::plain));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
     label4->setColour (TextEditor::textColourId, Colours::black);
     label4->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (midiOutputComboBox = new ComboBox (L"new combo box"));
-    midiOutputComboBox->setEditableText (false);
-    midiOutputComboBox->setJustificationType (Justification::centredLeft);
-    midiOutputComboBox->setTextWhenNothingSelected (String::empty);
-    midiOutputComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
-    midiOutputComboBox->addListener (this);
+    addAndMakeVisible (midiInputComboBox = new ComboBox (L"new combo box"));
+    midiInputComboBox->setEditableText (false);
+    midiInputComboBox->setJustificationType (Justification::centredLeft);
+    midiInputComboBox->setTextWhenNothingSelected (String::empty);
+    midiInputComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
+    midiInputComboBox->addListener (this);
 
     addAndMakeVisible (serialPortComboBox = new ComboBox (L"new combo box"));
     serialPortComboBox->setEditableText (true);
@@ -123,6 +126,21 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
     serialPortComboBox->setTextWhenNothingSelected (String::empty);
     serialPortComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
     serialPortComboBox->addListener (this);
+
+    addAndMakeVisible (label5 = new Label (L"new label",
+                                           L"MIDI Output"));
+    label5->setFont (Font (15.0000f, Font::plain));
+    label5->setJustificationType (Justification::centredLeft);
+    label5->setEditable (false, false, false);
+    label5->setColour (TextEditor::textColourId, Colours::black);
+    label5->setColour (TextEditor::backgroundColourId, Colour (0x0));
+
+    addAndMakeVisible (midiOutputComboBox = new ComboBox (L"new combo box"));
+    midiOutputComboBox->setEditableText (false);
+    midiOutputComboBox->setJustificationType (Justification::centredLeft);
+    midiOutputComboBox->setTextWhenNothingSelected (String::empty);
+    midiOutputComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
+    midiOutputComboBox->addListener (this);
 
 
     //[UserPreSize]
@@ -152,8 +170,10 @@ ApplicationSettingsComponent::~ApplicationSettingsComponent()
     deleteAndZero (label3);
     deleteAndZero (cancelButton);
     deleteAndZero (label4);
-    deleteAndZero (midiOutputComboBox);
+    deleteAndZero (midiInputComboBox);
     deleteAndZero (serialPortComboBox);
+    deleteAndZero (label5);
+    deleteAndZero (midiOutputComboBox);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -183,8 +203,10 @@ void ApplicationSettingsComponent::resized()
     label3->setBounds (16, 80, 104, 24);
     cancelButton->setBounds (280 - ((80) / 2), getHeight() - 44, 80, 24);
     label4->setBounds (16, 112, 104, 24);
-    midiOutputComboBox->setBounds (128, 112, 256, 24);
+    midiInputComboBox->setBounds (128, 112, 256, 24);
     serialPortComboBox->setBounds (128, 16, 256, 24);
+    label5->setBounds (16, 152, 104, 24);
+    midiOutputComboBox->setBounds (128, 152, 256, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -251,15 +273,20 @@ void ApplicationSettingsComponent::comboBoxChanged (ComboBox* comboBoxThatHasCha
         //[UserComboBoxCode_serialSpeedComboBox] -- add your combo box handling code here..
         //[/UserComboBoxCode_serialSpeedComboBox]
     }
-    else if (comboBoxThatHasChanged == midiOutputComboBox)
+    else if (comboBoxThatHasChanged == midiInputComboBox)
     {
-        //[UserComboBoxCode_midiOutputComboBox] -- add your combo box handling code here..
-        //[/UserComboBoxCode_midiOutputComboBox]
+        //[UserComboBoxCode_midiInputComboBox] -- add your combo box handling code here..
+        //[/UserComboBoxCode_midiInputComboBox]
     }
     else if (comboBoxThatHasChanged == serialPortComboBox)
     {
         //[UserComboBoxCode_serialPortComboBox] -- add your combo box handling code here..
         //[/UserComboBoxCode_serialPortComboBox]
+    }
+    else if (comboBoxThatHasChanged == midiOutputComboBox)
+    {
+        //[UserComboBoxCode_midiOutputComboBox] -- add your combo box handling code here..
+        //[/UserComboBoxCode_midiOutputComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -291,22 +318,36 @@ void ApplicationSettingsComponent::loadSettingsFromFile(){
   serialPortComboBox->setText(properties->getValue("serialport"));
   serialSpeedComboBox->setText(properties->getValue("serialspeed"));
   presetDirectoryEditor->setText(properties->getValue("presetdirectory"));
-  const StringArray& mididevices = MidiOutput::getDevices();
+
+  const StringArray& inputs = MidiInput::getDevices();
+  midiInputComboBox->addItem("none", ++index);
+  for(int i=0; i<inputs.size(); ++i)
+    midiInputComboBox->addItem(inputs[i], ++index);
+#if ! JUCE_WINDOWS
+  midiInputComboBox->addItem("BlipZones", ++index);
+#endif
+  midiInputComboBox->setText(properties->getValue("midiinput"));
+
+  const StringArray& outputs = MidiOutput::getDevices();
   midiOutputComboBox->addItem("none", ++index);
-  for(int i=0; i<mididevices.size(); ++i)
-    midiOutputComboBox->addItem(mididevices[i], ++index);
+  for(int i=0; i<outputs.size(); ++i)
+    midiOutputComboBox->addItem(outputs[i], ++index);
 #if ! JUCE_WINDOWS
   midiOutputComboBox->addItem("BlipZones", ++index);
 #endif
   midiOutputComboBox->setText(properties->getValue("midioutput"));
+
   std::cout << "loaded settings from file " << properties->getFile().getFullPathName() << std::endl;
 }
 
+MidiMessageReceiver receiver;
 void ApplicationSettingsComponent::saveSettingsToFile(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
   properties->setValue("serialport", serialPortComboBox->getText());
   properties->setValue("serialspeed", serialSpeedComboBox->getText());
   properties->setValue("presetdirectory", presetDirectoryEditor->getText());
+  properties->setValue("midiinput", midiInputComboBox->getText());
+  receiver.setMidiInput(midiInputComboBox->getText());
   properties->setValue("midioutput", midiOutputComboBox->getText());
   ApplicationConfiguration::getBlipSim()->setMidiOutput(midiOutputComboBox->getText());
   properties->saveIfNeeded();
@@ -364,14 +405,22 @@ BEGIN_JUCER_METADATA
               connectedEdges="1" needsCallback="1" radioGroupId="0"/>
   <LABEL name="new label" id="7d1479c64375a3e1" memberName="label4" virtualName=""
          explicitFocusOrder="0" pos="16 112 104 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="MIDI Output" editableSingleClick="0"
-         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
-         fontsize="15" bold="0" italic="0" justification="33"/>
-  <COMBOBOX name="new combo box" id="409c99a536e1b8d5" memberName="midiOutputComboBox"
+         edBkgCol="0" labelText="MIDI Input" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="409c99a536e1b8d5" memberName="midiInputComboBox"
             virtualName="" explicitFocusOrder="0" pos="128 112 256 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <COMBOBOX name="new combo box" id="77110bc32a931265" memberName="serialPortComboBox"
             virtualName="" explicitFocusOrder="0" pos="128 16 256 24" editable="1"
+            layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="60d65c9746810e9a" memberName="label5" virtualName=""
+         explicitFocusOrder="0" pos="16 152 104 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="MIDI Output" editableSingleClick="0"
+         editableDoubleClick="0" focusDiscardsChanges="0" fontname="Default font"
+         fontsize="15" bold="0" italic="0" justification="33"/>
+  <COMBOBOX name="new combo box" id="3652bf1f65dcab20" memberName="midiOutputComboBox"
+            virtualName="" explicitFocusOrder="0" pos="128 152 256 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
 </JUCER_COMPONENT>
 

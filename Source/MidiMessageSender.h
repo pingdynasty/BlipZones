@@ -25,7 +25,7 @@ class MidiMessageSender {
       delete midiout;
   }
 
-  void setMidiOutput(juce::String name){
+  void setMidiOutput(juce::String& name){
     std::cout << "setting midi output: " << name << std::endl;
     if(MidiOutput::getDevices().contains(name)){
       setMidiOutput(MidiOutput::openDevice(MidiOutput::getDevices().indexOf(name)));

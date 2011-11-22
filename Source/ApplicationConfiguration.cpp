@@ -1,4 +1,5 @@
 #include "ApplicationConfiguration.h"
+#include "MidiMessageReceiver.h"
 
 PropertiesFile* properties = NULL;
 PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
@@ -51,6 +52,13 @@ File ApplicationConfiguration::getPresetDirectory(){
 void ApplicationConfiguration::initialise(){
   for(int i=0; i<MIDI_ZONE_PRESETS; ++i)
     presets[i].setIndex(i);
+}
+
+ControlValues* controlvalues = NULL;
+ControlValues* ApplicationConfiguration::getControlValues(){
+  if(controlvalues == NULL)
+    controlvalues = new ControlValues();
+  return controlvalues;
 }
 
 void ApplicationConfiguration::release(){
