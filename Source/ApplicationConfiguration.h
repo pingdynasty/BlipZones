@@ -5,8 +5,8 @@
 #include "BlipSim.h"
 #include "SimScreen.h"
 #include "BlipClient.h"
-#include "MidiZonePreset.h"
 #include "ControlValues.h"
+#include "Preset.h"
 
 class ApplicationConfiguration {
 public:
@@ -15,7 +15,7 @@ public:
   static PropertiesFile* getApplicationProperties();
   static BlipSim* getBlipSim();
   static BlipClient* getBlipClient();
-  static MidiZonePreset* getMidiZonePreset(int index);
+  static Preset* getPreset(int index);
   static File getPresetDirectory();
   static ControlValues* getControlValues();
 private:

@@ -1,5 +1,7 @@
 #include "MidiMessageReceiver.h"
 
+#include "ApplicationConfiguration.h"
+
 void MidiMessageReceiver::handleIncomingMidiMessage(MidiInput* source, const MidiMessage& msg){
   std::cout << "midi! " << msg.getChannel() << std::endl;
   ControlValues* values = ApplicationConfiguration::getControlValues();

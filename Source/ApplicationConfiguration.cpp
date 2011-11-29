@@ -38,8 +38,9 @@ BlipClient* ApplicationConfiguration::getBlipClient(){
   return blipclient;
 }
 
-MidiZonePreset presets[MIDI_ZONE_PRESETS];
-MidiZonePreset* ApplicationConfiguration::getMidiZonePreset(int index){
+#define PRESETS 8
+Preset presets[PRESETS];
+Preset* ApplicationConfiguration::getPreset(int index){
   return &presets[index];
 }
 
@@ -50,8 +51,8 @@ File ApplicationConfiguration::getPresetDirectory(){
 }
 
 void ApplicationConfiguration::initialise(){
-  for(int i=0; i<MIDI_ZONE_PRESETS; ++i)
-    presets[i].setIndex(i);
+//   for(int i=0; i<PRESETS; ++i)
+//     presets[i].setIndex(i);
 }
 
 ControlValues* controlvalues = NULL;

@@ -56,11 +56,11 @@ void BlipSim::shutdown(){
 }
 
 uint8_t BlipSim::getPresetIndex(){
-  return blipbox.midizones.preset;
+  return blipbox.config.preset;
 }
  
 void BlipSim::setPresetIndex(uint8_t index){
-  blipbox.midizones.preset = index;
+  blipbox.config.preset = index;
 }
 
 void BlipSim::release(){
@@ -75,6 +75,26 @@ void BlipSim::position(uint16_t x, uint16_t y){
 
 bool BlipSim::isPressed(){
   return blipbox.keys.isPressed();
+}
+
+void BlipSim::clear(){
+  blipbox.leds.clear();
+}
+
+void BlipSim::flip(){
+  blipbox.leds.flip();
+}
+
+void BlipSim::fill(uint8_t value){
+  blipbox.leds.fill(value);
+}
+
+void BlipSim::fill(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t brightness){
+  blipbox.display.fill(x1, y1, x2, y2, brightness);
+}
+
+void BlipSim::setLed(uint8_t x, uint8_t y, uint8_t brightness){
+  blipbox.leds.setLed(x, y, brightness);
 }
 
 uint8_t BlipSim::getLed(uint8_t x, uint8_t y){
@@ -95,13 +115,21 @@ void BlipSim::sendSerial(uint8_t* data, size_t size){
   }
 }
 
+// void BlipSim::setMidiOutput(MidiOutput* midiout){
+//   midi.setMidiOutput(midiout);
+// }
+
 void BlipSim::setMidiOutput(String name){
   midi.setMidiOutput(name);
 }
 
-// void BlipSim::setMidiOutput(MidiOutput* midiout){
-//   midi.setMidiOutput(midiout);
-// }
+void BlipSim::setAnimator(Animator* animator){
+  blipbox.animator = animator;
+}
+
+void BlipSim::setEventHandler(EventHandler* handler){
+  blipbox.eventhandler = handler;
+}
 
 uint8_t domidi;
 void BlipSim::doMidi(bool doit){

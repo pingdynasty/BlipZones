@@ -124,8 +124,19 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\MidiNoteComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MidiPitchBendComponent.cpp"/>
+    <ClCompile Include="..\..\Source\ActionComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MidiControllerComponent.cpp"/>
+    <ClCompile Include="..\..\Source\ZoneComponent.cpp"/>
+    <ClCompile Include="..\..\Source\MidiMessageReceiver.cpp"/>
+    <ClCompile Include="..\..\Source\ZoneAreaAnimator.cpp"/>
     <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\Serial.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Action.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Event.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Preset.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Zone.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c"/>
@@ -141,8 +152,6 @@
     <ClCompile Include="..\..\..\BlipBox\firmware\globals.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\KeyController.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp"/>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp"/>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\PresetChooser.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocol.cpp"/>
@@ -155,7 +164,6 @@
     <ClCompile Include="..\..\Source\MainWindow.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
     <ClCompile Include="..\..\Source\MidiZoneComponent.cpp"/>
-    <ClCompile Include="..\..\Source\MidiZonePreset.cpp"/>
     <ClCompile Include="..\..\Source\PresetComponent.cpp"/>
     <ClCompile Include="..\..\Source\SimScreen.cpp"/>
     <ClCompile Include="..\..\Source\SimWindow.cpp"/>
@@ -163,7 +171,16 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiNoteComponent.h"/>
+    <ClInclude Include="..\..\Source\MidiPitchBendComponent.h"/>
+    <ClInclude Include="..\..\Source\ActionComponent.h"/>
+    <ClInclude Include="..\..\Source\MidiControllerComponent.h"/>
+    <ClInclude Include="..\..\Source\ZoneComponent.h"/>
+    <ClInclude Include="..\..\Source\ZoneAreaAnimator.h"/>
     <ClInclude Include="..\..\Source\AsioSerial.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Event.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Preset.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Zone.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\io.h"/>
@@ -184,8 +201,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\MessageDispatcher.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h"/>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZone.h"/>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\Position.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\PresetChooser.h"/>
@@ -202,7 +217,6 @@
     <ClInclude Include="..\..\Source\MainWindow.h"/>
     <ClInclude Include="..\..\Source\MidiMessageSender.h"/>
     <ClInclude Include="..\..\Source\MidiZoneComponent.h"/>
-    <ClInclude Include="..\..\Source\MidiZonePreset.h"/>
     <ClInclude Include="..\..\Source\OverflowTimer.h"/>
     <ClInclude Include="..\..\Source\PresetComponent.h"/>
     <ClInclude Include="..\..\Source\Serial.h"/>

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Serial.h"
-#include "MidiZone.h"
+#include "Zone.h"
 #include "Command.h"
 
 class BlipClient : public SerialCallback, public juce::Thread {
@@ -27,9 +27,9 @@ public:
   void clear();
   void fill(uint8_t value);
   void setLed(uint8_t x, uint8_t y, uint8_t brightness);
-  void requestMidiZonePreset(uint8_t index);
-  void sendMidiZonePreset(uint8_t index);
-  void drawMidiZone(MidiZone* zone);
+  void requestPreset(uint8_t index);
+  void sendPreset(uint8_t index);
+  void drawZone(Zone* zone);
   void sendCommand(Command command);
   void sendSerial(uint8_t* data, size_t size);
 

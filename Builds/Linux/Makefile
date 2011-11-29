@@ -43,8 +43,19 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/MidiNoteComponent_ad4c9beb.o \
+  $(OBJDIR)/MidiPitchBendComponent_6f08226e.o \
+  $(OBJDIR)/ActionComponent_1f273448.o \
+  $(OBJDIR)/MidiControllerComponent_633a1841.o \
+  $(OBJDIR)/ZoneComponent_e6171992.o \
+  $(OBJDIR)/MidiMessageReceiver_a5467196.o \
+  $(OBJDIR)/ZoneAreaAnimator_cca8cee9.o \
   $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/Serial_5af037d.o \
+  $(OBJDIR)/Action_8c62b41b.o \
+  $(OBJDIR)/Event_a7efa41f.o \
+  $(OBJDIR)/Preset_76c39c44.o \
+  $(OBJDIR)/Zone_92b07a91.o \
   $(OBJDIR)/eeprom_119b2b22.o \
   $(OBJDIR)/interrupt_7815b74b.o \
   $(OBJDIR)/io_396ac548.o \
@@ -60,8 +71,6 @@ OBJECTS := \
   $(OBJDIR)/globals_fb00bd5.o \
   $(OBJDIR)/KeyController_64b2cc60.o \
   $(OBJDIR)/MessageDispatcher_7190f993.o \
-  $(OBJDIR)/MidiZone_b040b8d2.o \
-  $(OBJDIR)/MidiZoneEventHandler_bc17ccc2.o \
   $(OBJDIR)/Parameters_d3e365cf.o \
   $(OBJDIR)/PresetChooser_3d3409e1.o \
   $(OBJDIR)/SerialProtocol_a3d59791.o \
@@ -74,7 +83,6 @@ OBJECTS := \
   $(OBJDIR)/MainWindow_499ac812.o \
   $(OBJDIR)/Main_90ebc5c2.o \
   $(OBJDIR)/MidiZoneComponent_5a1e8671.o \
-  $(OBJDIR)/MidiZonePreset_30c42135.o \
   $(OBJDIR)/PresetComponent_8f0e6a3f.o \
   $(OBJDIR)/SimScreen_99fdf804.o \
   $(OBJDIR)/SimWindow_21e2b188.o \
@@ -96,6 +104,41 @@ clean:
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
 
+$(OBJDIR)/MidiNoteComponent_ad4c9beb.o: ../../Source/MidiNoteComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiNoteComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiPitchBendComponent_6f08226e.o: ../../Source/MidiPitchBendComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiPitchBendComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ActionComponent_1f273448.o: ../../Source/ActionComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ActionComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiControllerComponent_633a1841.o: ../../Source/MidiControllerComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiControllerComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ZoneComponent_e6171992.o: ../../Source/ZoneComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ZoneComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiMessageReceiver_a5467196.o: ../../Source/MidiMessageReceiver.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiMessageReceiver.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ZoneAreaAnimator_cca8cee9.o: ../../Source/ZoneAreaAnimator.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ZoneAreaAnimator.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling AsioSerial.cpp"
@@ -104,6 +147,26 @@ $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 $(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Action_8c62b41b.o: ../../../BlipBox/firmware/Action.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Action.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Event_a7efa41f.o: ../../../BlipBox/firmware/Event.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Event.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Preset_76c39c44.o: ../../../BlipBox/firmware/Preset.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Preset.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/Zone_92b07a91.o: ../../../BlipBox/firmware/Zone.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling Zone.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/eeprom_119b2b22.o: ../../../BlipBox/firmware/simulator/avr/eeprom.c
@@ -181,16 +244,6 @@ $(OBJDIR)/MessageDispatcher_7190f993.o: ../../../BlipBox/firmware/MessageDispatc
 	@echo "Compiling MessageDispatcher.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
-$(OBJDIR)/MidiZone_b040b8d2.o: ../../../BlipBox/firmware/MidiZone.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiZone.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MidiZoneEventHandler_bc17ccc2.o: ../../../BlipBox/firmware/MidiZoneEventHandler.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiZoneEventHandler.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
 $(OBJDIR)/Parameters_d3e365cf.o: ../../../BlipBox/firmware/Parameters.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Parameters.cpp"
@@ -249,11 +302,6 @@ $(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 $(OBJDIR)/MidiZoneComponent_5a1e8671.o: ../../Source/MidiZoneComponent.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling MidiZoneComponent.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MidiZonePreset_30c42135.o: ../../Source/MidiZonePreset.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiZonePreset.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PresetComponent_8f0e6a3f.o: ../../Source/PresetComponent.cpp

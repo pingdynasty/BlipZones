@@ -32,10 +32,42 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="sCjFAZ" name="MidiNoteComponent.cpp" compile="1" resource="0"
+            file="Source/MidiNoteComponent.cpp"/>
+      <FILE id="XcYTdg" name="MidiNoteComponent.h" compile="0" resource="0"
+            file="Source/MidiNoteComponent.h"/>
+      <FILE id="LFjss3" name="MidiPitchBendComponent.cpp" compile="1" resource="0"
+            file="Source/MidiPitchBendComponent.cpp"/>
+      <FILE id="oE7qoe" name="MidiPitchBendComponent.h" compile="0" resource="0"
+            file="Source/MidiPitchBendComponent.h"/>
+      <FILE id="fXBIj3" name="ActionComponent.cpp" compile="1" resource="0"
+            file="Source/ActionComponent.cpp"/>
+      <FILE id="aSwA8" name="ActionComponent.h" compile="0" resource="0"
+            file="Source/ActionComponent.h"/>
+      <FILE id="uhYiNB" name="MidiControllerComponent.cpp" compile="1" resource="0"
+            file="Source/MidiControllerComponent.cpp"/>
+      <FILE id="L0PXt8" name="MidiControllerComponent.h" compile="0" resource="0"
+            file="Source/MidiControllerComponent.h"/>
+      <FILE id="xwpbn1" name="ZoneComponent.cpp" compile="1" resource="0"
+            file="Source/ZoneComponent.cpp"/>
+      <FILE id="da3qp9" name="ZoneComponent.h" compile="0" resource="0" file="Source/ZoneComponent.h"/>
+      <FILE id="V0qEGh" name="MidiMessageReceiver.cpp" compile="1" resource="0"
+            file="Source/MidiMessageReceiver.cpp"/>
+      <FILE id="eng3OP" name="ZoneAreaAnimator.cpp" compile="1" resource="0"
+            file="Source/ZoneAreaAnimator.cpp"/>
+      <FILE id="xbvZO2" name="ZoneAreaAnimator.h" compile="0" resource="0"
+            file="Source/ZoneAreaAnimator.h"/>
       <FILE id="ZNHE2U" name="AsioSerial.cpp" compile="1" resource="0" file="Source/AsioSerial.cpp"/>
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="AXplWp" name="Action.cpp" compile="1" resource="0" file="../BlipBox/firmware/Action.cpp"/>
+        <FILE id="DIC8c9" name="Event.cpp" compile="1" resource="0" file="../BlipBox/firmware/Event.cpp"/>
+        <FILE id="e0SPgw" name="Event.h" compile="0" resource="0" file="../BlipBox/firmware/Event.h"/>
+        <FILE id="AacMB" name="Preset.cpp" compile="1" resource="0" file="../BlipBox/firmware/Preset.cpp"/>
+        <FILE id="iAT4UO" name="Preset.h" compile="0" resource="0" file="../BlipBox/firmware/Preset.h"/>
+        <FILE id="D9uKTf" name="Zone.cpp" compile="1" resource="0" file="../BlipBox/firmware/Zone.cpp"/>
+        <FILE id="ksyzQZ" name="Zone.h" compile="0" resource="0" file="../BlipBox/firmware/Zone.h"/>
         <GROUP id="zEIWUP" name="simulator">
           <GROUP id="rWYSVI" name="avr">
             <FILE id="BDOfLN" name="eeprom.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.c"/>
@@ -86,12 +118,6 @@
               file="../BlipBox/firmware/MessageDispatcher.h"/>
         <FILE id="v4q1H" name="MidiPresetReader.h" compile="0" resource="0"
               file="../BlipBox/firmware/MidiPresetReader.h"/>
-        <FILE id="qYiMx4" name="MidiZone.cpp" compile="1" resource="0" file="../BlipBox/firmware/MidiZone.cpp"/>
-        <FILE id="rz6KbC" name="MidiZone.h" compile="0" resource="0" file="../BlipBox/firmware/MidiZone.h"/>
-        <FILE id="F3p7LH" name="MidiZoneEventHandler.cpp" compile="1" resource="0"
-              file="../BlipBox/firmware/MidiZoneEventHandler.cpp"/>
-        <FILE id="WtVyYi" name="MidiZoneEventHandler.h" compile="0" resource="0"
-              file="../BlipBox/firmware/MidiZoneEventHandler.h"/>
         <FILE id="qOl4Cp" name="Parameters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Parameters.cpp"/>
         <FILE id="UMVlH" name="Parameters.h" compile="0" resource="0" file="../BlipBox/firmware/Parameters.h"/>
         <FILE id="RGy1di" name="Position.h" compile="0" resource="0" file="../BlipBox/firmware/Position.h"/>
@@ -135,10 +161,6 @@
             file="Source/MidiZoneComponent.cpp"/>
       <FILE id="ZBqpVS" name="MidiZoneComponent.h" compile="0" resource="0"
             file="Source/MidiZoneComponent.h"/>
-      <FILE id="jtH53j" name="MidiZonePreset.cpp" compile="1" resource="0"
-            file="Source/MidiZonePreset.cpp"/>
-      <FILE id="zaMhX2" name="MidiZonePreset.h" compile="0" resource="0"
-            file="Source/MidiZonePreset.h"/>
       <FILE id="A2jt5w" name="OverflowTimer.h" compile="0" resource="0" file="Source/OverflowTimer.h"/>
       <FILE id="tn8i9Z" name="PresetComponent.cpp" compile="1" resource="0"
             file="Source/PresetComponent.cpp"/>

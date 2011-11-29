@@ -1,8 +1,17 @@
 #include "BlipClient.h"
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
+#include "MidiPresetReader.h"
 
 #define THREAD_TIMEOUT_MS  2000
+
+#ifdef min
+#undef min
+#endif
+
+#ifdef max
+#undef max
+#endif
 
 #define FILL_MESSAGE              0x10
 #define SET_LED_MESSAGE           0x20 // sets 1 led - 3 byte message
@@ -130,20 +139,25 @@ void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
 }
 
 void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
-  static uint8_t buf[1+MIDI_ZONE_PRESET_SIZE*MIDI_ZONES_IN_PRESET];
-  static uint8_t bufpos;
+  static MidiPresetReader* reader = NULL;
+  static uint8_t position = 0;
+  static uint8_t index = 0;
   std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
   if(pid == 6){
-//     std::cout << "preset data " << std::dec << (int)bufpos << std::endl;
-    if(bufpos < sizeof(buf))
-      buf[bufpos++] = (uint8_t)value;
-    else
-      std::cerr << "preset buffer overflow!" << std::endl;
-    if(bufpos == sizeof(buf)){
-      uint8_t index = buf[0];
+//     std::cout << "preset data " << std::dec << (int)position << std::endl;
+    if(position == 0){
+      delete reader;
+      reader = new MidiPresetReader();
+      index = value;
+    }
+    if(position++ < MIDI_ZONE_PRESET_LENGTH){
+      reader->serialInput((unsigned char)value);
+    }else{
       std::cout << "loading preset " << std::dec << (int)index << std::endl;
-      ApplicationConfiguration::getMidiZonePreset(index)->read(&buf[1]);
-      bufpos = 0;
+//       ApplicationConfiguration::getPreset(index)->read(&buf[1]);
+      blipbox.loadPreset(index);
+      position = 0;
+      delete reader;
       sendScreenUpdates(true);
     }
   }
@@ -210,22 +224,24 @@ void BlipClient::sendCommand(Command command){
 #define REQUEST_PRESET_COMMAND (2 << 4)
 #define READ_PRESET_COMMAND    (1 << 4)
 
-void BlipClient::requestMidiZonePreset(uint8_t index){
+void BlipClient::requestPreset(uint8_t index){
   sendScreenUpdates(false);
   uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, REQUEST_PRESET_COMMAND | index, 0x00};
   sendSerial(cmd, sizeof(cmd));
 }
 
-void BlipClient::sendMidiZonePreset(uint8_t index){
+void BlipClient::sendPreset(uint8_t index){
   sendScreenUpdates(false);
-  MidiZonePreset* preset = ApplicationConfiguration::getMidiZonePreset(index);
+  Preset* preset = ApplicationConfiguration::getPreset(index);
   uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, READ_PRESET_COMMAND | index};
   sendSerial(cmd, sizeof(cmd));
   uint8_t buf[MIDI_ZONE_PRESET_SIZE];
   // todo: move this code to MidiZonePreset
   // todo: sanity check and clean data: select preset 0 <= data1 <= 8, et c.
+  // todo: checksum
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){
-    preset->getZone(i)->write(buf);
+//     preset->getZone(i)->write(buf);
+
     sendSerial(buf, sizeof(buf));
   }
   cmd[0] = 0x00;
@@ -234,10 +250,10 @@ void BlipClient::sendMidiZonePreset(uint8_t index){
   sendScreenUpdates(true);
 }
 
-void BlipClient::drawMidiZone(MidiZone* zone){
+void BlipClient::drawZone(Zone* zone){
   clear();
-  for(int x=std::min(zone->_from_column, zone->_to_column); x<std::max(zone->_from_column, zone->_to_column); ++x)
-    for(int y=std::min(zone->_from_row, zone->_to_row); y<std::max(zone->_from_row, zone->_to_row); ++y)
+  for(int x=std::min(zone->from.getColumn(), zone->to.getColumn()); x<std::max(zone->from.getColumn(), zone->to.getColumn()); ++x)
+    for(int y=std::min(zone->from.getRow(), zone->to.getRow()); y<std::max(zone->from.getRow(), zone->to.getRow()); ++y)
       setLed(x, y, 0x20);
 }
 

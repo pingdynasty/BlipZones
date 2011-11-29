@@ -28,11 +28,44 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MidiNoteComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiPitchBendComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ActionComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiControllerComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ZoneComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiMessageReceiver.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ZoneAreaAnimator.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\AsioSerial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Action.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Event.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Preset.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\Zone.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
@@ -82,12 +115,6 @@
     <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
@@ -124,9 +151,6 @@
     <ClCompile Include="..\..\Source\MidiZoneComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MidiZonePreset.cpp">
-      <Filter>BlipZones\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\PresetComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -144,8 +168,35 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiNoteComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiPitchBendComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ActionComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiControllerComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ZoneComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ZoneAreaAnimator.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Event.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Preset.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Zone.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
@@ -207,12 +258,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZone.h">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.h">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
@@ -259,9 +304,6 @@
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MidiZoneComponent.h">
-      <Filter>BlipZones\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\MidiZonePreset.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OverflowTimer.h">

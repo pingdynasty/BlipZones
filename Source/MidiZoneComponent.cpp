@@ -36,188 +36,195 @@ void MidiZoneComponent::handlePositionMessage(uint16_t x, uint16_t y){
   x = x*10/1023;
   y = y*8/1023;
   const MessageManagerLock mmLock;
-  if(abs(getZone()->_from_column - x) < abs(getZone()->_to_column - x))
+  if(abs(getZone()->from.getColumn() - x) < abs(getZone()->to.getColumn() - x))
     Xslider->setMinValue(x, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   else
     Xslider->setMaxValue(x, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
-  if(abs(getZone()->_from_row - y) < abs(getZone()->_to_row - y))
+  if(abs(getZone()->from.getRow() - y) < abs(getZone()->to.getRow() - y))
     Yslider->setMinValue(y, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   else
     Yslider->setMaxValue(y, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
 }
 
 void MidiZoneComponent::updateZoneChannel(){
-  getZone()->_status = (getZone()->_status & MIDI_STATUS_MASK) | ((uint8_t)channelSlider->getValue() - 1);
+//   getZone()->_status = (getZone()->_status & MIDI_STATUS_MASK) | ((uint8_t)channelSlider->getValue() - 1);
+}
+
+void MidiZoneComponent::updateZoneData(){
+//       getZone()->_data1 = dataSlider->getValue();
 }
 
 void MidiZoneComponent::updateZoneType(){
-  uint8_t type = MIDI_ZONE_TYPE;
-  uint8_t status = 0;
-  bool hasData = true;
-  bool hasChannel = true;
-  switch(typeComboBox1->getSelectedId()){
-  case 1: // Control Change
-    status = MIDI_CONTROL_CHANGE;
-    break;
-  case 2: // Note On
-    status = MIDI_NOTE_ON;
-    break;
-  case 3: // Pitch Bend
-    status = MIDI_PITCH_BEND;
-    hasData = false;
-    break;
-  case 4: // NRPN
-    status = MIDI_CONTROL_CHANGE;
-    type = NRPN_ZONE_TYPE;
-    break;
-  case 5: // Channel Pressure
-    status = MIDI_CHANNEL_PRESSURE;
-    break;
-  case 6: // Polyphonic Aftertouch
-    status = MIDI_AFTERTOUCH;
-    hasData = false;
-    break;
-  case 7: // Select Preset
-    type = SELECTOR_ZONE_TYPE;
-    hasChannel = false;
-    break;
-  }
-  dataSlider->setEnabled(hasData);
-  channelSlider->setEnabled(hasChannel);
-  switch(typeComboBox2->getSelectedId()){
-  case 1: // Horizontal Slider
-    type |= HORIZONTAL_VERTICAL_ZONE_BIT;
-    break;
-  case 2: // Vertical Slider
-    break;
-  case 3: // Momentary Button
-    type |= MOMENTARY_TOGGLE_ZONE_BIT | BUTTON_SLIDER_ZONE_BIT;
-    break;
-  case 4: // Toggle Button
-    type |= BUTTON_SLIDER_ZONE_BIT;
-    break;
-  }
-  switch(typeComboBox3->getSelectedId()){
-  case 1:
-    type |= BAR_DISPLAY_TYPE;
-    break;
-  case 2:
-    type |= FILL_DISPLAY_TYPE;
-    break;
-  case 3:
-    type |= DOT_DISPLAY_TYPE;
-    break;
-  case 4:
-    type |= NO_DISPLAY_TYPE;
-    break;
-  }
-  getZone()->_status = status;
-  getZone()->_type = type;
-  updateZoneChannel();
-  uint8_t buf[MIDI_ZONE_PRESET_SIZE];
-  getZone()->write(buf);
-  getZone()->read(buf);
+//   uint8_t type = MIDI_ZONE_TYPE;
+//   uint8_t status = 0;
+//   bool hasData = true;
+//   bool hasChannel = true;
+//   switch(typeComboBox1->getSelectedId()){
+//   case 1: // Control Change
+//     status = MIDI_CONTROL_CHANGE;
+//     break;
+//   case 2: // Note On
+//     status = MIDI_NOTE_ON;
+//     break;
+//   case 3: // Pitch Bend
+//     status = MIDI_PITCH_BEND;
+//     hasData = false;
+//     break;
+//   case 4: // NRPN
+//     status = MIDI_CONTROL_CHANGE;
+//     type = NRPN_ZONE_TYPE;
+//     break;
+//   case 5: // Channel Pressure
+//     status = MIDI_CHANNEL_PRESSURE;
+//     break;
+//   case 6: // Polyphonic Aftertouch
+//     status = MIDI_AFTERTOUCH;
+//     hasData = false;
+//     break;
+//   case 7: // Select Preset
+//     type = SELECTOR_ZONE_TYPE;
+//     hasChannel = false;
+//     break;
+//   }
+//   dataSlider->setEnabled(hasData);
+//   channelSlider->setEnabled(hasChannel);
+//   switch(typeComboBox2->getSelectedId()){
+//   case 1: // Horizontal Slider
+//     type |= HORIZONTAL_VERTICAL_ZONE_BIT;
+//     break;
+//   case 2: // Vertical Slider
+//     break;
+//   case 3: // Momentary Button
+//     type |= MOMENTARY_TOGGLE_ZONE_BIT | BUTTON_SLIDER_ZONE_BIT;
+//     break;
+//   case 4: // Toggle Button
+//     type |= BUTTON_SLIDER_ZONE_BIT;
+//     break;
+//   }
+//   switch(typeComboBox3->getSelectedId()){
+//   case 1:
+//     type |= BAR_DISPLAY_TYPE;
+//     break;
+//   case 2:
+//     type |= FILL_DISPLAY_TYPE;
+//     break;
+//   case 3:
+//     type |= DOT_DISPLAY_TYPE;
+//     break;
+//   case 4:
+//     type |= NO_DISPLAY_TYPE;
+//     break;
+//   }
+//   getZone()->_status = status;
+//   getZone()->_type = type;
+//   updateZoneChannel();
+//   uint8_t buf[MIDI_ZONE_PRESET_SIZE];
+//   getZone()->write(buf);
+//   getZone()->read(buf);
 }
 
 void MidiZoneComponent::updateZoneRange(){
-  if(minSlider->getValue() > maxSlider->getValue()){
-    midizone->_max = minSlider->getValue();
-    midizone->_min = maxSlider->getValue();
-    midizone->_type |= INVERTED_ZONE_BIT;
-  }else{
-    midizone->_min = minSlider->getValue();
-    midizone->_max = maxSlider->getValue();
-    midizone->_type &= ~INVERTED_ZONE_BIT;
-  }
-  if(midizone->_min == midizone->_max)
-    midizone->_max += 1;
+//   if(minSlider->getValue() > maxSlider->getValue()){
+//     zone->_max = minSlider->getValue();
+//     zone->_min = maxSlider->getValue();
+//     zone->_type |= INVERTED_ZONE_BIT;
+//   }else{
+//     zone->_min = minSlider->getValue();
+//     zone->_max = maxSlider->getValue();
+//     zone->_type &= ~INVERTED_ZONE_BIT;
+//   }
+//   if(zone->_min == zone->_max)
+//     zone->_max += 1;
 }
 
 void MidiZoneComponent::updateZoneArea(){
-  midizone->_from_row = Yslider->getMinValue();
-  midizone->_to_row = Yslider->getMaxValue();
-  midizone->_from_column = Xslider->getMinValue();
-  midizone->_to_column = Xslider->getMaxValue();
+  zone->from.setRow(Yslider->getMinValue());
+  zone->to.setRow(Yslider->getMaxValue());
+  zone->from.setColumn(Xslider->getMinValue());
+  zone->to.setColumn(Xslider->getMaxValue());
 }
 
-void MidiZoneComponent::setZoneChannel(MidiZone* zone){
-  channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1, sendUpdateMessage, sendMessageSynchronously);
+void MidiZoneComponent::setZoneChannel(Zone* zone){
+//   if(typeid(zone->action) == typeid(MidiAction)){
+
+//   }
+//   channelSlider->setValue((zone->_status & MIDI_CHANNEL_MASK)+1, sendUpdateMessage, sendMessageSynchronously);
 }
 
-void MidiZoneComponent::setZoneType(MidiZone* zone){
-  switch(zone->_type & ZONE_TYPE_MASK){
-  case MIDI_ZONE_TYPE:
-    switch(zone->_status & MIDI_STATUS_MASK){
-    case MIDI_CONTROL_CHANGE:
-      typeComboBox1->setSelectedId(1, sendUpdateMessage); // Control Change
-      break;
-    case MIDI_NOTE_ON:
-      typeComboBox1->setSelectedId(2, sendUpdateMessage); // Note On
-      break;
-    case MIDI_PITCH_BEND:
-      typeComboBox1->setSelectedId(3, sendUpdateMessage); // Pitch Bend
-      break;
-    case MIDI_CHANNEL_PRESSURE:
-      typeComboBox1->setSelectedId(5, sendUpdateMessage); // Channel Pressure
-      break;
-    case MIDI_AFTERTOUCH:
-      typeComboBox1->setSelectedId(6, sendUpdateMessage); // Polyphonic Aftertouch
-      break;
-    }
-    break;
-  case NRPN_ZONE_TYPE:
-    typeComboBox1->setSelectedId(4, sendUpdateMessage); // NRPN
-    break;
-  case SELECTOR_ZONE_TYPE:
-    typeComboBox1->setSelectedId(7, sendUpdateMessage); // Select Preset
-    break;
-  case EMPTY_ZONE_TYPE:
-  default:
-    typeComboBox1->setSelectedId(0, sendUpdateMessage);
-    break;
-  }
-  if(zone->_type & BUTTON_SLIDER_ZONE_BIT){
-    if(zone->_type & MOMENTARY_TOGGLE_ZONE_BIT)
-      typeComboBox2->setSelectedId(3, sendUpdateMessage); // Momentary Button
-    else
-      typeComboBox2->setSelectedId(4, sendUpdateMessage); // Toggle Button
-  }else{
-    if(zone->_type & HORIZONTAL_VERTICAL_ZONE_BIT)
-      typeComboBox2->setSelectedId(1, sendUpdateMessage); // Horizontal Slider
-    else
-      typeComboBox2->setSelectedId(2, sendUpdateMessage); // Vertical Slider
-  }
-  switch(zone->_type & DISPLAY_TYPE_MASK){
-  case BAR_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(1, sendUpdateMessage);
-    break;
-  case FILL_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(2, sendUpdateMessage);
-    break;
-  case DOT_DISPLAY_TYPE:
-    typeComboBox3->setSelectedId(3, sendUpdateMessage);
-    break;
-  case NO_DISPLAY_TYPE:
-  default:
-    typeComboBox3->setSelectedId(4, sendUpdateMessage);
-    break;
-  }
+void MidiZoneComponent::setZoneType(Zone* zone){
+//   switch(zone->_type & ZONE_TYPE_MASK){
+//   case MIDI_ZONE_TYPE:
+//     switch(zone->_status & MIDI_STATUS_MASK){
+//     case MIDI_CONTROL_CHANGE:
+//       typeComboBox1->setSelectedId(1, sendUpdateMessage); // Control Change
+//       break;
+//     case MIDI_NOTE_ON:
+//       typeComboBox1->setSelectedId(2, sendUpdateMessage); // Note On
+//       break;
+//     case MIDI_PITCH_BEND:
+//       typeComboBox1->setSelectedId(3, sendUpdateMessage); // Pitch Bend
+//       break;
+//     case MIDI_CHANNEL_PRESSURE:
+//       typeComboBox1->setSelectedId(5, sendUpdateMessage); // Channel Pressure
+//       break;
+//     case MIDI_AFTERTOUCH:
+//       typeComboBox1->setSelectedId(6, sendUpdateMessage); // Polyphonic Aftertouch
+//       break;
+//     }
+//     break;
+//   case NRPN_ZONE_TYPE:
+//     typeComboBox1->setSelectedId(4, sendUpdateMessage); // NRPN
+//     break;
+//   case SELECTOR_ZONE_TYPE:
+//     typeComboBox1->setSelectedId(7, sendUpdateMessage); // Select Preset
+//     break;
+//   case EMPTY_ZONE_TYPE:
+//   default:
+//     typeComboBox1->setSelectedId(0, sendUpdateMessage);
+//     break;
+//   }
+//   if(zone->_type & BUTTON_SLIDER_ZONE_BIT){
+//     if(zone->_type & MOMENTARY_TOGGLE_ZONE_BIT)
+//       typeComboBox2->setSelectedId(3, sendUpdateMessage); // Momentary Button
+//     else
+//       typeComboBox2->setSelectedId(4, sendUpdateMessage); // Toggle Button
+//   }else{
+//     if(zone->_type & HORIZONTAL_VERTICAL_ZONE_BIT)
+//       typeComboBox2->setSelectedId(1, sendUpdateMessage); // Horizontal Slider
+//     else
+//       typeComboBox2->setSelectedId(2, sendUpdateMessage); // Vertical Slider
+//   }
+//   switch(zone->_type & DISPLAY_TYPE_MASK){
+//   case BAR_DISPLAY_TYPE:
+//     typeComboBox3->setSelectedId(1, sendUpdateMessage);
+//     break;
+//   case FILL_DISPLAY_TYPE:
+//     typeComboBox3->setSelectedId(2, sendUpdateMessage);
+//     break;
+//   case DOT_DISPLAY_TYPE:
+//     typeComboBox3->setSelectedId(3, sendUpdateMessage);
+//     break;
+//   case NO_DISPLAY_TYPE:
+//   default:
+//     typeComboBox3->setSelectedId(4, sendUpdateMessage);
+//     break;
+//   }
 }
 
-void MidiZoneComponent::loadZone(MidiZone* zone){
-  midizone = zone;
-  if(zone->_type & INVERTED_ZONE_BIT){
-    minSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
-  }else{
-    minSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
-  }
-  dataSlider->setValue(zone->_data1, sendUpdateMessage, sendMessageSynchronously);
-  Xslider->setMinValue(zone->_from_column, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
-  Yslider->setMinValue(zone->_from_row, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
-  Xslider->setMaxValue(zone->_to_column, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
-  Yslider->setMaxValue(zone->_to_row, sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+void MidiZoneComponent::loadZone(Zone* azone){
+  zone = azone;
+//   if(zone->_type & INVERTED_ZONE_BIT){
+//     minSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
+//     maxSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
+//   }else{
+//     minSlider->setValue(zone->_min, sendUpdateMessage, sendMessageSynchronously);
+//     maxSlider->setValue(zone->_max, sendUpdateMessage, sendMessageSynchronously);
+//   }
+//   dataSlider->setValue(zone->_data1, sendUpdateMessage, sendMessageSynchronously);
+  Xslider->setMinValue(zone->from.getColumn(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Yslider->setMinValue(zone->from.getRow(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Xslider->setMaxValue(zone->to.getColumn(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
+  Yslider->setMaxValue(zone->to.getRow(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   setZoneType(zone);
   setZoneChannel(zone);
 }
@@ -446,7 +453,7 @@ void MidiZoneComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == dataSlider)
     {
         //[UserSliderCode_dataSlider] -- add your slider handling code here..
-      midizone->_data1 = sliderThatWasMoved->getValue();
+      updateZoneData();
         //[/UserSliderCode_dataSlider]
     }
 

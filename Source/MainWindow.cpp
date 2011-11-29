@@ -22,8 +22,6 @@ MainAppWindow::MainAppWindow()
     setResizable(true, true); // resizable, with resize corner (instead of border)
     preset = new PresetComponent();
     setContentOwned(preset, true);
-//     setContentComponent(preset);
-//     addAndMakeVisible(preset);
 }
 
 MainAppWindow::~MainAppWindow()

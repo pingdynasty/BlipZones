@@ -2,7 +2,6 @@
 #define __MIDIMESSAGERECEIVER_H__
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "ApplicationConfiguration.h"
 
 class MidiMessageReceiver : public juce::MidiInputCallback {
 private:

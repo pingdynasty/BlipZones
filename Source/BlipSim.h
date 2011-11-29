@@ -4,6 +4,8 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #include <inttypes.h>
 #include "Position.h"
+#include "Animator.h"
+#include "EventHandler.h"
 
 class BlipSim {
 private:
@@ -18,7 +20,14 @@ public:
   void doMidi(bool doit);
   void setMidiOutput(String name);
 /*   void setMidiOutput(MidiOutput* midiout); */
+  void setAnimator(Animator* animator);
+  void setEventHandler(EventHandler* handler);
   void sendSerial(uint8_t* data, size_t size);
+  void flip();
+  void clear();
+  void fill(uint8_t value);
+  void fill(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t brightness);
+  void setLed(uint8_t x, uint8_t y, uint8_t brightness);
   uint8_t getLed(uint8_t x, uint8_t y);
   bool isPressed();
   Position& getPosition();

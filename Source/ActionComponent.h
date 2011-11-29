@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  1 Sep 2011 4:54:09pm
+  Creation date:  25 Nov 2011 2:09:36am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,12 +19,12 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4E8E4A3E__
-#define __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4E8E4A3E__
+#ifndef __JUCER_HEADER_ACTIONCOMPONENT_ACTIONCOMPONENT_22A823D7__
+#define __JUCER_HEADER_ACTIONCOMPONENT_ACTIONCOMPONENT_22A823D7__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
-/* #include "MidiZone.h" */
+#include "Action.h"
 //[/Headers]
 
 
@@ -33,37 +33,25 @@
 /**
                                                                     //[Comments]
     An auto-generated component, created by the Jucer.
+
+    Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class MidiZoneComponent  : public Component,
-                           public ComboBoxListener,
-                           public SliderListener
+class ActionComponent  : public Component
 {
 public:
     //==============================================================================
-    MidiZoneComponent ();
-    ~MidiZoneComponent();
+    ActionComponent ();
+    ~ActionComponent();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    Zone* getZone(){
-      return zone;
-    }
-    void loadZone(Zone* zone);
-    void updateZoneType();
-    void updateZoneArea();
-    void updateZoneRange();
-    void updateZoneChannel();
-    void updateZoneData();
-    void setZoneType(Zone* zone);
-    void setZoneChannel(Zone* zone);
-    void handlePositionMessage(uint16_t x, uint16_t y);
+    virtual Action* getAction(){ return NULL; }
+    virtual void loadAction(Action* action){ }
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
-    void sliderValueChanged (Slider* sliderThatWasMoved);
 
 
 
@@ -72,26 +60,16 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    Zone* zone;
     //[/UserVariables]
 
     //==============================================================================
-    ComboBox* typeComboBox1;
-    ComboBox* typeComboBox2;
-    Slider* channelSlider;
-    Slider* maxSlider;
-    Slider* minSlider;
-    Slider* Xslider;
-    Slider* Yslider;
-    Slider* dataSlider;
-    ComboBox* typeComboBox3;
 
 
     //==============================================================================
     // (prevent copy constructor and operator= being generated..)
-    MidiZoneComponent (const MidiZoneComponent&);
-    const MidiZoneComponent& operator= (const MidiZoneComponent&);
+    ActionComponent (const ActionComponent&);
+    const ActionComponent& operator= (const ActionComponent&);
 };
 
 
-#endif   // __JUCER_HEADER_MIDIZONECOMPONENT_MIDIZONECOMPONENT_4E8E4A3E__
+#endif   // __JUCER_HEADER_ACTIONCOMPONENT_ACTIONCOMPONENT_22A823D7__

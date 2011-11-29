@@ -53,6 +53,8 @@ class MidiMessageSender {
 
   void process(){
     uint8_t msglen = 0;
+    // todo: it seems that frompos can over/underflow here: 
+    // frompos == 1096020548, len == 3198947264, topos == 516
     switch(buf[frompos] & 0xf0){
     case MIDI_NOTE_OFF:
     case MIDI_NOTE_ON:
