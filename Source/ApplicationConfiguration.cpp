@@ -55,13 +55,6 @@ void ApplicationConfiguration::initialise(){
 //     presets[i].setIndex(i);
 }
 
-ControlValues* controlvalues = NULL;
-ControlValues* ApplicationConfiguration::getControlValues(){
-  if(controlvalues == NULL)
-    controlvalues = new ControlValues();
-  return controlvalues;
-}
-
 void ApplicationConfiguration::release(){
 /*     If you're leaking, it's probably because you're using old-fashioned, non-RAII techniques for */
 /*     your object management. Tut, tut. Always, always use ScopedPointers, OwnedArrays, */

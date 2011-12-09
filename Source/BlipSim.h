@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "Animator.h"
 #include "EventHandler.h"
+#include "Event.h"
 
 class BlipSim {
 private:
@@ -35,6 +36,7 @@ public:
   void setPresetIndex(uint8_t index);
   void position(uint16_t x, uint16_t y);
   void release();
+  void handle(MidiEvent& event);
 };
 
 #endif  // __BLIPSIM_H_

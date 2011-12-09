@@ -79,7 +79,8 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    ScopedPointer<Preset> preset;
+    Preset* preset;
+/*     ScopedPointer<Preset> preset; */
     Array<ZoneComponent*> components;
     //[/UserVariables]
 

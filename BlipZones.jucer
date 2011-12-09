@@ -32,6 +32,9 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="A5rR2x" name="PresetFactory.cpp" compile="1" resource="0"
+            file="Source/PresetFactory.cpp"/>
+      <FILE id="VqgEc5" name="PresetFactory.h" compile="0" resource="0" file="Source/PresetFactory.h"/>
       <FILE id="sCjFAZ" name="MidiNoteComponent.cpp" compile="1" resource="0"
             file="Source/MidiNoteComponent.cpp"/>
       <FILE id="XcYTdg" name="MidiNoteComponent.h" compile="0" resource="0"
@@ -61,6 +64,16 @@
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="XhszA1" name="macros.h" compile="0" resource="0" file="../BlipBox/firmware/macros.h"/>
+        <FILE id="e7MNAA" name="ControlVoltageAction.h" compile="0" resource="0"
+              file="../BlipBox/firmware/ControlVoltageAction.h"/>
+        <FILE id="yxIYd3" name="MidiPresetReader.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/MidiPresetReader.cpp"/>
+        <FILE id="cYPVbi" name="Action.h" compile="0" resource="0" file="../BlipBox/firmware/Action.h"/>
+        <FILE id="Qh8TKg" name="spi.h" compile="0" resource="0" file="../BlipBox/firmware/spi.h"/>
+        <FILE id="mqrAXc" name="spi_bitbang.cpp" compile="1" resource="0" file="../BlipBox/firmware/spi_bitbang.cpp"/>
+        <FILE id="Dsm1rd" name="ControlVoltageAction.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/ControlVoltageAction.cpp"/>
         <FILE id="AXplWp" name="Action.cpp" compile="1" resource="0" file="../BlipBox/firmware/Action.cpp"/>
         <FILE id="DIC8c9" name="Event.cpp" compile="1" resource="0" file="../BlipBox/firmware/Event.cpp"/>
         <FILE id="e0SPgw" name="Event.h" compile="0" resource="0" file="../BlipBox/firmware/Event.h"/>
@@ -112,10 +125,6 @@
               file="../BlipBox/firmware/KeyController.cpp"/>
         <FILE id="ytyttA" name="KeyController.h" compile="0" resource="0" file="../BlipBox/firmware/KeyController.h"/>
         <FILE id="qSebp" name="LedController.h" compile="0" resource="0" file="../BlipBox/firmware/LedController.h"/>
-        <FILE id="XfIEIn" name="MessageDispatcher.cpp" compile="1" resource="0"
-              file="../BlipBox/firmware/MessageDispatcher.cpp"/>
-        <FILE id="Pg6o42" name="MessageDispatcher.h" compile="0" resource="0"
-              file="../BlipBox/firmware/MessageDispatcher.h"/>
         <FILE id="v4q1H" name="MidiPresetReader.h" compile="0" resource="0"
               file="../BlipBox/firmware/MidiPresetReader.h"/>
         <FILE id="qOl4Cp" name="Parameters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Parameters.cpp"/>

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  28 Nov 2011 10:45:05pm
+  Creation date:  9 Dec 2011 1:40:13pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -224,6 +224,18 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == typeComboBox3)
     {
         //[UserComboBoxCode_typeComboBox3] -- add your combo box handling code here..
+      switch(typeComboBox3->getSelectedId()){
+      case 1:
+	zone->setDisplayType(LINE_DISPLAY_TYPE);
+	break;
+      case 2:
+	zone->setDisplayType(FILL_DISPLAY_TYPE);
+	break;
+      case 3:
+      default:
+	zone->setDisplayType(NONE_DISPLAY_TYPE);
+	break;
+      }
         //[/UserComboBoxCode_typeComboBox3]
     }
 

@@ -5,7 +5,6 @@
 #include "BlipSim.h"
 #include "SimScreen.h"
 #include "BlipClient.h"
-#include "ControlValues.h"
 #include "Preset.h"
 
 class ApplicationConfiguration {
@@ -17,7 +16,6 @@ public:
   static BlipClient* getBlipClient();
   static Preset* getPreset(int index);
   static File getPresetDirectory();
-  static ControlValues* getControlValues();
 private:
 };
 

@@ -28,6 +28,9 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\PresetFactory.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MidiNoteComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -54,6 +57,15 @@
     </ClCompile>
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\spi_bitbang.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\ControlVoltageAction.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\Action.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
@@ -112,9 +124,6 @@
     <ClCompile Include="..\..\..\BlipBox\firmware\KeyController.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
@@ -168,6 +177,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\PresetFactory.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\MidiNoteComponent.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
@@ -188,6 +200,18 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\macros.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\ControlVoltageAction.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\Action.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\spi.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\Event.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
@@ -250,9 +274,6 @@
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MessageDispatcher.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h">

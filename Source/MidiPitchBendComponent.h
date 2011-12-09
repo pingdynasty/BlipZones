@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  28 Nov 2011 11:59:21pm
+  Creation date:  9 Dec 2011 1:40:09pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_B719B80C__
-#define __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_B719B80C__
+#ifndef __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_33ADDFC__
+#define __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_33ADDFC__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -84,4 +84,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_B719B80C__
+#endif   // __JUCER_HEADER_MIDIPITCHBENDCOMPONENT_MIDIPITCHBENDCOMPONENT_33ADDFC__

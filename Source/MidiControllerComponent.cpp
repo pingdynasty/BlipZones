@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  28 Nov 2011 10:45:04pm
+  Creation date:  9 Dec 2011 1:40:08pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -138,10 +138,10 @@ void MidiControllerComponent::paint (Graphics& g)
     g.fillAll (Colours::white);
 
     g.setColour (Colour (0xf5f9ea0));
-    g.fillRoundedRectangle (0.0f, 0.0f, 510.0f, 70.0f, 3.5000f);
+    g.fillRoundedRectangle (0.0f, 0.0f, 510.0f, 68.0f, 3.5000f);
 
     g.setColour (Colours::cadetblue);
-    g.drawRoundedRectangle (0.0f, 0.0f, 510.0f, 70.0f, 3.5000f, 0.5000f);
+    g.drawRoundedRectangle (0.0f, 0.0f, 510.0f, 68.0f, 3.5000f, 0.5000f);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -227,7 +227,7 @@ BEGIN_JUCER_METADATA
                  overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
                  initialHeight="100">
   <BACKGROUND backgroundColour="ffffffff">
-    <ROUNDRECT pos="0 0 510 70" cornerSize="3.5" fill="solid: f5f9ea0" hasStroke="1"
+    <ROUNDRECT pos="0 0 510 68" cornerSize="3.5" fill="solid: f5f9ea0" hasStroke="1"
                stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
   </BACKGROUND>
   <SLIDER name="channel" id="3b517834e41dae35" memberName="channelSlider"

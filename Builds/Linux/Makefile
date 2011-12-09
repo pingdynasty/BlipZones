@@ -43,6 +43,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/PresetFactory_fe788f0c.o \
   $(OBJDIR)/MidiNoteComponent_ad4c9beb.o \
   $(OBJDIR)/MidiPitchBendComponent_6f08226e.o \
   $(OBJDIR)/ActionComponent_1f273448.o \
@@ -52,6 +53,9 @@ OBJECTS := \
   $(OBJDIR)/ZoneAreaAnimator_cca8cee9.o \
   $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/Serial_5af037d.o \
+  $(OBJDIR)/MidiPresetReader_dc2f7da8.o \
+  $(OBJDIR)/spi_bitbang_66707ed7.o \
+  $(OBJDIR)/ControlVoltageAction_1c1da3c.o \
   $(OBJDIR)/Action_8c62b41b.o \
   $(OBJDIR)/Event_a7efa41f.o \
   $(OBJDIR)/Preset_76c39c44.o \
@@ -70,7 +74,6 @@ OBJECTS := \
   $(OBJDIR)/EventHandler_659bf035.o \
   $(OBJDIR)/globals_fb00bd5.o \
   $(OBJDIR)/KeyController_64b2cc60.o \
-  $(OBJDIR)/MessageDispatcher_7190f993.o \
   $(OBJDIR)/Parameters_d3e365cf.o \
   $(OBJDIR)/PresetChooser_3d3409e1.o \
   $(OBJDIR)/SerialProtocol_a3d59791.o \
@@ -103,6 +106,11 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/PresetFactory_fe788f0c.o: ../../Source/PresetFactory.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PresetFactory.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/MidiNoteComponent_ad4c9beb.o: ../../Source/MidiNoteComponent.cpp
 	-@mkdir -p $(OBJDIR)
@@ -147,6 +155,21 @@ $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 $(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiPresetReader_dc2f7da8.o: ../../../BlipBox/firmware/MidiPresetReader.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiPresetReader.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/spi_bitbang_66707ed7.o: ../../../BlipBox/firmware/spi_bitbang.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling spi_bitbang.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ControlVoltageAction_1c1da3c.o: ../../../BlipBox/firmware/ControlVoltageAction.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ControlVoltageAction.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Action_8c62b41b.o: ../../../BlipBox/firmware/Action.cpp
@@ -237,11 +260,6 @@ $(OBJDIR)/globals_fb00bd5.o: ../../../BlipBox/firmware/globals.cpp
 $(OBJDIR)/KeyController_64b2cc60.o: ../../../BlipBox/firmware/KeyController.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling KeyController.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MessageDispatcher_7190f993.o: ../../../BlipBox/firmware/MessageDispatcher.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MessageDispatcher.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Parameters_d3e365cf.o: ../../../BlipBox/firmware/Parameters.cpp

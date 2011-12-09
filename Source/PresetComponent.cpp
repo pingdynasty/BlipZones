@@ -24,6 +24,7 @@
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsComponent.h"
 #include "ZoneAreaAnimator.h"
+#include "PresetFactory.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -179,7 +180,8 @@ PresetComponent::PresetComponent ()
 
 
     //[Constructor] You can add your own custom stuff here..
-    preset = new Preset();
+//     preset = new Preset();
+    preset = ApplicationConfiguration::getPreset(0);
     initialise();
     //[/Constructor]
 }
@@ -492,6 +494,8 @@ void PresetComponent::savePreset(uint8_t index){
 void PresetComponent::loadPreset(uint8_t index){
   std::cout << "load preset " << (int)index << std::endl;
 
+  preset = ApplicationConfiguration::getPreset(index);
+
 //   presetComboBox->setSelectedItemIndex(index, false);
 
   ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
@@ -516,8 +520,8 @@ void PresetComponent::saveFile(){
     File file = fc.getResult();
     if(!file.hasFileExtension(".xml"))
       file = file.withFileExtension(".xml");
-    // todo
-//     preset->saveFile(file);
+    PresetFactory factory;
+    factory.savePreset(*preset, file);
   }
 }
 
@@ -527,9 +531,11 @@ void PresetComponent::loadFile(){
 // 		 File::getCurrentWorkingDirectory(),
 		 "*.xml",
 		  useNativeVersion);
-  // todo
-//   if(fc.browseForFileToOpen())
-//     preset->loadFile(fc.getResult());
+  PresetFactory factory;
+  if(fc.browseForFileToOpen()){
+    File file = fc.getResult();
+    factory.loadPreset(*preset, file);
+  }  
   loadZones();
 }
 

@@ -2,8 +2,10 @@
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
 #include "MidiPresetReader.h"
+#include "globals.h"
 
 #define THREAD_TIMEOUT_MS  2000
+#define MIDI_ZONE_PRESET_LENGTH 1+MIDI_ZONES_IN_PRESET*MIDI_ZONE_PRESET_SIZE+1
 
 #ifdef min
 #undef min

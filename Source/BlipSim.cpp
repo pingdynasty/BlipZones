@@ -42,7 +42,7 @@ void BlipSim::start(){
 
 void BlipSim::stop(){
   blipbox.animator = NULL;
-  blipbox.eventhandler = &blipbox.defaulthandler;
+  blipbox.resetEventHandler();
   midi.setMidiOutput(NULL);
   timer0->stopThread(THREAD_TIMEOUT_MS);
   blipthread->stopThread(THREAD_TIMEOUT_MS);
@@ -134,6 +134,11 @@ void BlipSim::setEventHandler(EventHandler* handler){
 uint8_t domidi;
 void BlipSim::doMidi(bool doit){
   domidi = doit;
+}
+
+void BlipSim::handle(MidiEvent& event){
+  if(domidi)
+    blipbox.preset.handle(event);
 }
 
 extern "C" {
