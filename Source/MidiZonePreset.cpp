@@ -64,8 +64,8 @@ void MidiZonePreset::setIndex(uint8_t pindex){
 
 void MidiZonePreset::setSelectedPreset(){
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
-    if((zones[i]._type & ZONE_TYPE_MASK) == SELECTOR_ZONE_TYPE)
-      zones[i]._data2 = (zones[i]._data1 == index) ? 127 : 0;
+//     if((zones[i]._type & ZONE_TYPE_MASK) == SELECTOR_ZONE_TYPE)
+//       zones[i]._data2 = (zones[i]._data1 == index) ? 127 : 0;
     ApplicationConfiguration::getControlValues()->configureControlValue(&zones[i]);    
   }
 }

@@ -25,7 +25,7 @@ void MidiZoneEventHandler::loadPreset(uint8_t index){
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     zones[i].load((uint8_t*)offset);
     zones[i]._data2 = i;
-//     ApplicationConfiguration::getControlValues()->configureControlValue(&zones[i]);    
+    ApplicationConfiguration::getControlValues()->configureControlValue(&zones[i]);    
     offset += MIDI_ZONE_PRESET_SIZE;
   }
   std::cout << "loaded preset " << (int)index << std::endl;
