@@ -160,8 +160,8 @@ void MidiZonePreset::tick(uint16_t counter){
   }else{
     blipbox.leds.clear();
     MidiZone* zone = &zones[selected];
-    for(int x=min(zone->_from_column, zone->_to_column); x<max(zone->_from_column, zone->_to_column); ++x)
-      for(int y=min(zone->_from_row, zone->_to_row); y<max(zone->_from_row, zone->_to_row); ++y)
+	for(int x=std::min(zone->_from_column, zone->_to_column); x<std::max(zone->_from_column, zone->_to_column); ++x)
+      for(int y=std::min(zone->_from_row, zone->_to_row); y<std::		max(zone->_from_row, zone->_to_row); ++y)
 	blipbox.leds.setLed(x, y, 0x80);
     blipbox.leds.flip();
   }
