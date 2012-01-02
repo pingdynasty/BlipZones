@@ -124,8 +124,11 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\MidiZoneEventHandler.cpp"/>
+    <ClCompile Include="..\..\Source\MidiMessageReceiver.cpp"/>
     <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\Serial.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c"/>
@@ -142,7 +145,6 @@
     <ClCompile Include="..\..\..\BlipBox\firmware\KeyController.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MessageDispatcher.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp"/>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\PresetChooser.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\SerialProtocol.cpp"/>
@@ -163,6 +165,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiMessageReceiver.h"/>
     <ClInclude Include="..\..\Source\AsioSerial.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.h"/>

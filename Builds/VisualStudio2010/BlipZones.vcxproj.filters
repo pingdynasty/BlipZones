@@ -28,19 +28,25 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MidiZoneEventHandler.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiMessageReceiver.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\AsioSerial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\eeprom.c">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c">
-      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.o">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c">
@@ -83,9 +89,6 @@
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiZone.cpp">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiZoneEventHandler.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\Parameters.cpp">
@@ -144,6 +147,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiMessageReceiver.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>

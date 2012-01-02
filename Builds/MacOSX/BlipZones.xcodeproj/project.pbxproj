@@ -10,18 +10,18 @@
 		036824D38ADF25185AF0A6C7 /* DiscRecording.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDA65FDA1D2A8FD2A217035 /* DiscRecording.framework */; };
 		069EFA169E7D570081DFF109 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B121DEF6878456309C03792E /* QuickTime.framework */; };
 		0FEA6C8CBFB798A19A8C43BF /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4621B9BF5FB0E6B7CC40359 /* globals.cpp */; };
+		24FE4AD01B64790BD83A75F2 /* operators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47AFE3755DCECDC3A8C9105 /* operators.cpp */; };
 		2B0C7A9D7361F4FF20FB7D8B /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2869E883B48DF24E6C409AFF /* EventHandler.cpp */; };
 		39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */; };
 		3F815EA2C165CCF5B2E833D5 /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69E3CE875903BE2F4EA94527 /* MainWindow.cpp */; };
 		40A0DEE6CCB568B97B4B6942 /* KeyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */; };
-		415145BC140C6C400055F14F /* blipbox.icns in Resources */ = {isa = PBXBuildFile; fileRef = 415145BB140C6C400055F14F /* blipbox.icns */; };
 		41F00686466A35B446F21DD4 /* BinaryData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B75DE44B1A36EA8FC1770949 /* BinaryData.cpp */; };
-		41FB5462140C3FA50051EDF7 /* operators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41FB5461140C3FA50051EDF7 /* operators.cpp */; };
 		496271737F61DECBB9980E10 /* SerialProtocol.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 396E821AA125556416BD4CD1 /* SerialProtocol.cpp */; };
 		4F95C2A72AD5660572349E8B /* JuceLibraryCode.mm in Sources */ = {isa = PBXBuildFile; fileRef = F5124573ABD695FB00185620 /* JuceLibraryCode.mm */; };
 		5305BD92F3F36EE5F903C84B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC95562A9E9EDC3E9B1A9061 /* Cocoa.framework */; };
 		53787FCBE80B7440E9D63F28 /* PresetChooser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0F27AC4DE1C689E886E341E0 /* PresetChooser.cpp */; };
 		5551CE3056CBBF63574887C8 /* SimScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 846B1A20A060845FDE601C37 /* SimScreen.cpp */; };
+		55D43AAB5256F415A1FC6011 /* MidiZoneEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BE5611BCEEBB3C9D6E1069BE /* MidiZoneEventHandler.cpp */; };
 		5A9B745A4CF6E9B99F625169 /* Characters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4156FDFA57CB9E875DEE5C7A /* Characters.cpp */; };
 		5D821375EC14928BE91382F0 /* BlipSimComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F94C43D51A020517D1C09 /* BlipSimComponent.cpp */; };
 		5DF37B85BF95CF52B345D8AA /* MidiZoneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D67A1C3A27B560B7E541076 /* MidiZoneComponent.cpp */; };
@@ -33,7 +33,6 @@
 		80B1703C91850918C834C032 /* BlipSim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94CD8F31265CC481E0974A9C /* BlipSim.cpp */; };
 		82B1149437A9B20669D825CA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4646F809AD6C93233832846A /* OpenGL.framework */; };
 		8FC2EBAB3DF200043B21B16F /* MidiZonePreset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E7B9F84ADF93070234813BFC /* MidiZonePreset.cpp */; };
-		9B3B27FA91B96E104F5B8722 /* MidiZoneEventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C24A7BC4A006AF568BB11723 /* MidiZoneEventHandler.cpp */; };
 		9F3988E5875DC905119D69B9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBD52034C01DC96C596BF5 /* Carbon.framework */; };
 		A9E34DDD2DBBFF79C037B998 /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADBAB30F91E19C5690C81492 /* Parameters.cpp */; };
 		AE86D65581912C65DFB1C2AB /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */; };
@@ -47,6 +46,7 @@
 		D398705C2B10E1DB45A78F08 /* DirectCounter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E8924FEB0E7CF99209B99B19 /* DirectCounter.cpp */; };
 		DB30F69E948BB93E0FB3251E /* Serial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B00B43664A84156175CC3773 /* Serial.cpp */; };
 		DB9C36704CEE2A4091EB15D3 /* BlipBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EBD926A0B121AA0A48AC2756 /* BlipBox.cpp */; };
+		E23BC9EB4036B3FAB396BE4D /* MidiMessageReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 570D91D5D749A6C827895A84 /* MidiMessageReceiver.cpp */; };
 		E85C7E29F7A7DB8E82AEB523 /* ApplicationSettingsComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D1C0D693490BB7CFAA44E7B2 /* ApplicationSettingsComponent.cpp */; };
 		E8849F36894696AFEDAC7FBE /* AsioSerial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C8A68D5EF029999EA6109A4 /* AsioSerial.cpp */; };
 		EA4B358DDCB3C3454B6F0B6D /* FiveWireTouchController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F590A62C5F53226EAD488C05 /* FiveWireTouchController.cpp */; };
@@ -80,10 +80,9 @@
 		396E821AA125556416BD4CD1 /* SerialProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SerialProtocol.cpp; path = ../../../BlipBox/firmware/SerialProtocol.cpp; sourceTree = SOURCE_ROOT; };
 		3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3DB436F423624861AD227518 /* Animator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Animator.h; path = ../../../BlipBox/firmware/Animator.h; sourceTree = SOURCE_ROOT; };
-		415145BB140C6C400055F14F /* blipbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blipbox.icns; path = ../../Resources/blipbox.icns; sourceTree = "<group>"; };
+		3F881F7227EC7F183A68F4D6 /* MidiMessageReceiver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiMessageReceiver.h; path = ../../Source/MidiMessageReceiver.h; sourceTree = SOURCE_ROOT; };
 		4156FDFA57CB9E875DEE5C7A /* Characters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Characters.cpp; path = ../../../BlipBox/firmware/Characters.cpp; sourceTree = SOURCE_ROOT; };
 		41940D969B047E9558658C4B /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Counter.h; path = ../../../BlipBox/firmware/Counter.h; sourceTree = SOURCE_ROOT; };
-		41FB5461140C3FA50051EDF7 /* operators.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = operators.cpp; path = ../../../BlipBox/firmware/operators.cpp; sourceTree = SOURCE_ROOT; };
 		4381844D9A9572AE868B160A /* MidiZone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZone.cpp; path = ../../../BlipBox/firmware/MidiZone.cpp; sourceTree = SOURCE_ROOT; };
 		4646F809AD6C93233832846A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		47F593A1F41EE0D12717EAA7 /* MessageDispatcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MessageDispatcher.h; path = ../../../BlipBox/firmware/MessageDispatcher.h; sourceTree = SOURCE_ROOT; };
@@ -93,6 +92,7 @@
 		4B69C716A41DD1A366F2B5C9 /* globals.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = globals.h; path = ../../../BlipBox/firmware/globals.h; sourceTree = SOURCE_ROOT; };
 		4BC5DC2F1E516B123A432500 /* io.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = io.c; path = ../../../BlipBox/firmware/simulator/avr/io.c; sourceTree = SOURCE_ROOT; };
 		54D75DEDAF91397CA250ACBC /* Command.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Command.h; path = ../../../BlipBox/firmware/Command.h; sourceTree = SOURCE_ROOT; };
+		570D91D5D749A6C827895A84 /* MidiMessageReceiver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiMessageReceiver.cpp; path = ../../Source/MidiMessageReceiver.cpp; sourceTree = SOURCE_ROOT; };
 		5C47100C8F78F70EEC550FAB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		5D67A1C3A27B560B7E541076 /* MidiZoneComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZoneComponent.cpp; path = ../../Source/MidiZoneComponent.cpp; sourceTree = SOURCE_ROOT; };
 		5E69807E80D60E31B5E620D6 /* pgmspace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pgmspace.h; path = ../../../BlipBox/firmware/simulator/avr/pgmspace.h; sourceTree = SOURCE_ROOT; };
@@ -129,12 +129,13 @@
 		B121DEF6878456309C03792E /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		B37801490B33221F20D7FABE /* pgmspace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pgmspace.c; path = ../../../BlipBox/firmware/simulator/avr/pgmspace.c; sourceTree = SOURCE_ROOT; };
 		B3FACBB46867008A02A1D252 /* Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Protocol.h; path = ../../../BlipBox/firmware/Protocol.h; sourceTree = SOURCE_ROOT; };
+		B47AFE3755DCECDC3A8C9105 /* operators.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = operators.cpp; path = ../../../BlipBox/firmware/operators.cpp; sourceTree = SOURCE_ROOT; };
 		B493093CDC7CFB1CF7D58783 /* io.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = io.h; path = ../../../BlipBox/firmware/simulator/avr/io.h; sourceTree = SOURCE_ROOT; };
 		B669E8768BCF147C0C79D711 /* interrupt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = interrupt.h; path = ../../../BlipBox/firmware/simulator/avr/interrupt.h; sourceTree = SOURCE_ROOT; };
 		B6B847128944D605A53690F3 /* MidiZoneComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiZoneComponent.h; path = ../../Source/MidiZoneComponent.h; sourceTree = SOURCE_ROOT; };
 		B75DE44B1A36EA8FC1770949 /* BinaryData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData.cpp; path = ../../JuceLibraryCode/BinaryData.cpp; sourceTree = SOURCE_ROOT; };
 		BAE37E17112F357A454A9DDB /* PresetComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PresetComponent.cpp; path = ../../Source/PresetComponent.cpp; sourceTree = SOURCE_ROOT; };
-		C24A7BC4A006AF568BB11723 /* MidiZoneEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZoneEventHandler.cpp; path = ../../../BlipBox/firmware/MidiZoneEventHandler.cpp; sourceTree = SOURCE_ROOT; };
+		BE5611BCEEBB3C9D6E1069BE /* MidiZoneEventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiZoneEventHandler.cpp; path = ../../Source/MidiZoneEventHandler.cpp; sourceTree = SOURCE_ROOT; };
 		C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		C4621B9BF5FB0E6B7CC40359 /* globals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = globals.cpp; path = ../../../BlipBox/firmware/globals.cpp; sourceTree = SOURCE_ROOT; };
 		C4DF7781AF2F36C8359C56D0 /* Configuration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Configuration.cpp; path = ../../../BlipBox/firmware/Configuration.cpp; sourceTree = SOURCE_ROOT; };
@@ -144,7 +145,6 @@
 		CF4AAE045B54AD178F8A3A34 /* Position.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Position.h; path = ../../../BlipBox/firmware/Position.h; sourceTree = SOURCE_ROOT; };
 		D1C0D693490BB7CFAA44E7B2 /* ApplicationSettingsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationSettingsComponent.cpp; path = ../../Source/ApplicationSettingsComponent.cpp; sourceTree = SOURCE_ROOT; };
 		D500914F8650AB7A547D83B1 /* SimWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimWindow.h; path = ../../Source/SimWindow.h; sourceTree = SOURCE_ROOT; };
-		D517073C584412ECA97019B4 /* interrupt.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = interrupt.o; path = ../../../BlipBox/firmware/simulator/avr/interrupt.o; sourceTree = SOURCE_ROOT; };
 		D9233186CAB0B4CB82B1A41E /* ApplicationSettingsComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationSettingsComponent.h; path = ../../Source/ApplicationSettingsComponent.h; sourceTree = SOURCE_ROOT; };
 		DB0B82BCC9710D4366310C42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
 		DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KeyController.cpp; path = ../../../BlipBox/firmware/KeyController.cpp; sourceTree = SOURCE_ROOT; };
@@ -192,7 +192,7 @@
 		08BD380D6E3632F29E55E4E5 /* BlipBox */ = {
 			isa = PBXGroup;
 			children = (
-				41FB5461140C3FA50051EDF7 /* operators.cpp */,
+				B47AFE3755DCECDC3A8C9105 /* operators.cpp */,
 				DD0F6DE562D5D1F56543BAE2 /* simulator */,
 				ABD717D6A2B99B3E3FFC0E14 /* Animator.cpp */,
 				3DB436F423624861AD227518 /* Animator.h */,
@@ -222,7 +222,6 @@
 				E62FF6BB54816FAB4F0919B0 /* MidiPresetReader.h */,
 				4381844D9A9572AE868B160A /* MidiZone.cpp */,
 				0FCFA1A7CD2E3795595D6E91 /* MidiZone.h */,
-				C24A7BC4A006AF568BB11723 /* MidiZoneEventHandler.cpp */,
 				67E0B830401EA0E883CCAAAC /* MidiZoneEventHandler.h */,
 				ADBAB30F91E19C5690C81492 /* Parameters.cpp */,
 				92E65A2A27180E42E67B08CD /* Parameters.h */,
@@ -258,7 +257,6 @@
 				07A7CF286FAEC0E97C728C6F /* eeprom.h */,
 				0B0A69855A7F8C062E7C3A7B /* interrupt.c */,
 				B669E8768BCF147C0C79D711 /* interrupt.h */,
-				D517073C584412ECA97019B4 /* interrupt.o */,
 				4BC5DC2F1E516B123A432500 /* io.c */,
 				B493093CDC7CFB1CF7D58783 /* io.h */,
 				B37801490B33221F20D7FABE /* pgmspace.c */,
@@ -270,6 +268,9 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				BE5611BCEEBB3C9D6E1069BE /* MidiZoneEventHandler.cpp */,
+				570D91D5D749A6C827895A84 /* MidiMessageReceiver.cpp */,
+				3F881F7227EC7F183A68F4D6 /* MidiMessageReceiver.h */,
 				6C8A68D5EF029999EA6109A4 /* AsioSerial.cpp */,
 				95CB6C4BBD95128790768B0D /* AsioSerial.h */,
 				B00B43664A84156175CC3773 /* Serial.cpp */,
@@ -316,7 +317,6 @@
 		C2FA7C7DC4BD36D5512176C4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				415145BB140C6C400055F14F /* blipbox.icns */,
 				DB0B82BCC9710D4366310C42 /* Info.plist */,
 			);
 			name = Resources;
@@ -429,7 +429,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				415145BC140C6C400055F14F /* blipbox.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,8 +439,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55D43AAB5256F415A1FC6011 /* MidiZoneEventHandler.cpp in Sources */,
+				E23BC9EB4036B3FAB396BE4D /* MidiMessageReceiver.cpp in Sources */,
 				E8849F36894696AFEDAC7FBE /* AsioSerial.cpp in Sources */,
 				DB30F69E948BB93E0FB3251E /* Serial.cpp in Sources */,
+				24FE4AD01B64790BD83A75F2 /* operators.cpp in Sources */,
 				D04EDF3303086EDE7D74654D /* eeprom.c in Sources */,
 				7959587CF0CDD8D15D1DE427 /* interrupt.c in Sources */,
 				C7F98798B2AFD87CC8AFD1A4 /* io.c in Sources */,
@@ -458,7 +460,6 @@
 				40A0DEE6CCB568B97B4B6942 /* KeyController.cpp in Sources */,
 				5E40A60A20FD97F37CA399F9 /* MessageDispatcher.cpp in Sources */,
 				FA4396BB767E05FB7E59CFBF /* MidiZone.cpp in Sources */,
-				9B3B27FA91B96E104F5B8722 /* MidiZoneEventHandler.cpp in Sources */,
 				A9E34DDD2DBBFF79C037B998 /* Parameters.cpp in Sources */,
 				53787FCBE80B7440E9D63F28 /* PresetChooser.cpp in Sources */,
 				496271737F61DECBB9980E10 /* SerialProtocol.cpp in Sources */,
@@ -477,7 +478,6 @@
 				71F5C2BBD95AA04C4203E94D /* SimWindow.cpp in Sources */,
 				41F00686466A35B446F21DD4 /* BinaryData.cpp in Sources */,
 				4F95C2A72AD5660572349E8B /* JuceLibraryCode.mm in Sources */,
-				41FB5462140C3FA50051EDF7 /* operators.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

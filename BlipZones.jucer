@@ -32,17 +32,23 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="ywUx13" name="MidiZoneEventHandler.cpp" compile="1" resource="0"
+            file="Source/MidiZoneEventHandler.cpp"/>
+      <FILE id="lOwkj1" name="MidiMessageReceiver.cpp" compile="1" resource="0"
+            file="Source/MidiMessageReceiver.cpp"/>
+      <FILE id="gIbkfI" name="MidiMessageReceiver.h" compile="0" resource="0"
+            file="Source/MidiMessageReceiver.h"/>
       <FILE id="ZNHE2U" name="AsioSerial.cpp" compile="1" resource="0" file="Source/AsioSerial.cpp"/>
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="UNBQ0j" name="operators.cpp" compile="1" resource="0" file="../BlipBox/firmware/operators.cpp"/>
         <GROUP id="zEIWUP" name="simulator">
           <GROUP id="rWYSVI" name="avr">
             <FILE id="BDOfLN" name="eeprom.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.c"/>
             <FILE id="fba5rd" name="eeprom.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.h"/>
             <FILE id="uT5KhS" name="interrupt.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.c"/>
             <FILE id="QO28mm" name="interrupt.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.h"/>
-            <FILE id="k3jAjL" name="interrupt.o" compile="0" resource="1" file="../BlipBox/firmware/simulator/avr/interrupt.o"/>
             <FILE id="CYpWHf" name="io.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/io.c"/>
             <FILE id="S22Yp" name="io.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/io.h"/>
             <FILE id="F9vCb1" name="pgmspace.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/pgmspace.c"/>
@@ -88,8 +94,6 @@
               file="../BlipBox/firmware/MidiPresetReader.h"/>
         <FILE id="qYiMx4" name="MidiZone.cpp" compile="1" resource="0" file="../BlipBox/firmware/MidiZone.cpp"/>
         <FILE id="rz6KbC" name="MidiZone.h" compile="0" resource="0" file="../BlipBox/firmware/MidiZone.h"/>
-        <FILE id="F3p7LH" name="MidiZoneEventHandler.cpp" compile="1" resource="0"
-              file="../BlipBox/firmware/MidiZoneEventHandler.cpp"/>
         <FILE id="WtVyYi" name="MidiZoneEventHandler.h" compile="0" resource="0"
               file="../BlipBox/firmware/MidiZoneEventHandler.h"/>
         <FILE id="qOl4Cp" name="Parameters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Parameters.cpp"/>

@@ -43,8 +43,11 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/MidiZoneEventHandler_22e73c66.o \
+  $(OBJDIR)/MidiMessageReceiver_a5467196.o \
   $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/Serial_5af037d.o \
+  $(OBJDIR)/operators_caa0a374.o \
   $(OBJDIR)/eeprom_119b2b22.o \
   $(OBJDIR)/interrupt_7815b74b.o \
   $(OBJDIR)/io_396ac548.o \
@@ -61,7 +64,6 @@ OBJECTS := \
   $(OBJDIR)/KeyController_64b2cc60.o \
   $(OBJDIR)/MessageDispatcher_7190f993.o \
   $(OBJDIR)/MidiZone_b040b8d2.o \
-  $(OBJDIR)/MidiZoneEventHandler_bc17ccc2.o \
   $(OBJDIR)/Parameters_d3e365cf.o \
   $(OBJDIR)/PresetChooser_3d3409e1.o \
   $(OBJDIR)/SerialProtocol_a3d59791.o \
@@ -96,6 +98,16 @@ clean:
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
 
+$(OBJDIR)/MidiZoneEventHandler_22e73c66.o: ../../Source/MidiZoneEventHandler.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiZoneEventHandler.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiMessageReceiver_a5467196.o: ../../Source/MidiMessageReceiver.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiMessageReceiver.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling AsioSerial.cpp"
@@ -104,6 +116,11 @@ $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 $(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/operators_caa0a374.o: ../../../BlipBox/firmware/operators.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling operators.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/eeprom_119b2b22.o: ../../../BlipBox/firmware/simulator/avr/eeprom.c
@@ -184,11 +201,6 @@ $(OBJDIR)/MessageDispatcher_7190f993.o: ../../../BlipBox/firmware/MessageDispatc
 $(OBJDIR)/MidiZone_b040b8d2.o: ../../../BlipBox/firmware/MidiZone.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling MidiZone.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MidiZoneEventHandler_bc17ccc2.o: ../../../BlipBox/firmware/MidiZoneEventHandler.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiZoneEventHandler.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/Parameters_d3e365cf.o: ../../../BlipBox/firmware/Parameters.cpp
