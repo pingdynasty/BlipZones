@@ -42,10 +42,16 @@
 
 bool doSendScreenUpdates = false;
 
+#define LED_COLUMNS       8
+#define LED_ROWS          10
+
 class BlipConnectionThread : public Thread {
+private:
+  uint8_t leds[LED_COLUMNS*LED_ROWS];
 public:
   BlipConnectionThread () : Thread(T("BlipConnectionThread")) {
     setPriority(0);
+    memset(leds, 0, sizeof(leds));
   }
   void run(){
     sleep(2000);
@@ -54,9 +60,15 @@ public:
     while(!threadShouldExit()){
       if(doSendScreenUpdates){
 	client->sendCommand(START_LED_BLOCK);
-	for(int x=0; x<10; ++x)
-	  for(int y=0; y<8; ++y)
-	    client->setLed(x, y, sim->getLed(x, y));
+	for(int x=0; x<LED_ROWS; ++x){
+	  for(int y=0; y<LED_COLUMNS; ++y){
+	    uint8_t led = sim->getLed(x, y);
+	    if(led != leds[x+y*LED_ROWS]){
+	      leds[x+y*LED_ROWS] = led;
+	      client->setLed(x, y, led);
+	    }
+	  }
+	}
 	client->sendCommand(END_LED_BLOCK);
       }
       sleep(20);
