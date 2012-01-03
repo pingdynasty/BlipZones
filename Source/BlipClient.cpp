@@ -53,7 +53,7 @@ public:
 	  for(int y=0; y<8; ++y)
 	    if(leds[x][y] != sim->getLed(x, y)){
 	      leds[x][y] = sim->getLed(x, y);
-	      client->setLed(x, y, sim->getLed(x, y));
+	      client->setLed(x, y, leds[x][y]);
 	    }
 	client->sendCommand(END_LED_BLOCK);
       }
