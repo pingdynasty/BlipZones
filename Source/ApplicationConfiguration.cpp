@@ -1,5 +1,10 @@
 #include "ApplicationConfiguration.h"
+#include "BlipSim.h"
+#include "SimScreen.h"
+#include "BlipClient.h"
+#include "MidiZonePreset.h"
 #include "MidiMessageReceiver.h"
+#include "ControlValues.h"
 
 PropertiesFile* properties = NULL;
 PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
@@ -16,6 +21,8 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("serialspeed", "57600");
     if(!properties->containsKey("presetdirectory"))
       properties->setValue("presetdirectory", File::getSpecialLocation(File::userDocumentsDirectory).getChildFile("BlipZones").getFullPathName());
+    if(!properties->containsKey("midiinput"))
+      properties->setValue("midiinput", "none");
     if(!properties->containsKey("midioutput"))
       properties->setValue("midioutput", "none");
     if(!properties->isValidFile())
@@ -36,6 +43,11 @@ BlipClient* ApplicationConfiguration::getBlipClient(){
   if(blipclient == NULL)
     blipclient = new BlipClient();
   return blipclient;
+}
+
+MidiMessageReceiver receiver;
+MidiMessageReceiver* ApplicationConfiguration::getMidiMessageReceiver(){
+  return &receiver;
 }
 
 MidiZonePreset presets[MIDI_ZONE_PRESETS];

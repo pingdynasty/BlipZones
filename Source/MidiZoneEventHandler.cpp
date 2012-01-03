@@ -2,6 +2,7 @@
 #include "ApplicationConfiguration.h"
 #include "defs.h"
 #include "globals.h"
+#include "ControlValues.h"
 
 int8_t getControlValue(uint8_t index){
   return ApplicationConfiguration::getControlValues()->getControlValue(index);

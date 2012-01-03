@@ -21,12 +21,12 @@ public:
   }
 
   void setNote(uint8_t channel, uint8_t pitch, int8_t velocity){
-    std::cout << "set note " << (int)pitch << ": " << (int)velocity << std::endl;
+//     std::cout << "set note " << (int)pitch << ": " << (int)velocity << std::endl;
     notes[channel][pitch] = velocity;
   }
 
   void setController(uint8_t channel, uint8_t cc, int8_t value){
-    std::cout << "set cc " << (int)channel << "/" << (int)cc << ": " << (int)value << std::endl;
+//     std::cout << "set cc " << (int)channel << "/" << (int)cc << ": " << (int)value << std::endl;
     controllers[channel][cc] = value;
   }
 

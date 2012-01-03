@@ -1,6 +1,9 @@
 #include "BlipClient.h"
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
+#include "MidiMessageReceiver.h"
+#include "BlipSim.h"
+#include "MidiZonePreset.h"
 
 #define THREAD_TIMEOUT_MS  2000
 
@@ -32,9 +35,12 @@
 bool doSendScreenUpdates = false;
 
 class BlipConnectionThread : public Thread {
+private:
+  uint8_t leds[10][8];
 public:
   BlipConnectionThread () : Thread(T("BlipConnectionThread")) {
     setPriority(0);
+    memset(leds, 0, sizeof(leds));
   }
   void run(){
     sleep(2000);
@@ -45,7 +51,10 @@ public:
 	client->sendCommand(START_LED_BLOCK);
 	for(int x=0; x<10; ++x)
 	  for(int y=0; y<8; ++y)
-	    client->setLed(x, y, sim->getLed(x, y));
+	    if(leds[x][y] != sim->getLed(x, y)){
+	      leds[x][y] = sim->getLed(x, y);
+	      client->setLed(x, y, sim->getLed(x, y));
+	    }
 	client->sendCommand(END_LED_BLOCK);
       }
       sleep(20);
@@ -70,6 +79,10 @@ void BlipClient::initialise(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
   setPort(properties->getValue("serialport"));
   setSpeed(properties->getValue("serialspeed").getIntValue());
+  ApplicationConfiguration::getMidiMessageReceiver()->
+    setMidiInput(properties->getValue("midiinput"));
+  ApplicationConfiguration::getBlipSim()->
+    setMidiOutput(properties->getValue("midioutput"));
 }
 
 bool BlipClient::isConnected(){
@@ -120,7 +133,7 @@ void BlipClient::shutdown(){
 }
 
 void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
-  std::cout << "position " << x << "/" << y << std::endl;
+//   std::cout << "position " << x << "/" << y << std::endl;
 //   Component* window = ApplicationConfiguration::getSimScreen();
 //   Point<int> p = window->getPosition();
 //   p = p.translated(x*window->getWidth()/1024, window->getHeight()-y*window->getHeight()/1024);
@@ -132,7 +145,7 @@ void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
 void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
   static uint8_t buf[1+MIDI_ZONE_PRESET_SIZE*MIDI_ZONES_IN_PRESET];
   static uint8_t bufpos;
-  std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
+//   std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
   if(pid == 6){
 //     std::cout << "preset data " << std::dec << (int)bufpos << std::endl;
     if(bufpos < sizeof(buf))
@@ -141,7 +154,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
       std::cerr << "preset buffer overflow!" << std::endl;
     if(bufpos == sizeof(buf)){
       uint8_t index = buf[0];
-      std::cout << "loading preset " << std::dec << (int)index << std::endl;
+//       std::cout << "loading preset " << std::dec << (int)index << std::endl;
       ApplicationConfiguration::getMidiZonePreset(index)->read(&buf[1]);
       bufpos = 0;
       sendScreenUpdates(true);
@@ -150,7 +163,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
 }
 
 void BlipClient::handleReleaseMessage(){
-  std::cout << "release" << std::endl;
+//   std::cout << "release" << std::endl;
   ApplicationConfiguration::getBlipSim()->release();
 }
 
@@ -182,7 +195,7 @@ int BlipClient::handle(unsigned char* data, size_t len){
     handleReleaseMessage();
     return 1;
   }else{
-    std::cout << "unhandled message [" << (int)type << "]" << std::endl;
+    std::cerr << "unhandled message [" << (int)type << "]" << std::endl;
     return len;
   }
 }

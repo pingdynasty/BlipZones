@@ -23,6 +23,8 @@
 // #include <Math.h>
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsComponent.h"
+#include "BlipClient.h"
+#include "BlipSim.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -521,7 +523,8 @@ void PresetComponent::sendPreset(){
 void PresetComponent::openSettings(){
   std::cout << "opening settings" << std::endl;
   ApplicationSettingsComponent component;
-  component.showModalDialog(this);
+  if(component.showModalDialog(this))
+    ApplicationConfiguration::getBlipClient()->initialise();    
   std::cout << "settings done" << std::endl;
 }
 

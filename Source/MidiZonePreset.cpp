@@ -1,6 +1,7 @@
 #include "MidiZonePreset.h"
 #include "globals.h"
 #include "ApplicationConfiguration.h"
+#include "ControlValues.h"
 
 #define NONE_SELECTED -1
 

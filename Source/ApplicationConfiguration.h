@@ -2,11 +2,13 @@
 #define __APPLICATIONCONFIGURATION_H__
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "BlipSim.h"
-#include "SimScreen.h"
-#include "BlipClient.h"
-#include "MidiZonePreset.h"
-#include "ControlValues.h"
+
+class BlipSim;
+class SimScreen;
+class BlipClient;
+class MidiZonePreset;
+class ControlValues;
+class MidiMessageReceiver;
 
 class ApplicationConfiguration {
 public:
@@ -18,6 +20,7 @@ public:
   static MidiZonePreset* getMidiZonePreset(int index);
   static File getPresetDirectory();
   static ControlValues* getControlValues();
+  static MidiMessageReceiver* getMidiMessageReceiver();
 private:
 };
 

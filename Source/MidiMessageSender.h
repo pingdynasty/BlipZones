@@ -72,13 +72,13 @@ class MidiMessageSender {
       }
       // conditional fall-through
     default:
-      std::cout << "invalid midi message: 0x" << std::hex << (int)buf[frompos] << std::endl;
+      std::cerr << "invalid midi message: 0x" << std::hex << (int)buf[frompos] << std::endl;
       len = topos - ++frompos;
       if(len <= 0)
 	topos = frompos = len = 0;
       return;
     }
-    std::cout << "midi message: " << (int)msglen << " / " << (int)len << std::endl;
+/*     std::cout << "midi message: " << (int)msglen << " / " << (int)len << std::endl; */
     if(msglen > 0 && msglen <= len){
       int used;
       msg = juce::MidiMessage(&buf[frompos], msglen, used, msg.getRawData()[0]);

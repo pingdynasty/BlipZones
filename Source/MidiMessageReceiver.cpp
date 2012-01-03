@@ -1,7 +1,8 @@
 #include "MidiMessageReceiver.h"
+#include "ControlValues.h"
 
 void MidiMessageReceiver::handleIncomingMidiMessage(MidiInput* source, const MidiMessage& msg){
-  std::cout << "midi! " << msg.getChannel() << std::endl;
+//   std::cout << "midi! " << msg.getChannel() << std::endl;
   ControlValues* values = ApplicationConfiguration::getControlValues();
   if(msg.isNoteOnOrOff()){
     values->setNote(msg.getChannel()-1, msg.getNoteNumber(), msg.isNoteOn() ? msg.getVelocity() : 0);

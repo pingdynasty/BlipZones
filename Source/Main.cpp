@@ -14,6 +14,7 @@
 #include "BlipSim.h"
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsComponent.h"
+#include "BlipClient.h"
 
 //==============================================================================
 class BlipZonesApplication  : public JUCEApplication
