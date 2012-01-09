@@ -105,13 +105,13 @@ Position& BlipSim::getPosition(){
   return blipbox.keys.pos;
 }
 
-extern "C" void SIG_USART_RECV();
+extern "C" void USART_RX_vect();
 extern "C" uint8_t UDR0;
 
 void BlipSim::sendSerial(uint8_t* data, size_t size){
   for(int i=0; i<size; ++i){
     UDR0 = data[i];
-    SIG_USART_RECV();    
+    USART_RX_vect();    
   }
 }
 
