@@ -2,10 +2,11 @@
 #define __APPLICATIONCONFIGURATION_H__
 
 #include "../JuceLibraryCode/JuceHeader.h"
-#include "BlipSim.h"
-#include "SimScreen.h"
-#include "BlipClient.h"
-#include "Preset.h"
+
+class BlipSim;
+class BlipClient;
+class Preset;
+class MidiMessageReceiver;
 
 class ApplicationConfiguration {
 public:
@@ -16,6 +17,7 @@ public:
   static BlipClient* getBlipClient();
   static Preset* getPreset(int index);
   static File getPresetDirectory();
+  static MidiMessageReceiver* getMidiMessageReceiver();
 private:
 };
 

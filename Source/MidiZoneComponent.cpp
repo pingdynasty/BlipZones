@@ -21,6 +21,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "ApplicationConfiguration.h"
+#include "Zone.h"
 //[/Headers]
 
 #include "MidiZoneComponent.h"

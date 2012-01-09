@@ -23,14 +23,17 @@ public:
   }
 
   void setMidiInput(juce::String name){
-    std::cout << "setting midi input: " << name << std::endl;
-    if(MidiInput::getDevices().contains(name)){
-      setMidiInput(MidiInput::openDevice(MidiInput::getDevices().indexOf(name), this));
 #if ! JUCE_WINDOWS
-    }else if(name.compare("BlipZones") == 0){
-      setMidiInput(MidiInput::createNewDevice(T("BlipZones"), this));
+    if(name.compare("BlipZones") == 0){
+      std::cout << "creating midi input: " << name << std::endl;
+      setMidiInput(MidiInput::createNewDevice(name, this));
+    }else
 #endif
+    if(MidiInput::getDevices().contains(name)){
+      std::cout << "opening midi input: " << name <<  "." << std::endl;
+      setMidiInput(MidiInput::openDevice(MidiInput::getDevices().indexOf(name), this));
     }else{
+      std::cout << "no midi input: " << name << std::endl;
       setMidiInput(NULL);
     }
   }

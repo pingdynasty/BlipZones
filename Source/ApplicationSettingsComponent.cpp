@@ -21,7 +21,7 @@
 
 //[Headers] You can add your own extra header files here...
 #include "ApplicationConfiguration.h"
-#include "MidiMessageReceiver.h"
+#include "BlipClient.h"
 //[/Headers]
 
 #include "ApplicationSettingsComponent.h"
@@ -220,21 +220,12 @@ void ApplicationSettingsComponent::buttonClicked (Button* buttonThatWasClicked)
     {
         //[UserButtonCode_connectButton] -- add your button handler code here..
       ApplicationConfiguration::getBlipClient()->disconnect();
-//       std::cout << "checking connection " << ApplicationConfiguration::getBlipClient()->getPort() << std::endl;
-//       if(ApplicationConfiguration::getBlipClient()->isConnected()){
-// 	if(ApplicationConfiguration::getBlipClient()->checkConnection()){
-// 	  std::cout << "checked connection " << ApplicationConfiguration::getBlipClient()->getPort() << std::endl;
-// 	  ApplicationConfiguration::getBlipClient()->disconnect();
-// 	}else{
-// 	  std::cout << "fake connection " << ApplicationConfiguration::getBlipClient()->getPort() << std::endl;
-// 	}
-//       }
       String port = serialPortComboBox->getText();
       String speed = serialSpeedComboBox->getText();
       ApplicationConfiguration::getBlipClient()->setPort(port);
       ApplicationConfiguration::getBlipClient()->setSpeed(speed.getIntValue());
       ApplicationConfiguration::getBlipClient()->connect();
-      std::cout << "connect pressed " << ApplicationConfiguration::getBlipClient()->isConnected() << std::endl;
+      std::cout << "connected: " << ApplicationConfiguration::getBlipClient()->isConnected() << std::endl;
         //[/UserButtonCode_connectButton]
     }
     else if (buttonThatWasClicked == okButton)
@@ -254,7 +245,7 @@ void ApplicationSettingsComponent::buttonClicked (Button* buttonThatWasClicked)
       setVisible(false);
       DialogWindow* dw = findParentComponentOfClass((DialogWindow*)nullptr);
       if(dw != nullptr)
-	dw->exitModalState(1);
+	dw->exitModalState(0);
       std::cout << "cancel pressed" << std::endl;
         //[/UserButtonCode_cancelButton]
     }
@@ -340,16 +331,13 @@ void ApplicationSettingsComponent::loadSettingsFromFile(){
   std::cout << "loaded settings from file " << properties->getFile().getFullPathName() << std::endl;
 }
 
-MidiMessageReceiver receiver;
 void ApplicationSettingsComponent::saveSettingsToFile(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
   properties->setValue("serialport", serialPortComboBox->getText());
   properties->setValue("serialspeed", serialSpeedComboBox->getText());
   properties->setValue("presetdirectory", presetDirectoryEditor->getText());
   properties->setValue("midiinput", midiInputComboBox->getText());
-  receiver.setMidiInput(midiInputComboBox->getText());
   properties->setValue("midioutput", midiOutputComboBox->getText());
-  ApplicationConfiguration::getBlipSim()->setMidiOutput(midiOutputComboBox->getText());
   properties->saveIfNeeded();
   std::cout << "saved settings to file " << properties->getFile().getFullPathName() << std::endl;
 }

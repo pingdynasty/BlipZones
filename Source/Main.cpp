@@ -12,6 +12,7 @@
 #include "MainWindow.h"
 #include "SimWindow.h"
 #include "BlipSim.h"
+#include "BlipClient.h"
 #include "ApplicationConfiguration.h"
 #include "ApplicationSettingsComponent.h"
 

@@ -1,5 +1,6 @@
 #include "ZoneAreaAnimator.h"
 #include "ApplicationConfiguration.h"
+#include "BlipSim.h"
 
 #include <algorithm>
 

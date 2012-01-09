@@ -1,5 +1,9 @@
 #include "ApplicationConfiguration.h"
 #include "MidiMessageReceiver.h"
+#include "BlipSim.h"
+#include "SimScreen.h"
+#include "BlipClient.h"
+#include "Preset.h"
 
 PropertiesFile* properties = NULL;
 PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
@@ -18,6 +22,8 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("presetdirectory", File::getSpecialLocation(File::userDocumentsDirectory).getChildFile("BlipZones").getFullPathName());
     if(!properties->containsKey("midioutput"))
       properties->setValue("midioutput", "none");
+    if(!properties->containsKey("midiinput"))
+      properties->setValue("midiinput", "none");
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }
@@ -48,6 +54,11 @@ File ApplicationConfiguration::getPresetDirectory(){
   PropertiesFile* properties = getApplicationProperties();
   File dir(properties->getValue("presetdirectory"));
   return dir;
+}
+
+MidiMessageReceiver receiver;
+MidiMessageReceiver* ApplicationConfiguration::getMidiMessageReceiver(){
+  return &receiver;
 }
 
 void ApplicationConfiguration::initialise(){

@@ -26,14 +26,17 @@ class MidiMessageSender {
   }
 
   void setMidiOutput(juce::String& name){
-    std::cout << "setting midi output: " << name << std::endl;
-    if(MidiOutput::getDevices().contains(name)){
-      setMidiOutput(MidiOutput::openDevice(MidiOutput::getDevices().indexOf(name)));
 #if ! JUCE_WINDOWS
-    }else if(name.compare("BlipZones") == 0){
-      setMidiOutput(MidiOutput::createNewDevice(T("BlipZones")));
+    if(name.compare("BlipZones") == 0){
+      std::cout << "creating midi output: " << name << std::endl;
+      setMidiOutput(MidiOutput::createNewDevice(name));
+    }else
 #endif
+    if(MidiOutput::getDevices().contains(name)){
+      std::cout << "opening midi output: " << name << "." << std::endl;
+      setMidiOutput(MidiOutput::openDevice(MidiOutput::getDevices().indexOf(name)));
     }else{
+      std::cout << "no midi output" << std::endl;
       setMidiOutput(NULL);
     }
   }

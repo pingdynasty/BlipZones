@@ -1,7 +1,9 @@
 #include "BlipClient.h"
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
+#include "MidiMessageReceiver.h"
 #include "MidiPresetReader.h"
+#include "BlipSim.h"
 #include "globals.h"
 
 #define THREAD_TIMEOUT_MS  2000
@@ -42,12 +44,12 @@
 
 bool doSendScreenUpdates = false;
 
-#define LED_COLUMNS       8
-#define LED_ROWS          10
+#define LED_COLUMNS       10
+#define LED_ROWS          8
 
 class BlipConnectionThread : public Thread {
 private:
-  uint8_t leds[LED_COLUMNS*LED_ROWS];
+  uint8_t leds[LED_COLUMNS][LED_ROWS];
 public:
   BlipConnectionThread () : Thread(T("BlipConnectionThread")) {
     setPriority(0);
@@ -63,8 +65,8 @@ public:
 	for(int x=0; x<LED_ROWS; ++x){
 	  for(int y=0; y<LED_COLUMNS; ++y){
 	    uint8_t led = sim->getLed(x, y);
-	    if(led != leds[x+y*LED_ROWS]){
-	      leds[x+y*LED_ROWS] = led;
+	    if(led != leds[x][y]){
+	      leds[x][y] = led;
 	      client->setLed(x, y, led);
 	    }
 	  }
@@ -93,6 +95,10 @@ void BlipClient::initialise(){
   PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
   setPort(properties->getValue("serialport"));
   setSpeed(properties->getValue("serialspeed").getIntValue());
+  ApplicationConfiguration::getMidiMessageReceiver()->
+    setMidiInput(properties->getValue("midiinput"));
+  ApplicationConfiguration::getBlipSim()->
+    setMidiOutput(properties->getValue("midioutput"));
 }
 
 bool BlipClient::isConnected(){

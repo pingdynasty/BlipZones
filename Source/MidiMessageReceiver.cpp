@@ -1,6 +1,9 @@
 #include "MidiMessageReceiver.h"
 
 #include "ApplicationConfiguration.h"
+#include "BlipSim.h"
+#include "Event.h"
+#include "Preset.h"
 
 void MidiMessageReceiver::handleIncomingMidiMessage(MidiInput* source, const MidiMessage& msg){
   std::cout << "midi! " << msg.getRawDataSize() << std::endl;

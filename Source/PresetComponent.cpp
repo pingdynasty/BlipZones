@@ -25,6 +25,8 @@
 #include "ApplicationSettingsComponent.h"
 #include "ZoneAreaAnimator.h"
 #include "PresetFactory.h"
+#include "BlipSim.h"
+#include "BlipClient.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -447,8 +449,10 @@ void PresetComponent::sendPreset(){
 void PresetComponent::openSettings(){
   std::cout << "opening settings" << std::endl;
   ApplicationSettingsComponent component;
-  component.showModalDialog(this);
-  std::cout << "settings done" << std::endl;
+  if(component.showModalDialog(this)){
+    ApplicationConfiguration::getBlipClient()->initialise();
+    std::cout << "settings done" << std::endl;
+  }
 }
 
 void PresetComponent::requestPreset(){
