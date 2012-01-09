@@ -3,7 +3,7 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-extern "C" void TIMER1_OVF_vect();
+extern "C" void TIMER0_OVF_vect();
 unsigned long millis(void);
 
 #define CALIBRATION_INTERVAL 10000 // calibrate OverflowTimer every so often (milliseconds)
@@ -20,7 +20,7 @@ public:
   void run(){
     while(!threadShouldExit()){
       sleep(1);
-      TIMER1_OVF_vect();
+      TIMER0_OVF_vect();
     }
   }
   void runHighRes(){
@@ -31,7 +31,7 @@ public:
     while(!threadShouldExit()){
       if(Time::getHighResolutionTicks() - ticks > period){
 	ticks = Time::getHighResolutionTicks();
-	TIMER1_OVF_vect();
+	TIMER0_OVF_vect();
       }
       if(Time::currentTimeMillis() - lastcalibrated > calibrationperiod){
 	double drift = 1.0 - (double)(millis() - timerms) / (Time::currentTimeMillis() - lastcalibrated);
