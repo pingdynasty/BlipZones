@@ -64,6 +64,7 @@
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="h98Gg" name="operators.cpp" compile="1" resource="0" file="../BlipBox/firmware/operators.cpp"/>
         <FILE id="XhszA1" name="macros.h" compile="0" resource="0" file="../BlipBox/firmware/macros.h"/>
         <FILE id="e7MNAA" name="ControlVoltageAction.h" compile="0" resource="0"
               file="../BlipBox/firmware/ControlVoltageAction.h"/>
@@ -87,7 +88,6 @@
             <FILE id="fba5rd" name="eeprom.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/eeprom.h"/>
             <FILE id="uT5KhS" name="interrupt.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.c"/>
             <FILE id="QO28mm" name="interrupt.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/interrupt.h"/>
-            <FILE id="k3jAjL" name="interrupt.o" compile="0" resource="1" file="../BlipBox/firmware/simulator/avr/interrupt.o"/>
             <FILE id="CYpWHf" name="io.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/io.c"/>
             <FILE id="S22Yp" name="io.h" compile="0" resource="0" file="../BlipBox/firmware/simulator/avr/io.h"/>
             <FILE id="F9vCb1" name="pgmspace.c" compile="1" resource="0" file="../BlipBox/firmware/simulator/avr/pgmspace.c"/>
