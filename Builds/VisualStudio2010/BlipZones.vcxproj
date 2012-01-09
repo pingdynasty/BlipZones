@@ -134,6 +134,7 @@
     <ClCompile Include="..\..\Source\ZoneAreaAnimator.cpp"/>
     <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\Serial.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\spi_bitbang.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\ControlVoltageAction.cpp"/>

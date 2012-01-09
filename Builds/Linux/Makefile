@@ -53,6 +53,7 @@ OBJECTS := \
   $(OBJDIR)/ZoneAreaAnimator_cca8cee9.o \
   $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/Serial_5af037d.o \
+  $(OBJDIR)/operators_caa0a374.o \
   $(OBJDIR)/MidiPresetReader_dc2f7da8.o \
   $(OBJDIR)/spi_bitbang_66707ed7.o \
   $(OBJDIR)/ControlVoltageAction_1c1da3c.o \
@@ -155,6 +156,11 @@ $(OBJDIR)/AsioSerial_7a9dfc75.o: ../../Source/AsioSerial.cpp
 $(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Serial.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/operators_caa0a374.o: ../../../BlipBox/firmware/operators.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling operators.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/MidiPresetReader_dc2f7da8.o: ../../../BlipBox/firmware/MidiPresetReader.cpp

@@ -58,6 +58,9 @@
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
@@ -83,9 +86,6 @@
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.c">
-      <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\interrupt.o">
       <Filter>BlipZones\Source\BlipBox\simulator\avr</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\simulator\avr\io.c">
