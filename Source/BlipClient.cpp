@@ -62,8 +62,8 @@ public:
     while(!threadShouldExit()){
       if(doSendScreenUpdates){
 	client->sendCommand(START_LED_BLOCK);
-	for(int x=0; x<LED_ROWS; ++x){
-	  for(int y=0; y<LED_COLUMNS; ++y){
+	for(int x=0; x<LED_COLUMNS; ++x){
+	  for(int y=0; y<LED_ROWS; ++y){
 	    uint8_t led = sim->getLed(x, y);
 	    if(led != leds[x][y]){
 	      leds[x][y] = led;
