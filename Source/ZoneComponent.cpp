@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  9 Dec 2011 1:40:13pm
+  Creation date:  9 Jan 2012 11:11:08pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -82,6 +82,7 @@ ZoneComponent::ZoneComponent ()
     typeComboBox2->addItem (L"Vertical Slider", 2);
     typeComboBox2->addItem (L"Momentary Button", 3);
     typeComboBox2->addItem (L"Toggle Button", 4);
+    typeComboBox2->addItem (L"Disabled", 5);
     typeComboBox2->addListener (this);
 
     addAndMakeVisible (typeComboBox3 = new ComboBox (L"Type"));
@@ -201,19 +202,20 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       typeComboBox3->setVisible(true);
       switch(typeComboBox2->getSelectedId()){
       case 1:
-	zone->setType(HORIZONTAL_SLIDER_ZONE_TYPE);
+	zone->setZoneType(HORIZONTAL_SLIDER_ZONE_TYPE);
 	break;
       case 2:
-	zone->setType(VERTICAL_SLIDER_ZONE_TYPE);
+	zone->setZoneType(VERTICAL_SLIDER_ZONE_TYPE);
 	break;
       case 3:
-	zone->setType(MOMENTARY_BUTTON_ZONE_TYPE);
+	zone->setZoneType(MOMENTARY_BUTTON_ZONE_TYPE);
 	break;
       case 4:
-	zone->setType(TOGGLE_BUTTON_ZONE_TYPE);
+	zone->setZoneType(TOGGLE_BUTTON_ZONE_TYPE);
 	break;
+      case 5:
       default:
-	zone->setType(0);
+	zone->setZoneType(DISABLED_ZONE_TYPE);
 	typeComboBox->setVisible(false);
 	typeComboBox3->setVisible(false);
       }
@@ -301,7 +303,7 @@ void ZoneComponent::loadZone(Zone* azone){
   typeComboBox->setVisible(true);
   typeComboBox3->setVisible(true);
 
-  switch(zone->getType()){
+  switch(zone->getZoneType()){
   case HORIZONTAL_SLIDER_ZONE_TYPE:
     typeComboBox2->setSelectedId(1, dontSendChangeMessage);
     break;
@@ -314,13 +316,23 @@ void ZoneComponent::loadZone(Zone* azone){
   case TOGGLE_BUTTON_ZONE_TYPE:
     typeComboBox2->setSelectedId(4, dontSendChangeMessage);
     break;
+  case DISABLED_ZONE_TYPE:
   default:
+    typeComboBox2->setSelectedId(5, dontSendChangeMessage);
     typeComboBox->setVisible(false);
     typeComboBox3->setVisible(false);
-    typeComboBox2->setText(String::empty, dontSendChangeMessage);
-//     typeComboBox2->setSelectedId(0, dontSendChangeMessage);
   }
-
+  switch(zone->getDisplayType()){
+  case LINE_DISPLAY_TYPE:
+    typeComboBox3->setSelectedId(1);
+    break;
+  case FILL_DISPLAY_TYPE:
+    typeComboBox3->setSelectedId(2);
+    break;
+  case NONE_DISPLAY_TYPE:
+  default:
+    typeComboBox3->setSelectedId(3);
+  }
   loadAction(zone->action);
 }
 
@@ -405,7 +417,7 @@ BEGIN_JUCER_METADATA
           textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <COMBOBOX name="Type" id="c60683b64f639182" memberName="typeComboBox2"
             virtualName="" explicitFocusOrder="0" pos="8 8 136 24" editable="0"
-            layout="33" items="Horizontal Slider&#10;Vertical Slider&#10;Momentary Button&#10;Toggle Button"
+            layout="33" items="Horizontal Slider&#10;Vertical Slider&#10;Momentary Button&#10;Toggle Button&#10;Disabled"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <COMBOBOX name="Type" id="ee97d6a8e0e218c6" memberName="typeComboBox3"
             virtualName="" explicitFocusOrder="0" pos="328r 40 136 24" editable="0"
