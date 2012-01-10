@@ -26,10 +26,6 @@
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
-const bool dontSendChangeMessage = true;
-const bool sendUpdateMessage = false;
-const bool sendMessageSynchronously = true;
-const bool allowNudgingOfOtherValues = true;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -149,8 +145,7 @@ void MidiPitchBendComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == channelSlider)
     {
         //[UserSliderCode_channelSlider] -- add your slider handling code here..
-      action->status = (action->status & MIDI_STATUS_MASK) |
-	((uint8_t)channelSlider->getValue() - 1);
+      action->setChannel((uint8_t)channelSlider->getValue() - 1);
         //[/UserSliderCode_channelSlider]
     }
     else if (sliderThatWasMoved == maxSlider)
@@ -178,7 +173,7 @@ void MidiPitchBendComponent::loadAction(Action* anaction){
   if(action != NULL){
     minSlider->setValue(action->minimum - 63, sendUpdateMessage, sendMessageSynchronously);
     maxSlider->setValue(action->maximum - 63, sendUpdateMessage, sendMessageSynchronously);
-    channelSlider->setValue((action->status & MIDI_CHANNEL_MASK)+1, sendUpdateMessage, sendMessageSynchronously);
+    channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
   }

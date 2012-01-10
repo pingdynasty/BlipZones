@@ -43,6 +43,8 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/ControlVoltageComponent_e8d6d51d.o \
+  $(OBJDIR)/SelectPresetComponent_c32e92a3.o \
   $(OBJDIR)/PresetFactory_fe788f0c.o \
   $(OBJDIR)/MidiNoteComponent_ad4c9beb.o \
   $(OBJDIR)/MidiPitchBendComponent_6f08226e.o \
@@ -86,7 +88,6 @@ OBJECTS := \
   $(OBJDIR)/BlipSimComponent_eafa3680.o \
   $(OBJDIR)/MainWindow_499ac812.o \
   $(OBJDIR)/Main_90ebc5c2.o \
-  $(OBJDIR)/MidiZoneComponent_5a1e8671.o \
   $(OBJDIR)/PresetComponent_8f0e6a3f.o \
   $(OBJDIR)/SimScreen_99fdf804.o \
   $(OBJDIR)/SimWindow_21e2b188.o \
@@ -107,6 +108,16 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/ControlVoltageComponent_e8d6d51d.o: ../../Source/ControlVoltageComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ControlVoltageComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/SelectPresetComponent_c32e92a3.o: ../../Source/SelectPresetComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling SelectPresetComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PresetFactory_fe788f0c.o: ../../Source/PresetFactory.cpp
 	-@mkdir -p $(OBJDIR)
@@ -321,11 +332,6 @@ $(OBJDIR)/MainWindow_499ac812.o: ../../Source/MainWindow.cpp
 $(OBJDIR)/Main_90ebc5c2.o: ../../Source/Main.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling Main.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MidiZoneComponent_5a1e8671.o: ../../Source/MidiZoneComponent.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiZoneComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/PresetComponent_8f0e6a3f.o: ../../Source/PresetComponent.cpp

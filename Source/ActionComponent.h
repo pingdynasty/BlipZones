@@ -60,6 +60,12 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
+
+protected:
+  bool dontSendChangeMessage;
+  bool sendUpdateMessage;
+  bool sendMessageSynchronously;
+  bool allowNudgingOfOtherValues;
     //[/UserVariables]
 
     //==============================================================================

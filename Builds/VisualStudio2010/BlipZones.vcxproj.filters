@@ -28,6 +28,12 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ControlVoltageComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\SelectPresetComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\PresetFactory.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -157,9 +163,6 @@
     <ClCompile Include="..\..\Source\Main.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Source\MidiZoneComponent.cpp">
-      <Filter>BlipZones\Source</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\Source\PresetComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -177,6 +180,12 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ControlVoltageComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\SelectPresetComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\PresetFactory.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
@@ -258,9 +267,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\device.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\BlipBox\firmware\DirectCounter.h">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\DisplayManager.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
@@ -322,9 +328,6 @@
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MidiMessageSender.h">
-      <Filter>BlipZones\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\Source\MidiZoneComponent.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\OverflowTimer.h">

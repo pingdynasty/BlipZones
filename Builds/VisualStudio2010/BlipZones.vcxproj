@@ -124,6 +124,8 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\ControlVoltageComponent.cpp"/>
+    <ClCompile Include="..\..\Source\SelectPresetComponent.cpp"/>
     <ClCompile Include="..\..\Source\PresetFactory.cpp"/>
     <ClCompile Include="..\..\Source\MidiNoteComponent.cpp"/>
     <ClCompile Include="..\..\Source\MidiPitchBendComponent.cpp"/>
@@ -167,7 +169,6 @@
     <ClCompile Include="..\..\Source\BlipSimComponent.cpp"/>
     <ClCompile Include="..\..\Source\MainWindow.cpp"/>
     <ClCompile Include="..\..\Source\Main.cpp"/>
-    <ClCompile Include="..\..\Source\MidiZoneComponent.cpp"/>
     <ClCompile Include="..\..\Source\PresetComponent.cpp"/>
     <ClCompile Include="..\..\Source\SimScreen.cpp"/>
     <ClCompile Include="..\..\Source\SimWindow.cpp"/>
@@ -175,6 +176,8 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\ControlVoltageComponent.h"/>
+    <ClInclude Include="..\..\Source\SelectPresetComponent.h"/>
     <ClInclude Include="..\..\Source\PresetFactory.h"/>
     <ClInclude Include="..\..\Source\MidiNoteComponent.h"/>
     <ClInclude Include="..\..\Source\MidiPitchBendComponent.h"/>
@@ -202,7 +205,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\Counter.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\defs.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\device.h"/>
-    <ClInclude Include="..\..\..\BlipBox\firmware\DirectCounter.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\DisplayManager.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\EventHandler.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\globals.h"/>
@@ -224,7 +226,6 @@
     <ClInclude Include="..\..\Source\EventHandler.h"/>
     <ClInclude Include="..\..\Source\MainWindow.h"/>
     <ClInclude Include="..\..\Source\MidiMessageSender.h"/>
-    <ClInclude Include="..\..\Source\MidiZoneComponent.h"/>
     <ClInclude Include="..\..\Source\OverflowTimer.h"/>
     <ClInclude Include="..\..\Source\PresetComponent.h"/>
     <ClInclude Include="..\..\Source\Serial.h"/>

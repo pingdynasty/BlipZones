@@ -32,6 +32,14 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="GHw1bc" name="ControlVoltageComponent.cpp" compile="1" resource="0"
+            file="Source/ControlVoltageComponent.cpp"/>
+      <FILE id="n26Fqt" name="ControlVoltageComponent.h" compile="0" resource="0"
+            file="Source/ControlVoltageComponent.h"/>
+      <FILE id="AjFfuM" name="SelectPresetComponent.cpp" compile="1" resource="0"
+            file="Source/SelectPresetComponent.cpp"/>
+      <FILE id="ez10tA" name="SelectPresetComponent.h" compile="0" resource="0"
+            file="Source/SelectPresetComponent.h"/>
       <FILE id="A5rR2x" name="PresetFactory.cpp" compile="1" resource="0"
             file="Source/PresetFactory.cpp"/>
       <FILE id="VqgEc5" name="PresetFactory.h" compile="0" resource="0" file="Source/PresetFactory.h"/>
@@ -111,7 +119,6 @@
         <FILE id="UTuFnb" name="device.h" compile="0" resource="0" file="../BlipBox/firmware/device.h"/>
         <FILE id="w5ap9x" name="DirectCounter.cpp" compile="1" resource="0"
               file="../BlipBox/firmware/DirectCounter.cpp"/>
-        <FILE id="mFtk1" name="DirectCounter.h" compile="0" resource="0" file="../BlipBox/firmware/DirectCounter.h"/>
         <FILE id="gcjb04" name="DisplayManager.cpp" compile="1" resource="0"
               file="../BlipBox/firmware/DisplayManager.cpp"/>
         <FILE id="OSgKg3" name="DisplayManager.h" compile="0" resource="0"
@@ -166,10 +173,6 @@
       <FILE id="obzgrO" name="Main.cpp" compile="1" resource="0" file="Source/Main.cpp"/>
       <FILE id="hj81aA" name="MidiMessageSender.h" compile="0" resource="0"
             file="Source/MidiMessageSender.h"/>
-      <FILE id="KQetf8" name="MidiZoneComponent.cpp" compile="1" resource="0"
-            file="Source/MidiZoneComponent.cpp"/>
-      <FILE id="ZBqpVS" name="MidiZoneComponent.h" compile="0" resource="0"
-            file="Source/MidiZoneComponent.h"/>
       <FILE id="A2jt5w" name="OverflowTimer.h" compile="0" resource="0" file="Source/OverflowTimer.h"/>
       <FILE id="tn8i9Z" name="PresetComponent.cpp" compile="1" resource="0"
             file="Source/PresetComponent.cpp"/>

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  9 Jan 2012 11:11:08pm
+  Creation date:  9 Jan 2012 11:52:47pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -23,6 +23,8 @@
 #include "MidiControllerComponent.h"
 #include "MidiPitchBendComponent.h"
 #include "MidiNoteComponent.h"
+#include "SelectPresetComponent.h"
+#include "ControlVoltageComponent.h"
 #include "MidiConstants.h"
 //[/Headers]
 
@@ -59,6 +61,7 @@ ZoneComponent::ZoneComponent ()
     typeComboBox->addItem (L"Channel Pressure", 5);
     typeComboBox->addItem (L"Polyphonic Aftertouch", 6);
     typeComboBox->addItem (L"Select Preset", 7);
+    typeComboBox->addItem (L"Control Voltage", 8);
     typeComboBox->addListener (this);
 
     addAndMakeVisible (Xslider = new Slider (L"X"));
@@ -185,6 +188,9 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 	break;
       case 7:
 	zone->action = Action::createAction(SELECT_PRESET_ACTION_TYPE);
+	break;
+      case 8:
+	zone->action = Action::createAction(CONTROL_VOLTAGE_ACTION_TYPE);
 	break;
       default:
 	zone->action = Action::createAction(0);
@@ -355,9 +361,30 @@ void ZoneComponent::loadAction(Action* action){
       component = new MidiPitchBendComponent();
       typeComboBox->setSelectedId(3, dontSendChangeMessage);
       break;
+//     case MIDI_NRPN_ACTION_TYPE:
+//        component = new MidiNRPNComponent();
+//       typeComboBox->setSelectedId(4, dontSendChangeMessage);
+//       break;
+//     case MIDI_CHANNEL_PRESSURE:
+//        component = new MidiChannelPressureComponent();
+//       typeComboBox->setSelectedId(5, dontSendChangeMessage);
+//       break;
+//     case MIDI_AFTERTOUCH:
+//        component = new MidiAftertouchComponent();
+//       typeComboBox->setSelectedId(6, dontSendChangeMessage);
+//       break;
+    case SELECT_PRESET_ACTION_TYPE:
+      component = new SelectPresetComponent();
+      typeComboBox->setSelectedId(7, dontSendChangeMessage);
+      break;
+    case CONTROL_VOLTAGE_ACTION_TYPE:
+       component = new ControlVoltageComponent();
+      typeComboBox->setSelectedId(8, dontSendChangeMessage);
+      break;
     default:
       component = new ActionComponent();
-      typeComboBox->setText(String::empty, dontSendChangeMessage);
+//       typeComboBox->setText(String::empty, dontSendChangeMessage);
+      typeComboBox->setText("Unavailable", dontSendChangeMessage);
       break;
     }
     component->loadAction(action);
@@ -405,7 +432,7 @@ BEGIN_JUCER_METADATA
              constructorParams=""/>
   <COMBOBOX name="Type" id="c1f4660eabe8fccb" memberName="typeComboBox" virtualName=""
             explicitFocusOrder="0" pos="192 8 136 24" editable="0" layout="33"
-            items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Select Preset"
+            items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Select Preset&#10;Control Voltage"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <SLIDER name="X" id="9789276617163945" memberName="Xslider" virtualName=""
           explicitFocusOrder="0" pos="8 40 136 32" min="0" max="10" int="1"

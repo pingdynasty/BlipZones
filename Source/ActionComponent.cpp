@@ -34,6 +34,10 @@ ActionComponent::ActionComponent ()
 {
 
     //[UserPreSize]
+  dontSendChangeMessage = true;
+  sendUpdateMessage = false;
+  sendMessageSynchronously = true;
+  allowNudgingOfOtherValues = true;
     //[/UserPreSize]
 
     setSize (600, 100);

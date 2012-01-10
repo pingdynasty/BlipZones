@@ -168,7 +168,7 @@ void MidiNoteComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     if (sliderThatWasMoved == channelSlider)
     {
         //[UserSliderCode_channelSlider] -- add your slider handling code here..
-      action->setChannel((uint8_t)channelSlider->getValue());
+      action->setChannel((uint8_t)channelSlider->getValue() - 1);
         //[/UserSliderCode_channelSlider]
     }
     else if (sliderThatWasMoved == maxSlider)
