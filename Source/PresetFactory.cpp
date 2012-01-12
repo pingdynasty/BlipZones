@@ -63,20 +63,21 @@ void PresetFactory::savePreset(Preset& preset, File& file){
   props.setValue("preset", index);
   props.setValue("version", FILE_FORMAT_VERSION);
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
-    saveZone(preset.getZone(i), set);
-    String zn("zone");
-    zn += i;
-    ScopedPointer<XmlElement> xml;
-    xml = set.createXml("zone");
-    props.setValue(zn, xml);
+    if(saveZone(preset.getZone(i), set)){
+      String zn("zone");
+      zn += i;
+      ScopedPointer<XmlElement> xml;
+      xml = set.createXml("zone");
+      props.setValue(zn, xml);
+    }
   }
   props.save();
   std::cout << "saved preset " << index << " to file " << props.getFile().getFullPathName() << std::endl;    
 }
 
-void PresetFactory::saveZone(Zone* zone, PropertySet& set){
-  if(zone == NULL)
-    return;
+bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
+  if(zone == NULL || zone->getZoneType() == DISABLED_ZONE_TYPE)
+    return false;
   //       set.setValue("index", i);
   set.setValue("type", zone->getZoneType());
   set.setValue("display", zone->getDisplayType());
@@ -85,6 +86,7 @@ void PresetFactory::saveZone(Zone* zone, PropertySet& set){
   set.setValue("from_row", zone->from.getRow());
   set.setValue("to_row", zone->to.getRow());
   saveAction(zone->action, set);
+  return true;
 }
 
 void PresetFactory::saveAction(Action* action, PropertySet& set){

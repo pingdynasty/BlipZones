@@ -28,6 +28,9 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MidiNoteRangeComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\ControlVoltageComponent.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -180,6 +183,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiNoteRangeComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ControlVoltageComponent.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>

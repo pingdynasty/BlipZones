@@ -37,6 +37,7 @@
 		7A0FA79588881FE82E90A5CF /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9C9572A50DB8EA6E51E1C2 /* QTKit.framework */; };
 		7EF11CCDAB43D78D5D80EADD /* MidiControllerComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FCC032539A2BAAEEF1BAE355 /* MidiControllerComponent.cpp */; };
 		80B1703C91850918C834C032 /* BlipSim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94CD8F31265CC481E0974A9C /* BlipSim.cpp */; };
+		81732AAA85794F71AFCB170C /* MidiNoteRangeComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */; };
 		82B1149437A9B20669D825CA /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4646F809AD6C93233832846A /* OpenGL.framework */; };
 		9454F2A0089170EA0DAFEF5B /* SelectPresetComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 720184C25DD227D7CC21C80B /* SelectPresetComponent.cpp */; };
 		9F3988E5875DC905119D69B9 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBD52034C01DC96C596BF5 /* Carbon.framework */; };
@@ -72,6 +73,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiNoteRangeComponent.cpp; path = ../../Source/MidiNoteRangeComponent.cpp; sourceTree = SOURCE_ROOT; };
 		07A7CF286FAEC0E97C728C6F /* eeprom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = eeprom.h; path = ../../../BlipBox/firmware/simulator/avr/eeprom.h; sourceTree = SOURCE_ROOT; };
 		0B041D56E8CA4C914812DF01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0B0A69855A7F8C062E7C3A7B /* interrupt.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = interrupt.c; path = ../../../BlipBox/firmware/simulator/avr/interrupt.c; sourceTree = SOURCE_ROOT; };
@@ -167,6 +169,7 @@
 		C9219C1C82B8574AD7225641 /* ApplicationConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationConfiguration.h; path = ../../Source/ApplicationConfiguration.h; sourceTree = SOURCE_ROOT; };
 		CB2C9645BE1FF36027BFB7A3 /* BlipSimComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlipSimComponent.h; path = ../../Source/BlipSimComponent.h; sourceTree = SOURCE_ROOT; };
 		CF4AAE045B54AD178F8A3A34 /* Position.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Position.h; path = ../../../BlipBox/firmware/Position.h; sourceTree = SOURCE_ROOT; };
+		D157564BDA2E25789E1F7A30 /* MidiNoteRangeComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiNoteRangeComponent.h; path = ../../Source/MidiNoteRangeComponent.h; sourceTree = SOURCE_ROOT; };
 		D1C0D693490BB7CFAA44E7B2 /* ApplicationSettingsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationSettingsComponent.cpp; path = ../../Source/ApplicationSettingsComponent.cpp; sourceTree = SOURCE_ROOT; };
 		D500914F8650AB7A547D83B1 /* SimWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimWindow.h; path = ../../Source/SimWindow.h; sourceTree = SOURCE_ROOT; };
 		D9233186CAB0B4CB82B1A41E /* ApplicationSettingsComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationSettingsComponent.h; path = ../../Source/ApplicationSettingsComponent.h; sourceTree = SOURCE_ROOT; };
@@ -307,6 +310,8 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */,
+				D157564BDA2E25789E1F7A30 /* MidiNoteRangeComponent.h */,
 				DA674D0C5E728A27056319C5 /* ControlVoltageComponent.cpp */,
 				DAF892BC2874B5BE59A7E3B9 /* ControlVoltageComponent.h */,
 				720184C25DD227D7CC21C80B /* SelectPresetComponent.cpp */,
@@ -490,6 +495,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81732AAA85794F71AFCB170C /* MidiNoteRangeComponent.cpp in Sources */,
 				0E81320090CBA44873DFB86C /* ControlVoltageComponent.cpp in Sources */,
 				9454F2A0089170EA0DAFEF5B /* SelectPresetComponent.cpp in Sources */,
 				28DC16EF518E8C490EDE65FE /* PresetFactory.cpp in Sources */,

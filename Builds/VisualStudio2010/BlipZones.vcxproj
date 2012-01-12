@@ -124,6 +124,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\MidiNoteRangeComponent.cpp"/>
     <ClCompile Include="..\..\Source\ControlVoltageComponent.cpp"/>
     <ClCompile Include="..\..\Source\SelectPresetComponent.cpp"/>
     <ClCompile Include="..\..\Source\PresetFactory.cpp"/>
@@ -176,6 +177,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiNoteRangeComponent.h"/>
     <ClInclude Include="..\..\Source\ControlVoltageComponent.h"/>
     <ClInclude Include="..\..\Source\SelectPresetComponent.h"/>
     <ClInclude Include="..\..\Source\PresetFactory.h"/>

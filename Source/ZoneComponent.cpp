@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  9 Jan 2012 11:52:47pm
+  Creation date:  11 Jan 2012 5:34:06pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -23,6 +23,7 @@
 #include "MidiControllerComponent.h"
 #include "MidiPitchBendComponent.h"
 #include "MidiNoteComponent.h"
+#include "MidiNoteRangeComponent.h"
 #include "SelectPresetComponent.h"
 #include "ControlVoltageComponent.h"
 #include "MidiConstants.h"
@@ -57,11 +58,12 @@ ZoneComponent::ZoneComponent ()
     typeComboBox->addItem (L"Control Change", 1);
     typeComboBox->addItem (L"Note On", 2);
     typeComboBox->addItem (L"Pitch Bend", 3);
-    typeComboBox->addItem (L"NRPN", 4);
-    typeComboBox->addItem (L"Channel Pressure", 5);
-    typeComboBox->addItem (L"Polyphonic Aftertouch", 6);
-    typeComboBox->addItem (L"Select Preset", 7);
-    typeComboBox->addItem (L"Control Voltage", 8);
+    typeComboBox->addItem (L"Channel Pressure", 4);
+    typeComboBox->addItem (L"Polyphonic Aftertouch", 5);
+    typeComboBox->addItem (L"Note Range", 6);
+    typeComboBox->addItem (L"NRPN", 7);
+    typeComboBox->addItem (L"Select Preset", 8);
+    typeComboBox->addItem (L"Control Voltage", 9);
     typeComboBox->addListener (this);
 
     addAndMakeVisible (Xslider = new Slider (L"X"));
@@ -95,8 +97,7 @@ ZoneComponent::ZoneComponent ()
     typeComboBox3->setTextWhenNoChoicesAvailable (L"(no choices)");
     typeComboBox3->addItem (L"Bar", 1);
     typeComboBox3->addItem (L"Fill", 2);
-    typeComboBox3->addItem (L"Dot", 3);
-    typeComboBox3->addItem (L"None", 4);
+    typeComboBox3->addItem (L"None", 3);
     typeComboBox3->addListener (this);
 
 
@@ -177,19 +178,22 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
       case 3:
 	zone->action = Action::createAction(MIDI_PITCH_BEND);
 	break;
-      case 4: // NRPN - todo!
-	zone->action = Action::createAction(MIDI_NRPN_ACTION_TYPE);
-	break;
-      case 5:
+      case 4:
 	zone->action = Action::createAction(MIDI_CHANNEL_PRESSURE);
 	break;
-      case 6:
+      case 5:
 	zone->action = Action::createAction(MIDI_AFTERTOUCH);
 	break;
+      case 6:
+	zone->action = Action::createAction(MIDI_NOTE_RANGE_ACTION_TYPE);
+	break;
       case 7:
-	zone->action = Action::createAction(SELECT_PRESET_ACTION_TYPE);
+	zone->action = Action::createAction(MIDI_NRPN_ACTION_TYPE);
 	break;
       case 8:
+	zone->action = Action::createAction(SELECT_PRESET_ACTION_TYPE);
+	break;
+      case 9:
 	zone->action = Action::createAction(CONTROL_VOLTAGE_ACTION_TYPE);
 	break;
       default:
@@ -347,7 +351,7 @@ void ZoneComponent::loadAction(Action* action){
   if(action == NULL){
     component = new ActionComponent();
   }else{
-    switch(action->getType() & MIDI_STATUS_MASK){
+    switch(action->getActionType()){
     case MIDI_CONTROL_CHANGE:
       component = new MidiControllerComponent();
       typeComboBox->setSelectedId(1, dontSendChangeMessage);
@@ -361,30 +365,33 @@ void ZoneComponent::loadAction(Action* action){
       component = new MidiPitchBendComponent();
       typeComboBox->setSelectedId(3, dontSendChangeMessage);
       break;
-//     case MIDI_NRPN_ACTION_TYPE:
-//        component = new MidiNRPNComponent();
-//       typeComboBox->setSelectedId(4, dontSendChangeMessage);
-//       break;
 //     case MIDI_CHANNEL_PRESSURE:
 //        component = new MidiChannelPressureComponent();
-//       typeComboBox->setSelectedId(5, dontSendChangeMessage);
+//       typeComboBox->setSelectedId(4, dontSendChangeMessage);
 //       break;
 //     case MIDI_AFTERTOUCH:
 //        component = new MidiAftertouchComponent();
-//       typeComboBox->setSelectedId(6, dontSendChangeMessage);
+//       typeComboBox->setSelectedId(5, dontSendChangeMessage);
+//       break;
+    case MIDI_NOTE_RANGE_ACTION_TYPE:
+      component = new MidiNoteRangeComponent();
+      typeComboBox->setSelectedId(6, dontSendChangeMessage);
+      break;
+//     case MIDI_NRPN_ACTION_TYPE:
+//        component = new MidiNRPNComponent();
+//       typeComboBox->setSelectedId(7, dontSendChangeMessage);
 //       break;
     case SELECT_PRESET_ACTION_TYPE:
       component = new SelectPresetComponent();
-      typeComboBox->setSelectedId(7, dontSendChangeMessage);
+      typeComboBox->setSelectedId(8, dontSendChangeMessage);
       break;
     case CONTROL_VOLTAGE_ACTION_TYPE:
        component = new ControlVoltageComponent();
-      typeComboBox->setSelectedId(8, dontSendChangeMessage);
+      typeComboBox->setSelectedId(9, dontSendChangeMessage);
       break;
     default:
       component = new ActionComponent();
-//       typeComboBox->setText(String::empty, dontSendChangeMessage);
-      typeComboBox->setText("Unavailable", dontSendChangeMessage);
+      typeComboBox->setText(T("Unavailable"), dontSendChangeMessage);
       break;
     }
     component->loadAction(action);
@@ -432,7 +439,7 @@ BEGIN_JUCER_METADATA
              constructorParams=""/>
   <COMBOBOX name="Type" id="c1f4660eabe8fccb" memberName="typeComboBox" virtualName=""
             explicitFocusOrder="0" pos="192 8 136 24" editable="0" layout="33"
-            items="Control Change&#10;Note On&#10;Pitch Bend&#10;NRPN&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Select Preset&#10;Control Voltage"
+            items="Control Change&#10;Note On&#10;Pitch Bend&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Note Range&#10;NRPN&#10;Select Preset&#10;Control Voltage"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <SLIDER name="X" id="9789276617163945" memberName="Xslider" virtualName=""
           explicitFocusOrder="0" pos="8 40 136 32" min="0" max="10" int="1"
@@ -448,7 +455,7 @@ BEGIN_JUCER_METADATA
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <COMBOBOX name="Type" id="ee97d6a8e0e218c6" memberName="typeComboBox3"
             virtualName="" explicitFocusOrder="0" pos="328r 40 136 24" editable="0"
-            layout="33" items="Bar&#10;Fill&#10;Dot&#10;None" textWhenNonSelected=""
+            layout="33" items="Bar&#10;Fill&#10;None" textWhenNonSelected=""
             textWhenNoItems="(no choices)"/>
 </JUCER_COMPONENT>
 

@@ -130,6 +130,8 @@ int BlipClient::connect(){
     juce::Thread::startThread();
     connectionthread.startThread();
     sendScreenUpdates(true);
+    clear();
+    ApplicationConfiguration::getBlipSim()->clear();
   }
   return status;
 }
@@ -149,12 +151,7 @@ void BlipClient::shutdown(){
 }
 
 void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
-  std::cout << "position " << x << "/" << y << std::endl;
-//   Component* window = ApplicationConfiguration::getSimScreen();
-//   Point<int> p = window->getPosition();
-//   p = p.translated(x*window->getWidth()/1024, window->getHeight()-y*window->getHeight()/1024);
-//   std::cout << "p " << p.getX() << "/" << p.getY() << std::endl;
-//   Desktop::setMousePosition(p);
+//   std::cout << "position " << x << "/" << y << std::endl;
   ApplicationConfiguration::getBlipSim()->position(x, 1023-y); // inverted y axis
 }
 
@@ -162,7 +159,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
   static MidiPresetReader* reader = NULL;
   static uint8_t position = 0;
   static uint8_t index = 0;
-  std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
+//   std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
   if(pid == 6){
 //     std::cout << "preset data " << std::dec << (int)position << std::endl;
     if(position == 0){
@@ -184,7 +181,7 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
 }
 
 void BlipClient::handleReleaseMessage(){
-  std::cout << "release" << std::endl;
+//   std::cout << "release" << std::endl;
   ApplicationConfiguration::getBlipSim()->release();
 }
 
@@ -216,7 +213,7 @@ int BlipClient::handle(unsigned char* data, size_t len){
     handleReleaseMessage();
     return 1;
   }else{
-    std::cout << "unhandled message [" << (int)type << "]" << std::endl;
+    std::cerr << "unhandled message [" << (int)type << "]" << std::endl;
     return len;
   }
 }

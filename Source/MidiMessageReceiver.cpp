@@ -6,10 +6,16 @@
 #include "Preset.h"
 
 void MidiMessageReceiver::handleIncomingMidiMessage(MidiInput* source, const MidiMessage& msg){
-  std::cout << "midi! " << msg.getRawDataSize() << std::endl;
+//   std::cout << "midi! " << msg.getRawDataSize() << std::endl;
 //   ControlValues* values = ApplicationConfiguration::getControlValues();
-  if(msg.getRawDataSize() == 3){
-    MidiEvent event(msg.getRawData()[0], msg.getRawData()[1], msg.getRawData()[2]);
+  uint8_t buf[3];
+  buf[0] = msg.getRawData()[0];
+  if(msg.getRawDataSize() > 1)
+    buf[1] = msg.getRawData()[1];
+  if(msg.getRawDataSize() > 2)
+    buf[2] = msg.getRawData()[2];
+  if(msg.getRawDataSize() <= 3){
+    MidiEvent event(buf[0], buf[1], buf[2]);
 //     ApplicationConfiguration::getBlipSim()->handle(event);
     ApplicationConfiguration::getPreset(ApplicationConfiguration::getBlipSim()->getPresetIndex())->
       handle(event);

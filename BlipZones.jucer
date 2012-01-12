@@ -32,6 +32,10 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="skL8QV" name="MidiNoteRangeComponent.cpp" compile="1" resource="0"
+            file="Source/MidiNoteRangeComponent.cpp"/>
+      <FILE id="C5r53" name="MidiNoteRangeComponent.h" compile="0" resource="0"
+            file="Source/MidiNoteRangeComponent.h"/>
       <FILE id="GHw1bc" name="ControlVoltageComponent.cpp" compile="1" resource="0"
             file="Source/ControlVoltageComponent.cpp"/>
       <FILE id="n26Fqt" name="ControlVoltageComponent.h" compile="0" resource="0"

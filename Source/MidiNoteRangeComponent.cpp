@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  11 Jan 2012 5:58:03pm
+  Creation date:  11 Jan 2012 5:40:04pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -22,7 +22,7 @@
 //[Headers] You can add your own extra header files here...
 //[/Headers]
 
-#include "MidiNoteComponent.h"
+#include "MidiNoteRangeComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
@@ -32,7 +32,7 @@ const bool allowNudgingOfOtherValues = true;
 //[/MiscUserDefs]
 
 //==============================================================================
-MidiNoteComponent::MidiNoteComponent ()
+MidiNoteRangeComponent::MidiNoteRangeComponent ()
     : channelSlider (0),
       maxSlider (0),
       minSlider (0),
@@ -91,7 +91,7 @@ MidiNoteComponent::MidiNoteComponent ()
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
     addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"tone"));
+                                           L"vel"));
     label4->setFont (Font (15.0000f, Font::plain));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
@@ -109,7 +109,7 @@ MidiNoteComponent::MidiNoteComponent ()
     //[/Constructor]
 }
 
-MidiNoteComponent::~MidiNoteComponent()
+MidiNoteRangeComponent::~MidiNoteRangeComponent()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
@@ -129,7 +129,7 @@ MidiNoteComponent::~MidiNoteComponent()
 }
 
 //==============================================================================
-void MidiNoteComponent::paint (Graphics& g)
+void MidiNoteRangeComponent::paint (Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
@@ -146,7 +146,7 @@ void MidiNoteComponent::paint (Graphics& g)
     //[/UserPaint]
 }
 
-void MidiNoteComponent::resized()
+void MidiNoteRangeComponent::resized()
 {
     channelSlider->setBounds (360, 8, 56, 24);
     maxSlider->setBounds (448, 40, 64, 24);
@@ -155,12 +155,12 @@ void MidiNoteComponent::resized()
     label->setBounds (416, 8, 31, 24);
     label2->setBounds (416, 40, 32, 24);
     label3->setBounds (336, 8, 23, 24);
-    label4->setBounds (320, 40, 32, 24);
+    label4->setBounds (328, 40, 32, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
 
-void MidiNoteComponent::sliderValueChanged (Slider* sliderThatWasMoved)
+void MidiNoteRangeComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
@@ -197,8 +197,8 @@ void MidiNoteComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-void MidiNoteComponent::loadAction(Action* anaction){
-  action = dynamic_cast<MidiNoteAction*>(anaction);
+void MidiNoteRangeComponent::loadAction(Action* anaction){
+  action = dynamic_cast<MidiNoteRangeAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
     maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
@@ -219,7 +219,7 @@ void MidiNoteComponent::loadAction(Action* anaction){
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="MidiNoteComponent" componentName=""
+<JUCER_COMPONENT documentType="Component" className="MidiNoteRangeComponent" componentName=""
                  parentClasses="public ActionComponent" constructorParams="" variableInitialisers=""
                  snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
                  fixedSize="0" initialWidth="600" initialHeight="100">
@@ -259,8 +259,8 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="88089eba14839fec" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="320 40 32 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="tone" editableSingleClick="0" editableDoubleClick="0"
+         explicitFocusOrder="0" pos="328 40 32 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="vel" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>

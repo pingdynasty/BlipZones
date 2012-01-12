@@ -43,6 +43,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/MidiNoteRangeComponent_83ee53dc.o \
   $(OBJDIR)/ControlVoltageComponent_e8d6d51d.o \
   $(OBJDIR)/SelectPresetComponent_c32e92a3.o \
   $(OBJDIR)/PresetFactory_fe788f0c.o \
@@ -108,6 +109,11 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/MidiNoteRangeComponent_83ee53dc.o: ../../Source/MidiNoteRangeComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiNoteRangeComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ControlVoltageComponent_e8d6d51d.o: ../../Source/ControlVoltageComponent.cpp
 	-@mkdir -p $(OBJDIR)
