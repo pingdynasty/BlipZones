@@ -67,6 +67,9 @@
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiMessageReader.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
@@ -215,6 +218,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiMessageReader.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\macros.h">
       <Filter>BlipZones\Source\BlipBox</Filter>

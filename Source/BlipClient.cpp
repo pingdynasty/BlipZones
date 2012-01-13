@@ -1,9 +1,11 @@
 #include "BlipClient.h"
+#include "Protocol.h"
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
 #include "MidiMessageReceiver.h"
 #include "MidiPresetReader.h"
 #include "BlipSim.h"
+#include "Command.h"
 #include "globals.h"
 
 #define THREAD_TIMEOUT_MS  2000
@@ -16,31 +18,6 @@
 #ifdef max
 #undef max
 #endif
-
-#define FILL_MESSAGE              0x10
-#define SET_LED_MESSAGE           0x20 // sets 1 led - 3 byte message
-// set led: 4 bits marker type, 8 bits led index, 8 bits brightness
-// 1000mmmm llllllll bbbbbbbb
-#define SET_LED_ROW_MESSAGE       0x30 // sets 8 leds - two byte message
-// led row: 0011cccc bbbbbbbb : 4 bit row index i, bit mask b
-#define SET_LED_COL_MESSAGE       0x40 // sets 8 leds - two byte message
-// led column: 0100iiii bbbbbbbb : 4 bit column index i, bit mask b
-#define WRITE_CHARACTER_MESSAGE   0x50
-#define SHIFT_LEDS_MESSAGE        0x60
-#define COMMAND_MESSAGE           0x70
-// command: 0111cccc : 4 bit command index
-#define SET_PARAMETER_MESSAGE     0xc0
-
-#define POSITION_MSG       0x50 // 0x5 << 4
-#define RELEASE_MSG        0x70 // 0x7 << 4
-#define POT1_SENSOR_MSG    0x84 // 0x80 | (0x1 << 2)
-#define X_SENSOR_MSG       0x88 // 0x80 | (0x2 << 2)
-#define Y_SENSOR_MSG       0x8c // 0x80 | (0x3 << 2)
-#define POT2_SENSOR_MSG    0x90 // 0x80 | (0x4 << 2)
-#define BUTTON1_SENSOR_MSG 0x94 // 0x80 | (0x5 << 2)
-#define BUTTON2_SENSOR_MSG 0x98 // 0x80 | (0x6 << 2)
-#define BUTTON3_SENSOR_MSG 0x9c // 0x80 | (0x7 << 2)
-#define PARAMETER_MSG      0xc0 // 0x3 << 6 B11000000
 
 bool doSendScreenUpdates = false;
 
@@ -238,33 +215,31 @@ void BlipClient::sendCommand(Command command){
   sendSerial(cmd, sizeof(cmd));  
 }
 
-#define REQUEST_PRESET_COMMAND (2 << 4)
-#define READ_PRESET_COMMAND    (1 << 4)
-
 void BlipClient::requestPreset(uint8_t index){
   sendScreenUpdates(false);
-  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, REQUEST_PRESET_COMMAND | index, 0x00};
+  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, PRESET_REQUEST_COMMAND | index, 0x00};
   sendSerial(cmd, sizeof(cmd));
 }
 
 void BlipClient::sendPreset(uint8_t index){
   sendScreenUpdates(false);
   Preset* preset = ApplicationConfiguration::getPreset(index);
-  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, READ_PRESET_COMMAND | index};
+  uint8_t cmd[] = { COMMAND_MESSAGE | MIDI_PRESET, PRESET_RECEIVE_COMMAND | index};
   sendSerial(cmd, sizeof(cmd));
   uint8_t buf[MIDI_ZONE_PRESET_SIZE];
-  // todo: move this code to MidiZonePreset
-  // todo: sanity check and clean data: select preset 0 <= data1 <= 8, et c.
+  // todo: move this code to elsewhere
+  // todo: sanity check and clean data: select preset 0 <= data1 < 8, et c.
   // todo: checksum
   for(int i=0; i<MIDI_ZONES_IN_PRESET; ++i){
 //     preset->getZone(i)->write(buf);
-
     sendSerial(buf, sizeof(buf));
   }
   cmd[0] = 0x00;
   sendSerial(cmd, 1);
   sleep(1000);
   sendScreenUpdates(true);
+  ApplicationConfiguration::getBlipSim()->clear();
+  ApplicationConfiguration::getBlipClient()->clear();
 }
 
 void BlipClient::drawZone(Zone* zone){

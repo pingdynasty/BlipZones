@@ -137,6 +137,7 @@
     <ClCompile Include="..\..\Source\ZoneAreaAnimator.cpp"/>
     <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\Serial.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\MidiMessageReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\spi_bitbang.cpp"/>
@@ -188,6 +189,7 @@
     <ClInclude Include="..\..\Source\ZoneComponent.h"/>
     <ClInclude Include="..\..\Source\ZoneAreaAnimator.h"/>
     <ClInclude Include="..\..\Source\AsioSerial.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\MidiMessageReader.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\macros.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\ControlVoltageAction.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\Action.h"/>

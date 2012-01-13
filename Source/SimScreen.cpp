@@ -67,8 +67,10 @@ void SimScreen::paint (Graphics& g)
       g.setOpacity(0.4);
       g.drawEllipse(col*dx, row*dy, width, width, 4);
       uint8_t value = blipsim->getLed(col, row_count-row-1);
-//       g.setOpacity(blipsim->getLed(col, row)/255.0);
-//       g.setColour(c.withBrightness(blipsim->getLed(col, row)/255.0));
+      // adjust for non-linear LED brightness
+//       value = std::min(value*4, 0xff);
+      value = (uint8_t)std::min((sqrt((float)value)*16.0), 255.0);
+//       g.setColour(c.withBrightness(value/255.0));
       g.setOpacity(value/255.0);
       g.fillEllipse(col*dx, row*dy, width, width);
     }

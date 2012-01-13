@@ -46,6 +46,7 @@
 		AE86D65581912C65DFB1C2AB /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */; };
 		B2187236A44707AC00748B74 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B041D56E8CA4C914812DF01 /* QuartzCore.framework */; };
 		C16EC23CA8ED5104CE32092C /* pgmspace.c in Sources */ = {isa = PBXBuildFile; fileRef = B37801490B33221F20D7FABE /* pgmspace.c */; };
+		C43200160215609507ABB83C /* MidiMessageReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 199ED66AC91FB267E8FF5CE7 /* MidiMessageReader.cpp */; };
 		C7F98798B2AFD87CC8AFD1A4 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4BC5DC2F1E516B123A432500 /* io.c */; };
 		C9517C3150BA2A09F2A914D5 /* ApplicationConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E15D74B4DFFF343958E0C9BC /* ApplicationConfiguration.cpp */; };
 		CD6C0998B8F2D44EB4A62E1F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C47100C8F78F70EEC550FAB /* WebKit.framework */; };
@@ -73,6 +74,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0465436D480E1B1F8EC547D9 /* MidiMessageReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiMessageReader.h; path = ../../../BlipBox/firmware/MidiMessageReader.h; sourceTree = SOURCE_ROOT; };
 		05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiNoteRangeComponent.cpp; path = ../../Source/MidiNoteRangeComponent.cpp; sourceTree = SOURCE_ROOT; };
 		07A7CF286FAEC0E97C728C6F /* eeprom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = eeprom.h; path = ../../../BlipBox/firmware/simulator/avr/eeprom.h; sourceTree = SOURCE_ROOT; };
 		0B041D56E8CA4C914812DF01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -82,6 +84,7 @@
 		0F27AC4DE1C689E886E341E0 /* PresetChooser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PresetChooser.cpp; path = ../../../BlipBox/firmware/PresetChooser.cpp; sourceTree = SOURCE_ROOT; };
 		15E12980527D742693934162 /* Characters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Characters.h; path = ../../../BlipBox/firmware/Characters.h; sourceTree = SOURCE_ROOT; };
 		15ED533A6F2EA4B29432EE4F /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = macros.h; path = ../../../BlipBox/firmware/macros.h; sourceTree = SOURCE_ROOT; };
+		199ED66AC91FB267E8FF5CE7 /* MidiMessageReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiMessageReader.cpp; path = ../../../BlipBox/firmware/MidiMessageReader.cpp; sourceTree = SOURCE_ROOT; };
 		1DAA57DD250A2ABB9B2091AC /* OverflowTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OverflowTimer.h; path = ../../Source/OverflowTimer.h; sourceTree = SOURCE_ROOT; };
 		1F21BAA74106CBB37B69B6F1 /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = defs.h; path = ../../../BlipBox/firmware/defs.h; sourceTree = SOURCE_ROOT; };
 		201E2BC57EDDA2796285F7F6 /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainWindow.h; path = ../../Source/MainWindow.h; sourceTree = SOURCE_ROOT; };
@@ -226,6 +229,8 @@
 		08BD380D6E3632F29E55E4E5 /* BlipBox */ = {
 			isa = PBXGroup;
 			children = (
+				199ED66AC91FB267E8FF5CE7 /* MidiMessageReader.cpp */,
+				0465436D480E1B1F8EC547D9 /* MidiMessageReader.h */,
 				B47AFE3755DCECDC3A8C9105 /* operators.cpp */,
 				15ED533A6F2EA4B29432EE4F /* macros.h */,
 				4D9B2E6AFA51D48558F423C0 /* ControlVoltageAction.h */,
@@ -508,6 +513,7 @@
 				26910F110DC34DD16624C55A /* ZoneAreaAnimator.cpp in Sources */,
 				E8849F36894696AFEDAC7FBE /* AsioSerial.cpp in Sources */,
 				DB30F69E948BB93E0FB3251E /* Serial.cpp in Sources */,
+				C43200160215609507ABB83C /* MidiMessageReader.cpp in Sources */,
 				24FE4AD01B64790BD83A75F2 /* operators.cpp in Sources */,
 				A2D436E8BD4F478C63592D77 /* MidiPresetReader.cpp in Sources */,
 				72CA0CED3B65FD043ED92EFD /* spi_bitbang.cpp in Sources */,

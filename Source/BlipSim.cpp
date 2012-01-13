@@ -94,8 +94,6 @@ void BlipSim::fill(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t brigh
 }
 
 void BlipSim::setLed(uint8_t x, uint8_t y, uint8_t brightness){
-  if(brightness && brightness < 64)
-    brightness = 64; // adjust for non-linear LED brightness
   blipbox.leds.setLed(x, y, brightness);
 }
 

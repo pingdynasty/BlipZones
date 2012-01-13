@@ -76,6 +76,10 @@
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="XawoEe" name="MidiMessageReader.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/MidiMessageReader.cpp"/>
+        <FILE id="VxKLM0" name="MidiMessageReader.h" compile="0" resource="0"
+              file="../BlipBox/firmware/MidiMessageReader.h"/>
         <FILE id="h98Gg" name="operators.cpp" compile="1" resource="0" file="../BlipBox/firmware/operators.cpp"/>
         <FILE id="XhszA1" name="macros.h" compile="0" resource="0" file="../BlipBox/firmware/macros.h"/>
         <FILE id="e7MNAA" name="ControlVoltageAction.h" compile="0" resource="0"
