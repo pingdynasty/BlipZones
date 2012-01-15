@@ -32,8 +32,8 @@ void PresetFactory::loadPreset(Preset& preset, File& file){
 }
 
 void PresetFactory::loadZone(Zone& zone, PropertySet& set){
-  zone.setZoneType(set.getIntValue("type"));
-  zone.setDisplayType(set.getIntValue("display"));
+  zone.setZoneType((ZoneType)set.getIntValue("type"));
+  zone.setDisplayType((DisplayType)set.getIntValue("display"));
   zone.from.setColumn(set.getIntValue("from_column"));
   zone.to.setColumn(set.getIntValue("to_column"));
   zone.from.setRow(set.getIntValue("from_row"));
