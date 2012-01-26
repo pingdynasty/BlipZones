@@ -43,6 +43,7 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/ZoneListBox_dec494e2.o \
   $(OBJDIR)/MidiNoteRangeComponent_83ee53dc.o \
   $(OBJDIR)/ControlVoltageComponent_e8d6d51d.o \
   $(OBJDIR)/SelectPresetComponent_c32e92a3.o \
@@ -110,6 +111,11 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/ZoneListBox_dec494e2.o: ../../Source/ZoneListBox.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ZoneListBox.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/MidiNoteRangeComponent_83ee53dc.o: ../../Source/MidiNoteRangeComponent.cpp
 	-@mkdir -p $(OBJDIR)

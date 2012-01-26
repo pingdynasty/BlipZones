@@ -23,22 +23,35 @@ void PresetFactory::loadPreset(Preset& preset, File& file){
     xml = props.getXmlValue(zn);
     if(xml){
       set.restoreFromXml(*xml);
-      Zone& zone = *preset.getZone(i);
-      delete zone.action;
-      loadZone(zone, set);
+      Zone* zone = loadZone(set);
+      preset.setZone(i, zone);
     }
   }
   std::cout << "loaded preset from file " << props.getFile().getFullPathName() << std::endl;
 }
 
-void PresetFactory::loadZone(Zone& zone, PropertySet& set){
-  zone.setZoneType((ZoneType)set.getIntValue("type"));
-  zone.setDisplayType((DisplayType)set.getIntValue("display"));
-  zone.from.setColumn(set.getIntValue("from_column"));
-  zone.to.setColumn(set.getIntValue("to_column"));
-  zone.from.setRow(set.getIntValue("from_row"));
-  zone.to.setRow(set.getIntValue("to_row"));
-  zone.action = loadAction(set);
+// void PresetFactory::loadZone(Zone& zone, PropertySet& set){
+//   zone.setZoneType((ZoneType)set.getIntValue("type"));
+//   zone.setDisplayType((DisplayType)set.getIntValue("display"));
+//   zone.from.setColumn(set.getIntValue("from_column"));
+//   zone.to.setColumn(set.getIntValue("to_column"));
+//   zone.from.setRow(set.getIntValue("from_row"));
+//   zone.to.setRow(set.getIntValue("to_row"));
+//   zone.action = loadAction(set);
+// }
+
+Zone* PresetFactory::loadZone(PropertySet& set){
+  uint8_t type = set.getIntValue("type");
+  Zone* zone = Zone::createZone(type);
+  if(zone == NULL)
+    return NULL;
+  zone->setDisplayType((DisplayType)set.getIntValue("display"));
+  zone->from.setColumn(set.getIntValue("from_column"));
+  zone->to.setColumn(set.getIntValue("to_column"));
+  zone->from.setRow(set.getIntValue("from_row"));
+  zone->to.setRow(set.getIntValue("to_row"));
+  zone->action = loadAction(set);
+  return zone;
 }
 
 Action* PresetFactory::loadAction(PropertySet& set){

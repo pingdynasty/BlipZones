@@ -47,7 +47,9 @@ BlipClient* ApplicationConfiguration::getBlipClient(){
 #define PRESETS 8
 Preset presets[PRESETS];
 Preset* ApplicationConfiguration::getPreset(int index){
-  return &presets[index];
+  if(index < PRESETS)
+    return &presets[index];
+  return NULL;
 }
 
 File ApplicationConfiguration::getPresetDirectory(){

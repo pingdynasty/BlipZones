@@ -9,7 +9,8 @@
 class PresetFactory {
 public:
   void loadPreset(Preset& preset, File& file);
-  void loadZone(Zone& zone, PropertySet& set);
+/*   void loadZone(Zone& zone, PropertySet& set); */
+  Zone* loadZone(PropertySet& set);
   Action* loadAction(PropertySet& set);
   void savePreset(Preset& preset, File& file);
   bool saveZone(Zone* zone, PropertySet& set);

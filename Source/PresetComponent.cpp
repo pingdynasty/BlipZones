@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  28 Nov 2011 10:45:07pm
+  Creation date:  23 Jan 2012 2:56:11pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -38,39 +38,20 @@ const bool useNativeVersion = false;
 //[/MiscUserDefs]
 
 //==============================================================================
-PresetComponent::PresetComponent ()
-    : zone8 (0),
-      zone7 (0),
-      zone6 (0),
-      zone5 (0),
-      zone4 (0),
-      zone3 (0),
-      zone2 (0),
+PresetComponent::PresetComponent (Preset* p)
+    : preset(p),
       sendButton (0),
       label7 (0),
       presetComboBox (0),
       requestButton (0),
-      zone1 (0),
-      toggleButton1 (0),
-      toggleButton2 (0),
-      toggleButton3 (0),
-      toggleButton4 (0),
-      toggleButton5 (0),
-      toggleButton6 (0),
-      toggleButton7 (0),
-      toggleButton8 (0),
       saveButton (0),
       loadButton (0),
       settingsButton (0),
-      runButton (0)
+      runButton (0),
+      zoneTypeComboBox (0),
+      addButton (0),
+      zones (0)
 {
-    addAndMakeVisible (zone8 = new ZoneComponent());
-    addAndMakeVisible (zone7 = new ZoneComponent());
-    addAndMakeVisible (zone6 = new ZoneComponent());
-    addAndMakeVisible (zone5 = new ZoneComponent());
-    addAndMakeVisible (zone4 = new ZoneComponent());
-    addAndMakeVisible (zone3 = new ZoneComponent());
-    addAndMakeVisible (zone2 = new ZoneComponent());
     addAndMakeVisible (sendButton = new TextButton (L"send"));
     sendButton->setConnectedEdges (Button::ConnectedOnRight);
     sendButton->addListener (this);
@@ -104,55 +85,6 @@ PresetComponent::PresetComponent ()
     requestButton->setConnectedEdges (Button::ConnectedOnLeft);
     requestButton->addListener (this);
 
-    addAndMakeVisible (zone1 = new ZoneComponent());
-    addAndMakeVisible (toggleButton1 = new ToggleButton (L"new toggle button"));
-    toggleButton1->setExplicitFocusOrder (1);
-    toggleButton1->setButtonText (L"1");
-    toggleButton1->setRadioGroupId (1005);
-    toggleButton1->addListener (this);
-
-    addAndMakeVisible (toggleButton2 = new ToggleButton (L"new toggle button"));
-    toggleButton2->setExplicitFocusOrder (2);
-    toggleButton2->setButtonText (L"2");
-    toggleButton2->setRadioGroupId (1005);
-    toggleButton2->addListener (this);
-
-    addAndMakeVisible (toggleButton3 = new ToggleButton (L"new toggle button"));
-    toggleButton3->setExplicitFocusOrder (3);
-    toggleButton3->setButtonText (L"3");
-    toggleButton3->setRadioGroupId (1005);
-    toggleButton3->addListener (this);
-
-    addAndMakeVisible (toggleButton4 = new ToggleButton (L"new toggle button"));
-    toggleButton4->setExplicitFocusOrder (4);
-    toggleButton4->setButtonText (L"4");
-    toggleButton4->setRadioGroupId (1005);
-    toggleButton4->addListener (this);
-
-    addAndMakeVisible (toggleButton5 = new ToggleButton (L"new toggle button"));
-    toggleButton5->setExplicitFocusOrder (5);
-    toggleButton5->setButtonText (L"5");
-    toggleButton5->setRadioGroupId (1005);
-    toggleButton5->addListener (this);
-
-    addAndMakeVisible (toggleButton6 = new ToggleButton (L"new toggle button"));
-    toggleButton6->setExplicitFocusOrder (6);
-    toggleButton6->setButtonText (L"6");
-    toggleButton6->setRadioGroupId (1005);
-    toggleButton6->addListener (this);
-
-    addAndMakeVisible (toggleButton7 = new ToggleButton (L"new toggle button"));
-    toggleButton7->setExplicitFocusOrder (7);
-    toggleButton7->setButtonText (L"7");
-    toggleButton7->setRadioGroupId (1005);
-    toggleButton7->addListener (this);
-
-    addAndMakeVisible (toggleButton8 = new ToggleButton (L"new toggle button"));
-    toggleButton8->setExplicitFocusOrder (8);
-    toggleButton8->setButtonText (L"8");
-    toggleButton8->setRadioGroupId (1005);
-    toggleButton8->addListener (this);
-
     addAndMakeVisible (saveButton = new TextButton (L"save button"));
     saveButton->setButtonText (L"save");
     saveButton->setConnectedEdges (Button::ConnectedOnRight);
@@ -174,6 +106,22 @@ PresetComponent::PresetComponent ()
     runButton->addListener (this);
     runButton->setToggleState (true, false);
 
+    addAndMakeVisible (zoneTypeComboBox = new ComboBox (L"Zone Type"));
+    zoneTypeComboBox->setEditableText (false);
+    zoneTypeComboBox->setJustificationType (Justification::centredLeft);
+    zoneTypeComboBox->setTextWhenNothingSelected (String::empty);
+    zoneTypeComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
+    zoneTypeComboBox->addItem (L"Horizontal Slider", 1);
+    zoneTypeComboBox->addItem (L"Vertical Slider", 2);
+    zoneTypeComboBox->addItem (L"Momentary Button", 3);
+    zoneTypeComboBox->addItem (L"Toggle Button", 4);
+    zoneTypeComboBox->addListener (this);
+
+    addAndMakeVisible (addButton = new TextButton (L"new button"));
+    addButton->setButtonText (L"add zone");
+    addButton->addListener (this);
+
+    addAndMakeVisible (zones = new ZoneListBox (preset));
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -182,9 +130,11 @@ PresetComponent::PresetComponent ()
 
 
     //[Constructor] You can add your own custom stuff here..
+    // todo: preset is now passed into constructor
 //     preset = new Preset();
-    preset = ApplicationConfiguration::getPreset(0);
-    initialise();
+//     preset = ApplicationConfiguration::getPreset(0);
+//     presetComboBox->setSelectedItemIndex(0, false);
+//     loadPreset(presetComboBox->getSelectedItemIndex());
     //[/Constructor]
 }
 
@@ -193,30 +143,17 @@ PresetComponent::~PresetComponent()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    deleteAndZero (zone8);
-    deleteAndZero (zone7);
-    deleteAndZero (zone6);
-    deleteAndZero (zone5);
-    deleteAndZero (zone4);
-    deleteAndZero (zone3);
-    deleteAndZero (zone2);
     deleteAndZero (sendButton);
     deleteAndZero (label7);
     deleteAndZero (presetComboBox);
     deleteAndZero (requestButton);
-    deleteAndZero (zone1);
-    deleteAndZero (toggleButton1);
-    deleteAndZero (toggleButton2);
-    deleteAndZero (toggleButton3);
-    deleteAndZero (toggleButton4);
-    deleteAndZero (toggleButton5);
-    deleteAndZero (toggleButton6);
-    deleteAndZero (toggleButton7);
-    deleteAndZero (toggleButton8);
     deleteAndZero (saveButton);
     deleteAndZero (loadButton);
     deleteAndZero (settingsButton);
     deleteAndZero (runButton);
+    deleteAndZero (zoneTypeComboBox);
+    deleteAndZero (addButton);
+    deleteAndZero (zones);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -238,30 +175,17 @@ void PresetComponent::paint (Graphics& g)
 
 void PresetComponent::resized()
 {
-    zone8->setBounds (80, 568, 512, 72);
-    zone7->setBounds (80, 496, 512, 72);
-    zone6->setBounds (80, 424, 512, 72);
-    zone5->setBounds (80, 352, 512, 72);
-    zone4->setBounds (80, 280, 512, 72);
-    zone3->setBounds (80, 208, 512, 72);
-    zone2->setBounds (80, 136, 512, 72);
     sendButton->setBounds (392, 648, 80, 24);
     label7->setBounds (344, 8, 54, 24);
     presetComboBox->setBounds (400, 8, 150, 24);
     requestButton->setBounds (472, 648, 80, 24);
-    zone1->setBounds (80, 64, 512, 72);
-    toggleButton1->setBounds (48, 72, 32, 24);
-    toggleButton2->setBounds (48, 144, 32, 24);
-    toggleButton3->setBounds (48, 216, 32, 24);
-    toggleButton4->setBounds (48, 288, 32, 24);
-    toggleButton5->setBounds (48, 360, 32, 24);
-    toggleButton6->setBounds (48, 432, 32, 24);
-    toggleButton7->setBounds (48, 504, 32, 24);
-    toggleButton8->setBounds (48, 576, 32, 24);
     saveButton->setBounds (120, 648, 80, 24);
     loadButton->setBounds (200, 648, 80, 24);
     settingsButton->setBounds (296, 648, 80, 24);
     runButton->setBounds (48, 648, 64, 24);
+    zoneTypeComboBox->setBounds (48, 592, 136, 24);
+    addButton->setBounds (200, 592, 150, 24);
+    zones->setBounds (48, 152, 544, 392);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -282,54 +206,6 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
         //[UserButtonCode_requestButton] -- add your button handler code here..
       requestPreset();
         //[/UserButtonCode_requestButton]
-    }
-    else if (buttonThatWasClicked == toggleButton1)
-    {
-        //[UserButtonCode_toggleButton1] -- add your button handler code here..
-      selectZone(1);
-        //[/UserButtonCode_toggleButton1]
-    }
-    else if (buttonThatWasClicked == toggleButton2)
-    {
-        //[UserButtonCode_toggleButton2] -- add your button handler code here..
-      selectZone(2);
-        //[/UserButtonCode_toggleButton2]
-    }
-    else if (buttonThatWasClicked == toggleButton3)
-    {
-        //[UserButtonCode_toggleButton3] -- add your button handler code here..
-      selectZone(3);
-        //[/UserButtonCode_toggleButton3]
-    }
-    else if (buttonThatWasClicked == toggleButton4)
-    {
-        //[UserButtonCode_toggleButton4] -- add your button handler code here..
-      selectZone(4);
-        //[/UserButtonCode_toggleButton4]
-    }
-    else if (buttonThatWasClicked == toggleButton5)
-    {
-        //[UserButtonCode_toggleButton5] -- add your button handler code here..
-      selectZone(5);
-        //[/UserButtonCode_toggleButton5]
-    }
-    else if (buttonThatWasClicked == toggleButton6)
-    {
-        //[UserButtonCode_toggleButton6] -- add your button handler code here..
-      selectZone(6);
-        //[/UserButtonCode_toggleButton6]
-    }
-    else if (buttonThatWasClicked == toggleButton7)
-    {
-        //[UserButtonCode_toggleButton7] -- add your button handler code here..
-      selectZone(7);
-        //[/UserButtonCode_toggleButton7]
-    }
-    else if (buttonThatWasClicked == toggleButton8)
-    {
-        //[UserButtonCode_toggleButton8] -- add your button handler code here..
-      selectZone(8);
-        //[/UserButtonCode_toggleButton8]
     }
     else if (buttonThatWasClicked == saveButton)
     {
@@ -352,8 +228,15 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
     else if (buttonThatWasClicked == runButton)
     {
         //[UserButtonCode_runButton] -- add your button handler code here..
-      selectZone(0);
+      // todo!
+//       selectZone(0);
         //[/UserButtonCode_runButton]
+    }
+    else if (buttonThatWasClicked == addButton)
+    {
+        //[UserButtonCode_addButton] -- add your button handler code here..
+      addZone();
+        //[/UserButtonCode_addButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -368,9 +251,15 @@ void PresetComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == presetComboBox)
     {
         //[UserComboBoxCode_presetComboBox] -- add your combo box handling code here..
-      savePreset(ApplicationConfiguration::getBlipSim()->getPresetIndex());
-      loadPreset(comboBoxThatHasChanged->getSelectedItemIndex());
+    // todo: preset is now passed into constructor
+//       savePreset(ApplicationConfiguration::getBlipSim()->getPresetIndex());
+//       loadPreset(comboBoxThatHasChanged->getSelectedItemIndex());
         //[/UserComboBoxCode_presetComboBox]
+    }
+    else if (comboBoxThatHasChanged == zoneTypeComboBox)
+    {
+        //[UserComboBoxCode_zoneTypeComboBox] -- add your combo box handling code here..
+        //[/UserComboBoxCode_zoneTypeComboBox]
     }
 
     //[UsercomboBoxChanged_Post]
@@ -404,28 +293,38 @@ void PresetComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 //   }
 // };
 
-// PresetComponent* pchack;
-void PresetComponent::initialise(){
-  presetComboBox->setSelectedItemIndex(0, false);
-  components.add(zone1);
-  components.add(zone2);
-  components.add(zone3);
-  components.add(zone4);
-  components.add(zone5);
-  components.add(zone6);
-  components.add(zone7);
-  components.add(zone8);
-  loadPreset(presetComboBox->getSelectedItemIndex());
-//   PresetSynchronizingHackThread* hack = new PresetSynchronizingHackThread(this);
-//   hack->startThread();
-//   pchack = this;
-}
-
 // void MidiZonePreset::loadPreset(uint8_t index){
 //   std::cout << "MidiZonePreset::loadPreset " << (int)index << std::endl;
 //   const MessageManagerLock mmLock;
 //   pchack->loadPreset(index);
 // }
+
+void PresetComponent::addZone(){
+  uint8_t index = preset->getNumberOfZones();
+  std::cout << "add zone " << (int)index << std::endl;
+  Zone* zone = NULL;
+  switch(zoneTypeComboBox->getSelectedId()){
+  case 1:
+    zone = Zone::createZone(HORIZONTAL_SLIDER_ZONE_TYPE);
+    break;
+  case 2:
+    zone = Zone::createZone(VERTICAL_SLIDER_ZONE_TYPE);
+    break;
+  case 3:
+    zone = Zone::createZone(MOMENTARY_BUTTON_ZONE_TYPE);
+    break;
+  case 4:
+    zone = Zone::createZone(TOGGLE_BUTTON_ZONE_TYPE);
+    break;
+//   case 5:
+//   default:
+  }
+//   zone->action = NULL; // todo: why is the constructor not called?
+  preset->setZone(index, zone);
+  zones->updateContent();
+//   zones->repaint();
+//   repaint();
+}
 
 void PresetComponent::release(){
 }
@@ -437,7 +336,9 @@ Preset* PresetComponent::getPreset(){
 void PresetComponent::sendPreset(){
   std::cout << "send!" << std::endl;
   if(ApplicationConfiguration::getBlipClient()->isConnected()){
-    ApplicationConfiguration::getBlipClient()->sendPreset(presetComboBox->getSelectedItemIndex());
+//     ApplicationConfiguration::getBlipClient()->sendPreset(presetComboBox->getSelectedItemIndex());
+    // todo!
+//     ApplicationConfiguration::getBlipClient()->sendPreset(preset);
     std::cout << "sent!" << std::endl;
   }else{
     AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon,
@@ -460,7 +361,9 @@ void PresetComponent::requestPreset(){
   if(ApplicationConfiguration::getBlipClient()->isConnected()){
     ApplicationConfiguration::getBlipClient()->requestPreset(presetComboBox->getSelectedItemIndex());
     Thread::sleep(200); // otherwise load is called before the preset has actually been loaded
-    loadZones();
+    // todo!
+//     loadPreset(BlipClient.getPreset());
+//     loadPreset(preset);
     std::cout << "requested!" << std::endl;
   }else{
     AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon,
@@ -469,49 +372,66 @@ void PresetComponent::requestPreset(){
   }
 }
 
-#define NONE_SELECTED 0xff
-uint8_t selected;
-uint8_t PresetComponent::getSelectedZoneIndex(){
-  return selected+1;
-}
-ScopedPointer<Animator> spanimator;
-void PresetComponent::selectZone(uint8_t index){
-  std::cout << "select zone " << (int)index << std::endl;
-  if(index > 0 && index <= MAX_ZONES_IN_PRESET){
-    selected = index-1;
-    spanimator = new ZoneAreaAnimator(*preset->getZone(selected));
-    ApplicationConfiguration::getBlipSim()->setAnimator(spanimator);
-  }else{
-    selected = NONE_SELECTED;
-    spanimator = NULL;
-    ApplicationConfiguration::getBlipSim()->setAnimator(preset);
-    ApplicationConfiguration::getBlipSim()->setEventHandler(preset);
-  }
-  ApplicationConfiguration::getBlipSim()->doMidi(index == 0);
-}
+// #define NONE_SELECTED 0xff
+// uint8_t selected;
+// uint8_t PresetComponent::getSelectedZoneIndex(){
+//   return selected+1;
+// }
+// ScopedPointer<Animator> spanimator;
+// void PresetComponent::selectZone(uint8_t index){
+//   std::cout << "select zone " << (int)index << std::endl;
+//   if(index > 0 && index <= MAX_ZONES_IN_PRESET){
+//     selected = index-1;
+//     if(preset->getZone(selected) != NULL){
+//       spanimator = new ZoneAreaAnimator(*preset->getZone(selected));
+//       ApplicationConfiguration::getBlipSim()->setAnimator(spanimator);
+//     }
+//   }else{
+//     selected = NONE_SELECTED;
+//     spanimator = NULL;
+//     ApplicationConfiguration::getBlipSim()->setAnimator(preset);
+//     ApplicationConfiguration::getBlipSim()->setEventHandler(preset);
+//   }
+//   ApplicationConfiguration::getBlipSim()->doMidi(index == 0);
+// }
 
 void PresetComponent::savePreset(uint8_t index){
   std::cout << "save preset " << (int)index << std::endl;
-  preset->save(index);
+
+  // todo
+//   for(int i=0; i<components.size(); ++i)
+//     preset->setZone(i, components[i]->getZone());
+//   preset->save(index);
+
 }
 
 void PresetComponent::loadPreset(uint8_t index){
   std::cout << "load preset " << (int)index << std::endl;
-
-  preset = ApplicationConfiguration::getPreset(index);
-
-//   presetComboBox->setSelectedItemIndex(index, false);
-
-  ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
-  preset->load(index);
-
-  loadZones();
+    // todo: preset is now passed into constructor
+//   preset = ApplicationConfiguration::getPreset(index);
+//   zones->setPreset(preset);
+// //   presetComboBox->setSelectedItemIndex(index, false);
+//   ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
+//   if(preset == NULL)
+//     return;
+//   preset->load(index);
+//   loadPreset(preset);
 }
 
-void PresetComponent::loadZones(){
-  for(int i=0; i<components.size(); ++i)
-    components[i]->loadZone(preset->getZone(i));
-  selectZone(getSelectedZoneIndex());
+void PresetComponent::loadPreset(Preset* p){
+//   preset = p;
+
+  // todo
+//   for(int i=0; i<components.size(); ++i){
+// //   components.clear();
+// //   for(int i=0; i<MAX_ZONES_IN_PRESET; ++i){
+//     Zone* zone = preset->getZone(i);
+// //     deleteAndZero(components[i]);
+// //     if(zone == NULL){
+// //     components.add(new ZoneComponent());
+//     components[i]->loadZone(zone);
+//   }
+//   selectZone(getSelectedZoneIndex());
 }
 
 void PresetComponent::saveFile(){
@@ -539,8 +459,8 @@ void PresetComponent::loadFile(){
   if(fc.browseForFileToOpen()){
     File file = fc.getResult();
     factory.loadPreset(*preset, file);
-  }  
-  loadZones();
+  }
+  loadPreset(preset);
 }
 
 //[/MiscUserCode]
@@ -555,31 +475,11 @@ void PresetComponent::loadFile(){
 BEGIN_JUCER_METADATA
 
 <JUCER_COMPONENT documentType="Component" className="PresetComponent" componentName=""
-                 parentClasses="public Component" constructorParams="" variableInitialisers=""
-                 snapPixels="8" snapActive="1" snapShown="1" overlayOpacity="0.330000013"
-                 fixedSize="0" initialWidth="600" initialHeight="700">
+                 parentClasses="public Component" constructorParams="Preset* p"
+                 variableInitialisers="preset(p)" snapPixels="8" snapActive="1"
+                 snapShown="1" overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
+                 initialHeight="700">
   <BACKGROUND backgroundColour="ffffffff"/>
-  <JUCERCOMP name="" id="60caeec735b4583b" memberName="zone8" virtualName=""
-             explicitFocusOrder="0" pos="80 568 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="2ba6878101e39e9d" memberName="zone7" virtualName=""
-             explicitFocusOrder="0" pos="80 496 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="f150a24e5fa97df6" memberName="zone6" virtualName=""
-             explicitFocusOrder="0" pos="80 424 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="1a795bfc2c6dfd1c" memberName="zone5" virtualName=""
-             explicitFocusOrder="0" pos="80 352 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="f1a4f72b4b947356" memberName="zone4" virtualName=""
-             explicitFocusOrder="0" pos="80 280 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="8a33541f14a036d" memberName="zone3" virtualName=""
-             explicitFocusOrder="0" pos="80 208 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <JUCERCOMP name="" id="46ed8e8b4db3c778" memberName="zone2" virtualName=""
-             explicitFocusOrder="0" pos="80 136 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
   <TEXTBUTTON name="send" id="13dae98d24a6df1f" memberName="sendButton" virtualName=""
               explicitFocusOrder="0" pos="392 648 80 24" buttonText="send"
               connectedEdges="2" needsCallback="1" radioGroupId="0"/>
@@ -595,33 +495,6 @@ BEGIN_JUCER_METADATA
   <TEXTBUTTON name="request button" id="6d5630b830980a64" memberName="requestButton"
               virtualName="" explicitFocusOrder="0" pos="472 648 80 24" buttonText="request"
               connectedEdges="1" needsCallback="1" radioGroupId="0"/>
-  <JUCERCOMP name="" id="cc448d859441e3cf" memberName="zone1" virtualName=""
-             explicitFocusOrder="0" pos="80 64 512 72" sourceFile="ZoneComponent.cpp"
-             constructorParams=""/>
-  <TOGGLEBUTTON name="new toggle button" id="162d6fc3ec28538e" memberName="toggleButton1"
-                virtualName="" explicitFocusOrder="1" pos="48 72 32 24" buttonText="1"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="93cf0f4ff2bc2160" memberName="toggleButton2"
-                virtualName="" explicitFocusOrder="2" pos="48 144 32 24" buttonText="2"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="8222b08484d4cd87" memberName="toggleButton3"
-                virtualName="" explicitFocusOrder="3" pos="48 216 32 24" buttonText="3"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="68774f91cf9a5989" memberName="toggleButton4"
-                virtualName="" explicitFocusOrder="4" pos="48 288 32 24" buttonText="4"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="6ac4129d00e3e05b" memberName="toggleButton5"
-                virtualName="" explicitFocusOrder="5" pos="48 360 32 24" buttonText="5"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="24b75ea8e86ff196" memberName="toggleButton6"
-                virtualName="" explicitFocusOrder="6" pos="48 432 32 24" buttonText="6"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="8a2e65dc8c6aa7b2" memberName="toggleButton7"
-                virtualName="" explicitFocusOrder="7" pos="48 504 32 24" buttonText="7"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
-  <TOGGLEBUTTON name="new toggle button" id="71291038b4f91490" memberName="toggleButton8"
-                virtualName="" explicitFocusOrder="8" pos="48 576 32 24" buttonText="8"
-                connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
   <TEXTBUTTON name="save button" id="5f20cba43de4f1e8" memberName="saveButton"
               virtualName="" explicitFocusOrder="0" pos="120 648 80 24" buttonText="save"
               connectedEdges="2" needsCallback="1" radioGroupId="0"/>
@@ -634,6 +507,16 @@ BEGIN_JUCER_METADATA
   <TOGGLEBUTTON name="new toggle button" id="fc0dad117bb79388" memberName="runButton"
                 virtualName="" explicitFocusOrder="9" pos="48 648 64 24" buttonText="run"
                 connectedEdges="0" needsCallback="1" radioGroupId="1005" state="1"/>
+  <COMBOBOX name="Zone Type" id="c60683b64f639182" memberName="zoneTypeComboBox"
+            virtualName="" explicitFocusOrder="0" pos="48 592 136 24" editable="0"
+            layout="33" items="Horizontal Slider&#10;Vertical Slider&#10;Momentary Button&#10;Toggle Button"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <TEXTBUTTON name="new button" id="d2ac626a2f30f00f" memberName="addButton"
+              virtualName="" explicitFocusOrder="0" pos="200 592 150 24" buttonText="add zone"
+              connectedEdges="0" needsCallback="1" radioGroupId="0"/>
+  <JUCERCOMP name="" id="b8c5bc328fdcae1f" memberName="zones" virtualName=""
+             explicitFocusOrder="0" pos="48 152 544 392" sourceFile="ZoneListBox.cpp"
+             constructorParams="preset"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

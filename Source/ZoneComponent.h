@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  11 Jan 2012 5:34:06pm
+  Creation date:  23 Jan 2012 1:48:24pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_6A861B0D__
-#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_6A861B0D__
+#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__
+#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -40,11 +40,12 @@
 */
 class ZoneComponent  : public Component,
                        public ComboBoxListener,
-                       public SliderListener
+                       public SliderListener,
+                       public ButtonListener
 {
 public:
     //==============================================================================
-    ZoneComponent ();
+    ZoneComponent (Zone* z);
     ~ZoneComponent();
 
     //==============================================================================
@@ -53,15 +54,21 @@ public:
       return zone;
     }
     void loadZone(Zone* zone);
+private:
     void loadAction(Action* action);
-    void handlePositionMessage(uint16_t x, uint16_t y);
+    void setZoneType(ZoneType type);
+public:
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void sliderValueChanged (Slider* sliderThatWasMoved);
+    void buttonClicked (Button* buttonThatWasClicked);
 
+    // Binary resources:
+    static const char* deleteButtonSmall_png;
+    static const int deleteButtonSmall_pngSize;
 
 
     //==============================================================================
@@ -74,11 +81,12 @@ private:
 
     //==============================================================================
     ActionComponent* component;
-    ComboBox* typeComboBox;
+    ComboBox* actionTypeComboBox;
     Slider* Xslider;
     Slider* Yslider;
-    ComboBox* typeComboBox2;
-    ComboBox* typeComboBox3;
+    ComboBox* displayTypeComboBox;
+    Label* typeLabel;
+    ImageButton* imageButton;
 
 
     //==============================================================================
@@ -88,4 +96,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_6A861B0D__
+#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__

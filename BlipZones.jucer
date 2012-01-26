@@ -29,9 +29,13 @@
   </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
     <GROUP id="sVYklZ" name="Resources">
+      <FILE id="rZq52C" name="DeleteButtonSmall.png" compile="0" resource="1"
+            file="Resources/DeleteButtonSmall.png"/>
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="c36A9a" name="ZoneListBox.cpp" compile="1" resource="0" file="Source/ZoneListBox.cpp"/>
+      <FILE id="GjKmuw" name="ZoneListBox.h" compile="0" resource="0" file="Source/ZoneListBox.h"/>
       <FILE id="skL8QV" name="MidiNoteRangeComponent.cpp" compile="1" resource="0"
             file="Source/MidiNoteRangeComponent.cpp"/>
       <FILE id="C5r53" name="MidiNoteRangeComponent.h" compile="0" resource="0"
