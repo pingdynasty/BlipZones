@@ -3,7 +3,7 @@
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
 #include "MidiMessageReceiver.h"
-#include "MidiPresetReader.h"
+#include "PresetReader.h"
 #include "BlipSim.h"
 #include "Command.h"
 #include "globals.h"
@@ -133,7 +133,7 @@ void BlipClient::handlePositionMessage(uint16_t x, uint16_t y){
 }
 
 void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
-  static MidiPresetReader* reader = NULL;
+  static PresetReader* reader = NULL;
   static uint8_t position = 0;
   static uint8_t index = 0;
 //   std::cout << "param [" << (int)pid << "][" << (int)value << "]" << std::endl;
@@ -141,7 +141,8 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
 //     std::cout << "preset data " << std::dec << (int)position << std::endl;
     if(position == 0){
       delete reader;
-      reader = new MidiPresetReader();
+      // todo: factor out the preset
+      reader = new PresetReader(&blipbox.preset);
       index = value;
     }
     if(position++ < MIDI_ZONE_PRESET_LENGTH){
