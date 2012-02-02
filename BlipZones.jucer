@@ -8,7 +8,7 @@
               pluginSilenceInIsSilenceOut="0" pluginTailLength="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="JuceProjectAU" pluginAUViewClass="JuceProjectAU_V1"
               pluginRTASCategory="" bundleIdentifier="org.blipbox.blipzones"
-              jucerVersion="3.0.0">
+              jucerVersion="3.0.0" smallIcon="wUSjwY" bigIcon="wUSjwY">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="~/SDKs/vstsdk2.4" rtasFolder="~/SDKs/PT_80_SDK"
                objCExtraSuffix="Q4ONJ" juceFolder="Libraries/juce"/>
@@ -29,6 +29,7 @@
   </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
     <GROUP id="sVYklZ" name="Resources">
+      <FILE id="wUSjwY" name="blipbox.png" compile="0" resource="1" file="Resources/blipbox.png"/>
       <FILE id="rZq52C" name="DeleteButtonSmall.png" compile="0" resource="1"
             file="Resources/DeleteButtonSmall.png"/>
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
@@ -80,6 +81,9 @@
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
+        <FILE id="xHJSQe" name="PresetReader.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/PresetReader.cpp"/>
+        <FILE id="NQeItB" name="PresetReader.h" compile="0" resource="0" file="../BlipBox/firmware/PresetReader.h"/>
         <FILE id="XawoEe" name="MidiMessageReader.cpp" compile="1" resource="0"
               file="../BlipBox/firmware/MidiMessageReader.cpp"/>
         <FILE id="VxKLM0" name="MidiMessageReader.h" compile="0" resource="0"
@@ -88,8 +92,6 @@
         <FILE id="XhszA1" name="macros.h" compile="0" resource="0" file="../BlipBox/firmware/macros.h"/>
         <FILE id="e7MNAA" name="ControlVoltageAction.h" compile="0" resource="0"
               file="../BlipBox/firmware/ControlVoltageAction.h"/>
-        <FILE id="yxIYd3" name="MidiPresetReader.cpp" compile="1" resource="0"
-              file="../BlipBox/firmware/MidiPresetReader.cpp"/>
         <FILE id="cYPVbi" name="Action.h" compile="0" resource="0" file="../BlipBox/firmware/Action.h"/>
         <FILE id="Qh8TKg" name="spi.h" compile="0" resource="0" file="../BlipBox/firmware/spi.h"/>
         <FILE id="mqrAXc" name="spi_bitbang.cpp" compile="1" resource="0" file="../BlipBox/firmware/spi_bitbang.cpp"/>
@@ -144,8 +146,6 @@
               file="../BlipBox/firmware/KeyController.cpp"/>
         <FILE id="ytyttA" name="KeyController.h" compile="0" resource="0" file="../BlipBox/firmware/KeyController.h"/>
         <FILE id="qSebp" name="LedController.h" compile="0" resource="0" file="../BlipBox/firmware/LedController.h"/>
-        <FILE id="v4q1H" name="MidiPresetReader.h" compile="0" resource="0"
-              file="../BlipBox/firmware/MidiPresetReader.h"/>
         <FILE id="qOl4Cp" name="Parameters.cpp" compile="1" resource="0" file="../BlipBox/firmware/Parameters.cpp"/>
         <FILE id="UMVlH" name="Parameters.h" compile="0" resource="0" file="../BlipBox/firmware/Parameters.h"/>
         <FILE id="RGy1di" name="Position.h" compile="0" resource="0" file="../BlipBox/firmware/Position.h"/>

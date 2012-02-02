@@ -138,9 +138,9 @@
     <ClCompile Include="..\..\Source\ZoneAreaAnimator.cpp"/>
     <ClCompile Include="..\..\Source\AsioSerial.cpp"/>
     <ClCompile Include="..\..\Source\Serial.cpp"/>
+    <ClCompile Include="..\..\..\BlipBox\firmware\PresetReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiMessageReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp"/>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\spi_bitbang.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\ControlVoltageAction.cpp"/>
     <ClCompile Include="..\..\..\BlipBox\firmware\Action.cpp"/>
@@ -191,6 +191,7 @@
     <ClInclude Include="..\..\Source\ZoneComponent.h"/>
     <ClInclude Include="..\..\Source\ZoneAreaAnimator.h"/>
     <ClInclude Include="..\..\Source\AsioSerial.h"/>
+    <ClInclude Include="..\..\..\BlipBox\firmware\PresetReader.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\MidiMessageReader.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\macros.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\ControlVoltageAction.h"/>
@@ -216,7 +217,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\globals.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\KeyController.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h"/>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\Position.h"/>
     <ClInclude Include="..\..\..\BlipBox\firmware\PresetChooser.h"/>
@@ -240,6 +240,12 @@
     <ClInclude Include="..\..\JuceLibraryCode\AppConfig.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".\icon.ico"/>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include=".\resources.rc"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
   <ImportGroup Label="ExtensionTargets"/>

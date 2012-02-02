@@ -7,6 +7,9 @@
 
 namespace BinaryData
 {
+    extern const char*   blipbox_png;
+    const int            blipbox_pngSize = 5226;
+
     extern const char*   DeleteButtonSmall_png;
     const int            DeleteButtonSmall_pngSize = 3992;
 

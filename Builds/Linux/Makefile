@@ -57,9 +57,9 @@ OBJECTS := \
   $(OBJDIR)/ZoneAreaAnimator_cca8cee9.o \
   $(OBJDIR)/AsioSerial_7a9dfc75.o \
   $(OBJDIR)/Serial_5af037d.o \
+  $(OBJDIR)/PresetReader_165d1067.o \
   $(OBJDIR)/MidiMessageReader_cccd780e.o \
   $(OBJDIR)/operators_caa0a374.o \
-  $(OBJDIR)/MidiPresetReader_dc2f7da8.o \
   $(OBJDIR)/spi_bitbang_66707ed7.o \
   $(OBJDIR)/ControlVoltageAction_1c1da3c.o \
   $(OBJDIR)/Action_8c62b41b.o \
@@ -182,6 +182,11 @@ $(OBJDIR)/Serial_5af037d.o: ../../Source/Serial.cpp
 	@echo "Compiling Serial.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
+$(OBJDIR)/PresetReader_165d1067.o: ../../../BlipBox/firmware/PresetReader.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling PresetReader.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
 $(OBJDIR)/MidiMessageReader_cccd780e.o: ../../../BlipBox/firmware/MidiMessageReader.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling MidiMessageReader.cpp"
@@ -190,11 +195,6 @@ $(OBJDIR)/MidiMessageReader_cccd780e.o: ../../../BlipBox/firmware/MidiMessageRea
 $(OBJDIR)/operators_caa0a374.o: ../../../BlipBox/firmware/operators.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling operators.cpp"
-	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
-
-$(OBJDIR)/MidiPresetReader_dc2f7da8.o: ../../../BlipBox/firmware/MidiPresetReader.cpp
-	-@mkdir -p $(OBJDIR)
-	@echo "Compiling MidiPresetReader.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/spi_bitbang_66707ed7.o: ../../../BlipBox/firmware/spi_bitbang.cpp

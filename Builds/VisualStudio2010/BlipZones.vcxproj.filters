@@ -25,6 +25,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Resources\blipbox.png">
+      <Filter>BlipZones\Resources</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Resources\DeleteButtonSmall.png">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
@@ -73,13 +76,13 @@
     <ClCompile Include="..\..\Source\Serial.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\BlipBox\firmware\PresetReader.cpp">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\MidiMessageReader.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\operators.cpp">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\BlipBox\firmware\MidiPresetReader.cpp">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\BlipBox\firmware\spi_bitbang.cpp">
@@ -228,6 +231,9 @@
     <ClInclude Include="..\..\Source\AsioSerial.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\BlipBox\firmware\PresetReader.h">
+      <Filter>BlipZones\Source\BlipBox</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\MidiMessageReader.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
@@ -303,9 +309,6 @@
     <ClInclude Include="..\..\..\BlipBox\firmware\LedController.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\BlipBox\firmware\MidiPresetReader.h">
-      <Filter>BlipZones\Source\BlipBox</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\BlipBox\firmware\Parameters.h">
       <Filter>BlipZones\Source\BlipBox</Filter>
     </ClInclude>
@@ -375,5 +378,15 @@
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h">
       <Filter>Juce Library Code</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".\icon.ico">
+      <Filter>Juce Library Code</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include=".\resources.rc">
+      <Filter>Juce Library Code</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
