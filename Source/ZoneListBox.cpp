@@ -4,7 +4,7 @@ ZoneListBox::ZoneListBox (Preset* p)
     : ListBox("ZoneListBox", this), preset(p)
 {
     setSize (600, 400);
-    setRowHeight(60);
+    setRowHeight(72);
 //     setRowHeight(ZoneComponent(NULL).getHeight());
 }
 
@@ -12,8 +12,24 @@ ZoneListBox::~ZoneListBox()
 {
 }
 
+void ZoneListBox::deleteKeyPressed(int row){
+  std::cout << "delete " << row << std::endl;
+}
+
+void ZoneListBox::returnKeyPressed(int row){
+  std::cout << "return " << row << std::endl;
+}
+
+void ZoneListBox::listBoxItemClicked(int row, const MouseEvent &e){
+  std::cout << "clicked " << row << std::endl;
+}
+
+void ZoneListBox::listBoxItemDoubleClicked(int row, const MouseEvent &e){
+  std::cout << "double clicked " << row << std::endl;
+}
+
 int ZoneListBox::getNumRows(){
-  std::cout << "getNumRows " << (int)preset->getNumberOfZones() << std::endl;
+   std::cout << "getNumRows " << (int)preset->getNumberOfZones() << std::endl;
   return preset->getNumberOfZones();
 }
 

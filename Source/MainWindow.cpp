@@ -7,7 +7,8 @@
 */
 
 #include "MainWindow.h"
-#include "ApplicationConfiguration.h"
+// #include "ApplicationConfiguration.h"
+#include "ConfigurationComponent.h"
 
 //==============================================================================
 MainAppWindow::MainAppWindow()
@@ -19,10 +20,12 @@ MainAppWindow::MainAppWindow()
     setVisible (true);
     setResizable(true, true); // resizable, with resize corner (instead of border)
 
-    // todo: sort out preset choices
-    Preset* p = ApplicationConfiguration::getPreset(0);
-    preset = new PresetComponent(p);
-    setContentOwned(preset, true);
+//     // todo: sort out preset choices
+//     Preset* p = ApplicationConfiguration::getPreset(0);
+//     preset = new PresetComponent(p);
+//     setContentOwned(preset, true);
+    component = new ConfigurationComponent();
+    setContentOwned(component, true);
 }
 
 MainAppWindow::~MainAppWindow()

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 12:05:13pm
+  Creation date:  2 Feb 2012 12:05:26pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,15 +19,15 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_20A4C865__
-#define __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_20A4C865__
+#ifndef __JUCER_HEADER_CONFIGURATIONCOMPONENT_CONFIGURATIONCOMPONENT_72C6D96A__
+#define __JUCER_HEADER_CONFIGURATIONCOMPONENT_CONFIGURATIONCOMPONENT_72C6D96A__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "Preset.h"
 //[/Headers]
 
-#include "ZoneListBox.h"
+#include "PresetComponent.h"
 
 
 //==============================================================================
@@ -38,28 +38,33 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class PresetComponent  : public Component,
-                         public ComboBoxListener,
-                         public ButtonListener
+class ConfigurationComponent  : public Component,
+                                public ButtonListener,
+                                public ComboBoxListener
 {
 public:
     //==============================================================================
-    PresetComponent (Preset* p);
-    ~PresetComponent();
+    ConfigurationComponent ();
+    ~ConfigurationComponent();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
-    Preset* getPreset();
-    void addZone();
-    void loadZones();
-/*     void selectZone(uint8_t index); */
-/*     uint8_t getSelectedZoneIndex(); */
+    void requestPreset();
+    void sendPreset();
+    void loadPreset(uint8_t index);
+    void loadPreset(Preset* preset);
+    void savePreset(uint8_t index);
+    void loadFile();
+    void saveFile();
+    void openSettings();
+    Preset* getCurrentPreset();
+    Preset* getDefaultPreset();
     //[/UserMethods]
 
     void paint (Graphics& g);
     void resized();
-    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void buttonClicked (Button* buttonThatWasClicked);
+    void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
 
 
 
@@ -68,20 +73,25 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    Preset* preset;
     //[/UserVariables]
 
     //==============================================================================
-    ComboBox* zoneTypeComboBox;
-    TextButton* addButton;
-    ZoneListBox* zones;
+    TextButton* sendButton;
+    TextButton* requestButton;
+    TextButton* saveButton;
+    TextButton* loadButton;
+    TextButton* settingsButton;
+    ToggleButton* runButton;
+    PresetComponent* component;
+    Label* label7;
+    ComboBox* presetComboBox;
 
 
     //==============================================================================
     // (prevent copy constructor and operator= being generated..)
-    PresetComponent (const PresetComponent&);
-    const PresetComponent& operator= (const PresetComponent&);
+    ConfigurationComponent (const ConfigurationComponent&);
+    const ConfigurationComponent& operator= (const ConfigurationComponent&);
 };
 
 
-#endif   // __JUCER_HEADER_PRESETCOMPONENT_PRESETCOMPONENT_20A4C865__
+#endif   // __JUCER_HEADER_CONFIGURATIONCOMPONENT_CONFIGURATIONCOMPONENT_72C6D96A__

@@ -13,8 +13,6 @@
 
 #include "../JuceLibraryCode/JuceHeader.h"
 
-#include "PresetComponent.h"
-
 //==============================================================================
 class MainAppWindow   : public DocumentWindow
 {
@@ -34,7 +32,7 @@ public:
     */
 
 private:
-    PresetComponent* preset;
+    Component* component;
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MainAppWindow)
 };
