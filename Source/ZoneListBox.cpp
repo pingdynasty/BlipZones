@@ -1,5 +1,17 @@
 #include "ZoneListBox.h"
 
+ZoneListBox::ZoneListBox (Preset* p)
+    : ListBox("ZoneListBox", this), preset(p)
+{
+    setSize (600, 400);
+    setRowHeight(60);
+//     setRowHeight(ZoneComponent(NULL).getHeight());
+}
+
+ZoneListBox::~ZoneListBox()
+{
+}
+
 int ZoneListBox::getNumRows(){
   std::cout << "getNumRows " << (int)preset->getNumberOfZones() << std::endl;
   return preset->getNumberOfZones();
@@ -7,8 +19,13 @@ int ZoneListBox::getNumRows(){
 
 Component *ZoneListBox::refreshComponentForRow(int rowNumber, bool isRowSelected, Component *existingComponentToUpdate){
   std::cout << "refresh " << rowNumber << std::endl;
-  delete existingComponentToUpdate;
   Zone* zone = preset->getZone(rowNumber);
+
+  ZoneComponent* comp = dynamic_cast <ZoneComponent*>(existingComponentToUpdate);
+  if(comp != NULL && comp->getZone() == zone)
+    return comp;
+
+  delete existingComponentToUpdate;
   // todo: iff isRowSelected, return editable component
   std::cout << "zone " << (long)zone << std::endl;
   if(zone == NULL)
@@ -20,7 +37,7 @@ Component *ZoneListBox::refreshComponentForRow(int rowNumber, bool isRowSelected
 }
 
 void ZoneListBox::paintListBoxItem(int rowNumber, Graphics &g, int width, int height, bool rowIsSelected){
-  std::cout << "paint " << rowNumber << std::endl;
+//   std::cout << "paint " << rowNumber << std::endl;
   // todo - leave empty?
 //     if (rowIsSelected)
 //         g.fillAll (findColour (TextEditor::highlightColourId));
@@ -34,13 +51,3 @@ void ZoneListBox::paintListBoxItem(int rowNumber, Graphics &g, int width, int he
 //                 Justification::centredLeft, true);
 }
 
-//==============================================================================
-ZoneListBox::ZoneListBox (Preset* p)
-    : ListBox("ZoneListBox", this), preset(p)
-{
-    setSize (600, 400);
-}
-
-ZoneListBox::~ZoneListBox()
-{
-}
