@@ -5,6 +5,12 @@
     <Filter Include="BlipZones">
       <UniqueIdentifier>{2CA9AAB7-2F97-4AC1-ABD3-F29A867048C6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BlipZones\Libraries">
+      <UniqueIdentifier>{5451E7AC-4B4A-9FBE-2E4B-E86975FC8592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="BlipZones\Libraries\osc">
+      <UniqueIdentifier>{F6E03A4A-CA02-0BD0-BED0-35DA96921F11}</UniqueIdentifier>
+    </Filter>
     <Filter Include="BlipZones\Resources">
       <UniqueIdentifier>{46270A4F-F88B-563C-A2D1-47F751D01473}</UniqueIdentifier>
     </Filter>
@@ -25,6 +31,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Libraries\osc\OscOutboundPacketStream.cpp">
+      <Filter>BlipZones\Libraries\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\osc\OscPrintReceivedElements.cpp">
+      <Filter>BlipZones\Libraries\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\osc\OscReceivedElements.cpp">
+      <Filter>BlipZones\Libraries\osc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Libraries\osc\OscTypes.cpp">
+      <Filter>BlipZones\Libraries\osc</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Resources\blipbox.png">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
@@ -33,6 +51,18 @@
     </ClCompile>
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OscAction.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OscServer.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\OscComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\ConfigurationComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Source\ZoneListBox.cpp">
       <Filter>BlipZones\Source</Filter>
@@ -195,6 +225,18 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\OscAction.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OscServer.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\OscComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ConfigurationComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\ZoneListBox.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>

@@ -14,10 +14,12 @@
 		0FEA6C8CBFB798A19A8C43BF /* globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C4621B9BF5FB0E6B7CC40359 /* globals.cpp */; };
 		14C04D76F74226E05BB685B0 /* Preset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7F6F134D85E6FD645FCB57 /* Preset.cpp */; };
 		159D3E5BC01B0EEE15A9E328 /* MidiNoteComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 592BF688E76C3E6A83C7F9AC /* MidiNoteComponent.cpp */; };
+		231674197F2BCC887BFD470A /* OscComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5AB48DE3AA856121C785B6C6 /* OscComponent.cpp */; };
 		24FE4AD01B64790BD83A75F2 /* operators.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47AFE3755DCECDC3A8C9105 /* operators.cpp */; };
 		26910F110DC34DD16624C55A /* ZoneAreaAnimator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90CA4E3B66FCAED6E9B761AE /* ZoneAreaAnimator.cpp */; };
 		28DC16EF518E8C490EDE65FE /* PresetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F22C39DEFBC002FC32A53104 /* PresetFactory.cpp */; };
 		2B0C7A9D7361F4FF20FB7D8B /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2869E883B48DF24E6C409AFF /* EventHandler.cpp */; };
+		32FECD2A064A3D9689F0127C /* OscServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B00DC3EA8445E3F20BDFFB45 /* OscServer.cpp */; };
 		39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */; };
 		3F815EA2C165CCF5B2E833D5 /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69E3CE875903BE2F4EA94527 /* MainWindow.cpp */; };
 		40A0DEE6CCB568B97B4B6942 /* KeyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */; };
@@ -32,8 +34,11 @@
 		5A9B745A4CF6E9B99F625169 /* Characters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4156FDFA57CB9E875DEE5C7A /* Characters.cpp */; };
 		5D821375EC14928BE91382F0 /* BlipSimComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6D8F94C43D51A020517D1C09 /* BlipSimComponent.cpp */; };
 		5E0EE15CCCF677DF49C32E5F /* SerialProtocolReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E832D5201F79B4C196A8AEB2 /* SerialProtocolReader.cpp */; };
+		636C84DBA00FBE1643F0C08A /* OscTypes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C46DC02650D46CE587772C71 /* OscTypes.cpp */; };
+		716A2D86B13E898AAF58A820 /* OscOutboundPacketStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6C9F9BA1F50B355E2233A9B0 /* OscOutboundPacketStream.cpp */; };
 		71F5C2BBD95AA04C4203E94D /* SimWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E298CBF215030626A1ACC5DC /* SimWindow.cpp */; };
 		72CA0CED3B65FD043ED92EFD /* spi_bitbang.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B4DA37723DF8899C29972FC /* spi_bitbang.cpp */; };
+		74E91DEE5AE36E749098CCB9 /* OscPrintReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6B0E73A020AF771614F4710E /* OscPrintReceivedElements.cpp */; };
 		77C7207C3B711A995ECDBC74 /* ZoneListBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 90FE5B0035225F3C4DEC84C2 /* ZoneListBox.cpp */; };
 		7959587CF0CDD8D15D1DE427 /* interrupt.c in Sources */ = {isa = PBXBuildFile; fileRef = 0B0A69855A7F8C062E7C3A7B /* interrupt.c */; };
 		7A0FA79588881FE82E90A5CF /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E9C9572A50DB8EA6E51E1C2 /* QTKit.framework */; };
@@ -47,9 +52,11 @@
 		A9E34DDD2DBBFF79C037B998 /* Parameters.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ADBAB30F91E19C5690C81492 /* Parameters.cpp */; };
 		AE86D65581912C65DFB1C2AB /* CoreMIDI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */; };
 		B2187236A44707AC00748B74 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B041D56E8CA4C914812DF01 /* QuartzCore.framework */; };
+		C129DBC8F00FC57604BF0123 /* ConfigurationComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0988FBC7BEA6FC167A1D6535 /* ConfigurationComponent.cpp */; };
 		C16EC23CA8ED5104CE32092C /* pgmspace.c in Sources */ = {isa = PBXBuildFile; fileRef = B37801490B33221F20D7FABE /* pgmspace.c */; };
 		C43200160215609507ABB83C /* MidiMessageReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 199ED66AC91FB267E8FF5CE7 /* MidiMessageReader.cpp */; };
 		C7F98798B2AFD87CC8AFD1A4 /* io.c in Sources */ = {isa = PBXBuildFile; fileRef = 4BC5DC2F1E516B123A432500 /* io.c */; };
+		C8C46D4E4117D17ACD9353B6 /* OscReceivedElements.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DC19149DAAC59B76E59FC657 /* OscReceivedElements.cpp */; };
 		C9517C3150BA2A09F2A914D5 /* ApplicationConfiguration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E15D74B4DFFF343958E0C9BC /* ApplicationConfiguration.cpp */; };
 		CD6C0998B8F2D44EB4A62E1F /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C47100C8F78F70EEC550FAB /* WebKit.framework */; };
 		D04EDF3303086EDE7D74654D /* eeprom.c in Sources */ = {isa = PBXBuildFile; fileRef = 7C62614B21925E8E8A424123 /* eeprom.c */; };
@@ -67,6 +74,7 @@
 		EA56E96EC2815026A27EF591 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD46F99396B85E6C9880FD31 /* IOKit.framework */; };
 		EAEFD2BA9DDACF751C545ED7 /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0BC5FFEF408E7788EDAE3A3C /* Main.cpp */; };
 		F13B742D7FB7747E8EBD9604 /* DisplayManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D04D2765BBE8746944D3D6E /* DisplayManager.cpp */; };
+		F2F92AA3D4A9E9FAFC989F7C /* OscAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 442A142130EA309F45EE0887 /* OscAction.cpp */; };
 		F50CF0CC56F6BA6CAE19C653 /* ZoneComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 395C9A239A2F397A3AFDDD47 /* ZoneComponent.cpp */; };
 		F6EE8D1F038E0BBB0C44851B /* PresetComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BAE37E17112F357A454A9DDB /* PresetComponent.cpp */; };
 		F71C5835AA69DD3ACB4BEBD6 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */; };
@@ -79,11 +87,13 @@
 		0465436D480E1B1F8EC547D9 /* MidiMessageReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiMessageReader.h; path = ../../../BlipBox/firmware/MidiMessageReader.h; sourceTree = SOURCE_ROOT; };
 		05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiNoteRangeComponent.cpp; path = ../../Source/MidiNoteRangeComponent.cpp; sourceTree = SOURCE_ROOT; };
 		07A7CF286FAEC0E97C728C6F /* eeprom.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = eeprom.h; path = ../../../BlipBox/firmware/simulator/avr/eeprom.h; sourceTree = SOURCE_ROOT; };
+		0988FBC7BEA6FC167A1D6535 /* ConfigurationComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ConfigurationComponent.cpp; path = ../../Source/ConfigurationComponent.cpp; sourceTree = SOURCE_ROOT; };
 		0B041D56E8CA4C914812DF01 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0B0A69855A7F8C062E7C3A7B /* interrupt.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = interrupt.c; path = ../../../BlipBox/firmware/simulator/avr/interrupt.c; sourceTree = SOURCE_ROOT; };
 		0BC5FFEF408E7788EDAE3A3C /* Main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../../Source/Main.cpp; sourceTree = SOURCE_ROOT; };
 		0E9C9572A50DB8EA6E51E1C2 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = System/Library/Frameworks/QTKit.framework; sourceTree = SDKROOT; };
 		0F27AC4DE1C689E886E341E0 /* PresetChooser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PresetChooser.cpp; path = ../../../BlipBox/firmware/PresetChooser.cpp; sourceTree = SOURCE_ROOT; };
+		117EAFF93F0B8254514C18A2 /* OscAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OscAction.h; path = ../../Source/OscAction.h; sourceTree = SOURCE_ROOT; };
 		15E12980527D742693934162 /* Characters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Characters.h; path = ../../../BlipBox/firmware/Characters.h; sourceTree = SOURCE_ROOT; };
 		15ED533A6F2EA4B29432EE4F /* macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = macros.h; path = ../../../BlipBox/firmware/macros.h; sourceTree = SOURCE_ROOT; };
 		199ED66AC91FB267E8FF5CE7 /* MidiMessageReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiMessageReader.cpp; path = ../../../BlipBox/firmware/MidiMessageReader.cpp; sourceTree = SOURCE_ROOT; };
@@ -93,6 +103,7 @@
 		1F21BAA74106CBB37B69B6F1 /* defs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = defs.h; path = ../../../BlipBox/firmware/defs.h; sourceTree = SOURCE_ROOT; };
 		201E2BC57EDDA2796285F7F6 /* MainWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MainWindow.h; path = ../../Source/MainWindow.h; sourceTree = SOURCE_ROOT; };
 		20529268326B381FB07E65F3 /* BlipClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BlipClient.h; path = ../../Source/BlipClient.h; sourceTree = SOURCE_ROOT; };
+		237827014EDDA905EC7365C3 /* OscComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OscComponent.h; path = ../../Source/OscComponent.h; sourceTree = SOURCE_ROOT; };
 		2869E883B48DF24E6C409AFF /* EventHandler.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = EventHandler.cpp; path = ../../../BlipBox/firmware/EventHandler.cpp; sourceTree = SOURCE_ROOT; };
 		29EFBBFC6EE8782CEAEA838A /* MidiControllerComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiControllerComponent.h; path = ../../Source/MidiControllerComponent.h; sourceTree = SOURCE_ROOT; };
 		2AF8826A683988DD79A3AF01 /* ActionComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ActionComponent.h; path = ../../Source/ActionComponent.h; sourceTree = SOURCE_ROOT; };
@@ -100,6 +111,7 @@
 		2CD77B0298962985677D3C2A /* Configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Configuration.h; path = ../../../BlipBox/firmware/Configuration.h; sourceTree = SOURCE_ROOT; };
 		2D04D2765BBE8746944D3D6E /* DisplayManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DisplayManager.cpp; path = ../../../BlipBox/firmware/DisplayManager.cpp; sourceTree = SOURCE_ROOT; };
 		3633C52A42C10B3C68C6F725 /* Zone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Zone.cpp; path = ../../../BlipBox/firmware/Zone.cpp; sourceTree = SOURCE_ROOT; };
+		3908E9909BEFAFD0E9C8849E /* OscServer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = OscServer.h; path = ../../Source/OscServer.h; sourceTree = SOURCE_ROOT; };
 		395C9A239A2F397A3AFDDD47 /* ZoneComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ZoneComponent.cpp; path = ../../Source/ZoneComponent.cpp; sourceTree = SOURCE_ROOT; };
 		396E821AA125556416BD4CD1 /* SerialProtocol.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SerialProtocol.cpp; path = ../../../BlipBox/firmware/SerialProtocol.cpp; sourceTree = SOURCE_ROOT; };
 		3CDBEAE055F0588BAB5B1964 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -107,6 +119,7 @@
 		3ECB147A06BD2C38513C3215 /* SelectPresetComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SelectPresetComponent.h; path = ../../Source/SelectPresetComponent.h; sourceTree = SOURCE_ROOT; };
 		4156FDFA57CB9E875DEE5C7A /* Characters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Characters.cpp; path = ../../../BlipBox/firmware/Characters.cpp; sourceTree = SOURCE_ROOT; };
 		41940D969B047E9558658C4B /* Counter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Counter.h; path = ../../../BlipBox/firmware/Counter.h; sourceTree = SOURCE_ROOT; };
+		442A142130EA309F45EE0887 /* OscAction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscAction.cpp; path = ../../Source/OscAction.cpp; sourceTree = SOURCE_ROOT; };
 		443DD29C1CD478A286B7015A /* ZoneListBox.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ZoneListBox.h; path = ../../Source/ZoneListBox.h; sourceTree = SOURCE_ROOT; };
 		444557638849E89A0F9B3F66 /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../BlipBox/firmware/Event.h; sourceTree = SOURCE_ROOT; };
 		4646F809AD6C93233832846A /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -119,6 +132,7 @@
 		54D75DEDAF91397CA250ACBC /* Command.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Command.h; path = ../../../BlipBox/firmware/Command.h; sourceTree = SOURCE_ROOT; };
 		570D91D5D749A6C827895A84 /* MidiMessageReceiver.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiMessageReceiver.cpp; path = ../../Source/MidiMessageReceiver.cpp; sourceTree = SOURCE_ROOT; };
 		592BF688E76C3E6A83C7F9AC /* MidiNoteComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MidiNoteComponent.cpp; path = ../../Source/MidiNoteComponent.cpp; sourceTree = SOURCE_ROOT; };
+		5AB48DE3AA856121C785B6C6 /* OscComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscComponent.cpp; path = ../../Source/OscComponent.cpp; sourceTree = SOURCE_ROOT; };
 		5C47100C8F78F70EEC550FAB /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		5E69807E80D60E31B5E620D6 /* pgmspace.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pgmspace.h; path = ../../../BlipBox/firmware/simulator/avr/pgmspace.h; sourceTree = SOURCE_ROOT; };
 		63574AF2E0EC0E1F149F8D4A /* KeyController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = KeyController.h; path = ../../../BlipBox/firmware/KeyController.h; sourceTree = SOURCE_ROOT; };
@@ -127,8 +141,10 @@
 		69CDED260452C302BCAE8CB5 /* PresetChooser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PresetChooser.h; path = ../../../BlipBox/firmware/PresetChooser.h; sourceTree = SOURCE_ROOT; };
 		69E3CE875903BE2F4EA94527 /* MainWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MainWindow.cpp; path = ../../Source/MainWindow.cpp; sourceTree = SOURCE_ROOT; };
 		6A2624DBD12C79CBAB1FF5B6 /* blipbox.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = blipbox.icns; path = ../../Resources/blipbox.icns; sourceTree = SOURCE_ROOT; };
+		6B0E73A020AF771614F4710E /* OscPrintReceivedElements.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscPrintReceivedElements.cpp; path = ../../Libraries/osc/OscPrintReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		6B4DA37723DF8899C29972FC /* spi_bitbang.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = spi_bitbang.cpp; path = ../../../BlipBox/firmware/spi_bitbang.cpp; sourceTree = SOURCE_ROOT; };
 		6C8A68D5EF029999EA6109A4 /* AsioSerial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AsioSerial.cpp; path = ../../Source/AsioSerial.cpp; sourceTree = SOURCE_ROOT; };
+		6C9F9BA1F50B355E2233A9B0 /* OscOutboundPacketStream.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscOutboundPacketStream.cpp; path = ../../Libraries/osc/OscOutboundPacketStream.cpp; sourceTree = SOURCE_ROOT; };
 		6D8F7B61C0950C60A3F650AC /* PresetComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PresetComponent.h; path = ../../Source/PresetComponent.h; sourceTree = SOURCE_ROOT; };
 		6D8F94C43D51A020517D1C09 /* BlipSimComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlipSimComponent.cpp; path = ../../Source/BlipSimComponent.cpp; sourceTree = SOURCE_ROOT; };
 		720184C25DD227D7CC21C80B /* SelectPresetComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SelectPresetComponent.cpp; path = ../../Source/SelectPresetComponent.cpp; sourceTree = SOURCE_ROOT; };
@@ -146,6 +162,7 @@
 		90CA4E3B66FCAED6E9B761AE /* ZoneAreaAnimator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ZoneAreaAnimator.cpp; path = ../../Source/ZoneAreaAnimator.cpp; sourceTree = SOURCE_ROOT; };
 		90FE5B0035225F3C4DEC84C2 /* ZoneListBox.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ZoneListBox.cpp; path = ../../Source/ZoneListBox.cpp; sourceTree = SOURCE_ROOT; };
 		92E65A2A27180E42E67B08CD /* Parameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Parameters.h; path = ../../../BlipBox/firmware/Parameters.h; sourceTree = SOURCE_ROOT; };
+		93C269CF3C16661BC9470C7C /* ConfigurationComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ConfigurationComponent.h; path = ../../Source/ConfigurationComponent.h; sourceTree = SOURCE_ROOT; };
 		94CD8F31265CC481E0974A9C /* BlipSim.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BlipSim.cpp; path = ../../Source/BlipSim.cpp; sourceTree = SOURCE_ROOT; };
 		95CB6C4BBD95128790768B0D /* AsioSerial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AsioSerial.h; path = ../../Source/AsioSerial.h; sourceTree = SOURCE_ROOT; };
 		9AD0E6CB40B7C5A8D8ABB133 /* LedController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LedController.h; path = ../../../BlipBox/firmware/LedController.h; sourceTree = SOURCE_ROOT; };
@@ -158,6 +175,7 @@
 		AE5C6BC55AB1473BBF47AF65 /* Zone.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Zone.h; path = ../../../BlipBox/firmware/Zone.h; sourceTree = SOURCE_ROOT; };
 		AF954846A74FE95C77980B83 /* AppConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppConfig.h; path = ../../JuceLibraryCode/AppConfig.h; sourceTree = SOURCE_ROOT; };
 		B00B43664A84156175CC3773 /* Serial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Serial.cpp; path = ../../Source/Serial.cpp; sourceTree = SOURCE_ROOT; };
+		B00DC3EA8445E3F20BDFFB45 /* OscServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscServer.cpp; path = ../../Source/OscServer.cpp; sourceTree = SOURCE_ROOT; };
 		B121DEF6878456309C03792E /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = System/Library/Frameworks/QuickTime.framework; sourceTree = SDKROOT; };
 		B37801490B33221F20D7FABE /* pgmspace.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; name = pgmspace.c; path = ../../../BlipBox/firmware/simulator/avr/pgmspace.c; sourceTree = SOURCE_ROOT; };
 		B3FACBB46867008A02A1D252 /* Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Protocol.h; path = ../../../BlipBox/firmware/Protocol.h; sourceTree = SOURCE_ROOT; };
@@ -172,6 +190,7 @@
 		BDC58CE625E3F0DD2BFCC15A /* DeleteButtonSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DeleteButtonSmall.png; path = ../../Resources/DeleteButtonSmall.png; sourceTree = SOURCE_ROOT; };
 		C27C3793A6FCE5F9F69F8C6E /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		C4621B9BF5FB0E6B7CC40359 /* globals.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = globals.cpp; path = ../../../BlipBox/firmware/globals.cpp; sourceTree = SOURCE_ROOT; };
+		C46DC02650D46CE587772C71 /* OscTypes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscTypes.cpp; path = ../../Libraries/osc/OscTypes.cpp; sourceTree = SOURCE_ROOT; };
 		C4DF7781AF2F36C8359C56D0 /* Configuration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Configuration.cpp; path = ../../../BlipBox/firmware/Configuration.cpp; sourceTree = SOURCE_ROOT; };
 		C5E6B56CA59565A658D32A52 /* Action.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Action.cpp; path = ../../../BlipBox/firmware/Action.cpp; sourceTree = SOURCE_ROOT; };
 		C602CB39EBD122BF8EBF2C3B /* serial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = serial.h; path = ../../../BlipBox/firmware/serial.h; sourceTree = SOURCE_ROOT; };
@@ -186,6 +205,7 @@
 		DAAE659AC53757297006E2FB /* ControlVoltageAction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ControlVoltageAction.cpp; path = ../../../BlipBox/firmware/ControlVoltageAction.cpp; sourceTree = SOURCE_ROOT; };
 		DAF892BC2874B5BE59A7E3B9 /* ControlVoltageComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ControlVoltageComponent.h; path = ../../Source/ControlVoltageComponent.h; sourceTree = SOURCE_ROOT; };
 		DB0B82BCC9710D4366310C42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = SOURCE_ROOT; };
+		DC19149DAAC59B76E59FC657 /* OscReceivedElements.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OscReceivedElements.cpp; path = ../../Libraries/osc/OscReceivedElements.cpp; sourceTree = SOURCE_ROOT; };
 		DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = KeyController.cpp; path = ../../../BlipBox/firmware/KeyController.cpp; sourceTree = SOURCE_ROOT; };
 		E15D74B4DFFF343958E0C9BC /* ApplicationConfiguration.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationConfiguration.cpp; path = ../../Source/ApplicationConfiguration.cpp; sourceTree = SOURCE_ROOT; };
 		E298CBF215030626A1ACC5DC /* SimWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = SimWindow.cpp; path = ../../Source/SimWindow.cpp; sourceTree = SOURCE_ROOT; };
@@ -304,6 +324,25 @@
 			name = "Juce Library Code";
 			sourceTree = "<group>";
 		};
+		1123017F61C1810BCA3CB00D /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				25C2A5A8FAC4653D2635912A /* osc */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		25C2A5A8FAC4653D2635912A /* osc */ = {
+			isa = PBXGroup;
+			children = (
+				6C9F9BA1F50B355E2233A9B0 /* OscOutboundPacketStream.cpp */,
+				6B0E73A020AF771614F4710E /* OscPrintReceivedElements.cpp */,
+				DC19149DAAC59B76E59FC657 /* OscReceivedElements.cpp */,
+				C46DC02650D46CE587772C71 /* OscTypes.cpp */,
+			);
+			name = osc;
+			sourceTree = "<group>";
+		};
 		2666C602FDBA01A8DAB002C5 /* avr */ = {
 			isa = PBXGroup;
 			children = (
@@ -322,6 +361,14 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				442A142130EA309F45EE0887 /* OscAction.cpp */,
+				117EAFF93F0B8254514C18A2 /* OscAction.h */,
+				B00DC3EA8445E3F20BDFFB45 /* OscServer.cpp */,
+				3908E9909BEFAFD0E9C8849E /* OscServer.h */,
+				5AB48DE3AA856121C785B6C6 /* OscComponent.cpp */,
+				237827014EDDA905EC7365C3 /* OscComponent.h */,
+				0988FBC7BEA6FC167A1D6535 /* ConfigurationComponent.cpp */,
+				93C269CF3C16661BC9470C7C /* ConfigurationComponent.h */,
 				90FE5B0035225F3C4DEC84C2 /* ZoneListBox.cpp */,
 				443DD29C1CD478A286B7015A /* ZoneListBox.h */,
 				05716102AD70BD125ED42BDA /* MidiNoteRangeComponent.cpp */,
@@ -446,6 +493,7 @@
 		F3419B0B0090B3979E58CB67 /* BlipZones */ = {
 			isa = PBXGroup;
 			children = (
+				1123017F61C1810BCA3CB00D /* Libraries */,
 				C190910D4439DCF92F5BD71F /* Resources */,
 				37E4663821DAE593C016B4D5 /* Source */,
 			);
@@ -513,6 +561,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				716A2D86B13E898AAF58A820 /* OscOutboundPacketStream.cpp in Sources */,
+				74E91DEE5AE36E749098CCB9 /* OscPrintReceivedElements.cpp in Sources */,
+				C8C46D4E4117D17ACD9353B6 /* OscReceivedElements.cpp in Sources */,
+				636C84DBA00FBE1643F0C08A /* OscTypes.cpp in Sources */,
+				F2F92AA3D4A9E9FAFC989F7C /* OscAction.cpp in Sources */,
+				32FECD2A064A3D9689F0127C /* OscServer.cpp in Sources */,
+				231674197F2BCC887BFD470A /* OscComponent.cpp in Sources */,
+				C129DBC8F00FC57604BF0123 /* ConfigurationComponent.cpp in Sources */,
 				77C7207C3B711A995ECDBC74 /* ZoneListBox.cpp in Sources */,
 				81732AAA85794F71AFCB170C /* MidiNoteRangeComponent.cpp in Sources */,
 				0E81320090CBA44873DFB86C /* ControlVoltageComponent.cpp in Sources */,

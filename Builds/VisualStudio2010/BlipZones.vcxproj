@@ -124,6 +124,14 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Libraries\osc\OscOutboundPacketStream.cpp"/>
+    <ClCompile Include="..\..\Libraries\osc\OscPrintReceivedElements.cpp"/>
+    <ClCompile Include="..\..\Libraries\osc\OscReceivedElements.cpp"/>
+    <ClCompile Include="..\..\Libraries\osc\OscTypes.cpp"/>
+    <ClCompile Include="..\..\Source\OscAction.cpp"/>
+    <ClCompile Include="..\..\Source\OscServer.cpp"/>
+    <ClCompile Include="..\..\Source\OscComponent.cpp"/>
+    <ClCompile Include="..\..\Source\ConfigurationComponent.cpp"/>
     <ClCompile Include="..\..\Source\ZoneListBox.cpp"/>
     <ClCompile Include="..\..\Source\MidiNoteRangeComponent.cpp"/>
     <ClCompile Include="..\..\Source\ControlVoltageComponent.cpp"/>
@@ -179,6 +187,10 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\OscAction.h"/>
+    <ClInclude Include="..\..\Source\OscServer.h"/>
+    <ClInclude Include="..\..\Source\OscComponent.h"/>
+    <ClInclude Include="..\..\Source\ConfigurationComponent.h"/>
     <ClInclude Include="..\..\Source\ZoneListBox.h"/>
     <ClInclude Include="..\..\Source\MidiNoteRangeComponent.h"/>
     <ClInclude Include="..\..\Source\ControlVoltageComponent.h"/>

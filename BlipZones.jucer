@@ -8,7 +8,7 @@
               pluginSilenceInIsSilenceOut="0" pluginTailLength="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="JuceProjectAU" pluginAUViewClass="JuceProjectAU_V1"
               pluginRTASCategory="" bundleIdentifier="org.blipbox.blipzones"
-              jucerVersion="3.0.0" smallIcon="wUSjwY" bigIcon="wUSjwY">
+              jucerVersion="3.0.0" smallIcon="wUSjwY" bigIcon="wUSjwY" defines="">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="~/SDKs/vstsdk2.4" rtasFolder="~/SDKs/PT_80_SDK"
                objCExtraSuffix="Q4ONJ" juceFolder="Libraries/juce"/>
@@ -28,6 +28,17 @@
                    headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
   </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
+    <GROUP id="e2Exkf" name="Libraries">
+      <GROUP id="jR6wBS" name="osc">
+        <FILE id="dCQCFQ" name="OscOutboundPacketStream.cpp" compile="1" resource="0"
+              file="Libraries/osc/OscOutboundPacketStream.cpp"/>
+        <FILE id="iTC7Zq" name="OscPrintReceivedElements.cpp" compile="1" resource="0"
+              file="Libraries/osc/OscPrintReceivedElements.cpp"/>
+        <FILE id="e4PjR7" name="OscReceivedElements.cpp" compile="1" resource="0"
+              file="Libraries/osc/OscReceivedElements.cpp"/>
+        <FILE id="Ri3xct" name="OscTypes.cpp" compile="1" resource="0" file="Libraries/osc/OscTypes.cpp"/>
+      </GROUP>
+    </GROUP>
     <GROUP id="sVYklZ" name="Resources">
       <FILE id="wUSjwY" name="blipbox.png" compile="0" resource="1" file="Resources/blipbox.png"/>
       <FILE id="rZq52C" name="DeleteButtonSmall.png" compile="0" resource="1"
@@ -35,6 +46,17 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="FmQ4ou" name="OscAction.cpp" compile="1" resource="0" file="Source/OscAction.cpp"/>
+      <FILE id="VLC1A6" name="OscAction.h" compile="0" resource="0" file="Source/OscAction.h"/>
+      <FILE id="WCZaVI" name="OscServer.cpp" compile="1" resource="0" file="Source/OscServer.cpp"/>
+      <FILE id="WFpx6a" name="OscServer.h" compile="0" resource="0" file="Source/OscServer.h"/>
+      <FILE id="odshqL" name="OscComponent.cpp" compile="1" resource="0"
+            file="Source/OscComponent.cpp"/>
+      <FILE id="NorO1b" name="OscComponent.h" compile="0" resource="0" file="Source/OscComponent.h"/>
+      <FILE id="WS7VK" name="ConfigurationComponent.cpp" compile="1" resource="0"
+            file="Source/ConfigurationComponent.cpp"/>
+      <FILE id="yynDn" name="ConfigurationComponent.h" compile="0" resource="0"
+            file="Source/ConfigurationComponent.h"/>
       <FILE id="c36A9a" name="ZoneListBox.cpp" compile="1" resource="0" file="Source/ZoneListBox.cpp"/>
       <FILE id="GjKmuw" name="ZoneListBox.h" compile="0" resource="0" file="Source/ZoneListBox.h"/>
       <FILE id="skL8QV" name="MidiNoteRangeComponent.cpp" compile="1" resource="0"

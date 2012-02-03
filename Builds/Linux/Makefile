@@ -43,6 +43,14 @@ ifeq ($(CONFIG),Release)
 endif
 
 OBJECTS := \
+  $(OBJDIR)/OscOutboundPacketStream_87ae81a6.o \
+  $(OBJDIR)/OscPrintReceivedElements_773a3861.o \
+  $(OBJDIR)/OscReceivedElements_990f2ae6.o \
+  $(OBJDIR)/OscTypes_5116aa15.o \
+  $(OBJDIR)/OscAction_e33520f6.o \
+  $(OBJDIR)/OscServer_7fe8383.o \
+  $(OBJDIR)/OscComponent_a9199e47.o \
+  $(OBJDIR)/ConfigurationComponent_819f48b0.o \
   $(OBJDIR)/ZoneListBox_dec494e2.o \
   $(OBJDIR)/MidiNoteRangeComponent_83ee53dc.o \
   $(OBJDIR)/ControlVoltageComponent_e8d6d51d.o \
@@ -111,6 +119,46 @@ clean:
 	-@rm -f $(OUTDIR)/$(TARGET)
 	-@rm -rf $(OBJDIR)/*
 	-@rm -rf $(OBJDIR)
+
+$(OBJDIR)/OscOutboundPacketStream_87ae81a6.o: ../../Libraries/osc/OscOutboundPacketStream.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscOutboundPacketStream.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscPrintReceivedElements_773a3861.o: ../../Libraries/osc/OscPrintReceivedElements.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscPrintReceivedElements.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscReceivedElements_990f2ae6.o: ../../Libraries/osc/OscReceivedElements.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscReceivedElements.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscTypes_5116aa15.o: ../../Libraries/osc/OscTypes.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscTypes.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscAction_e33520f6.o: ../../Source/OscAction.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscAction.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscServer_7fe8383.o: ../../Source/OscServer.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscServer.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/OscComponent_a9199e47.o: ../../Source/OscComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling OscComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/ConfigurationComponent_819f48b0.o: ../../Source/ConfigurationComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling ConfigurationComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/ZoneListBox_dec494e2.o: ../../Source/ZoneListBox.cpp
 	-@mkdir -p $(OBJDIR)
