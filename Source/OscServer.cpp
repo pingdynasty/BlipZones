@@ -3,7 +3,6 @@
 #include "OscAction.h"
 #include "../Libraries/osc/OscOutboundPacketStream.h"
 #include "../Libraries/osc/OscOutboundPacketStream.h"
-#include "../Libraries/ip/UdpSocket.h"
 
 void OscServer::send(OscAction* action){
   char buffer[bufsize];
@@ -15,7 +14,8 @@ void OscServer::send(OscAction* action){
 
   DatagramSocket socket(0);
   socket.connect(hostname, port);
-  UdpTransmitSocket socket(IpEndpointName(hostname.toUTF8(), port));
-  socket.Send(stream.Data(), stream.Size());
+//   socket.waitUntilReady(false, 10);
+  socket.write(stream.Data(), stream.Size());
+  socket.close();
 }
 
