@@ -4,6 +4,17 @@
 #include "SimScreen.h"
 #include "BlipClient.h"
 #include "Preset.h"
+#include "OscServer.h"
+
+void ApplicationConfiguration::initialise(){
+  PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
+  getBlipClient()->setPort(properties->getValue("serialport"));
+  getBlipClient()->setSpeed(properties->getValue("serialspeed").getIntValue());
+  getMidiMessageReceiver()->setMidiInput(properties->getValue("midiinput"));
+  getBlipSim()->setMidiOutput(properties->getValue("midioutput"));
+  getOscServer()->setHostname(properties->getValue("oschost"));
+  getOscServer()->setPort(properties->getValue("oscport").getIntValue());
+}
 
 PropertiesFile* properties = NULL;
 PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
@@ -24,6 +35,10 @@ PropertiesFile* ApplicationConfiguration::getApplicationProperties(){
       properties->setValue("midioutput", "none");
     if(!properties->containsKey("midiinput"))
       properties->setValue("midiinput", "none");
+    if(!properties->containsKey("oschost"))
+      properties->setValue("oschost", "localhost");
+    if(!properties->containsKey("oscport"))
+      properties->setValue("oscport", "9000");
     if(!properties->isValidFile())
       std::cerr << "Invalid properties file: " << properties->getFile().getFullPathName() << std::endl;
   }
@@ -63,9 +78,9 @@ MidiMessageReceiver* ApplicationConfiguration::getMidiMessageReceiver(){
   return &receiver;
 }
 
-void ApplicationConfiguration::initialise(){
-//   for(int i=0; i<PRESETS; ++i)
-//     presets[i].setIndex(i);
+OscServer oscserver;
+OscServer* ApplicationConfiguration::getOscServer(){
+  return &oscserver;
 }
 
 void ApplicationConfiguration::release(){

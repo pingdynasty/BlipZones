@@ -22,8 +22,7 @@ public:
   }
 };
 
-void BlipSim::initialise(){
-  std::cout << "BlipSim::initialise" << std::endl;
+BlipSim::BlipSim(){
   init();
   setup();
   blipbox.setMode(MIDI_MODE);

@@ -1,9 +1,8 @@
 #include "OscAction.h"
 #include "OscServer.h"
-
-static OscServer server;
+#include "ApplicationConfiguration.h"
 
 void OscAction::sendMessage(float value){
-  std::cout << prefix << value << suffix << std::endl;
-  server.send(this);
+  std::cout << prefix << value << std::endl;
+  ApplicationConfiguration::getOscServer()->send(this);
 }

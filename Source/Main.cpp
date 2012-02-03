@@ -34,7 +34,6 @@ public:
     {
       // Do your application's initialisation code here..
       ApplicationConfiguration::initialise();
-      ApplicationConfiguration::getBlipSim()->initialise();
       mainWindow = new MainAppWindow();
       if(!ApplicationConfiguration::getApplicationProperties()->getFile().exists()){
 	ApplicationSettingsComponent component;
@@ -42,18 +41,16 @@ public:
       }
       simWindow = new SimWindow();
       ApplicationConfiguration::getBlipSim()->start();
-      ApplicationConfiguration::getBlipClient()->initialise();
       ApplicationConfiguration::getBlipClient()->connect();
     }
 
     void shutdown()
     {
-      std::cout << "shutdown" << std::endl;
+      std::cerr << "shutdown" << std::endl;
         // Do your application's shutdown code here..
       ApplicationConfiguration::getBlipClient()->shutdown();
       ApplicationConfiguration::getBlipSim()->shutdown();
       ApplicationConfiguration::release();
-      std::cout << "shutdown complete" << std::endl;
       mainWindow = 0;
       simWindow = 0;
     }
@@ -72,7 +69,7 @@ public:
 
     const String getApplicationVersion()
     {
-        return T("1.0");      
+        return T("2.0");      
 //         return ProjectInfo::versionString;
     }
 

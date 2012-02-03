@@ -13,26 +13,26 @@ private:
   String hostname;
   int port;
   int bufsize;
+
 public:
   OscServer() :
     hostname(OSC_SERVER_DEFAULT_HOST), 
     port(OSC_SERVER_DEFAULT_PORT), 
     bufsize(OSC_SERVER_DEFAULT_OUTPUT_BUFFER_SIZE) {}
 
-  void configure(String h, int p){
-    hostname = h;
+  void setPort(int p){
     port = p;
   }
 
-//   osc::OutboundPacketStream* getOutputPacketStream(){
-//     return new osc::OutboundPacketStream(buffer, OSC_SERVER_OUTPUT_BUFFER_SIZE);
-//   }
+  void setHostname(String h){
+    hostname = h;
+  }
+
+  void setBufferSize(int sz){
+    bufsize = sz;
+  }
 
   void send(OscAction* action);
-
-//   void setHostName(String name){
-//     hostname = name;
-//   }
 
 };
 

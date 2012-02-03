@@ -14,8 +14,7 @@ private:
   Thread* blipthread;
   Thread* timer0;
 public:
-  BlipSim(){}
-  void initialise();
+  BlipSim();
   void shutdown();
   void start();
   void stop();

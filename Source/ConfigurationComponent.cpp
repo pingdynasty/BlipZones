@@ -258,10 +258,8 @@ void ConfigurationComponent::sendPreset(){
 void ConfigurationComponent::openSettings(){
   std::cout << "opening settings" << std::endl;
   ApplicationSettingsComponent component;
-  if(component.showModalDialog(this)){
-    ApplicationConfiguration::getBlipClient()->initialise();
-    std::cout << "settings done" << std::endl;
-  }
+  if(component.showModalDialog(this))
+    ApplicationConfiguration::initialise();
 }
 
 void ConfigurationComponent::requestPreset(){

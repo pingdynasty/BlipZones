@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  5 Nov 2011 9:20:33am
+  Creation date:  3 Feb 2012 3:44:07am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -44,7 +44,11 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
       midiInputComboBox (0),
       serialPortComboBox (0),
       label5 (0),
-      midiOutputComboBox (0)
+      midiOutputComboBox (0),
+      label6 (0),
+      oscHostEditor (0),
+      label7 (0),
+      oscPortEditor (0)
 {
     addAndMakeVisible (label = new Label (L"new label",
                                           L"Serial Port"));
@@ -142,11 +146,45 @@ ApplicationSettingsComponent::ApplicationSettingsComponent ()
     midiOutputComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
     midiOutputComboBox->addListener (this);
 
+    addAndMakeVisible (label6 = new Label (L"new label",
+                                           L"OSC Host"));
+    label6->setFont (Font (15.0000f, Font::plain));
+    label6->setJustificationType (Justification::centredLeft);
+    label6->setEditable (false, false, false);
+    label6->setColour (TextEditor::textColourId, Colours::black);
+    label6->setColour (TextEditor::backgroundColourId, Colour (0x0));
+
+    addAndMakeVisible (oscHostEditor = new TextEditor (L"new text editor"));
+    oscHostEditor->setMultiLine (false);
+    oscHostEditor->setReturnKeyStartsNewLine (false);
+    oscHostEditor->setReadOnly (false);
+    oscHostEditor->setScrollbarsShown (true);
+    oscHostEditor->setCaretVisible (true);
+    oscHostEditor->setPopupMenuEnabled (true);
+    oscHostEditor->setText (String::empty);
+
+    addAndMakeVisible (label7 = new Label (L"new label",
+                                           L"OSC Port"));
+    label7->setFont (Font (15.0000f, Font::plain));
+    label7->setJustificationType (Justification::centredLeft);
+    label7->setEditable (false, false, false);
+    label7->setColour (TextEditor::textColourId, Colours::black);
+    label7->setColour (TextEditor::backgroundColourId, Colour (0x0));
+
+    addAndMakeVisible (oscPortEditor = new TextEditor (L"new text editor"));
+    oscPortEditor->setMultiLine (false);
+    oscPortEditor->setReturnKeyStartsNewLine (false);
+    oscPortEditor->setReadOnly (false);
+    oscPortEditor->setScrollbarsShown (true);
+    oscPortEditor->setCaretVisible (true);
+    oscPortEditor->setPopupMenuEnabled (true);
+    oscPortEditor->setText (String::empty);
+
 
     //[UserPreSize]
     //[/UserPreSize]
 
-    setSize (600, 240);
+    setSize (600, 360);
 
 
     //[Constructor] You can add your own custom stuff here..
@@ -174,6 +212,10 @@ ApplicationSettingsComponent::~ApplicationSettingsComponent()
     deleteAndZero (serialPortComboBox);
     deleteAndZero (label5);
     deleteAndZero (midiOutputComboBox);
+    deleteAndZero (label6);
+    deleteAndZero (oscHostEditor);
+    deleteAndZero (label7);
+    deleteAndZero (oscPortEditor);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -207,6 +249,10 @@ void ApplicationSettingsComponent::resized()
     serialPortComboBox->setBounds (128, 16, 256, 24);
     label5->setBounds (16, 152, 104, 24);
     midiOutputComboBox->setBounds (128, 152, 256, 24);
+    label6->setBounds (16, 192, 104, 24);
+    oscHostEditor->setBounds (128, 192, 256, 24);
+    label7->setBounds (16, 224, 104, 24);
+    oscPortEditor->setBounds (128, 224, 256, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -236,7 +282,6 @@ void ApplicationSettingsComponent::buttonClicked (Button* buttonThatWasClicked)
       DialogWindow* dw = findParentComponentOfClass((DialogWindow*)nullptr);
       if(dw != nullptr)
 	dw->exitModalState(1);
-      std::cout << "ok pressed" << std::endl;
         //[/UserButtonCode_okButton]
     }
     else if (buttonThatWasClicked == cancelButton)
@@ -246,7 +291,6 @@ void ApplicationSettingsComponent::buttonClicked (Button* buttonThatWasClicked)
       DialogWindow* dw = findParentComponentOfClass((DialogWindow*)nullptr);
       if(dw != nullptr)
 	dw->exitModalState(0);
-      std::cout << "cancel pressed" << std::endl;
         //[/UserButtonCode_cancelButton]
     }
 
@@ -328,6 +372,9 @@ void ApplicationSettingsComponent::loadSettingsFromFile(){
 #endif
   midiOutputComboBox->setText(properties->getValue("midioutput"));
 
+  oscHostEditor->setText(properties->getValue("oschost"));
+  oscPortEditor->setText(properties->getValue("oscport"));
+
   std::cout << "loaded settings from file " << properties->getFile().getFullPathName() << std::endl;
 }
 
@@ -338,6 +385,8 @@ void ApplicationSettingsComponent::saveSettingsToFile(){
   properties->setValue("presetdirectory", presetDirectoryEditor->getText());
   properties->setValue("midiinput", midiInputComboBox->getText());
   properties->setValue("midioutput", midiOutputComboBox->getText());
+  properties->setValue("oschost", oscHostEditor->getText());
+  properties->setValue("oscport", oscPortEditor->getText());
   properties->saveIfNeeded();
   std::cout << "saved settings to file " << properties->getFile().getFullPathName() << std::endl;
 }
@@ -357,7 +406,7 @@ BEGIN_JUCER_METADATA
                  componentName="" parentClasses="public Component" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
-                 initialHeight="240">
+                 initialHeight="360">
   <BACKGROUND backgroundColour="ffffffff"/>
   <LABEL name="new label" id="20e8eb8f34814ba6" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="16 16 104 24" edTextCol="ff000000"
@@ -410,6 +459,24 @@ BEGIN_JUCER_METADATA
   <COMBOBOX name="new combo box" id="3652bf1f65dcab20" memberName="midiOutputComboBox"
             virtualName="" explicitFocusOrder="0" pos="128 152 256 24" editable="0"
             layout="33" items="" textWhenNonSelected="" textWhenNoItems="(no choices)"/>
+  <LABEL name="new label" id="60c597769ec08258" memberName="label6" virtualName=""
+         explicitFocusOrder="0" pos="16 192 104 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="OSC Host" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <TEXTEDITOR name="new text editor" id="6000871883be6ddc" memberName="oscHostEditor"
+              virtualName="" explicitFocusOrder="0" pos="128 192 256 24" initialText=""
+              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
+              caret="1" popupmenu="1"/>
+  <LABEL name="new label" id="89a7e519cd69f47c" memberName="label7" virtualName=""
+         explicitFocusOrder="0" pos="16 224 104 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="OSC Port" editableSingleClick="0" editableDoubleClick="0"
+         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
+         bold="0" italic="0" justification="33"/>
+  <TEXTEDITOR name="new text editor" id="81851515e1d203de" memberName="oscPortEditor"
+              virtualName="" explicitFocusOrder="0" pos="128 224 256 24" initialText=""
+              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
+              caret="1" popupmenu="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

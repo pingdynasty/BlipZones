@@ -67,15 +67,8 @@ BlipClient::~BlipClient(){
   delete serial;
 }
 
-void BlipClient::initialise(){
-  PropertiesFile* properties = ApplicationConfiguration::getApplicationProperties();
-  setPort(properties->getValue("serialport"));
-  setSpeed(properties->getValue("serialspeed").getIntValue());
-  ApplicationConfiguration::getMidiMessageReceiver()->
-    setMidiInput(properties->getValue("midiinput"));
-  ApplicationConfiguration::getBlipSim()->
-    setMidiOutput(properties->getValue("midioutput"));
-}
+// void BlipClient::initialise(){
+// }
 
 bool BlipClient::isConnected(){
   return serial->isConnected();

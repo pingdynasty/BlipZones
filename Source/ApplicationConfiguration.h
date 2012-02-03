@@ -7,6 +7,7 @@ class BlipSim;
 class BlipClient;
 class Preset;
 class MidiMessageReceiver;
+class OscServer;
 
 class ApplicationConfiguration {
 public:
@@ -18,6 +19,7 @@ public:
   static Preset* getPreset(int index);
   static File getPresetDirectory();
   static MidiMessageReceiver* getMidiMessageReceiver();
+  static OscServer* getOscServer();
 private:
 };
 

@@ -11,7 +11,7 @@ class BlipClient : public SerialCallback, public juce::Thread {
 public:
   BlipClient();
   ~BlipClient();
-  void initialise();
+/*   void initialise(); */
   int connect();
   int disconnect();
   void shutdown();
