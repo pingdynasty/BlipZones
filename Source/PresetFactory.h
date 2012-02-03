@@ -23,11 +23,14 @@ public:
   static Zone* createZone(String type);
   static Zone* createZone(uint8_t type);
 
-  static String getActionName(uint8_t code);
-  static uint8_t getActionCode(String name);
+  static String getActionTypeName(uint8_t code);
+  static uint8_t getActionTypeCode(String name);
 
-  static String getZoneName(uint8_t code);
-  static uint8_t getZoneCode(String name);
+  static String getZoneTypeName(uint8_t code);
+  static uint8_t getZoneTypeCode(String name);
+
+  static String getDisplayTypeName(uint8_t code);
+  static uint8_t getDisplayTypeCode(String name);
 private:
 };
 

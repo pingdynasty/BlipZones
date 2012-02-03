@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 4:29:51pm
+  Creation date:  3 Feb 2012 5:12:28am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__
-#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__
+#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__
+#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -96,4 +96,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__
+#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__

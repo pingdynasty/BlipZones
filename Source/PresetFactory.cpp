@@ -10,7 +10,7 @@
 #define FILE_FORMAT_VERSION 2
 
 static HashMap<String, int> *actions = NULL;
-HashMap<String, int>* getActions(){
+HashMap<String, int>* getActionTypes(){
   if(actions == NULL){
     actions = new HashMap<String, int>();
     actions->set("Control Change",        MIDI_CONTROL_CHANGE);
@@ -28,7 +28,7 @@ HashMap<String, int>* getActions(){
 }
 
 static HashMap<String, int> *zones = NULL;
-HashMap<String, int>* getZones(){
+HashMap<String, int>* getZoneTypes(){
   if(zones == NULL){
     zones = new HashMap<String, int>();
     zones->set("Horizontal Slider",       HORIZONTAL_SLIDER_ZONE_TYPE);
@@ -37,6 +37,18 @@ HashMap<String, int>* getZones(){
     zones->set("Toggle Button",           TOGGLE_BUTTON_ZONE_TYPE);
   }
   return zones;
+}
+
+static HashMap<String, int> *displays = NULL;
+HashMap<String, int>* getDisplayTypes(){
+  if(displays == NULL){
+    displays = new HashMap<String, int>();
+    displays->set("Fill",                 FILL_DISPLAY_TYPE);
+    displays->set("Bar",                  LINE_DISPLAY_TYPE);
+    displays->set("Graded Fill",          GRADED_FILL_DISPLAY_TYPE);
+    displays->set("Graded Bar",           GRADED_LINE_DISPLAY_TYPE);
+  }
+  return displays;
 }
 
 PresetFactory::PresetFactory(){
@@ -68,7 +80,7 @@ Zone* PresetFactory::loadZone(PropertySet& set){
   Zone* zone = createZone(set.getValue("type"));
   if(zone == NULL)
     return NULL;
-  zone->setDisplayType((DisplayType)set.getIntValue("display"));
+  zone->setDisplayType((DisplayType)getDisplayTypeCode(set.getValue("display")));
   zone->from.setColumn(set.getIntValue("from_column"));
   zone->to.setColumn(set.getIntValue("to_column"));
   zone->from.setRow(set.getIntValue("from_row"));
@@ -113,8 +125,8 @@ void PresetFactory::savePreset(Preset& preset, File& file){
 bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
   if(zone == NULL || zone->getZoneType() == DISABLED_ZONE_TYPE)
     return false;
-  set.setValue("type", getZoneName(zone->getZoneType()));
-  set.setValue("display", zone->getDisplayType());
+  set.setValue("type", getZoneTypeName(zone->getZoneType()));
+  set.setValue("display", getDisplayTypeName(zone->getDisplayType()));
   set.setValue("from_column", zone->from.getColumn());
   set.setValue("to_column", zone->to.getColumn());
   set.setValue("from_row", zone->from.getRow());
@@ -126,7 +138,7 @@ bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
 void PresetFactory::saveAction(Action* action, PropertySet& set){
   if(action == NULL)
     return;
-  set.setValue("action", getActionName(action->getActionType()));
+  set.setValue("action", getActionTypeName(action->getActionType()));
   uint8_t data[8];
   memset(data, 0, sizeof(data));
   uint8_t sz = action->write(data);
@@ -141,46 +153,61 @@ void PresetFactory::saveAction(Action* action, PropertySet& set){
     set.setValue("data2", data[7]);
 }
 
-String PresetFactory::getZoneName(uint8_t code){
-  HashMap<String, int>* zones = getZones();
+String PresetFactory::getDisplayTypeName(uint8_t code){
+  HashMap<String, int>* displaytypes = getDisplayTypes();
+  for(HashMap<String, int>::Iterator i(*displaytypes); i.next();)
+    if(i.getValue() == code)
+      return i.getKey();
+  return "None";
+}
+
+uint8_t PresetFactory::getDisplayTypeCode(String name){
+  HashMap<String, int>* displaytypes = getDisplayTypes();
+  if(displaytypes->contains(name))
+    return (*displaytypes)[name];
+  return NONE_DISPLAY_TYPE;
+}
+
+String PresetFactory::getZoneTypeName(uint8_t code){
+  HashMap<String, int>* zones = getZoneTypes();
   for(HashMap<String, int>::Iterator i(*zones); i.next();)
     if(i.getValue() == code)
       return i.getKey();
   return "Disabled Zone";
 }
 
-uint8_t PresetFactory::getZoneCode(String name){
-  HashMap<String, int>* zones = getZones();
+uint8_t PresetFactory::getZoneTypeCode(String name){
+  HashMap<String, int>* zones = getZoneTypes();
   if(zones->contains(name))
     return (*zones)[name];
   return DISABLED_ZONE_TYPE;
 }
 
 Zone* PresetFactory::createZone(String name){
-  return createZone(getZoneCode(name));
+  return createZone(getZoneTypeCode(name));
 }
 
 Zone* PresetFactory::createZone(uint8_t type){
   return Zone::createZone(type);
 }
 
-String PresetFactory::getActionName(uint8_t code){
-  HashMap<String, int>* actions = getActions();
+String PresetFactory::getActionTypeName(uint8_t code){
+  HashMap<String, int>* actions = getActionTypes();
   for(HashMap<String, int>::Iterator i(*actions); i.next();)
     if(i.getValue() == code)
       return i.getKey();
   return "No Action";
 }
 
-uint8_t PresetFactory::getActionCode(String name){
-  HashMap<String, int>* actions = getActions();
+uint8_t PresetFactory::getActionTypeCode(String name){
+  HashMap<String, int>* actions = getActionTypes();
   if(actions->contains(name))
     return (*actions)[name];
   return NO_ACTION_TYPE;
 }
 
 Action* PresetFactory::createAction(String name){
-  return createAction(getActionCode(name));
+  return createAction(getActionTypeCode(name));
 }
 
 Action* PresetFactory::createAction(uint8_t type){

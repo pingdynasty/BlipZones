@@ -22,6 +22,7 @@
 //[Headers] You can add your own extra header files here...
 #include "ApplicationConfiguration.h"
 #include "BlipSim.h"
+#include "PresetFactory.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -138,30 +139,11 @@ void PresetComponent::buttonClicked (Button* buttonThatWasClicked)
 
 void PresetComponent::loadZones(){
   zones->updateContent();
-//   for(int i=0; i<preset->getNumberOfZones(); ++i){
-//     Zone* zone = preset->getZone(i);
 }
 
 void PresetComponent::addZone(){
   uint8_t index = preset->getNumberOfZones();
-  std::cout << "add zone " << (int)index << std::endl;
-  Zone* zone = NULL;
-  switch(zoneTypeComboBox->getSelectedId()){
-  case 1:
-    zone = Zone::createZone(HORIZONTAL_SLIDER_ZONE_TYPE);
-    break;
-  case 2:
-    zone = Zone::createZone(VERTICAL_SLIDER_ZONE_TYPE);
-    break;
-  case 3:
-    zone = Zone::createZone(MOMENTARY_BUTTON_ZONE_TYPE);
-    break;
-  case 4:
-    zone = Zone::createZone(TOGGLE_BUTTON_ZONE_TYPE);
-    break;
-//   case 5:
-//   default:
-  }
+  Zone* zone = PresetFactory::createZone(zoneTypeComboBox->getText());
 //   zone->action = NULL; // todo: why is the constructor not called?
   preset->setZone(index, zone);
   zones->updateContent();

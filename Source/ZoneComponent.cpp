@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 4:29:51pm
+  Creation date:  3 Feb 2012 5:12:28am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -89,7 +89,9 @@ ZoneComponent::ZoneComponent (Zone* z)
     displayTypeComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
     displayTypeComboBox->addItem (L"Bar", 1);
     displayTypeComboBox->addItem (L"Fill", 2);
-    displayTypeComboBox->addItem (L"None", 3);
+    displayTypeComboBox->addItem (L"Graded Bar", 3);
+    displayTypeComboBox->addItem (L"Graded Fill", 4);
+    displayTypeComboBox->addItem (L"None", 5);
     displayTypeComboBox->addListener (this);
 
     addAndMakeVisible (typeLabel = new Label (L"Type Label",
@@ -186,17 +188,8 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == displayTypeComboBox)
     {
         //[UserComboBoxCode_displayTypeComboBox] -- add your combo box handling code here..
-      switch(displayTypeComboBox->getSelectedId()){
-      case 1:
-	zone->setDisplayType(LINE_DISPLAY_TYPE);
-	break;
-      case 2:
-	zone->setDisplayType(FILL_DISPLAY_TYPE);
-	break;
-      case 3:
-	zone->setDisplayType(NONE_DISPLAY_TYPE);
-	break;
-      }
+      DisplayType code = (DisplayType)PresetFactory::getDisplayTypeCode(displayTypeComboBox->getText());
+      zone->setDisplayType(code);
         //[/UserComboBoxCode_displayTypeComboBox]
     }
 
@@ -276,38 +269,19 @@ void ZoneComponent::loadZone(Zone* z){
   Xslider->setMinValue(zone->from.getColumn(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
   Yslider->setMinValue(zone->from.getRow(), sendUpdateMessage, sendMessageSynchronously, allowNudgingOfOtherValues);
 
-  actionTypeComboBox->setVisible(true);
-  displayTypeComboBox->setVisible(true);
-  switch(zone->getZoneType()){
-  case HORIZONTAL_SLIDER_ZONE_TYPE:
-    typeLabel->setText("Horizontal Slider", false);
-    break;
-  case VERTICAL_SLIDER_ZONE_TYPE:
-    typeLabel->setText("Vertical Slider", false);
-    break;
-  case MOMENTARY_BUTTON_ZONE_TYPE:
-    typeLabel->setText("Momentary Button", false);
-    break;
-  case TOGGLE_BUTTON_ZONE_TYPE:
-    typeLabel->setText("Toggle Button", false);
-    break;
-  case DISABLED_ZONE_TYPE:
-  default:
+  if(zone->getZoneType() == DISABLED_ZONE_TYPE){
     actionTypeComboBox->setVisible(false);
     displayTypeComboBox->setVisible(false);
+  }else{
+    actionTypeComboBox->setVisible(true);
+    displayTypeComboBox->setVisible(true);
   }
 
-  switch(zone->getDisplayType()){
-  case LINE_DISPLAY_TYPE:
-    displayTypeComboBox->setSelectedId(1);
-    break;
-  case FILL_DISPLAY_TYPE:
-    displayTypeComboBox->setSelectedId(2);
-    break;
-  case NONE_DISPLAY_TYPE:
-  default:
-    displayTypeComboBox->setSelectedId(3);
-  }
+  String name = PresetFactory::getZoneTypeName(zone->getZoneType());
+  typeLabel->setText(name, dontSendChangeMessage);
+  name = PresetFactory::getDisplayTypeName(zone->getDisplayType());
+  displayTypeComboBox->setText(name, dontSendChangeMessage);
+
   loadAction(zone->action);
 }
 
@@ -407,8 +381,8 @@ BEGIN_JUCER_METADATA
           textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <COMBOBOX name="Display Type" id="ee97d6a8e0e218c6" memberName="displayTypeComboBox"
             virtualName="" explicitFocusOrder="0" pos="328r 40 136 24" editable="0"
-            layout="33" items="Bar&#10;Fill&#10;None" textWhenNonSelected=""
-            textWhenNoItems="(no choices)"/>
+            layout="33" items="Bar&#10;Fill&#10;Graded Bar&#10;Graded Fill&#10;None"
+            textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="Type Label" id="cc644bbdf1e40c7f" memberName="typeLabel"
          virtualName="" explicitFocusOrder="0" pos="32 8 112 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Zone Type" editableSingleClick="0" editableDoubleClick="0"
