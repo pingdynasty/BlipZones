@@ -1,12 +1,46 @@
 
 #include "PresetFactory.h"
 
+#include "OscAction.h"
+
 #include "defs.h"
 #include <inttypes.h>
 #include <string.h>
 
-
 #define FILE_FORMAT_VERSION 2
+
+static HashMap<String, int> *actions = NULL;
+HashMap<String, int>* getActions(){
+  if(actions == NULL){
+    actions = new HashMap<String, int>();
+    actions->set("Control Change",        MIDI_CONTROL_CHANGE);
+    actions->set("Note On",               MIDI_NOTE_ON);
+    actions->set("Pitch Bend",            MIDI_PITCH_BEND);
+    actions->set("Channel Pressure",      MIDI_CHANNEL_PRESSURE);
+    actions->set("Polyphonic Aftertouch", MIDI_CHANNEL_PRESSURE);
+    actions->set("Note Range",            MIDI_NOTE_RANGE_ACTION_TYPE);
+    actions->set("NRPN",                  MIDI_NRPN_ACTION_TYPE);
+    actions->set("Select Preset",         SELECT_PRESET_ACTION_TYPE);
+    actions->set("Control Voltage",       CONTROL_VOLTAGE_ACTION_TYPE);
+    actions->set("OSC",                   OSC_ACTION_TYPE);
+  }
+  return actions;
+}
+
+static HashMap<String, int> *zones = NULL;
+HashMap<String, int>* getZones(){
+  if(zones == NULL){
+    zones = new HashMap<String, int>();
+    zones->set("Horizontal Slider",       HORIZONTAL_SLIDER_ZONE_TYPE);
+    zones->set("Vertical Slider",         VERTICAL_SLIDER_ZONE_TYPE);
+    zones->set("Momentary Button",        MOMENTARY_BUTTON_ZONE_TYPE);
+    zones->set("Toggle Button",           TOGGLE_BUTTON_ZONE_TYPE);
+  }
+  return zones;
+}
+
+PresetFactory::PresetFactory(){
+}
 
 void PresetFactory::loadPreset(Preset& preset, File& file){
   PropertiesFile props(file, PropertiesFile::Options());
@@ -30,19 +64,8 @@ void PresetFactory::loadPreset(Preset& preset, File& file){
   std::cout << "loaded preset from file " << props.getFile().getFullPathName() << std::endl;
 }
 
-// void PresetFactory::loadZone(Zone& zone, PropertySet& set){
-//   zone.setZoneType((ZoneType)set.getIntValue("type"));
-//   zone.setDisplayType((DisplayType)set.getIntValue("display"));
-//   zone.from.setColumn(set.getIntValue("from_column"));
-//   zone.to.setColumn(set.getIntValue("to_column"));
-//   zone.from.setRow(set.getIntValue("from_row"));
-//   zone.to.setRow(set.getIntValue("to_row"));
-//   zone.action = loadAction(set);
-// }
-
 Zone* PresetFactory::loadZone(PropertySet& set){
-  uint8_t type = set.getIntValue("type");
-  Zone* zone = Zone::createZone(type);
+  Zone* zone = createZone(set.getValue("type"));
   if(zone == NULL)
     return NULL;
   zone->setDisplayType((DisplayType)set.getIntValue("display"));
@@ -55,13 +78,12 @@ Zone* PresetFactory::loadZone(PropertySet& set){
 }
 
 Action* PresetFactory::loadAction(PropertySet& set){
-  uint8_t status = set.getIntValue("status");
-  Action* action = Action::createAction(status);
+  Action* action = createAction(set.getValue("action"));
   if(action == NULL)
     return NULL;
   uint8_t data[8];
   memset(data, 0, sizeof(data));
-  data[3] = status;
+  data[3] = set.getIntValue("status");;
   data[4] = set.getIntValue("min");
   data[5] = set.getIntValue("max");
   data[6] = set.getIntValue("data1");
@@ -91,8 +113,7 @@ void PresetFactory::savePreset(Preset& preset, File& file){
 bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
   if(zone == NULL || zone->getZoneType() == DISABLED_ZONE_TYPE)
     return false;
-  //       set.setValue("index", i);
-  set.setValue("type", zone->getZoneType());
+  set.setValue("type", getZoneName(zone->getZoneType()));
   set.setValue("display", zone->getDisplayType());
   set.setValue("from_column", zone->from.getColumn());
   set.setValue("to_column", zone->to.getColumn());
@@ -105,6 +126,7 @@ bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
 void PresetFactory::saveAction(Action* action, PropertySet& set){
   if(action == NULL)
     return;
+  set.setValue("action", getActionName(action->getActionType()));
   uint8_t data[8];
   memset(data, 0, sizeof(data));
   uint8_t sz = action->write(data);
@@ -117,4 +139,55 @@ void PresetFactory::saveAction(Action* action, PropertySet& set){
     set.setValue("data1", data[6]);
   if(sz > 4)
     set.setValue("data2", data[7]);
+}
+
+String PresetFactory::getZoneName(uint8_t code){
+  HashMap<String, int>* zones = getZones();
+  for(HashMap<String, int>::Iterator i(*zones); i.next();)
+    if(i.getValue() == code)
+      return i.getKey();
+  return "Disabled Zone";
+}
+
+uint8_t PresetFactory::getZoneCode(String name){
+  HashMap<String, int>* zones = getZones();
+  if(zones->contains(name))
+    return (*zones)[name];
+  return DISABLED_ZONE_TYPE;
+}
+
+Zone* PresetFactory::createZone(String name){
+  return createZone(getZoneCode(name));
+}
+
+Zone* PresetFactory::createZone(uint8_t type){
+  return Zone::createZone(type);
+}
+
+String PresetFactory::getActionName(uint8_t code){
+  HashMap<String, int>* actions = getActions();
+  for(HashMap<String, int>::Iterator i(*actions); i.next();)
+    if(i.getValue() == code)
+      return i.getKey();
+  return "No Action";
+}
+
+uint8_t PresetFactory::getActionCode(String name){
+  HashMap<String, int>* actions = getActions();
+  if(actions->contains(name))
+    return (*actions)[name];
+  return NO_ACTION_TYPE;
+}
+
+Action* PresetFactory::createAction(String name){
+  return createAction(getActionCode(name));
+}
+
+Action* PresetFactory::createAction(uint8_t type){
+  Action* action = NULL;
+  if(type == OSC_ACTION_TYPE)
+    action = new OscAction();
+  else
+    action = Action::createAction(type);
+  return action;
 }

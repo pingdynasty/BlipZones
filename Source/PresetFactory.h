@@ -8,6 +8,7 @@
 
 class PresetFactory {
 public:
+  PresetFactory();
   void loadPreset(Preset& preset, File& file);
 /*   void loadZone(Zone& zone, PropertySet& set); */
   Zone* loadZone(PropertySet& set);
@@ -16,6 +17,17 @@ public:
   bool saveZone(Zone* zone, PropertySet& set);
   void saveAction(Action* action, PropertySet& set);
 
+  static Action* createAction(String type);
+  static Action* createAction(uint8_t type);
+
+  static Zone* createZone(String type);
+  static Zone* createZone(uint8_t type);
+
+  static String getActionName(uint8_t code);
+  static uint8_t getActionCode(String name);
+
+  static String getZoneName(uint8_t code);
+  static uint8_t getZoneCode(String name);
 private:
 };
 

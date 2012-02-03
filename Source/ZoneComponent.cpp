@@ -28,7 +28,7 @@
 #include "ControlVoltageComponent.h"
 #include "OscComponent.h"
 #include "MidiConstants.h"
-#include "OscAction.h"
+#include "PresetFactory.h"
 //[/Headers]
 
 #include "ZoneComponent.h"
@@ -178,18 +178,7 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == actionTypeComboBox)
     {
         //[UserComboBoxCode_actionTypeComboBox] -- add your combo box handling code here..
-      Action* action = NULL;
-      if(actionTypeComboBox->getText().equalsIgnoreCase(T("Control Change"))){
-	action = Action::createAction(MIDI_CONTROL_CHANGE);
-      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("Note On"))){
-	action = Action::createAction(MIDI_NOTE_ON);
-      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("Note Range"))){
-	action = Action::createAction(MIDI_NOTE_RANGE_ACTION_TYPE);
-      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("NRPN"))){
-	action = Action::createAction(MIDI_NRPN_ACTION_TYPE);
-      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("OSC"))){
-	action = new OscAction();
-      }
+      Action* action = PresetFactory::createAction(actionTypeComboBox->getText());
       loadAction(action);
       zone->action = action;
         //[/UserComboBoxCode_actionTypeComboBox]
