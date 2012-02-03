@@ -53,7 +53,7 @@ public:
     void sendPreset();
     void loadPreset(uint8_t index);
     void loadPreset(Preset* preset);
-    void savePreset(uint8_t index);
+/*     void savePreset(uint8_t index); */
     void loadFile();
     void saveFile();
     void openSettings();

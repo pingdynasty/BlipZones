@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  23 Jan 2012 1:48:24pm
+  Creation date:  2 Feb 2012 4:29:51pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -26,7 +26,9 @@
 #include "MidiNoteRangeComponent.h"
 #include "SelectPresetComponent.h"
 #include "ControlVoltageComponent.h"
+#include "OscComponent.h"
 #include "MidiConstants.h"
+#include "OscAction.h"
 //[/Headers]
 
 #include "ZoneComponent.h"
@@ -48,7 +50,7 @@ ZoneComponent::ZoneComponent (Zone* z)
       Yslider (0),
       displayTypeComboBox (0),
       typeLabel (0),
-      imageButton (0)
+      deleteButton (0)
 {
     addAndMakeVisible (component = new ActionComponent());
     addAndMakeVisible (actionTypeComboBox = new ComboBox (L"Action Type"));
@@ -65,6 +67,7 @@ ZoneComponent::ZoneComponent (Zone* z)
     actionTypeComboBox->addItem (L"NRPN", 7);
     actionTypeComboBox->addItem (L"Select Preset", 8);
     actionTypeComboBox->addItem (L"Control Voltage", 9);
+    actionTypeComboBox->addItem (L"OSC", 10);
     actionTypeComboBox->addListener (this);
 
     addAndMakeVisible (Xslider = new Slider (L"X"));
@@ -97,13 +100,14 @@ ZoneComponent::ZoneComponent (Zone* z)
     typeLabel->setColour (TextEditor::textColourId, Colours::black);
     typeLabel->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (imageButton = new ImageButton (L"new button"));
-    imageButton->addListener (this);
+    addAndMakeVisible (deleteButton = new ImageButton (L"delete button"));
+    deleteButton->setButtonText (L"delete");
+    deleteButton->addListener (this);
 
-    imageButton->setImages (false, true, true,
-                            ImageCache::getFromMemory (deleteButtonSmall_png, deleteButtonSmall_pngSize), 1.0000f, Colour (0x0),
-                            Image(), 1.0000f, Colour (0x0),
-                            Image(), 1.0000f, Colour (0x0));
+    deleteButton->setImages (false, true, true,
+                             ImageCache::getFromMemory (deleteButtonSmall_png, deleteButtonSmall_pngSize), 1.0000f, Colour (0x0),
+                             Image(), 1.0000f, Colour (0x0),
+                             Image(), 1.0000f, Colour (0x0));
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -128,7 +132,7 @@ ZoneComponent::~ZoneComponent()
     deleteAndZero (Yslider);
     deleteAndZero (displayTypeComboBox);
     deleteAndZero (typeLabel);
-    deleteAndZero (imageButton);
+    deleteAndZero (deleteButton);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -161,7 +165,7 @@ void ZoneComponent::resized()
     Yslider->setBounds (152, 0, 32, 72);
     displayTypeComboBox->setBounds (328 - 136, 40, 136, 24);
     typeLabel->setBounds (32, 8, 112, 24);
-    imageButton->setBounds (8, 8, 23, 24);
+    deleteButton->setBounds (8, 8, 23, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -174,11 +178,36 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     if (comboBoxThatHasChanged == actionTypeComboBox)
     {
         //[UserComboBoxCode_actionTypeComboBox] -- add your combo box handling code here..
+      Action* action = NULL;
+      if(actionTypeComboBox->getText().equalsIgnoreCase(T("Control Change"))){
+	action = Action::createAction(MIDI_CONTROL_CHANGE);
+      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("Note On"))){
+	action = Action::createAction(MIDI_NOTE_ON);
+      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("Note Range"))){
+	action = Action::createAction(MIDI_NOTE_RANGE_ACTION_TYPE);
+      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("NRPN"))){
+	action = Action::createAction(MIDI_NRPN_ACTION_TYPE);
+      }else if(actionTypeComboBox->getText().equalsIgnoreCase(T("OSC"))){
+	action = new OscAction();
+      }
+      loadAction(action);
+      zone->action = action;
         //[/UserComboBoxCode_actionTypeComboBox]
     }
     else if (comboBoxThatHasChanged == displayTypeComboBox)
     {
         //[UserComboBoxCode_displayTypeComboBox] -- add your combo box handling code here..
+      switch(displayTypeComboBox->getSelectedId()){
+      case 1:
+	zone->setDisplayType(LINE_DISPLAY_TYPE);
+	break;
+      case 2:
+	zone->setDisplayType(FILL_DISPLAY_TYPE);
+	break;
+      case 3:
+	zone->setDisplayType(NONE_DISPLAY_TYPE);
+	break;
+      }
         //[/UserComboBoxCode_displayTypeComboBox]
     }
 
@@ -215,10 +244,14 @@ void ZoneComponent::buttonClicked (Button* buttonThatWasClicked)
     //[UserbuttonClicked_Pre]
     //[/UserbuttonClicked_Pre]
 
-    if (buttonThatWasClicked == imageButton)
+    if (buttonThatWasClicked == deleteButton)
     {
-        //[UserButtonCode_imageButton] -- add your button handler code here..
-        //[/UserButtonCode_imageButton]
+        //[UserButtonCode_deleteButton] -- add your button handler code here..
+
+      // todo!
+//       ApplicationConfiguration::getBlipSim()->getPreset()->;
+
+        //[/UserButtonCode_deleteButton]
     }
 
     //[UserbuttonClicked_Post]
@@ -332,6 +365,10 @@ void ZoneComponent::loadAction(Action* action){
        component = new ControlVoltageComponent();
       actionTypeComboBox->setSelectedId(9, dontSendChangeMessage);
       break;
+    case OSC_ACTION_TYPE:
+      component = new OscComponent();
+      actionTypeComboBox->setText(T("OSC"), dontSendChangeMessage);
+      break;
     default:
       component = new ActionComponent();
       actionTypeComboBox->setText(T("Unavailable"), dontSendChangeMessage);
@@ -369,7 +406,7 @@ BEGIN_JUCER_METADATA
              constructorParams=""/>
   <COMBOBOX name="Action Type" id="c1f4660eabe8fccb" memberName="actionTypeComboBox"
             virtualName="" explicitFocusOrder="0" pos="192 8 136 24" editable="0"
-            layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Note Range&#10;NRPN&#10;Select Preset&#10;Control Voltage"
+            layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Note Range&#10;NRPN&#10;Select Preset&#10;Control Voltage&#10;OSC"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <SLIDER name="X" id="9789276617163945" memberName="Xslider" virtualName=""
           explicitFocusOrder="0" pos="8 40 136 32" min="0" max="10" int="1"
@@ -388,8 +425,8 @@ BEGIN_JUCER_METADATA
          edBkgCol="0" labelText="Zone Type" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
-  <IMAGEBUTTON name="new button" id="12ad1bce5b170b59" memberName="imageButton"
-               virtualName="" explicitFocusOrder="0" pos="8 8 23 24" buttonText="new button"
+  <IMAGEBUTTON name="delete button" id="12ad1bce5b170b59" memberName="deleteButton"
+               virtualName="" explicitFocusOrder="0" pos="8 8 23 24" buttonText="delete"
                connectedEdges="0" needsCallback="1" radioGroupId="0" keepProportions="1"
                resourceNormal="deleteButtonSmall_png" opacityNormal="1" colourNormal="0"
                resourceOver="" opacityOver="1" colourOver="0" resourceDown=""

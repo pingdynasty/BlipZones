@@ -227,37 +227,6 @@ void ConfigurationComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
 
-
-// class PresetSynchronizingHackThread : public Thread {
-// private:
-//   PresetComponent* presetcomponent;
-// public:
-//   PresetSynchronizingHackThread(PresetComponent* pc) :
-//     Thread(T("PresetSynchronizingHackThread")), presetcomponent(pc) {
-//     setPriority(0);
-//   }
-//   void run(){
-//     sleep(2000);
-//     while(!threadShouldExit()){
-//       const MessageManagerLock mmLock;
-//       uint8_t index = ApplicationConfiguration::getBlipSim()->getPresetIndex();
-//       if(presetcomponent->getPreset() != NULL &&
-// 	 index != presetcomponent->getPreset()->getIndex()){
-// 	presetcomponent->loadPreset(index);
-//       }
-//       sleep(200);
-//     }
-//     delete this;
-//   }
-// };
-
-// void MidiZonePreset::loadPreset(uint8_t index){
-//   std::cout << "MidiZonePreset::loadPreset " << (int)index << std::endl;
-//   const MessageManagerLock mmLock;
-//   pchack->loadPreset(index);
-// }
-
-
 Preset* ConfigurationComponent::getDefaultPreset(){
   std::cout << "get default preset " << std::endl;
   return ApplicationConfiguration::getPreset(0);
@@ -335,49 +304,27 @@ void ConfigurationComponent::requestPreset(){
 //   ApplicationConfiguration::getBlipSim()->doMidi(index == 0);
 // }
 
-void ConfigurationComponent::savePreset(uint8_t index){
-  std::cout << "save preset " << (int)index << std::endl;
-
+// void ConfigurationComponent::savePreset(uint8_t index){
+//   std::cout << "save preset " << (int)index << std::endl;
   // todo
 //   for(int i=0; i<components.size(); ++i)
 //     preset->setZone(i, components[i]->getZone());
 //   preset->save(index);
-
-}
+// }
 
 void ConfigurationComponent::loadPreset(uint8_t index){
   std::cout << "load preset " << (int)index << std::endl;
-    // todo: preset is now passed into constructor
   Preset* preset = ApplicationConfiguration::getPreset(index);
+  loadPreset(preset);
+  ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
+}
+
+void ConfigurationComponent::loadPreset(Preset* preset){
   removeChildComponent(component);
   delete component;
   addAndMakeVisible(component = new PresetComponent(preset));
-//   repaint();
   resized();
-
-//   zones->setPreset(preset);
-// //   presetComboBox->setSelectedItemIndex(index, false);
-//   ApplicationConfiguration::getBlipSim()->setPresetIndex(index);
-//   if(preset == NULL)
-//     return;
-//   preset->load(index);
-//   loadPreset(preset);
-}
-
-void ConfigurationComponent::loadPreset(Preset* p){
-//   preset = p;
-
-  // todo
-//   for(int i=0; i<components.size(); ++i){
-// //   components.clear();
-// //   for(int i=0; i<MAX_ZONES_IN_PRESET; ++i){
-//     Zone* zone = preset->getZone(i);
-// //     deleteAndZero(components[i]);
-// //     if(zone == NULL){
-// //     components.add(new ZoneComponent());
-//     components[i]->loadZone(zone);
-//   }
-//   selectZone(getSelectedZoneIndex());
+  ApplicationConfiguration::getBlipSim()->setPreset(preset);
 }
 
 void ConfigurationComponent::saveFile(){
@@ -408,8 +355,8 @@ void ConfigurationComponent::loadFile(){
     File file = fc.getResult();
     // todo!
     factory.loadPreset(*preset, file);
+    loadPreset(preset);
   }
-  loadPreset(preset);
 }
 
 //[/MiscUserCode]

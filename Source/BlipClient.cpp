@@ -6,7 +6,6 @@
 #include "PresetReader.h"
 #include "BlipSim.h"
 #include "Command.h"
-#include "globals.h"
 
 #define THREAD_TIMEOUT_MS  2000
 #define MIDI_ZONE_PRESET_LENGTH 1+MIDI_ZONES_IN_PRESET*MIDI_ZONE_PRESET_SIZE+1
@@ -141,16 +140,14 @@ void BlipClient::handleParameterMessage(uint8_t pid, uint16_t value){
 //     std::cout << "preset data " << std::dec << (int)position << std::endl;
     if(position == 0){
       delete reader;
-      // todo: factor out the preset
-      reader = new PresetReader(&blipbox.preset);
       index = value;
+      Preset* preset = ApplicationConfiguration::getPreset(index);
+      reader = new PresetReader(preset);
     }
     if(position++ < MIDI_ZONE_PRESET_LENGTH){
       reader->serialInput((unsigned char)value);
     }else{
       std::cout << "loading preset " << std::dec << (int)index << std::endl;
-//       ApplicationConfiguration::getPreset(index)->read(&buf[1]);
-      blipbox.loadPreset(index);
       position = 0;
       delete reader;
       sendScreenUpdates(true);

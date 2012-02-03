@@ -73,7 +73,7 @@ Action* PresetFactory::loadAction(PropertySet& set){
 void PresetFactory::savePreset(Preset& preset, File& file){
   PropertiesFile props(file, PropertiesFile::Options());
   PropertySet set;
-  props.setValue("preset", index);
+//   props.setValue("preset", index);
   props.setValue("version", FILE_FORMAT_VERSION);
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     if(saveZone(preset.getZone(i), set)){

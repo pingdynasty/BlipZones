@@ -7,6 +7,7 @@
 #include "Animator.h"
 #include "EventHandler.h"
 #include "Event.h"
+#include "Preset.h"
 
 class BlipSim {
 private:
@@ -32,6 +33,8 @@ public:
   uint8_t getLed(uint8_t x, uint8_t y);
   bool isPressed();
   Position& getPosition();
+  void setPreset(Preset* preset);
+/*   Preset* getPreset(); */
   uint8_t getPresetIndex();
   void setPresetIndex(uint8_t index);
   void position(uint16_t x, uint16_t y);

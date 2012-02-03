@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  23 Jan 2012 1:48:24pm
+  Creation date:  2 Feb 2012 4:29:51pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__
-#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__
+#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__
+#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -86,7 +86,7 @@ private:
     Slider* Yslider;
     ComboBox* displayTypeComboBox;
     Label* typeLabel;
-    ImageButton* imageButton;
+    ImageButton* deleteButton;
 
 
     //==============================================================================
@@ -96,4 +96,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_345378E7__
+#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_288257A1__

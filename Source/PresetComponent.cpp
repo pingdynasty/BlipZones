@@ -20,6 +20,8 @@
 */
 
 //[Headers] You can add your own extra header files here...
+#include "ApplicationConfiguration.h"
+#include "BlipSim.h"
 //[/Headers]
 
 #include "PresetComponent.h"
@@ -163,8 +165,7 @@ void PresetComponent::addZone(){
 //   zone->action = NULL; // todo: why is the constructor not called?
   preset->setZone(index, zone);
   zones->updateContent();
-//   zones->repaint();
-//   repaint();
+  ApplicationConfiguration::getBlipSim()->setPreset(preset);
 }
 
 Preset* PresetComponent::getPreset(){

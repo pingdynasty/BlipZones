@@ -26,6 +26,7 @@ void BlipSim::initialise(){
   std::cout << "BlipSim::initialise" << std::endl;
   init();
   setup();
+  blipbox.setMode(MIDI_MODE);
   blipbox.config.touchscreen_x_min = 0;
   blipbox.config.touchscreen_y_min = 0;
   blipbox.config.touchscreen_x_range = 1023;
@@ -59,6 +60,14 @@ uint8_t BlipSim::getPresetIndex(){
   return blipbox.config.preset;
 }
  
+// Preset* BlipSim::getPreset(){
+//   return ApplicationConfiguration::getPreset(blipbox.config.preset);
+// }
+
+void BlipSim::setPreset(Preset* preset){
+  blipbox.preset = *preset;
+}
+
 void BlipSim::setPresetIndex(uint8_t index){
   blipbox.config.preset = index;
 }
@@ -131,7 +140,7 @@ void BlipSim::setEventHandler(EventHandler* handler){
   blipbox.eventhandler = handler;
 }
 
-uint8_t domidi;
+uint8_t domidi = false;
 void BlipSim::doMidi(bool doit){
   domidi = doit;
 }
