@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 5:09:34pm
+  Creation date:  3 Feb 2012 3:50:25am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -35,8 +35,6 @@ OscComponent::OscComponent ()
       label (0),
       label2 (0),
       label3 (0),
-      label4 (0),
-      suffixEditor (0),
       prefixEditor (0)
 {
     addAndMakeVisible (maxSlider = new Slider (L"max"));
@@ -68,29 +66,12 @@ OscComponent::OscComponent ()
     label2->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
     addAndMakeVisible (label3 = new Label (L"new label",
-                                           L"pre"));
+                                           L"prefix"));
     label3->setFont (Font (15.0000f, Font::plain));
     label3->setJustificationType (Justification::centredLeft);
     label3->setEditable (false, false, false);
     label3->setColour (TextEditor::textColourId, Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
-
-    addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"post"));
-    label4->setFont (Font (15.0000f, Font::plain));
-    label4->setJustificationType (Justification::centredLeft);
-    label4->setEditable (false, false, false);
-    label4->setColour (TextEditor::textColourId, Colours::black);
-    label4->setColour (TextEditor::backgroundColourId, Colour (0x0));
-
-    addAndMakeVisible (suffixEditor = new TextEditor (L"new text editor"));
-    suffixEditor->setMultiLine (false);
-    suffixEditor->setReturnKeyStartsNewLine (false);
-    suffixEditor->setReadOnly (false);
-    suffixEditor->setScrollbarsShown (true);
-    suffixEditor->setCaretVisible (true);
-    suffixEditor->setPopupMenuEnabled (true);
-    suffixEditor->setText (String::empty);
 
     addAndMakeVisible (prefixEditor = new TextEditor (L"new text editor"));
     prefixEditor->setMultiLine (false);
@@ -110,7 +91,6 @@ OscComponent::OscComponent ()
 
     //[Constructor] You can add your own custom stuff here..
     prefixEditor->addListener (this);
-    suffixEditor->addListener (this);
     //[/Constructor]
 }
 
@@ -124,8 +104,6 @@ OscComponent::~OscComponent()
     deleteAndZero (label);
     deleteAndZero (label2);
     deleteAndZero (label3);
-    deleteAndZero (label4);
-    deleteAndZero (suffixEditor);
     deleteAndZero (prefixEditor);
 
 
@@ -154,13 +132,11 @@ void OscComponent::paint (Graphics& g)
 void OscComponent::resized()
 {
     maxSlider->setBounds (448, 40, 64, 24);
-    minSlider->setBounds (448, 8, 64, 24);
-    label->setBounds (416, 8, 31, 24);
+    minSlider->setBounds (360, 40, 64, 24);
+    label->setBounds (328, 40, 31, 24);
     label2->setBounds (416, 40, 32, 24);
-    label3->setBounds (328, 8, 31, 24);
-    label4->setBounds (328, 40, 32, 24);
-    suffixEditor->setBounds (360, 40, 56, 24);
-    prefixEditor->setBounds (360, 8, 56, 24);
+    label3->setBounds (328, 8, 48, 24);
+    prefixEditor->setBounds (376, 8, 128, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -196,7 +172,6 @@ void OscComponent::loadAction(Action* anaction){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
     maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
     prefixEditor->setText(action->prefix);
-    suffixEditor->setText(action->suffix);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
   }
@@ -205,8 +180,6 @@ void OscComponent::loadAction(Action* anaction){
 void OscComponent::textEditorTextChanged(TextEditor &editor){
   if(&editor == prefixEditor){
     action->prefix = prefixEditor->getText();
-  }else if(&editor == suffixEditor){
-    action->suffix = suffixEditor->getText();
   }
 }
 // void OscComponent::textEditorReturnKeyPressed (TextEditor &editor){}
@@ -238,11 +211,11 @@ BEGIN_JUCER_METADATA
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 8 64 24" min="0" max="1" int="0.1"
+          explicitFocusOrder="0" pos="360 40 64 24" min="0" max="1" int="0.1"
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="6bf549a531a0e0e9" memberName="label" virtualName=""
-         explicitFocusOrder="0" pos="416 8 31 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="328 40 31 24" edTextCol="ff000000"
          edBkgCol="0" labelText="min" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
@@ -252,21 +225,12 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="5b78e24b9826b219" memberName="label3" virtualName=""
-         explicitFocusOrder="0" pos="328 8 31 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="pre" editableSingleClick="0" editableDoubleClick="0"
+         explicitFocusOrder="0" pos="328 8 48 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="prefix" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
-  <LABEL name="new label" id="88089eba14839fec" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="328 40 32 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="post" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="33"/>
-  <TEXTEDITOR name="new text editor" id="bf07a0aba9b5a884" memberName="suffixEditor"
-              virtualName="" explicitFocusOrder="0" pos="360 40 56 24" initialText=""
-              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
-              caret="1" popupmenu="1"/>
   <TEXTEDITOR name="new text editor" id="4e866dc7c74d9d80" memberName="prefixEditor"
-              virtualName="" explicitFocusOrder="0" pos="360 8 56 24" initialText=""
+              virtualName="" explicitFocusOrder="0" pos="376 8 128 24" initialText=""
               multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
               caret="1" popupmenu="1"/>
 </JUCER_COMPONENT>

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 5:09:34pm
+  Creation date:  3 Feb 2012 3:50:25am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_A91AEAA0__
-#define __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_A91AEAA0__
+#ifndef __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
+#define __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -79,8 +79,6 @@ private:
     Label* label;
     Label* label2;
     Label* label3;
-    Label* label4;
-    TextEditor* suffixEditor;
     TextEditor* prefixEditor;
 
 
@@ -91,4 +89,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_A91AEAA0__
+#endif   // __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
