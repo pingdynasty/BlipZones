@@ -64,6 +64,7 @@ uint8_t BlipSim::getPresetIndex(){
 // }
 
 void BlipSim::setPreset(Preset* preset){
+  // calls copy constructor
   blipbox.preset = *preset;
 }
 

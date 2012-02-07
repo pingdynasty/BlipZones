@@ -6,7 +6,7 @@
 #include "ZoneComponent.h"
 
 class ZoneListBox  : public TableListBox,
-                     public TableListBoxModel
+		     public TableListBoxModel
 {
 public:
     //==============================================================================
@@ -26,12 +26,10 @@ public:
   void deleteKeyPressed(int row);
   void returnKeyPressed(int row);
 
-  virtual void paintRowBackground(Graphics &g, int rowNumber, int width, int height, bool rowIsSelected);
-  virtual Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate);
-  virtual void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected);
-
-//   Component* refreshComponentForRow(int rowNumber, bool isRowSelected, Component *existingComponentToUpdate);
-//   void paintListBoxItem(int rowNumber, Graphics &g, int width, int height, bool rowIsSelected);
+  void updateContent();
+  void paintRowBackground(Graphics &g, int rowNumber, int width, int height, bool rowIsSelected);
+  Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate);
+  void paintCell(Graphics &g, int rowNumber, int columnId, int width, int height, bool rowIsSelected);
 
     juce_UseDebuggingNewOperator
 

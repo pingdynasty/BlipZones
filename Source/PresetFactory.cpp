@@ -62,6 +62,7 @@ void PresetFactory::loadPreset(Preset& preset, File& file){
 	      << ": " << props.getIntValue("version") << std::endl;
     return;
   }
+  preset.clear();
   for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
     String zn("zone");
     zn += i;
@@ -70,7 +71,7 @@ void PresetFactory::loadPreset(Preset& preset, File& file){
     if(xml){
       set.restoreFromXml(*xml);
       Zone* zone = loadZone(set);
-      preset.setZone(i, zone);
+      preset.addZone(zone);
     }
   }
   std::cout << "loaded preset from file " << props.getFile().getFullPathName() << std::endl;
@@ -109,7 +110,7 @@ void PresetFactory::savePreset(Preset& preset, File& file){
   PropertySet set;
 //   props.setValue("preset", index);
   props.setValue("version", FILE_FORMAT_VERSION);
-  for(uint8_t i=0; i<MIDI_ZONES_IN_PRESET; ++i){
+  for(uint8_t i=0; i<preset.getNumberOfZones(); ++i){
     if(saveZone(preset.getZone(i), set)){
       String zn("zone");
       zn += i;
@@ -123,7 +124,7 @@ void PresetFactory::savePreset(Preset& preset, File& file){
 }
 
 bool PresetFactory::saveZone(Zone* zone, PropertySet& set){
-  if(zone == NULL || zone->getZoneType() == DISABLED_ZONE_TYPE)
+  if(zone == NULL || zone->action == NULL || zone->getZoneType() == DISABLED_ZONE_TYPE)
     return false;
   set.setValue("type", getZoneTypeName(zone->getZoneType()));
   set.setValue("display", getDisplayTypeName(zone->getDisplayType()));

@@ -142,11 +142,9 @@ void PresetComponent::loadZones(){
 }
 
 void PresetComponent::addZone(){
-  uint8_t index = preset->getNumberOfZones();
   Zone* zone = PresetFactory::createZone(zoneTypeComboBox->getText());
-  preset->setZone(index, zone);
+  preset->addZone(zone);
   zones->updateContent();
-  ApplicationConfiguration::getBlipSim()->setPreset(preset);
 }
 
 Preset* PresetComponent::getPreset(){
