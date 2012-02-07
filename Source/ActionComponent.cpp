@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  9 Dec 2011 1:40:10pm
+  Creation date:  3 Feb 2012 10:36:50am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -69,8 +69,8 @@ void ActionComponent::paint (Graphics& g)
     g.setColour (Colour (0xf5f9ea0));
     g.fillRoundedRectangle (0.0f, 0.0f, 510.0f, 68.0f, 3.5000f);
 
-    g.setColour (Colours::cadetblue);
-    g.drawRoundedRectangle (0.0f, 0.0f, 510.0f, 68.0f, 3.5000f, 0.5000f);
+    g.setColour (Colour (0x827fa6a7));
+    g.drawRoundedRectangle (0.0f, 0.0f, 510.0f, 68.0f, 3.5000f, 0.2000f);
 
     //[UserPaint] Add your own custom painting code here..
     //[/UserPaint]
@@ -102,7 +102,7 @@ BEGIN_JUCER_METADATA
                  fixedSize="0" initialWidth="600" initialHeight="100">
   <BACKGROUND backgroundColour="ffffffff">
     <ROUNDRECT pos="0 0 510 68" cornerSize="3.5" fill="solid: f5f9ea0" hasStroke="1"
-               stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
+               stroke="0.200000003, mitered, butt" strokeColour="solid: 827fa6a7"/>
   </BACKGROUND>
 </JUCER_COMPONENT>
 

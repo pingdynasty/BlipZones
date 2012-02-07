@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  3 Feb 2012 5:12:28am
+  Creation date:  3 Feb 2012 10:27:51am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__
-#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__
+#ifndef __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_746B7F59__
+#define __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_746B7F59__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -40,8 +40,7 @@
 */
 class ZoneComponent  : public Component,
                        public ComboBoxListener,
-                       public SliderListener,
-                       public ButtonListener
+                       public SliderListener
 {
 public:
     //==============================================================================
@@ -64,7 +63,6 @@ public:
     void resized();
     void comboBoxChanged (ComboBox* comboBoxThatHasChanged);
     void sliderValueChanged (Slider* sliderThatWasMoved);
-    void buttonClicked (Button* buttonThatWasClicked);
 
     // Binary resources:
     static const char* deleteButtonSmall_png;
@@ -86,7 +84,6 @@ private:
     Slider* Yslider;
     ComboBox* displayTypeComboBox;
     Label* typeLabel;
-    ImageButton* deleteButton;
 
 
     //==============================================================================
@@ -96,4 +93,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_8D0CFEF4__
+#endif   // __JUCER_HEADER_ZONECOMPONENT_ZONECOMPONENT_746B7F59__

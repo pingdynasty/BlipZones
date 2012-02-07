@@ -20,6 +20,7 @@
 		28DC16EF518E8C490EDE65FE /* PresetFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F22C39DEFBC002FC32A53104 /* PresetFactory.cpp */; };
 		2B0C7A9D7361F4FF20FB7D8B /* EventHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2869E883B48DF24E6C409AFF /* EventHandler.cpp */; };
 		32FECD2A064A3D9689F0127C /* OscServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B00DC3EA8445E3F20BDFFB45 /* OscServer.cpp */; };
+		339B90D35FE7D7538D955D3F /* DeleteZoneButton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A892A723DC081488E9A47B3B /* DeleteZoneButton.cpp */; };
 		39D9936319B814801DBA9C64 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */; };
 		3F815EA2C165CCF5B2E833D5 /* MainWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 69E3CE875903BE2F4EA94527 /* MainWindow.cpp */; };
 		40A0DEE6CCB568B97B4B6942 /* KeyController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DEE1C66336F5D9D46770F1D0 /* KeyController.cpp */; };
@@ -169,6 +170,7 @@
 		9B91F8BB10F0597A05DEC3C5 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		A63B4A1751B774926AFC7D43 /* MidiPitchBendComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiPitchBendComponent.h; path = ../../Source/MidiPitchBendComponent.h; sourceTree = SOURCE_ROOT; };
 		A698315080C79C4605643744 /* spi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = spi.h; path = ../../../BlipBox/firmware/spi.h; sourceTree = SOURCE_ROOT; };
+		A892A723DC081488E9A47B3B /* DeleteZoneButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = DeleteZoneButton.cpp; path = ../../Source/DeleteZoneButton.cpp; sourceTree = SOURCE_ROOT; };
 		AA055F83A370B3CF7D5EFF56 /* Serial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Serial.h; path = ../../Source/Serial.h; sourceTree = SOURCE_ROOT; };
 		ABD717D6A2B99B3E3FFC0E14 /* Animator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Animator.cpp; path = ../../../BlipBox/firmware/Animator.cpp; sourceTree = SOURCE_ROOT; };
 		ADBAB30F91E19C5690C81492 /* Parameters.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Parameters.cpp; path = ../../../BlipBox/firmware/Parameters.cpp; sourceTree = SOURCE_ROOT; };
@@ -200,6 +202,7 @@
 		D157564BDA2E25789E1F7A30 /* MidiNoteRangeComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MidiNoteRangeComponent.h; path = ../../Source/MidiNoteRangeComponent.h; sourceTree = SOURCE_ROOT; };
 		D1C0D693490BB7CFAA44E7B2 /* ApplicationSettingsComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ApplicationSettingsComponent.cpp; path = ../../Source/ApplicationSettingsComponent.cpp; sourceTree = SOURCE_ROOT; };
 		D500914F8650AB7A547D83B1 /* SimWindow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = SimWindow.h; path = ../../Source/SimWindow.h; sourceTree = SOURCE_ROOT; };
+		D71712F1753F11C9C2A2C01D /* DeleteZoneButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = DeleteZoneButton.h; path = ../../Source/DeleteZoneButton.h; sourceTree = SOURCE_ROOT; };
 		D9233186CAB0B4CB82B1A41E /* ApplicationSettingsComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ApplicationSettingsComponent.h; path = ../../Source/ApplicationSettingsComponent.h; sourceTree = SOURCE_ROOT; };
 		DA674D0C5E728A27056319C5 /* ControlVoltageComponent.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ControlVoltageComponent.cpp; path = ../../Source/ControlVoltageComponent.cpp; sourceTree = SOURCE_ROOT; };
 		DAAE659AC53757297006E2FB /* ControlVoltageAction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ControlVoltageAction.cpp; path = ../../../BlipBox/firmware/ControlVoltageAction.cpp; sourceTree = SOURCE_ROOT; };
@@ -361,6 +364,8 @@
 		37E4663821DAE593C016B4D5 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A892A723DC081488E9A47B3B /* DeleteZoneButton.cpp */,
+				D71712F1753F11C9C2A2C01D /* DeleteZoneButton.h */,
 				442A142130EA309F45EE0887 /* OscAction.cpp */,
 				117EAFF93F0B8254514C18A2 /* OscAction.h */,
 				B00DC3EA8445E3F20BDFFB45 /* OscServer.cpp */,
@@ -565,6 +570,7 @@
 				74E91DEE5AE36E749098CCB9 /* OscPrintReceivedElements.cpp in Sources */,
 				C8C46D4E4117D17ACD9353B6 /* OscReceivedElements.cpp in Sources */,
 				636C84DBA00FBE1643F0C08A /* OscTypes.cpp in Sources */,
+				339B90D35FE7D7538D955D3F /* DeleteZoneButton.cpp in Sources */,
 				F2F92AA3D4A9E9FAFC989F7C /* OscAction.cpp in Sources */,
 				32FECD2A064A3D9689F0127C /* OscServer.cpp in Sources */,
 				231674197F2BCC887BFD470A /* OscComponent.cpp in Sources */,

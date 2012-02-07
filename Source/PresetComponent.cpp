@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 12:05:13pm
+  Creation date:  3 Feb 2012 10:27:47am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -97,7 +97,7 @@ void PresetComponent::resized()
 {
     zoneTypeComboBox->setBounds (16, getHeight() - 32, 136, 24);
     addButton->setBounds (168, getHeight() - 32, 150, 24);
-    zones->setBounds (8, 8, 544, getHeight() - 52);
+    zones->setBounds (0, 0, 580, getHeight() - 44);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -144,7 +144,6 @@ void PresetComponent::loadZones(){
 void PresetComponent::addZone(){
   uint8_t index = preset->getNumberOfZones();
   Zone* zone = PresetFactory::createZone(zoneTypeComboBox->getText());
-//   zone->action = NULL; // todo: why is the constructor not called?
   preset->setZone(index, zone);
   zones->updateContent();
   ApplicationConfiguration::getBlipSim()->setPreset(preset);
@@ -179,7 +178,7 @@ BEGIN_JUCER_METADATA
               virtualName="" explicitFocusOrder="0" pos="168 32R 150 24" buttonText="add zone"
               connectedEdges="0" needsCallback="1" radioGroupId="0"/>
   <JUCERCOMP name="" id="b8c5bc328fdcae1f" memberName="zones" virtualName="ZoneListBox"
-             explicitFocusOrder="0" pos="8 8 544 52M" sourceFile="ZoneListBox.cpp"
+             explicitFocusOrder="0" pos="0 0 580 44M" sourceFile="ZoneListBox.cpp"
              constructorParams="preset"/>
 </JUCER_COMPONENT>
 

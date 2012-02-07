@@ -46,6 +46,10 @@
       <FILE id="BcT0J1" name="blipbox.icns" compile="0" resource="1" file="Resources/blipbox.icns"/>
     </GROUP>
     <GROUP id="qfOGQR" name="Source">
+      <FILE id="E277UN" name="DeleteZoneButton.cpp" compile="1" resource="0"
+            file="Source/DeleteZoneButton.cpp"/>
+      <FILE id="OC8kGD" name="DeleteZoneButton.h" compile="0" resource="0"
+            file="Source/DeleteZoneButton.h"/>
       <FILE id="FmQ4ou" name="OscAction.cpp" compile="1" resource="0" file="Source/OscAction.cpp"/>
       <FILE id="VLC1A6" name="OscAction.h" compile="0" resource="0" file="Source/OscAction.h"/>
       <FILE id="WCZaVI" name="OscServer.cpp" compile="1" resource="0" file="Source/OscServer.cpp"/>

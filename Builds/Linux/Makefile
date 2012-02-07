@@ -47,6 +47,7 @@ OBJECTS := \
   $(OBJDIR)/OscPrintReceivedElements_773a3861.o \
   $(OBJDIR)/OscReceivedElements_990f2ae6.o \
   $(OBJDIR)/OscTypes_5116aa15.o \
+  $(OBJDIR)/DeleteZoneButton_48234812.o \
   $(OBJDIR)/OscAction_e33520f6.o \
   $(OBJDIR)/OscServer_7fe8383.o \
   $(OBJDIR)/OscComponent_a9199e47.o \
@@ -138,6 +139,11 @@ $(OBJDIR)/OscReceivedElements_990f2ae6.o: ../../Libraries/osc/OscReceivedElement
 $(OBJDIR)/OscTypes_5116aa15.o: ../../Libraries/osc/OscTypes.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling OscTypes.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/DeleteZoneButton_48234812.o: ../../Source/DeleteZoneButton.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling DeleteZoneButton.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/OscAction_e33520f6.o: ../../Source/OscAction.cpp

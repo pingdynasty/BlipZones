@@ -52,6 +52,9 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\DeleteZoneButton.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\OscAction.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -225,6 +228,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\DeleteZoneButton.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\OscAction.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>

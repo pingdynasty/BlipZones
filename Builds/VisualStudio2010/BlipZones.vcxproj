@@ -128,6 +128,7 @@
     <ClCompile Include="..\..\Libraries\osc\OscPrintReceivedElements.cpp"/>
     <ClCompile Include="..\..\Libraries\osc\OscReceivedElements.cpp"/>
     <ClCompile Include="..\..\Libraries\osc\OscTypes.cpp"/>
+    <ClCompile Include="..\..\Source\DeleteZoneButton.cpp"/>
     <ClCompile Include="..\..\Source\OscAction.cpp"/>
     <ClCompile Include="..\..\Source\OscServer.cpp"/>
     <ClCompile Include="..\..\Source\OscComponent.cpp"/>
@@ -187,6 +188,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\JuceLibraryCode.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\DeleteZoneButton.h"/>
     <ClInclude Include="..\..\Source\OscAction.h"/>
     <ClInclude Include="..\..\Source\OscServer.h"/>
     <ClInclude Include="..\..\Source\OscComponent.h"/>

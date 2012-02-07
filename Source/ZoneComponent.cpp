@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  3 Feb 2012 5:12:28am
+  Creation date:  3 Feb 2012 10:27:51am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -49,8 +49,7 @@ ZoneComponent::ZoneComponent (Zone* z)
       Xslider (0),
       Yslider (0),
       displayTypeComboBox (0),
-      typeLabel (0),
-      deleteButton (0)
+      typeLabel (0)
 {
     addAndMakeVisible (component = new ActionComponent());
     addAndMakeVisible (actionTypeComboBox = new ComboBox (L"Action Type"));
@@ -102,14 +101,6 @@ ZoneComponent::ZoneComponent (Zone* z)
     typeLabel->setColour (TextEditor::textColourId, Colours::black);
     typeLabel->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (deleteButton = new ImageButton (L"delete button"));
-    deleteButton->setButtonText (L"delete");
-    deleteButton->addListener (this);
-
-    deleteButton->setImages (false, true, true,
-                             ImageCache::getFromMemory (deleteButtonSmall_png, deleteButtonSmall_pngSize), 1.0000f, Colour (0x0),
-                             Image(), 1.0000f, Colour (0x0),
-                             Image(), 1.0000f, Colour (0x0));
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -134,7 +125,6 @@ ZoneComponent::~ZoneComponent()
     deleteAndZero (Yslider);
     deleteAndZero (displayTypeComboBox);
     deleteAndZero (typeLabel);
-    deleteAndZero (deleteButton);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -166,8 +156,7 @@ void ZoneComponent::resized()
     Xslider->setBounds (8, 40, 136, 32);
     Yslider->setBounds (152, 0, 32, 72);
     displayTypeComboBox->setBounds (328 - 136, 40, 136, 24);
-    typeLabel->setBounds (32, 8, 112, 24);
-    deleteButton->setBounds (8, 8, 23, 24);
+    typeLabel->setBounds (8, 8, 136, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -219,25 +208,6 @@ void ZoneComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
-}
-
-void ZoneComponent::buttonClicked (Button* buttonThatWasClicked)
-{
-    //[UserbuttonClicked_Pre]
-    //[/UserbuttonClicked_Pre]
-
-    if (buttonThatWasClicked == deleteButton)
-    {
-        //[UserButtonCode_deleteButton] -- add your button handler code here..
-
-      // todo!
-//       ApplicationConfiguration::getBlipSim()->getPreset()->;
-
-        //[/UserButtonCode_deleteButton]
-    }
-
-    //[UserbuttonClicked_Post]
-    //[/UserbuttonClicked_Post]
 }
 
 
@@ -384,16 +354,10 @@ BEGIN_JUCER_METADATA
             layout="33" items="Bar&#10;Fill&#10;Graded Bar&#10;Graded Fill&#10;None"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="Type Label" id="cc644bbdf1e40c7f" memberName="typeLabel"
-         virtualName="" explicitFocusOrder="0" pos="32 8 112 24" edTextCol="ff000000"
+         virtualName="" explicitFocusOrder="0" pos="8 8 136 24" edTextCol="ff000000"
          edBkgCol="0" labelText="Zone Type" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
-  <IMAGEBUTTON name="delete button" id="12ad1bce5b170b59" memberName="deleteButton"
-               virtualName="" explicitFocusOrder="0" pos="8 8 23 24" buttonText="delete"
-               connectedEdges="0" needsCallback="1" radioGroupId="0" keepProportions="1"
-               resourceNormal="deleteButtonSmall_png" opacityNormal="1" colourNormal="0"
-               resourceOver="" opacityOver="1" colourOver="0" resourceDown=""
-               opacityDown="1" colourDown="0"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA
