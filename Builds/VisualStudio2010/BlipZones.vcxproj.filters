@@ -52,6 +52,15 @@
     <ClCompile Include="..\..\Resources\blipbox.icns">
       <Filter>BlipZones\Resources</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MidiNRPNComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiAftertouchComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MidiChannelPressureComponent.cpp">
+      <Filter>BlipZones\Source</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\DeleteZoneButton.cpp">
       <Filter>BlipZones\Source</Filter>
     </ClCompile>
@@ -228,6 +237,15 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\MidiNRPNComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiAftertouchComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MidiChannelPressureComponent.h">
+      <Filter>BlipZones\Source</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\DeleteZoneButton.h">
       <Filter>BlipZones\Source</Filter>
     </ClInclude>

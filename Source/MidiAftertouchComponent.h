@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  8 Feb 2012 12:20:54pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,14 +19,13 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
-#define __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#ifndef __JUCER_HEADER_MIDIAFTERTOUCHCOMPONENT_MIDIAFTERTOUCHCOMPONENT_1E72B421__
+#define __JUCER_HEADER_MIDIAFTERTOUCHCOMPONENT_MIDIAFTERTOUCHCOMPONENT_1E72B421__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "ActionComponent.h"
 #include "Action.h"
-#include "ControlVoltageAction.h"
 //[/Headers]
 
 
@@ -39,20 +38,20 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class ControlVoltageComponent  : public ActionComponent,
+class MidiAftertouchComponent  : public ActionComponent,
                                  public SliderListener
 {
 public:
     //==============================================================================
-    ControlVoltageComponent ();
-    ~ControlVoltageComponent();
+    MidiAftertouchComponent ();
+    ~MidiAftertouchComponent();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     Action* getAction(){
       return action;
     }
-    void loadAction(Action* anaction);
+    void loadAction(Action* action);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -66,7 +65,7 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    ControlVoltageAction* action;
+    MidiAftertouchAction* action;
     //[/UserVariables]
 
     //==============================================================================
@@ -82,9 +81,9 @@ private:
 
     //==============================================================================
     // (prevent copy constructor and operator= being generated..)
-    ControlVoltageComponent (const ControlVoltageComponent&);
-    const ControlVoltageComponent& operator= (const ControlVoltageComponent&);
+    MidiAftertouchComponent (const MidiAftertouchComponent&);
+    const MidiAftertouchComponent& operator= (const MidiAftertouchComponent&);
 };
 
 
-#endif   // __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#endif   // __JUCER_HEADER_MIDIAFTERTOUCHCOMPONENT_MIDIAFTERTOUCHCOMPONENT_1E72B421__

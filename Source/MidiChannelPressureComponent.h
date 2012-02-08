@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  8 Feb 2012 11:15:39am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,14 +19,13 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
-#define __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#ifndef __JUCER_HEADER_MIDICHANNELPRESSURECOMPONENT_MIDICHANNELPRESSURECOMPONENT_23EA44F3__
+#define __JUCER_HEADER_MIDICHANNELPRESSURECOMPONENT_MIDICHANNELPRESSURECOMPONENT_23EA44F3__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
 #include "ActionComponent.h"
 #include "Action.h"
-#include "ControlVoltageAction.h"
 //[/Headers]
 
 
@@ -39,20 +38,20 @@
     Describe your class and how it works here!
                                                                     //[/Comments]
 */
-class ControlVoltageComponent  : public ActionComponent,
-                                 public SliderListener
+class MidiChannelPressureComponent  : public ActionComponent,
+                                      public SliderListener
 {
 public:
     //==============================================================================
-    ControlVoltageComponent ();
-    ~ControlVoltageComponent();
+    MidiChannelPressureComponent ();
+    ~MidiChannelPressureComponent();
 
     //==============================================================================
     //[UserMethods]     -- You can add your own custom methods in this section.
     Action* getAction(){
       return action;
     }
-    void loadAction(Action* anaction);
+    void loadAction(Action* action);
     //[/UserMethods]
 
     void paint (Graphics& g);
@@ -66,25 +65,23 @@ public:
 
 private:
     //[UserVariables]   -- You can add your own custom variables in this section.
-    ControlVoltageAction* action;
+    MidiChannelPressureAction* action;
     //[/UserVariables]
 
     //==============================================================================
     Slider* channelSlider;
     Slider* maxSlider;
     Slider* minSlider;
-    Slider* dataSlider;
     Label* label;
     Label* label2;
     Label* label3;
-    Label* label4;
 
 
     //==============================================================================
     // (prevent copy constructor and operator= being generated..)
-    ControlVoltageComponent (const ControlVoltageComponent&);
-    const ControlVoltageComponent& operator= (const ControlVoltageComponent&);
+    MidiChannelPressureComponent (const MidiChannelPressureComponent&);
+    const MidiChannelPressureComponent& operator= (const MidiChannelPressureComponent&);
 };
 
 
-#endif   // __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#endif   // __JUCER_HEADER_MIDICHANNELPRESSURECOMPONENT_MIDICHANNELPRESSURECOMPONENT_23EA44F3__

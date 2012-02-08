@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  3 Feb 2012 10:27:51am
+  Creation date:  8 Feb 2012 12:52:02pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -22,8 +22,11 @@
 //[Headers] You can add your own extra header files here...
 #include "MidiControllerComponent.h"
 #include "MidiPitchBendComponent.h"
+#include "MidiNRPNComponent.h"
 #include "MidiNoteComponent.h"
 #include "MidiNoteRangeComponent.h"
+#include "MidiAftertouchComponent.h"
+#include "MidiChannelPressureComponent.h"
 #include "SelectPresetComponent.h"
 #include "ControlVoltageComponent.h"
 #include "OscComponent.h"
@@ -58,15 +61,16 @@ ZoneComponent::ZoneComponent (Zone* z)
     actionTypeComboBox->setTextWhenNothingSelected (String::empty);
     actionTypeComboBox->setTextWhenNoChoicesAvailable (L"(no choices)");
     actionTypeComboBox->addItem (L"Control Change", 1);
-    actionTypeComboBox->addItem (L"Note On", 2);
-    actionTypeComboBox->addItem (L"Pitch Bend", 3);
-    actionTypeComboBox->addItem (L"Channel Pressure", 4);
-    actionTypeComboBox->addItem (L"Polyphonic Aftertouch", 5);
-    actionTypeComboBox->addItem (L"Note Range", 6);
-    actionTypeComboBox->addItem (L"NRPN", 7);
-    actionTypeComboBox->addItem (L"Select Preset", 8);
-    actionTypeComboBox->addItem (L"Control Voltage", 9);
-    actionTypeComboBox->addItem (L"OSC", 10);
+    actionTypeComboBox->addItem (L"Program Change", 2);
+    actionTypeComboBox->addItem (L"Note On", 3);
+    actionTypeComboBox->addItem (L"Pitch Bend", 4);
+    actionTypeComboBox->addItem (L"Channel Pressure", 5);
+    actionTypeComboBox->addItem (L"Polyphonic Aftertouch", 6);
+    actionTypeComboBox->addItem (L"Note Range", 7);
+    actionTypeComboBox->addItem (L"NRPN", 8);
+    actionTypeComboBox->addItem (L"Select Preset", 9);
+    actionTypeComboBox->addItem (L"Control Voltage", 10);
+    actionTypeComboBox->addItem (L"OSC", 11);
     actionTypeComboBox->addListener (this);
 
     addAndMakeVisible (Xslider = new Slider (L"X"));
@@ -90,7 +94,8 @@ ZoneComponent::ZoneComponent (Zone* z)
     displayTypeComboBox->addItem (L"Fill", 2);
     displayTypeComboBox->addItem (L"Graded Bar", 3);
     displayTypeComboBox->addItem (L"Graded Fill", 4);
-    displayTypeComboBox->addItem (L"None", 5);
+    displayTypeComboBox->addItem (L"Inverted Fill", 5);
+    displayTypeComboBox->addItem (L"None", 6);
     displayTypeComboBox->addListener (this);
 
     addAndMakeVisible (typeLabel = new Label (L"Type Label",
@@ -177,7 +182,14 @@ void ZoneComponent::comboBoxChanged (ComboBox* comboBoxThatHasChanged)
     else if (comboBoxThatHasChanged == displayTypeComboBox)
     {
         //[UserComboBoxCode_displayTypeComboBox] -- add your combo box handling code here..
-      DisplayType code = (DisplayType)PresetFactory::getDisplayTypeCode(displayTypeComboBox->getText());
+      String txt = displayTypeComboBox->getText();
+      if(txt.startsWith("Inverted ")){
+	txt = txt.trimCharactersAtStart("Inverted ");
+	zone->setInverted(true);
+      }else{
+	zone->setInverted(false);
+      }
+      DisplayType code = (DisplayType)PresetFactory::getDisplayTypeCode(txt);
       zone->setDisplayType(code);
         //[/UserComboBoxCode_displayTypeComboBox]
     }
@@ -250,6 +262,8 @@ void ZoneComponent::loadZone(Zone* z){
   String name = PresetFactory::getZoneTypeName(zone->getZoneType());
   typeLabel->setText(name, dontSendChangeMessage);
   name = PresetFactory::getDisplayTypeName(zone->getDisplayType());
+  if(zone->isInverted())
+    name = "Inverted "+name;
   displayTypeComboBox->setText(name, dontSendChangeMessage);
 
   loadAction(zone->action);
@@ -263,55 +277,53 @@ void ZoneComponent::loadAction(Action* action){
     switch(action->getActionType()){
     case MIDI_CONTROL_CHANGE:
       component = new MidiControllerComponent();
-      actionTypeComboBox->setSelectedId(1, dontSendChangeMessage);
       break;
     case MIDI_NOTE_ON:
     case MIDI_NOTE_OFF:
       component = new MidiNoteComponent();
-      actionTypeComboBox->setSelectedId(2, dontSendChangeMessage);
       break;
     case MIDI_PITCH_BEND:
       component = new MidiPitchBendComponent();
-      actionTypeComboBox->setSelectedId(3, dontSendChangeMessage);
       break;
-//     case MIDI_CHANNEL_PRESSURE:
-//        component = new MidiChannelPressureComponent();
-//       actionTypeComboBox->setSelectedId(4, dontSendChangeMessage);
-//       break;
-//     case MIDI_AFTERTOUCH:
-//        component = new MidiAftertouchComponent();
-//       actionTypeComboBox->setSelectedId(5, dontSendChangeMessage);
-//       break;
+    case MIDI_CHANNEL_PRESSURE:
+      component = new MidiChannelPressureComponent();
+      break;
+    case MIDI_AFTERTOUCH:
+      component = new MidiAftertouchComponent();
+      break;
     case MIDI_NOTE_RANGE_ACTION_TYPE:
       component = new MidiNoteRangeComponent();
-      actionTypeComboBox->setSelectedId(6, dontSendChangeMessage);
       break;
-//     case MIDI_NRPN_ACTION_TYPE:
-//        component = new MidiNRPNComponent();
-//       actionTypeComboBox->setSelectedId(7, dontSendChangeMessage);
-//       break;
+    case MIDI_PROGRAM_CHANGE:
+      component = new MidiChannelPressureComponent();
+      break;
+    case MIDI_NRPN_ACTION_TYPE:
+       component = new MidiNRPNComponent();
+      break;
     case SELECT_PRESET_ACTION_TYPE:
       component = new SelectPresetComponent();
-      actionTypeComboBox->setSelectedId(8, dontSendChangeMessage);
       break;
     case CONTROL_VOLTAGE_ACTION_TYPE:
        component = new ControlVoltageComponent();
-      actionTypeComboBox->setSelectedId(9, dontSendChangeMessage);
       break;
     case OSC_ACTION_TYPE:
       component = new OscComponent();
-      actionTypeComboBox->setText(T("OSC"), dontSendChangeMessage);
       break;
     default:
       component = new ActionComponent();
-      actionTypeComboBox->setText(T("Unavailable"), dontSendChangeMessage);
       break;
     }
     component->loadAction(action);
+
   }
   addAndMakeVisible(component);
   component->setBounds(0, 0, 512, 72);
   component->toBack();
+
+  String name = "No Action";
+  if(action != NULL)
+    name = PresetFactory::getActionTypeName(action->getActionType());
+  actionTypeComboBox->setText(name, dontSendChangeMessage);
 }
 
 //[/MiscUserCode]
@@ -339,7 +351,7 @@ BEGIN_JUCER_METADATA
              constructorParams=""/>
   <COMBOBOX name="Action Type" id="c1f4660eabe8fccb" memberName="actionTypeComboBox"
             virtualName="" explicitFocusOrder="0" pos="192 8 136 24" editable="0"
-            layout="33" items="Control Change&#10;Note On&#10;Pitch Bend&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Note Range&#10;NRPN&#10;Select Preset&#10;Control Voltage&#10;OSC"
+            layout="33" items="Control Change&#10;Program Change&#10;Note On&#10;Pitch Bend&#10;Channel Pressure&#10;Polyphonic Aftertouch&#10;Note Range&#10;NRPN&#10;Select Preset&#10;Control Voltage&#10;OSC"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <SLIDER name="X" id="9789276617163945" memberName="Xslider" virtualName=""
           explicitFocusOrder="0" pos="8 40 136 32" min="0" max="10" int="1"
@@ -351,7 +363,7 @@ BEGIN_JUCER_METADATA
           textBoxWidth="40" textBoxHeight="20" skewFactor="1"/>
   <COMBOBOX name="Display Type" id="ee97d6a8e0e218c6" memberName="displayTypeComboBox"
             virtualName="" explicitFocusOrder="0" pos="328r 40 136 24" editable="0"
-            layout="33" items="Bar&#10;Fill&#10;Graded Bar&#10;Graded Fill&#10;None"
+            layout="33" items="Bar&#10;Fill&#10;Graded Bar&#10;Graded Fill&#10;Inverted Fill&#10;None"
             textWhenNonSelected="" textWhenNoItems="(no choices)"/>
   <LABEL name="Type Label" id="cc644bbdf1e40c7f" memberName="typeLabel"
          virtualName="" explicitFocusOrder="0" pos="8 8 136 24" edTextCol="ff000000"

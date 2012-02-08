@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  11 Jan 2012 5:58:03pm
+  Creation date:  8 Feb 2012 12:20:20pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -26,9 +26,6 @@
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
-const bool sendUpdateMessage = false;
-const bool sendMessageSynchronously = true;
-const bool allowNudgingOfOtherValues = true;
 //[/MiscUserDefs]
 
 //==============================================================================
@@ -148,14 +145,14 @@ void MidiNoteComponent::paint (Graphics& g)
 
 void MidiNoteComponent::resized()
 {
-    channelSlider->setBounds (360, 8, 56, 24);
+    channelSlider->setBounds (360, 8, 64, 24);
     maxSlider->setBounds (448, 40, 64, 24);
     minSlider->setBounds (448, 8, 64, 24);
-    dataSlider->setBounds (352, 40, 64, 24);
+    dataSlider->setBounds (360, 40, 64, 24);
     label->setBounds (416, 8, 31, 24);
     label2->setBounds (416, 40, 32, 24);
     label3->setBounds (336, 8, 23, 24);
-    label4->setBounds (320, 40, 32, 24);
+    label4->setBounds (328, 40, 32, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
@@ -228,7 +225,7 @@ BEGIN_JUCER_METADATA
                stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
   </BACKGROUND>
   <SLIDER name="channel" id="3b517834e41dae35" memberName="channelSlider"
-          virtualName="" explicitFocusOrder="0" pos="360 8 56 24" min="1"
+          virtualName="" explicitFocusOrder="0" pos="360 8 64 24" min="1"
           max="16" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
@@ -240,7 +237,7 @@ BEGIN_JUCER_METADATA
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="data" id="e3a29d8ffb183a23" memberName="dataSlider" virtualName=""
-          explicitFocusOrder="0" pos="352 40 64 24" min="0" max="127" int="1"
+          explicitFocusOrder="0" pos="360 40 64 24" min="0" max="127" int="1"
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="6bf549a531a0e0e9" memberName="label" virtualName=""
@@ -259,7 +256,7 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="88089eba14839fec" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="320 40 32 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="328 40 32 24" edTextCol="ff000000"
          edBkgCol="0" labelText="tone" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>

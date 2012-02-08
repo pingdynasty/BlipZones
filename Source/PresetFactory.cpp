@@ -13,10 +13,11 @@ static HashMap<String, int> actions;
 HashMap<String, int>* getActionTypes(){
   if(actions.size() == 0){
     actions.set("Control Change",        MIDI_CONTROL_CHANGE);
+    actions.set("Program Change",        MIDI_PROGRAM_CHANGE);
     actions.set("Note On",               MIDI_NOTE_ON);
     actions.set("Pitch Bend",            MIDI_PITCH_BEND);
     actions.set("Channel Pressure",      MIDI_CHANNEL_PRESSURE);
-    actions.set("Polyphonic Aftertouch", MIDI_CHANNEL_PRESSURE);
+    actions.set("Polyphonic Aftertouch", MIDI_AFTERTOUCH);
     actions.set("Note Range",            MIDI_NOTE_RANGE_ACTION_TYPE);
     actions.set("NRPN",                  MIDI_NRPN_ACTION_TYPE);
     actions.set("Select Preset",         SELECT_PRESET_ACTION_TYPE);

@@ -47,6 +47,9 @@ OBJECTS := \
   $(OBJDIR)/OscPrintReceivedElements_773a3861.o \
   $(OBJDIR)/OscReceivedElements_990f2ae6.o \
   $(OBJDIR)/OscTypes_5116aa15.o \
+  $(OBJDIR)/MidiNRPNComponent_31fe6b3b.o \
+  $(OBJDIR)/MidiAftertouchComponent_fdd4a45a.o \
+  $(OBJDIR)/MidiChannelPressureComponent_876df3f.o \
   $(OBJDIR)/DeleteZoneButton_48234812.o \
   $(OBJDIR)/OscAction_e33520f6.o \
   $(OBJDIR)/OscServer_7fe8383.o \
@@ -139,6 +142,21 @@ $(OBJDIR)/OscReceivedElements_990f2ae6.o: ../../Libraries/osc/OscReceivedElement
 $(OBJDIR)/OscTypes_5116aa15.o: ../../Libraries/osc/OscTypes.cpp
 	-@mkdir -p $(OBJDIR)
 	@echo "Compiling OscTypes.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiNRPNComponent_31fe6b3b.o: ../../Source/MidiNRPNComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiNRPNComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiAftertouchComponent_fdd4a45a.o: ../../Source/MidiAftertouchComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiAftertouchComponent.cpp"
+	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
+
+$(OBJDIR)/MidiChannelPressureComponent_876df3f.o: ../../Source/MidiChannelPressureComponent.cpp
+	-@mkdir -p $(OBJDIR)
+	@echo "Compiling MidiChannelPressureComponent.cpp"
 	@$(CXX) $(CXXFLAGS) -o "$@" -c "$<"
 
 $(OBJDIR)/DeleteZoneButton_48234812.o: ../../Source/DeleteZoneButton.cpp

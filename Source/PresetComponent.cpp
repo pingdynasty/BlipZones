@@ -142,6 +142,7 @@ void PresetComponent::loadZones(){
 void PresetComponent::addZone(){
   Zone* zone = PresetFactory::createZone(zoneTypeComboBox->getText());
   preset->addZone(zone);
+  zone->setDisplayType(LINE_DISPLAY_TYPE);
   zones->updateContent();
 }
 

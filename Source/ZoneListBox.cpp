@@ -31,22 +31,6 @@ ZoneListBox::ZoneListBox (Preset* p)
 ZoneListBox::~ZoneListBox(){
 }
 
-void ZoneListBox::deleteKeyPressed(int row){
-  std::cout << "delete " << row << std::endl;
-}
-
-void ZoneListBox::returnKeyPressed(int row){
-  std::cout << "return " << row << std::endl;
-}
-
-void ZoneListBox::listBoxItemClicked(int row, const MouseEvent &e){
-  std::cout << "clicked " << row << std::endl;
-}
-
-void ZoneListBox::listBoxItemDoubleClicked(int row, const MouseEvent &e){
-  std::cout << "double clicked " << row << std::endl;
-}
-
 int ZoneListBox::getNumRows(){
   return preset->getNumberOfZones();
 }

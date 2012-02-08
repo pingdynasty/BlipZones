@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  8 Feb 2012 12:20:54pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -22,14 +22,14 @@
 //[Headers] You can add your own extra header files here...
 //[/Headers]
 
-#include "ControlVoltageComponent.h"
+#include "MidiAftertouchComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
 
 //==============================================================================
-ControlVoltageComponent::ControlVoltageComponent ()
+MidiAftertouchComponent::MidiAftertouchComponent ()
     : channelSlider (0),
       maxSlider (0),
       minSlider (0),
@@ -40,7 +40,7 @@ ControlVoltageComponent::ControlVoltageComponent ()
       label4 (0)
 {
     addAndMakeVisible (channelSlider = new Slider (L"channel"));
-    channelSlider->setRange (1, 4, 1);
+    channelSlider->setRange (1, 16, 1);
     channelSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     channelSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     channelSlider->addListener (this);
@@ -88,7 +88,7 @@ ControlVoltageComponent::ControlVoltageComponent ()
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
     addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"cc"));
+                                           L"tone"));
     label4->setFont (Font (15.0000f, Font::plain));
     label4->setJustificationType (Justification::centredLeft);
     label4->setEditable (false, false, false);
@@ -106,7 +106,7 @@ ControlVoltageComponent::ControlVoltageComponent ()
     //[/Constructor]
 }
 
-ControlVoltageComponent::~ControlVoltageComponent()
+MidiAftertouchComponent::~MidiAftertouchComponent()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
@@ -126,7 +126,7 @@ ControlVoltageComponent::~ControlVoltageComponent()
 }
 
 //==============================================================================
-void ControlVoltageComponent::paint (Graphics& g)
+void MidiAftertouchComponent::paint (Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
@@ -143,7 +143,7 @@ void ControlVoltageComponent::paint (Graphics& g)
     //[/UserPaint]
 }
 
-void ControlVoltageComponent::resized()
+void MidiAftertouchComponent::resized()
 {
     channelSlider->setBounds (360, 8, 64, 24);
     maxSlider->setBounds (448, 40, 64, 24);
@@ -152,12 +152,12 @@ void ControlVoltageComponent::resized()
     label->setBounds (416, 8, 31, 24);
     label2->setBounds (416, 40, 32, 24);
     label3->setBounds (336, 8, 23, 24);
-    label4->setBounds (336, 40, 23, 24);
+    label4->setBounds (328, 40, 32, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
 
-void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
+void MidiAftertouchComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
@@ -183,7 +183,7 @@ void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == dataSlider)
     {
         //[UserSliderCode_dataSlider] -- add your slider handling code here..
-      action->cc = dataSlider->getValue();
+      action->data1 = dataSlider->getValue();
         //[/UserSliderCode_dataSlider]
     }
 
@@ -194,13 +194,13 @@ void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-void ControlVoltageComponent::loadAction(Action* anaction){
-  action = dynamic_cast<ControlVoltageAction*>(anaction);
+void MidiAftertouchComponent::loadAction(Action* anaction){
+  action = dynamic_cast<MidiAftertouchAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
     maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
-    dataSlider->setValue(action->cc, sendUpdateMessage, sendMessageSynchronously);
+    dataSlider->setValue(action->data1, sendUpdateMessage, sendMessageSynchronously);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
   }
@@ -216,7 +216,7 @@ void ControlVoltageComponent::loadAction(Action* anaction){
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="ControlVoltageComponent"
+<JUCER_COMPONENT documentType="Component" className="MidiAftertouchComponent"
                  componentName="" parentClasses="public ActionComponent" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
@@ -227,7 +227,7 @@ BEGIN_JUCER_METADATA
   </BACKGROUND>
   <SLIDER name="channel" id="3b517834e41dae35" memberName="channelSlider"
           virtualName="" explicitFocusOrder="0" pos="360 8 64 24" min="1"
-          max="4" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
+          max="16" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
           explicitFocusOrder="0" pos="448 40 64 24" min="0" max="127" int="1"
@@ -257,8 +257,8 @@ BEGIN_JUCER_METADATA
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="88089eba14839fec" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="336 40 23 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="cc" editableSingleClick="0" editableDoubleClick="0"
+         explicitFocusOrder="0" pos="328 40 32 24" edTextCol="ff000000"
+         edBkgCol="0" labelText="tone" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>

@@ -21,11 +21,6 @@ public:
   }
 
   int getNumRows();
-  void listBoxItemClicked(int row, const MouseEvent &e);
-  void listBoxItemDoubleClicked(int row, const MouseEvent &e);
-  void deleteKeyPressed(int row);
-  void returnKeyPressed(int row);
-
   void updateContent();
   void paintRowBackground(Graphics &g, int rowNumber, int width, int height, bool rowIsSelected);
   Component* refreshComponentForCell(int rowNumber, int columnId, bool isRowSelected, Component *existingComponentToUpdate);

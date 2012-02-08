@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  8 Feb 2012 11:15:39am
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -22,25 +22,23 @@
 //[Headers] You can add your own extra header files here...
 //[/Headers]
 
-#include "ControlVoltageComponent.h"
+#include "MidiChannelPressureComponent.h"
 
 
 //[MiscUserDefs] You can add your own user definitions and misc code here...
 //[/MiscUserDefs]
 
 //==============================================================================
-ControlVoltageComponent::ControlVoltageComponent ()
+MidiChannelPressureComponent::MidiChannelPressureComponent ()
     : channelSlider (0),
       maxSlider (0),
       minSlider (0),
-      dataSlider (0),
       label (0),
       label2 (0),
-      label3 (0),
-      label4 (0)
+      label3 (0)
 {
     addAndMakeVisible (channelSlider = new Slider (L"channel"));
-    channelSlider->setRange (1, 4, 1);
+    channelSlider->setRange (1, 16, 1);
     channelSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     channelSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     channelSlider->addListener (this);
@@ -56,12 +54,6 @@ ControlVoltageComponent::ControlVoltageComponent ()
     minSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     minSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     minSlider->addListener (this);
-
-    addAndMakeVisible (dataSlider = new Slider (L"data"));
-    dataSlider->setRange (0, 127, 1);
-    dataSlider->setSliderStyle (Slider::RotaryVerticalDrag);
-    dataSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
-    dataSlider->addListener (this);
 
     addAndMakeVisible (label = new Label (L"new label",
                                           L"min"));
@@ -87,14 +79,6 @@ ControlVoltageComponent::ControlVoltageComponent ()
     label3->setColour (TextEditor::textColourId, Colours::black);
     label3->setColour (TextEditor::backgroundColourId, Colour (0x0));
 
-    addAndMakeVisible (label4 = new Label (L"new label",
-                                           L"cc"));
-    label4->setFont (Font (15.0000f, Font::plain));
-    label4->setJustificationType (Justification::centredLeft);
-    label4->setEditable (false, false, false);
-    label4->setColour (TextEditor::textColourId, Colours::black);
-    label4->setColour (TextEditor::backgroundColourId, Colour (0x0));
-
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -106,7 +90,7 @@ ControlVoltageComponent::ControlVoltageComponent ()
     //[/Constructor]
 }
 
-ControlVoltageComponent::~ControlVoltageComponent()
+MidiChannelPressureComponent::~MidiChannelPressureComponent()
 {
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
@@ -114,11 +98,9 @@ ControlVoltageComponent::~ControlVoltageComponent()
     deleteAndZero (channelSlider);
     deleteAndZero (maxSlider);
     deleteAndZero (minSlider);
-    deleteAndZero (dataSlider);
     deleteAndZero (label);
     deleteAndZero (label2);
     deleteAndZero (label3);
-    deleteAndZero (label4);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -126,7 +108,7 @@ ControlVoltageComponent::~ControlVoltageComponent()
 }
 
 //==============================================================================
-void ControlVoltageComponent::paint (Graphics& g)
+void MidiChannelPressureComponent::paint (Graphics& g)
 {
     //[UserPrePaint] Add your own custom painting code here..
     //[/UserPrePaint]
@@ -143,21 +125,19 @@ void ControlVoltageComponent::paint (Graphics& g)
     //[/UserPaint]
 }
 
-void ControlVoltageComponent::resized()
+void MidiChannelPressureComponent::resized()
 {
-    channelSlider->setBounds (360, 8, 64, 24);
+    channelSlider->setBounds (360, 8, 56, 24);
     maxSlider->setBounds (448, 40, 64, 24);
     minSlider->setBounds (448, 8, 64, 24);
-    dataSlider->setBounds (360, 40, 64, 24);
     label->setBounds (416, 8, 31, 24);
     label2->setBounds (416, 40, 32, 24);
     label3->setBounds (336, 8, 23, 24);
-    label4->setBounds (336, 40, 23, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
 }
 
-void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
+void MidiChannelPressureComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 {
     //[UsersliderValueChanged_Pre]
     //[/UsersliderValueChanged_Pre]
@@ -180,12 +160,6 @@ void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
       action->minimum = minSlider->getValue();
         //[/UserSliderCode_minSlider]
     }
-    else if (sliderThatWasMoved == dataSlider)
-    {
-        //[UserSliderCode_dataSlider] -- add your slider handling code here..
-      action->cc = dataSlider->getValue();
-        //[/UserSliderCode_dataSlider]
-    }
 
     //[UsersliderValueChanged_Post]
     //[/UsersliderValueChanged_Post]
@@ -194,13 +168,12 @@ void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 
 
 //[MiscUserCode] You can add your own definitions of your custom methods or any other code here...
-void ControlVoltageComponent::loadAction(Action* anaction){
-  action = dynamic_cast<ControlVoltageAction*>(anaction);
+void MidiChannelPressureComponent::loadAction(Action* anaction){
+  action = dynamic_cast<MidiChannelPressureAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
     maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
-    dataSlider->setValue(action->cc, sendUpdateMessage, sendMessageSynchronously);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
   }
@@ -216,7 +189,7 @@ void ControlVoltageComponent::loadAction(Action* anaction){
 
 BEGIN_JUCER_METADATA
 
-<JUCER_COMPONENT documentType="Component" className="ControlVoltageComponent"
+<JUCER_COMPONENT documentType="Component" className="MidiChannelPressureComponent"
                  componentName="" parentClasses="public ActionComponent" constructorParams=""
                  variableInitialisers="" snapPixels="8" snapActive="1" snapShown="1"
                  overlayOpacity="0.330000013" fixedSize="0" initialWidth="600"
@@ -226,8 +199,8 @@ BEGIN_JUCER_METADATA
                stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
   </BACKGROUND>
   <SLIDER name="channel" id="3b517834e41dae35" memberName="channelSlider"
-          virtualName="" explicitFocusOrder="0" pos="360 8 64 24" min="1"
-          max="4" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
+          virtualName="" explicitFocusOrder="0" pos="360 8 56 24" min="1"
+          max="16" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
           explicitFocusOrder="0" pos="448 40 64 24" min="0" max="127" int="1"
@@ -235,10 +208,6 @@ BEGIN_JUCER_METADATA
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
           explicitFocusOrder="0" pos="448 8 64 24" min="0" max="127" int="1"
-          style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
-  <SLIDER name="data" id="e3a29d8ffb183a23" memberName="dataSlider" virtualName=""
-          explicitFocusOrder="0" pos="360 40 64 24" min="0" max="127" int="1"
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="6bf549a531a0e0e9" memberName="label" virtualName=""
@@ -254,11 +223,6 @@ BEGIN_JUCER_METADATA
   <LABEL name="new label" id="5b78e24b9826b219" memberName="label3" virtualName=""
          explicitFocusOrder="0" pos="336 8 23 24" edTextCol="ff000000"
          edBkgCol="0" labelText="ch" editableSingleClick="0" editableDoubleClick="0"
-         focusDiscardsChanges="0" fontname="Default font" fontsize="15"
-         bold="0" italic="0" justification="33"/>
-  <LABEL name="new label" id="88089eba14839fec" memberName="label4" virtualName=""
-         explicitFocusOrder="0" pos="336 40 23 24" edTextCol="ff000000"
-         edBkgCol="0" labelText="cc" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
 </JUCER_COMPONENT>
