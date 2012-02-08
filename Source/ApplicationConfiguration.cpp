@@ -84,6 +84,9 @@ OscServer* ApplicationConfiguration::getOscServer(){
 }
 
 void ApplicationConfiguration::release(){
+  receiver.close();
+//   oscserver.close();
+
 /*     If you're leaking, it's probably because you're using old-fashioned, non-RAII techniques for */
 /*     your object management. Tut, tut. Always, always use ScopedPointers, OwnedArrays, */
 /*     ReferenceCountedObjects, etc, and avoid the 'delete' operator at all costs! */

@@ -20,8 +20,6 @@
 */
 
 //[Headers] You can add your own extra header files here...
-#include "ApplicationConfiguration.h"
-#include "BlipSim.h"
 #include "PresetFactory.h"
 //[/Headers]
 

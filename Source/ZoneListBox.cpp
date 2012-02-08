@@ -26,11 +26,9 @@ ZoneListBox::ZoneListBox (Preset* p)
 
 //     getHeader().setStretchToFitActive(true);
 //     getHeader().resizeAllColumnsToFit(580);
-
 }
 
-ZoneListBox::~ZoneListBox()
-{
+ZoneListBox::~ZoneListBox(){
 }
 
 void ZoneListBox::deleteKeyPressed(int row){
@@ -59,24 +57,20 @@ void ZoneListBox::updateContent(){
 }
 
 Component* ZoneListBox::refreshComponentForCell(int row, int column, bool isRowSelected, Component *existingComponentToUpdate){
+  delete existingComponentToUpdate;
   if(column == 2){
-    delete existingComponentToUpdate;
     Zone* zone = preset->getZone(row);
     if(zone == NULL){
-//       delete existingComponentToUpdate;
       return NULL;
     }
+//     std::cout << "zone 0x" << std::hex << (long)zone << std::endl;
 //     ZoneComponent* comp = dynamic_cast <ZoneComponent*>(existingComponentToUpdate);
 //     if(comp != NULL && comp->getZone() == zone)
 //       return comp;
 //     delete existingComponentToUpdate;
     // todo: iff isRowSelected, return editable component
-    std::cout << "zone 0x" << std::hex << (long)zone << std::endl;
-    //   ZoneComponent* component = new ZoneComponent(zone);
-    //   addAndMakeVisible(component);
-    //   return component;
     return new ZoneComponent(zone);
-  }else if(column == 3){
+  }else if(column == 3){    
     return new DeleteZoneButton(this, row);
   }
   return NULL;

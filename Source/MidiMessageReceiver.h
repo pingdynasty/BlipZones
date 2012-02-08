@@ -12,13 +12,14 @@ public:
   }
 
   virtual ~MidiMessageReceiver(){
-    close();
+    delete midiin;
   }
 
   void close(){
     if(midiin != NULL){
       midiin->stop();
       delete midiin;
+      midiin = NULL;
     }
   }
 

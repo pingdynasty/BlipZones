@@ -21,9 +21,7 @@ public:
     addListener (this);
   }
   void buttonClicked(Button* buttonThatWasClicked){
-    std::cout << "delete " << index << ": 0x" << std::hex << (long)box->getPreset()->getZone(index) << std::endl;
     Preset* preset = box->getPreset();
-    // shifts later zones up one notch
     Zone* zone = preset->removeZone(index);
     box->updateContent();
     delete zone;

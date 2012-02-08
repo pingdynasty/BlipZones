@@ -9,46 +9,43 @@
 
 #define FILE_FORMAT_VERSION 2
 
-static HashMap<String, int> *actions = NULL;
+static HashMap<String, int> actions;
 HashMap<String, int>* getActionTypes(){
-  if(actions == NULL){
-    actions = new HashMap<String, int>();
-    actions->set("Control Change",        MIDI_CONTROL_CHANGE);
-    actions->set("Note On",               MIDI_NOTE_ON);
-    actions->set("Pitch Bend",            MIDI_PITCH_BEND);
-    actions->set("Channel Pressure",      MIDI_CHANNEL_PRESSURE);
-    actions->set("Polyphonic Aftertouch", MIDI_CHANNEL_PRESSURE);
-    actions->set("Note Range",            MIDI_NOTE_RANGE_ACTION_TYPE);
-    actions->set("NRPN",                  MIDI_NRPN_ACTION_TYPE);
-    actions->set("Select Preset",         SELECT_PRESET_ACTION_TYPE);
-    actions->set("Control Voltage",       CONTROL_VOLTAGE_ACTION_TYPE);
-    actions->set("OSC",                   OSC_ACTION_TYPE);
+  if(actions.size() == 0){
+    actions.set("Control Change",        MIDI_CONTROL_CHANGE);
+    actions.set("Note On",               MIDI_NOTE_ON);
+    actions.set("Pitch Bend",            MIDI_PITCH_BEND);
+    actions.set("Channel Pressure",      MIDI_CHANNEL_PRESSURE);
+    actions.set("Polyphonic Aftertouch", MIDI_CHANNEL_PRESSURE);
+    actions.set("Note Range",            MIDI_NOTE_RANGE_ACTION_TYPE);
+    actions.set("NRPN",                  MIDI_NRPN_ACTION_TYPE);
+    actions.set("Select Preset",         SELECT_PRESET_ACTION_TYPE);
+    actions.set("Control Voltage",       CONTROL_VOLTAGE_ACTION_TYPE);
+    actions.set("OSC",                   OSC_ACTION_TYPE);
   }
-  return actions;
+  return &actions;
 }
 
-static HashMap<String, int> *zones = NULL;
+static HashMap<String, int> zones;
 HashMap<String, int>* getZoneTypes(){
-  if(zones == NULL){
-    zones = new HashMap<String, int>();
-    zones->set("Horizontal Slider",       HORIZONTAL_SLIDER_ZONE_TYPE);
-    zones->set("Vertical Slider",         VERTICAL_SLIDER_ZONE_TYPE);
-    zones->set("Momentary Button",        MOMENTARY_BUTTON_ZONE_TYPE);
-    zones->set("Toggle Button",           TOGGLE_BUTTON_ZONE_TYPE);
+  if(zones.size() == 0){
+    zones.set("Horizontal Slider",       HORIZONTAL_SLIDER_ZONE_TYPE);
+    zones.set("Vertical Slider",         VERTICAL_SLIDER_ZONE_TYPE);
+    zones.set("Momentary Button",        MOMENTARY_BUTTON_ZONE_TYPE);
+    zones.set("Toggle Button",           TOGGLE_BUTTON_ZONE_TYPE);
   }
-  return zones;
+  return &zones;
 }
 
-static HashMap<String, int> *displays = NULL;
+static HashMap<String, int> displays;
 HashMap<String, int>* getDisplayTypes(){
-  if(displays == NULL){
-    displays = new HashMap<String, int>();
-    displays->set("Fill",                 FILL_DISPLAY_TYPE);
-    displays->set("Bar",                  LINE_DISPLAY_TYPE);
-    displays->set("Graded Fill",          GRADED_FILL_DISPLAY_TYPE);
-    displays->set("Graded Bar",           GRADED_LINE_DISPLAY_TYPE);
+  if(displays.size() == 0){
+    displays.set("Fill",                 FILL_DISPLAY_TYPE);
+    displays.set("Bar",                  LINE_DISPLAY_TYPE);
+    displays.set("Graded Fill",          GRADED_FILL_DISPLAY_TYPE);
+    displays.set("Graded Bar",           GRADED_LINE_DISPLAY_TYPE);
   }
-  return displays;
+  return &displays;
 }
 
 PresetFactory::PresetFactory(){

@@ -2,7 +2,6 @@
 #include "Protocol.h"
 #include "Serial.h"
 #include "ApplicationConfiguration.h"
-#include "MidiMessageReceiver.h"
 #include "PresetReader.h"
 #include "BlipSim.h"
 #include "Command.h"

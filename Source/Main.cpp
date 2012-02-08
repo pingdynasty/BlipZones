@@ -50,7 +50,7 @@ public:
         // Do your application's shutdown code here..
       ApplicationConfiguration::getBlipClient()->shutdown();
       ApplicationConfiguration::getBlipSim()->shutdown();
-      ApplicationConfiguration::release();
+      ApplicationConfiguration::release();      
       mainWindow = 0;
       simWindow = 0;
     }
