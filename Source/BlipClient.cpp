@@ -5,6 +5,7 @@
 #include "PresetReader.h"
 #include "BlipSim.h"
 #include "Command.h"
+#include "Parameters.h"
 
 #define THREAD_TIMEOUT_MS  2000
 #define MIDI_ZONE_PRESET_LENGTH 1+MIDI_ZONES_IN_PRESET*MIDI_ZONE_PRESET_SIZE+1
@@ -19,12 +20,13 @@
 
 bool doSendScreenUpdates = false;
 
-#define LED_COLUMNS       10
-#define LED_ROWS          8
+#define CLIENT_LED_COLUMNS       10
+#define CLIENT_LED_ROWS          8
+#define CLIENT_CONTROL_VOLTAGES  4
 
 class BlipConnectionThread : public Thread {
 private:
-  uint8_t leds[LED_COLUMNS][LED_ROWS];
+  uint8_t leds[CLIENT_LED_COLUMNS][CLIENT_LED_ROWS];
 public:
   BlipConnectionThread () : Thread(T("BlipConnectionThread")) {
     setPriority(0);
@@ -35,10 +37,12 @@ public:
     BlipClient* client = ApplicationConfiguration::getBlipClient();
     BlipSim* sim = ApplicationConfiguration::getBlipSim();
     while(!threadShouldExit()){
+      for(int i=0; i<CLIENT_CONTROL_VOLTAGES; ++i)
+	client->setControlVoltage(i, sim->getControlVoltage(i));
       if(doSendScreenUpdates){
 	client->sendCommand(START_LED_BLOCK);
-	for(int x=0; x<LED_COLUMNS; ++x){
-	  for(int y=0; y<LED_ROWS; ++y){
+	for(int x=0; x<CLIENT_LED_COLUMNS; ++x){
+	  for(int y=0; y<CLIENT_LED_ROWS; ++y){
 	    uint8_t led = sim->getLed(x, y);
 	    if(led != leds[x][y]){
 	      leds[x][y] = led;
@@ -60,14 +64,37 @@ BlipClient::BlipClient()
   serial = Serial::createSerial();
   serial->setSerialCallback(this);
   setPriority(0);
+  memset(controlvoltages, 0, sizeof(controlvoltages));
 }
 
 BlipClient::~BlipClient(){
   delete serial;
 }
 
-// void BlipClient::initialise(){
-// }
+uint16_t BlipClient::getControlVoltage(uint8_t value){
+}
+
+void BlipClient::setControlVoltage(uint8_t channel, uint16_t value){
+  if(controlvoltages[channel] == value)
+    return;
+  controlvoltages[channel] = value;
+  uint8_t pid;
+  switch(channel){
+  case 0:
+    pid = CV1_PARAMETER_ID;
+    break;
+  case 1:
+    pid = CV2_PARAMETER_ID;
+    break;
+  case 2:
+    pid = CV3_PARAMETER_ID;
+    break;
+  case 3:
+    pid = CV4_PARAMETER_ID;
+    break;
+  }
+  sendParameter(pid, value>>2);
+}
 
 bool BlipClient::isConnected(){
   return serial->isConnected();
@@ -197,6 +224,11 @@ void BlipClient::clear(){
 
 void BlipClient::setLed(uint8_t x, uint8_t y, uint8_t brightness){
   uint8_t cmd[] = { SET_LED_MESSAGE, x*16+y, brightness };
+  sendSerial(cmd, sizeof(cmd));
+}
+
+void BlipClient::sendParameter(uint8_t pid, uint16_t value){
+  uint8_t cmd[] = {SET_PARAMETER_MESSAGE | (pid & 0x3c) | ((value >> 8) & 0x03), value & 0xff};
   sendSerial(cmd, sizeof(cmd));
 }
 

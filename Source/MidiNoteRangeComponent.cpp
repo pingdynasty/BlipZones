@@ -174,7 +174,7 @@ void MidiNoteRangeComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == maxSlider)
     {
         //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      action->maximum = maxSlider->getValue();
+      action->maximum = maxSlider->getValue()+1;
         //[/UserSliderCode_maxSlider]
     }
     else if (sliderThatWasMoved == minSlider)
@@ -201,7 +201,7 @@ void MidiNoteRangeComponent::loadAction(Action* anaction){
   action = dynamic_cast<MidiNoteRangeAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue(action->maximum-1, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
     dataSlider->setValue(action->data1, sendUpdateMessage, sendMessageSynchronously);
   }else{

@@ -55,6 +55,10 @@ void BlipSim::shutdown(){
   deleteAndZero(blipthread);
 }
 
+uint16_t BlipSim::getControlVoltage(uint8_t channel){
+  return blipbox.getControlVoltage(channel);
+}
+
 uint8_t BlipSim::getPresetIndex(){
   return blipbox.config.preset;
 }

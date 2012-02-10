@@ -39,6 +39,7 @@ public:
   void position(uint16_t x, uint16_t y);
   void release();
   void handle(MidiEvent& event);
+  uint16_t getControlVoltage(uint8_t channel);
 };
 
 #endif  // __BLIPSIM_H_

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  2 Feb 2012 12:05:26pm
+  Creation date:  9 Feb 2012 12:53:37pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -153,7 +153,7 @@ void ConfigurationComponent::resized()
     loadButton->setBounds (208, getHeight() - 36, 80, 24);
     settingsButton->setBounds (304, getHeight() - 36, 80, 24);
     runButton->setBounds (56, getHeight() - 36, 64, 24);
-    component->setBounds (40, 48, 560, getHeight() - 100);
+    component->setBounds (10, 48, 580, getHeight() - 100);
     label7->setBounds (352, 8, 54, 24);
     presetComboBox->setBounds (408, 8, 150, 24);
     //[UserResized] Add your own custom resize handling here..
@@ -392,7 +392,7 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="9" pos="56 36R 64 24" buttonText="run"
                 connectedEdges="0" needsCallback="1" radioGroupId="1005" state="0"/>
   <JUCERCOMP name="" id="5b591b1380507d69" memberName="component" virtualName=""
-             explicitFocusOrder="0" pos="40 48 560 100M" sourceFile="PresetComponent.cpp"
+             explicitFocusOrder="0" pos="10 48 580 100M" sourceFile="PresetComponent.cpp"
              constructorParams="getDefaultPreset()"/>
   <LABEL name="new label" id="500d6335007480ac" memberName="label7" virtualName=""
          explicitFocusOrder="0" pos="352 8 54 24" edTextCol="ff000000"

@@ -31,9 +31,12 @@ public:
   void sendPreset(uint8_t index);
   void drawZone(Zone* zone);
   void sendCommand(Command command);
+  void sendParameter(uint8_t pid, uint16_t value);
   void sendSerial(uint8_t* data, size_t size);
-
+  uint16_t getControlVoltage(uint8_t channel);
+  void setControlVoltage(uint8_t channel, uint16_t value);
 private:
+  uint16_t controlvoltages[4];
   Serial *serial;
 };
 

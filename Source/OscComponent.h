@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  3 Feb 2012 3:50:25am
+  Creation date:  10 Feb 2012 8:07:04pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
-#define __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
+#ifndef __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_D40231FB__
+#define __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_D40231FB__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -39,8 +39,7 @@
                                                                     //[/Comments]
 */
 class OscComponent  : public ActionComponent,
-                      public TextEditor::Listener,
-                      public SliderListener
+                      public TextEditor::Listener
 {
 public:
     //==============================================================================
@@ -61,7 +60,6 @@ public:
 
     void paint (Graphics& g);
     void resized();
-    void sliderValueChanged (Slider* sliderThatWasMoved);
 
 
 
@@ -74,12 +72,12 @@ private:
     //[/UserVariables]
 
     //==============================================================================
-    Slider* maxSlider;
-    Slider* minSlider;
     Label* label;
     Label* label2;
     Label* label3;
     TextEditor* prefixEditor;
+    TextEditor* minEditor;
+    TextEditor* maxEditor;
 
 
     //==============================================================================
@@ -89,4 +87,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_5118B348__
+#endif   // __JUCER_HEADER_OSCCOMPONENT_OSCCOMPONENT_D40231FB__

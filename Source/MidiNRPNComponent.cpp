@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:23:43pm
+  Creation date:  9 Feb 2012 12:53:55pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -171,7 +171,7 @@ void MidiNRPNComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == maxSlider)
     {
         //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      action->maximum = maxSlider->getValue();
+      action->maximum = maxSlider->getValue()+1;
         //[/UserSliderCode_maxSlider]
     }
     else if (sliderThatWasMoved == minSlider)
@@ -198,7 +198,7 @@ void MidiNRPNComponent::loadAction(Action* anaction){
   action = dynamic_cast<MidiNRPNAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue(action->maximum-1, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
     dataSlider->setValue(action->data1, sendUpdateMessage, sendMessageSynchronously);
   }else{

@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  9 Dec 2011 1:40:09pm
+  Creation date:  9 Feb 2012 12:12:03pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -44,13 +44,13 @@ MidiPitchBendComponent::MidiPitchBendComponent ()
     channelSlider->addListener (this);
 
     addAndMakeVisible (maxSlider = new Slider (L"max"));
-    maxSlider->setRange (-63, 64, 1);
+    maxSlider->setRange (-100, 100, 1);
     maxSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     maxSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     maxSlider->addListener (this);
 
     addAndMakeVisible (minSlider = new Slider (L"min"));
-    minSlider->setRange (-63, 64, 1);
+    minSlider->setRange (-100, 100, 1);
     minSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     minSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     minSlider->addListener (this);
@@ -151,13 +151,13 @@ void MidiPitchBendComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == maxSlider)
     {
         //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      action->maximum = maxSlider->getValue() + 63;
+      action->maximum = maxSlider->getValue()/100.0*0x3f+0x3f + 1;
         //[/UserSliderCode_maxSlider]
     }
     else if (sliderThatWasMoved == minSlider)
     {
         //[UserSliderCode_minSlider] -- add your slider handling code here..
-      action->minimum = minSlider->getValue() + 63;
+      action->minimum = minSlider->getValue()/100.0*0x3f+0x3f;
         //[/UserSliderCode_minSlider]
     }
 
@@ -171,8 +171,8 @@ void MidiPitchBendComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 void MidiPitchBendComponent::loadAction(Action* anaction){
   action = dynamic_cast<MidiPitchBendAction*>(anaction);
   if(action != NULL){
-    minSlider->setValue(action->minimum - 63, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(action->maximum - 63, sendUpdateMessage, sendMessageSynchronously);
+    minSlider->setValue((action->minimum-0x3f)*100.0/0x3f, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue((action->maximum-0x3f)*100.0/0x3f - 1, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
@@ -202,12 +202,12 @@ BEGIN_JUCER_METADATA
           max="16" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 40 64 24" min="-63" max="64"
+          explicitFocusOrder="0" pos="448 40 64 24" min="-100" max="100"
           int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 8 64 24" min="-63" max="64" int="1"
-          style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
+          explicitFocusOrder="0" pos="448 8 64 24" min="-100" max="100"
+          int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="6bf549a531a0e0e9" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="416 8 31 24" edTextCol="ff000000"

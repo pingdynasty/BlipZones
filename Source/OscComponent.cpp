@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  3 Feb 2012 3:50:25am
+  Creation date:  10 Feb 2012 8:07:04pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -30,25 +30,13 @@
 
 //==============================================================================
 OscComponent::OscComponent ()
-    : maxSlider (0),
-      minSlider (0),
-      label (0),
+    : label (0),
       label2 (0),
       label3 (0),
-      prefixEditor (0)
+      prefixEditor (0),
+      minEditor (0),
+      maxEditor (0)
 {
-    addAndMakeVisible (maxSlider = new Slider (L"max"));
-    maxSlider->setRange (0, 1, 0.1);
-    maxSlider->setSliderStyle (Slider::RotaryVerticalDrag);
-    maxSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
-    maxSlider->addListener (this);
-
-    addAndMakeVisible (minSlider = new Slider (L"min"));
-    minSlider->setRange (0, 1, 0.1);
-    minSlider->setSliderStyle (Slider::RotaryVerticalDrag);
-    minSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
-    minSlider->addListener (this);
-
     addAndMakeVisible (label = new Label (L"new label",
                                           L"min"));
     label->setFont (Font (15.0000f, Font::plain));
@@ -82,6 +70,24 @@ OscComponent::OscComponent ()
     prefixEditor->setPopupMenuEnabled (true);
     prefixEditor->setText (String::empty);
 
+    addAndMakeVisible (minEditor = new TextEditor (L"new text editor"));
+    minEditor->setMultiLine (false);
+    minEditor->setReturnKeyStartsNewLine (false);
+    minEditor->setReadOnly (false);
+    minEditor->setScrollbarsShown (true);
+    minEditor->setCaretVisible (true);
+    minEditor->setPopupMenuEnabled (true);
+    minEditor->setText (L"0");
+
+    addAndMakeVisible (maxEditor = new TextEditor (L"new text editor"));
+    maxEditor->setMultiLine (false);
+    maxEditor->setReturnKeyStartsNewLine (false);
+    maxEditor->setReadOnly (false);
+    maxEditor->setScrollbarsShown (true);
+    maxEditor->setCaretVisible (true);
+    maxEditor->setPopupMenuEnabled (true);
+    maxEditor->setText (L"1.0");
+
 
     //[UserPreSize]
     //[/UserPreSize]
@@ -91,6 +97,10 @@ OscComponent::OscComponent ()
 
     //[Constructor] You can add your own custom stuff here..
     prefixEditor->addListener (this);
+    minEditor->addListener (this);
+    maxEditor->addListener (this);
+    minEditor->setInputRestrictions(14, "0123456789.-");
+    maxEditor->setInputRestrictions(14, "0123456789.-");
     //[/Constructor]
 }
 
@@ -99,12 +109,12 @@ OscComponent::~OscComponent()
     //[Destructor_pre]. You can add your own custom destruction code here..
     //[/Destructor_pre]
 
-    deleteAndZero (maxSlider);
-    deleteAndZero (minSlider);
     deleteAndZero (label);
     deleteAndZero (label2);
     deleteAndZero (label3);
     deleteAndZero (prefixEditor);
+    deleteAndZero (minEditor);
+    deleteAndZero (maxEditor);
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -131,36 +141,14 @@ void OscComponent::paint (Graphics& g)
 
 void OscComponent::resized()
 {
-    maxSlider->setBounds (448, 40, 64, 24);
-    minSlider->setBounds (360, 40, 64, 24);
     label->setBounds (328, 40, 31, 24);
-    label2->setBounds (416, 40, 32, 24);
-    label3->setBounds (328, 8, 48, 24);
-    prefixEditor->setBounds (376, 8, 128, 24);
+    label2->setBounds (424, 40, 32, 24);
+    label3->setBounds (328, 8, 40, 24);
+    prefixEditor->setBounds (368, 8, 136, 24);
+    minEditor->setBounds (368, 40, 48, 24);
+    maxEditor->setBounds (456, 40, 48, 24);
     //[UserResized] Add your own custom resize handling here..
     //[/UserResized]
-}
-
-void OscComponent::sliderValueChanged (Slider* sliderThatWasMoved)
-{
-    //[UsersliderValueChanged_Pre]
-    //[/UsersliderValueChanged_Pre]
-
-    if (sliderThatWasMoved == maxSlider)
-    {
-        //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      action->maximum = maxSlider->getValue();
-        //[/UserSliderCode_maxSlider]
-    }
-    else if (sliderThatWasMoved == minSlider)
-    {
-        //[UserSliderCode_minSlider] -- add your slider handling code here..
-      action->minimum = minSlider->getValue();
-        //[/UserSliderCode_minSlider]
-    }
-
-    //[UsersliderValueChanged_Post]
-    //[/UsersliderValueChanged_Post]
 }
 
 
@@ -169,8 +157,8 @@ void OscComponent::sliderValueChanged (Slider* sliderThatWasMoved)
 void OscComponent::loadAction(Action* anaction){
   action = dynamic_cast<OscAction*>(anaction);
   if(action != NULL){
-    minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
+    minEditor->setText(String(action->minimum));
+    maxEditor->setText(String(action->maximum));
     prefixEditor->setText(action->prefix);
   }else{
     std::cout << "null action, dynamic cast failed " << anaction << std::endl;
@@ -180,6 +168,10 @@ void OscComponent::loadAction(Action* anaction){
 void OscComponent::textEditorTextChanged(TextEditor &editor){
   if(&editor == prefixEditor){
     action->prefix = prefixEditor->getText();
+  }else if(&editor == minEditor){
+    action->minimum = minEditor->getText().getFloatValue();
+  }else if(&editor == maxEditor){
+    action->maximum = maxEditor->getText().getFloatValue();
   }
 }
 // void OscComponent::textEditorReturnKeyPressed (TextEditor &editor){}
@@ -206,31 +198,31 @@ BEGIN_JUCER_METADATA
     <ROUNDRECT pos="0 0 510 68" cornerSize="3.5" fill="solid: f5f9ea0" hasStroke="1"
                stroke="0.5, mitered, butt" strokeColour="solid: ff5f9ea0"/>
   </BACKGROUND>
-  <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 40 64 24" min="0" max="1" int="0.1"
-          style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
-  <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
-          explicitFocusOrder="0" pos="360 40 64 24" min="0" max="1" int="0.1"
-          style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
-          textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <LABEL name="new label" id="6bf549a531a0e0e9" memberName="label" virtualName=""
          explicitFocusOrder="0" pos="328 40 31 24" edTextCol="ff000000"
          edBkgCol="0" labelText="min" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="389586e97e49a327" memberName="label2" virtualName=""
-         explicitFocusOrder="0" pos="416 40 32 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="424 40 32 24" edTextCol="ff000000"
          edBkgCol="0" labelText="max" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <LABEL name="new label" id="5b78e24b9826b219" memberName="label3" virtualName=""
-         explicitFocusOrder="0" pos="328 8 48 24" edTextCol="ff000000"
+         explicitFocusOrder="0" pos="328 8 40 24" edTextCol="ff000000"
          edBkgCol="0" labelText="prefix" editableSingleClick="0" editableDoubleClick="0"
          focusDiscardsChanges="0" fontname="Default font" fontsize="15"
          bold="0" italic="0" justification="33"/>
   <TEXTEDITOR name="new text editor" id="4e866dc7c74d9d80" memberName="prefixEditor"
-              virtualName="" explicitFocusOrder="0" pos="376 8 128 24" initialText=""
+              virtualName="" explicitFocusOrder="0" pos="368 8 136 24" initialText=""
+              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
+              caret="1" popupmenu="1"/>
+  <TEXTEDITOR name="new text editor" id="d0548205a1d20222" memberName="minEditor"
+              virtualName="" explicitFocusOrder="0" pos="368 40 48 24" initialText="0"
+              multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
+              caret="1" popupmenu="1"/>
+  <TEXTEDITOR name="new text editor" id="a3297ea03e61e7b3" memberName="maxEditor"
+              virtualName="" explicitFocusOrder="0" pos="456 40 48 24" initialText="1.0"
               multiline="0" retKeyStartsLine="0" readonly="0" scrollbars="1"
               caret="1" popupmenu="1"/>
 </JUCER_COMPONENT>

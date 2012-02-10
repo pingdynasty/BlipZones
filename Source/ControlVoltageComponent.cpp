@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  9 Feb 2012 12:32:18pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -46,13 +46,13 @@ ControlVoltageComponent::ControlVoltageComponent ()
     channelSlider->addListener (this);
 
     addAndMakeVisible (maxSlider = new Slider (L"max"));
-    maxSlider->setRange (0, 127, 1);
+    maxSlider->setRange (0, 1023, 1);
     maxSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     maxSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     maxSlider->addListener (this);
 
     addAndMakeVisible (minSlider = new Slider (L"min"));
-    minSlider->setRange (0, 127, 1);
+    minSlider->setRange (0, 1023, 1);
     minSlider->setSliderStyle (Slider::RotaryVerticalDrag);
     minSlider->setTextBoxStyle (Slider::TextBoxLeft, false, 80, 20);
     minSlider->addListener (this);
@@ -171,7 +171,7 @@ void ControlVoltageComponent::sliderValueChanged (Slider* sliderThatWasMoved)
     else if (sliderThatWasMoved == maxSlider)
     {
         //[UserSliderCode_maxSlider] -- add your slider handling code here..
-      action->maximum = maxSlider->getValue();
+      action->maximum = maxSlider->getValue()/8+1;
         //[/UserSliderCode_maxSlider]
     }
     else if (sliderThatWasMoved == minSlider)
@@ -198,7 +198,7 @@ void ControlVoltageComponent::loadAction(Action* anaction){
   action = dynamic_cast<ControlVoltageAction*>(anaction);
   if(action != NULL){
     minSlider->setValue(action->minimum, sendUpdateMessage, sendMessageSynchronously);
-    maxSlider->setValue(action->maximum, sendUpdateMessage, sendMessageSynchronously);
+    maxSlider->setValue((action->maximum)*8-1, sendUpdateMessage, sendMessageSynchronously);
     channelSlider->setValue(action->getChannel()+1, sendUpdateMessage, sendMessageSynchronously);
     dataSlider->setValue(action->cc, sendUpdateMessage, sendMessageSynchronously);
   }else{
@@ -230,11 +230,11 @@ BEGIN_JUCER_METADATA
           max="4" int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft"
           textBoxEditable="1" textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="max" id="aa57fa59b0b89fff" memberName="maxSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 40 64 24" min="0" max="127" int="1"
-          style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
+          explicitFocusOrder="0" pos="448 40 64 24" min="0" max="1023"
+          int="1" style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="min" id="b0ac6409986e9469" memberName="minSlider" virtualName=""
-          explicitFocusOrder="0" pos="448 8 64 24" min="0" max="127" int="1"
+          explicitFocusOrder="0" pos="448 8 64 24" min="0" max="1023" int="1"
           style="RotaryVerticalDrag" textBoxPos="TextBoxLeft" textBoxEditable="1"
           textBoxWidth="80" textBoxHeight="20" skewFactor="1"/>
   <SLIDER name="data" id="e3a29d8ffb183a23" memberName="dataSlider" virtualName=""

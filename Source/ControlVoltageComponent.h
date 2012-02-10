@@ -3,7 +3,7 @@
 
   This is an automatically generated file created by the Jucer!
 
-  Creation date:  8 Feb 2012 12:25:50pm
+  Creation date:  9 Feb 2012 12:32:18pm
 
   Be careful when adding custom code to these files, as only the code within
   the "//[xyz]" and "//[/xyz]" sections will be retained when the file is loaded
@@ -19,8 +19,8 @@
   ==============================================================================
 */
 
-#ifndef __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
-#define __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#ifndef __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_718AF8A4__
+#define __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_718AF8A4__
 
 //[Headers]     -- You can add your own extra header files here --
 #include "../JuceLibraryCode/JuceHeader.h"
@@ -87,4 +87,4 @@ private:
 };
 
 
-#endif   // __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_9D8DDF31__
+#endif   // __JUCER_HEADER_CONTROLVOLTAGECOMPONENT_CONTROLVOLTAGECOMPONENT_718AF8A4__
