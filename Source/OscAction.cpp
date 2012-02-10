@@ -12,6 +12,5 @@ uint8_t OscAction::write(uint8_t* data){
 }
 
 void OscAction::sendMessage(float value){
-  std::cout << prefix << value << std::endl;
   ApplicationConfiguration::getOscServer()->send(this);
 }
