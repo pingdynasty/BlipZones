@@ -1,5 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
-Project("{BCB1769A-5BDD-B15B-9DE1-1421215569A0}") = "BlipZones", "BlipZones.vcxproj", "{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}"
+# Visual Studio 2010
+Project("{06507D60-ED1B-93A3-D7DB-61310E10C411}") = "BlipZones", "BlipZones.vcxproj", "{0A5A72CF-89E0-0953-FA1F-B8789E279AFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -7,10 +8,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}.Debug|Win32.ActiveCfg = Debug|Win32
-		{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}.Debug|Win32.Build.0 = Debug|Win32
-		{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}.Release|Win32.ActiveCfg = Release|Win32
-		{9E3C38DA-B257-3C0C-59B2-6907C9A1DAB3}.Release|Win32.Build.0 = Release|Win32
+		{0A5A72CF-89E0-0953-FA1F-B8789E279AFB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0A5A72CF-89E0-0953-FA1F-B8789E279AFB}.Debug|Win32.Build.0 = Debug|Win32
+		{0A5A72CF-89E0-0953-FA1F-B8789E279AFB}.Release|Win32.ActiveCfg = Release|Win32
+		{0A5A72CF-89E0-0953-FA1F-B8789E279AFB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

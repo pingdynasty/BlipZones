@@ -4,7 +4,7 @@
 #include "../JuceLibraryCode/JuceHeader.h"
 #define OSC_SERVER_DEFAULT_OUTPUT_BUFFER_SIZE 1024
 #define OSC_SERVER_DEFAULT_PORT               7000
-#define OSC_SERVER_DEFAULT_HOST               T("localhost")
+#define OSC_SERVER_DEFAULT_HOST               "localhost"
 
 class OscAction;
 
@@ -16,7 +16,7 @@ private:
 
 public:
   OscServer() :
-    hostname(OSC_SERVER_DEFAULT_HOST), 
+    hostname(String(OSC_SERVER_DEFAULT_HOST)), 
     port(OSC_SERVER_DEFAULT_PORT), 
     bufsize(OSC_SERVER_DEFAULT_OUTPUT_BUFFER_SIZE) {}
 

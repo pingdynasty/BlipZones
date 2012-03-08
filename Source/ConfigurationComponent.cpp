@@ -242,11 +242,10 @@ Preset* ConfigurationComponent::getCurrentPreset(){
 }
 
 void ConfigurationComponent::sendPreset(){
-  std::cout << "send!" << std::endl;
+  int index = presetComboBox->getSelectedItemIndex();
+  std::cout << "send: " << index << std::endl;
   if(ApplicationConfiguration::getBlipClient()->isConnected()){
-//     ApplicationConfiguration::getBlipClient()->sendPreset(presetComboBox->getSelectedItemIndex());
-    // todo!
-//     ApplicationConfiguration::getBlipClient()->sendPreset(preset);
+    ApplicationConfiguration::getBlipClient()->sendPreset(index);
     std::cout << "sent!" << std::endl;
   }else{
     AlertWindow::showMessageBoxAsync(AlertWindow::WarningIcon,

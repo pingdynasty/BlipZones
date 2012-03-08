@@ -44,7 +44,10 @@ bool AsioSerial::isConnected(){
 }
 
 size_t AsioSerial::readSerial(unsigned char* data, size_t len){
-  return sport.read_some(asio::buffer(data, len));
+  if(isConnected())
+    return sport.read_some(asio::buffer(data, len));
+  else
+    return 0;
 //   sport.async_read_some( asio::buffer(data, len),
 // 			bind(&my_client::read_done,
 // 				    shared_from_this(),
@@ -53,5 +56,8 @@ size_t AsioSerial::readSerial(unsigned char* data, size_t len){
 }
 
 size_t AsioSerial::writeSerial(unsigned char* data, size_t len){
-  return sport.write_some(asio::buffer(data, len));
+  if(isConnected())
+    return sport.write_some(asio::buffer(data, len));
+  else
+    return 0;
 }

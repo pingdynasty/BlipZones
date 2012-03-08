@@ -64,12 +64,12 @@ public:
     //==============================================================================
     const String getApplicationName()
     {
-      return T("BlipZones");
+      return "BlipZones";
     }
 
     const String getApplicationVersion()
     {
-        return T("2.0");      
+        return "2.0";      
 //         return ProjectInfo::versionString;
     }
 

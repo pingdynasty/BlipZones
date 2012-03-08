@@ -3,7 +3,7 @@
 #include "ApplicationConfiguration.h"
 
 SimWindow::SimWindow()
-  : DocumentWindow (T("BlipSim"),
+  : DocumentWindow ("BlipSim",
 		    Colours::lightgrey,
 		    DocumentWindow::allButtons, true)
 {

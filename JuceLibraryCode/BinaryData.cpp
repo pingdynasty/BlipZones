@@ -5,28 +5,8 @@
 
 */
 
-#include "BinaryData.h"
-
-
-const char* BinaryData::getNamedResource (const char* resourceNameUTF8, int& numBytes) throw()
+namespace BinaryData
 {
-    int hash = 0;
-    if (resourceNameUTF8 != 0)
-        while (*resourceNameUTF8 != 0)
-            hash = 31 * hash + *resourceNameUTF8++;
-
-    switch (hash)
-    {
-        case 0x5571d1a4:  numBytes = BinaryData::blipbox_pngSize; return BinaryData::blipbox_png;
-        case 0x2aaaa294:  numBytes = BinaryData::DeleteButtonSmall_pngSize; return BinaryData::DeleteButtonSmall_png;
-        case 0x58c50c44:  numBytes = BinaryData::blipbox_icnsSize; return BinaryData::blipbox_icns;
-        default: break;
-    }
-
-    numBytes = 0;
-    return 0;
-}
-
 
 //================== blipbox.png ==================
 static const unsigned char temp_6455653b[] =
@@ -105,7 +85,7 @@ static const unsigned char temp_6455653b[] =
 125,66,151,237,113,43,1,161,221,170,157,54,243,4,1,161,125,66,151,237,113,43,1,161,221,170,157,54,243,4,1,161,125,66,151,237,113,43,1,161,221,170,157,54,243,4,1,161,125,66,151,237,113,43,1,161,221,170,157,54,243,4,1,161,125,66,151,237,113,43,129,255,
 2,60,112,247,246,27,101,250,45,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
 
-const char* BinaryData::blipbox_png = (const char*) temp_6455653b;
+const char* blipbox_png = (const char*) temp_6455653b;
 
 //================== DeleteButtonSmall.png ==================
 static const unsigned char temp_9ab536ab[] =
@@ -166,7 +146,7 @@ static const unsigned char temp_9ab536ab[] =
 44,157,173,26,21,254,236,65,45,195,52,58,138,77,179,131,37,102,210,177,255,192,77,0,39,194,13,38,218,78,216,27,70,16,199,109,198,194,1,29,195,212,237,49,190,11,161,99,152,58,155,177,112,0,192,241,216,184,220,68,196,0,216,7,32,7,192,38,128,181,116,222,
 106,50,175,114,61,128,44,0,15,1,60,0,16,138,219,24,39,217,29,211,225,111,144,241,152,59,100,42,60,134,74,106,47,65,8,193,191,3,0,88,141,69,118,30,136,249,181,0,0,0,0,73,69,78,68,174,66,96,130,0,0 };
 
-const char* BinaryData::DeleteButtonSmall_png = (const char*) temp_9ab536ab;
+const char* DeleteButtonSmall_png = (const char*) temp_9ab536ab;
 
 //================== blipbox.icns ==================
 static const unsigned char temp_2653eb8d[] =
@@ -738,4 +718,29 @@ static const unsigned char temp_2653eb8d[] =
 255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
 255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,0,0 };
 
-const char* BinaryData::blipbox_icns = (const char*) temp_2653eb8d;
+const char* blipbox_icns = (const char*) temp_2653eb8d;
+
+
+const char* getNamedResource (const char* resourceNameUTF8, int& numBytes) throw()
+{
+    int hash = 0;
+    if (resourceNameUTF8 != 0)
+        while (*resourceNameUTF8 != 0)
+            hash = 31 * hash + *resourceNameUTF8++;
+
+    switch (hash)
+    {
+        case 0x5571d1a4:
+        case 0x30165276:  numBytes = 5226; return blipbox_png;
+        case 0x2aaaa294:
+        case 0x27e1609c:  numBytes = 3992; return DeleteButtonSmall_png;
+        case 0x58c50c44:
+        case 0xd66a57a3:  numBytes = 38378; return blipbox_icns;
+        default: break;
+    }
+
+    numBytes = 0;
+    return 0;
+}
+
+}

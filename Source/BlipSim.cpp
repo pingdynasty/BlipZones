@@ -9,7 +9,7 @@ MidiMessageSender midi;
 
 class BlipSimThread : public Thread { 
 public:
-  BlipSimThread() : Thread(T("BlipBox Simulator")) {
+  BlipSimThread() : Thread("BlipBox Simulator") {
     setPriority(0);
   }
   void run(){

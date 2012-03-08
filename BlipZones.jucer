@@ -8,25 +8,57 @@
               pluginSilenceInIsSilenceOut="0" pluginTailLength="0" pluginEditorRequiresKeys="0"
               pluginAUExportPrefix="JuceProjectAU" pluginAUViewClass="JuceProjectAU_V1"
               pluginRTASCategory="" bundleIdentifier="org.blipbox.blipzones"
-              jucerVersion="3.0.0" smallIcon="wUSjwY" bigIcon="wUSjwY" defines="">
+              jucerVersion="3.0.0" defines="">
   <EXPORTFORMATS>
     <XCODE_MAC targetFolder="Builds/MacOSX" vstFolder="~/SDKs/vstsdk2.4" rtasFolder="~/SDKs/PT_80_SDK"
-               objCExtraSuffix="Q4ONJ" juceFolder="Libraries/juce"/>
+               objCExtraSuffix="Q4ONJ" juceFolder="/Users/mars/devel/juce" bigIcon="wUSjwY"
+               smallIcon="wUSjwY">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
+                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
+                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
+      </CONFIGURATIONS>
+    </XCODE_MAC>
     <XCODE_IPHONE targetFolder="Builds/iOS" vstFolder="~/SDKs/vstsdk2.4" rtasFolder="~/SDKs/PT_80_SDK"
-                  objCExtraSuffix="zMvwnk" juceFolder="Libraries/juce"/>
+                  objCExtraSuffix="zMvwnk" juceFolder="Libraries/juce" bigIcon="wUSjwY"
+                  smallIcon="wUSjwY">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
+                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
+                       osxSDK="default" osxCompatibility="default" osxArchitecture="default"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
+      </CONFIGURATIONS>
+    </XCODE_IPHONE>
     <VS2010 targetFolder="Builds/VisualStudio2010" vstFolder="c:\SDKs\vstsdk2.4"
             rtasFolder="c:\SDKs\PT_80_SDK" libraryType="1" juceFolder="Libraries/juce"
-            extraDefs="BOOST_ALL_NO_LIB" extraCompilerFlags="-I ../../Libraries/MSIntTypes"/>
-    <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="~/SDKs/vstsdk2.4" juceFolder="Libraries/juce"/>
+            extraDefs="BOOST_ALL_NO_LIB" extraCompilerFlags="-I ../../Libraries/MSIntTypes"
+            bigIcon="wUSjwY" smallIcon="wUSjwY">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"
+                       winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"
+                       winWarningLevel="4" generateManifest="1" winArchitecture="32-bit"/>
+      </CONFIGURATIONS>
+    </VS2010>
+    <LINUX_MAKE targetFolder="Builds/Linux" vstFolder="~/SDKs/vstsdk2.4" juceFolder="Libraries/juce"
+                bigIcon="wUSjwY" smallIcon="wUSjwY">
+      <CONFIGURATIONS>
+        <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"
+                       libraryPath="/usr/X11R6/lib/"/>
+        <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
+                       headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"
+                       libraryPath="/usr/X11R6/lib/"/>
+      </CONFIGURATIONS>
+    </LINUX_MAKE>
   </EXPORTFORMATS>
-  <CONFIGURATIONS>
-    <CONFIGURATION name="Debug" isDebug="1" optimisation="1" targetName="BlipZones"
-                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                   headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
-    <CONFIGURATION name="Release" isDebug="0" optimisation="2" targetName="BlipZones"
-                   osxSDK="default" osxCompatibility="default" osxArchitecture="default"
-                   headerPath="../../Libraries;../../../BlipBox/firmware/simulator;../../../BlipBox/firmware;../../BlipBox/firmware/simulator;../../BlipBox/firmware"/>
-  </CONFIGURATIONS>
   <MAINGROUP id="WA2OO7" name="BlipZones">
     <GROUP id="e2Exkf" name="Libraries">
       <GROUP id="jR6wBS" name="osc">
@@ -119,9 +151,10 @@
       <FILE id="RmrxR7" name="AsioSerial.h" compile="0" resource="0" file="Source/AsioSerial.h"/>
       <FILE id="j8ESZc" name="Serial.cpp" compile="1" resource="0" file="Source/Serial.cpp"/>
       <GROUP id="C9s1RO" name="BlipBox">
-        <FILE id="xHJSQe" name="PresetReader.cpp" compile="1" resource="0"
-              file="../BlipBox/firmware/PresetReader.cpp"/>
-        <FILE id="NQeItB" name="PresetReader.h" compile="0" resource="0" file="../BlipBox/firmware/PresetReader.h"/>
+        <FILE id="vMXfS9" name="PresetCommandReader.cpp" compile="1" resource="0"
+              file="../BlipBox/firmware/PresetCommandReader.cpp"/>
+        <FILE id="dOUEeZ" name="PresetCommandReader.h" compile="0" resource="0"
+              file="../BlipBox/firmware/PresetCommandReader.h"/>
         <FILE id="XawoEe" name="MidiMessageReader.cpp" compile="1" resource="0"
               file="../BlipBox/firmware/MidiMessageReader.cpp"/>
         <FILE id="VxKLM0" name="MidiMessageReader.h" compile="0" resource="0"
@@ -235,15 +268,17 @@
       <FILE id="iNFnaN" name="SimWindow.h" compile="0" resource="0" file="Source/SimWindow.h"/>
     </GROUP>
   </MAINGROUP>
-  <JUCEOPTIONS JUCE_FORCE_DEBUG="default" JUCE_LOG_ASSERTIONS="default" JUCE_ASIO="default"
-               JUCE_WASAPI="default" JUCE_DIRECTSOUND="default" JUCE_DIRECTSHOW="default"
-               JUCE_MEDIAFOUNDATION="default" JUCE_ALSA="default" JUCE_QUICKTIME="default"
-               JUCE_OPENGL="default" JUCE_DIRECT2D="default" JUCE_USE_FLAC="default"
-               JUCE_USE_OGGVORBIS="default" JUCE_USE_CDBURNER="default" JUCE_USE_CDREADER="default"
-               JUCE_USE_CAMERA="default" JUCE_ENABLE_REPAINT_DEBUGGING="default"
-               JUCE_USE_XINERAMA="default" JUCE_USE_XSHM="default" JUCE_USE_XRENDER="default"
-               JUCE_USE_XCURSOR="default" JUCE_PLUGINHOST_VST="default" JUCE_PLUGINHOST_AU="default"
-               JUCE_ONLY_BUILD_CORE_LIBRARY="default" JUCE_WEB_BROWSER="default"
-               JUCE_SUPPORT_CARBON="default" JUCE_CHECK_MEMORY_LEAKS="default"
-               JUCE_CATCH_UNHANDLED_EXCEPTIONS="default"/>
+  <JUCEOPTIONS/>
+  <MODULES>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_gui_audio" showAllCode="1"/>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="1"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="1"/>
+  </MODULES>
 </JUCERPROJECT>

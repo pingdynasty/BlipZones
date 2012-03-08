@@ -12,7 +12,7 @@ unsigned long millis(void);
 class OverflowTimer : public Thread { 
 // juce::Timer can't do 1ms accuracy
 public:
-  OverflowTimer(double periodSeconds) : Thread(T("Overflow Timer")) {
+  OverflowTimer(double periodSeconds) : Thread("Overflow Timer") {
     period = Time::secondsToHighResolutionTicks(periodSeconds);
     std::cout << "period " << period << " ticks" << std::endl;
     setPriority(0);
